@@ -1,0 +1,18 @@
+<section class="{{ section.style == 'gradient' ? 'bg-primary bg-gradient text-white' }}">
+    <div class="container {{ section.overlay_content ? 'move-content-up' }}">
+        {% if section.show_title %}
+            <h2 class="fw-bold">{{ section.title }}</h2>
+        {% endif %}
+        {{ section.content|raw }}
+        <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto">
+            {% for column in section.columns %}
+                <div class="col mb-5 {{ column.position }} col-lg-{{ column.width }}">
+                    {% if column.show_title %}
+                        <h2 class="fw-bold">{{ column.title }}</h2>
+                    {% endif %}
+                    {{ column.content|raw }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

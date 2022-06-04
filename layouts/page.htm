@@ -1,0 +1,19 @@
+description = "Page Layout for Page Tailor Entries"
+title = "Page"
+
+[resources]
+js[] = "bootstrap.min.js"
+css[] = "bootstrap.min.css"
+==
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% partial 'head' %}
+    </head>
+    {% partial 'header' %}
+    <main>
+        {% page %}
+    </main>
+    {% partial 'footer' %}
+    {% partial 'foot' %}
+</html>

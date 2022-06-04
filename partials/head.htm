@@ -1,0 +1,63 @@
+[global settings]
+handle = "Content\Settings"
+==
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+{% if section is empty  %}
+    
+    {# Primary Meta Tags #}
+    <title>{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}</title>
+    <meta name="title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
+    <meta name="description" content="{{ this.page.meta_description }}">
+    
+
+    {# Open Graph / Facebook #}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ ''|app }}">
+    <meta property="og:title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
+    <meta property="og:description" content="{{ this.page.meta_description }}">
+
+    {# Twitter #}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ ''|app }}">
+    <meta property="twitter:title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
+    <meta property="twitter:description" content="{{ this.page.meta_description }}">
+
+{% else %}
+
+    {# Primary Meta Tags #}
+    <title>{{ section.meta_title ~ ' - ' ~ settings.website_name }}</title>
+    <meta name="title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
+    <meta name="description" content="{{ section.meta_description }}">
+    {% if section.meta_keywords|length %}
+        <meta name="keywords" content="{{ section.meta_keywords }}">
+    {% endif %}
+
+    {# Open Graph / Facebook #}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ ''|app }}">
+    <meta property="og:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
+    <meta property="og:description" content="{{ section.meta_description }}">
+    <meta property="og:image" content="{{ section.sharing_image }}">
+
+    {# Twitter #}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ ''|app }}">
+    <meta property="twitter:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
+    <meta property="twitter:description" content="{{ section.meta_description }}">
+    <meta property="twitter:image" content="{{ section.sharing_image }}">
+
+{% endif  %}
+
+{# Google Fonts #}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa:400,500,600,700,800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap">
+{% styles %}
+
+{# Favicons #}
+{% if settings.favicon %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon|media|resize(180) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon|media|resize(32) }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon|media|resize(16) }}">
+{% endif %}

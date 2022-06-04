@@ -1,0 +1,95 @@
+[collection mainMenu]
+handle = "Content\MainMenu"
+
+[global settings]
+handle = "Content\Settings"
+==
+<nav class="navbar navbar-light navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ '/'|app }}">
+            {% if settings.logo|length %}
+                <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">
+            {% else %}
+                {{ settings.website_name }}
+            {% endif %}
+        </a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+            </svg>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav">
+                {% for item in mainMenu %}
+                    {% if item.is_enabled %}
+                        {% if not item.parent_id %}
+                            <li class="nav-item {{ item.children ? 'dropdown' }}">
+                                {% if item.type == "url" %}
+                                    <a
+                                            class="nav-link {{ item.children|length ? 'dropdown-toggle' : '' }}"
+                                            href="{{ item.url }}"
+                                            {{ item.external ? 'target="_blank" '}}
+                                            {% if item.children|length %}
+                                                data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                                            {% endif %}
+                                    >
+                                        {{ item.title }}
+                                    </a>
+                                    {% if item.children %}
+                                        <div class="dropdown-menu">
+                                            {% for child in item.children %}
+                                                {% if child.type == "url" %}
+                                                    <a
+                                                            class="dropdown-item"
+                                                            href="{{ child.url }}"
+                                                            {{ child.external ? 'target="_blank" '}}
+                                                    >
+                                                        {{ child.title }}
+                                                    </a>
+                                                {% endif %}
+                                                {% if child.type == "page_entry" %}
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ section.id == child.page.id ? 'active' }}{{ global.homepage.id == child.page.id ? 'active' }}"  href="{{ child.page.slug == '' ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                                {% if item.type == "page_entry" %}
+                                    <a
+                                            class="nav-link {{ section.id == item.page.id ? 'active' }}{{ global.homepage.id == item.page.id ? 'active' }} {{ item.children|length ? 'dropdown-toggle' : '' }}"
+                                            {{ item.external ? 'target="_blank" '}}
+                                            href="{{ item.page.slug == '' ? '/' : 'page'|page({ page: item.page.slug }) }}"
+                                            {% if item.children|length %}
+                                                data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                                            {% endif %}
+                                    >
+                                        {{ item.title }}
+                                    </a>
+                                    {% if item.children %}
+                                        <div class="dropdown-menu">
+                                            {% for child in item.children %}
+                                                {% if child.type == "url" %}
+                                                    <a
+                                                            class="dropdown-item"
+                                                            href="{{ child.url }}"
+                                                            {{ child.external ? 'target="_blank" '}}
+                                                    >
+                                                        {{ child.title }}
+                                                    </a>
+                                                {% endif %}
+                                                {% if child.type == "page_entry" %}
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ section.id == child.page.id ? 'active' }}{{ global.homepage.id == child.page.id ? 'active' }}"  href="{{ child.page.slug == '' ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

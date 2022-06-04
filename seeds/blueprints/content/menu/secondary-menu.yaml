@@ -1,0 +1,49 @@
+uuid: 1084631f-d54d-11ec-9fa3-3b373fee9fc6
+handle: Content\SecondaryMenu
+type: structure
+name: Secondary Menu
+drafts: false
+
+
+navigation:
+  icon: icon-list
+  parent: Content\Page
+  order: 6
+
+structure:
+  maxDepth: 1
+
+fields:
+  type:
+    label: Type
+    type: dropdown
+    span: left
+    default: value[entry]
+    options:
+      page_entry: Page
+      tournament_entry: Tournament
+      url: URL
+  url:
+    type: Text
+    label: URL
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[url]
+  page:
+    type: entries
+    source: Content\Page
+    label: Page
+    maxItems: 1
+    displayMode: balloon-selector
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[page_entry]
+  external:
+    label: External link
+    type: switch
+    default: unchecked
+

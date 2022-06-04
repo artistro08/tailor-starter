@@ -1,0 +1,41 @@
+uuid: 533c314d-6e80-430c-b278-272cbc6632cf
+handle: Content\Settings
+type: global
+name: Settings
+
+
+navigation:
+  parent: Content\Page
+  icon: icon-cog
+  order: 10
+
+fields:
+  homepage:
+    maxItems: 1
+    label: Home Page
+    tab: Settings
+    type: entries
+    source: Content\Page
+    span: left
+    comment: The default homepage
+  website_name:
+    label: Website Name
+    tab: Settings
+    span: right
+  favicon:
+    type: mediafinder
+    mode: image
+    label: Favicon
+    comment: The icon that appears in the browser tab or window
+    tab: Settings
+    maxItems: 1
+    span: left
+  logo:
+    type: mediafinder
+    mode: image
+    label: Logo
+    comment: The Logo. Appears in the navigation
+    tab: Settings
+    maxItems: 1
+    span: right
+    

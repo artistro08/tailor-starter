@@ -1,0 +1,10 @@
+name: 'Tailor Starter Theme'
+description: "This theme supplies the user some simple starter templates to get started with October's Tailor Feature. It uses Bootstrap 5 to generate menus, general HTML content, and more. Recommended to be used as a parent theme."
+author: 'Devin Green'
+homepage: 'https://devingreen.me'
+authorCode: Artistro08
+code: TailorStarterTheme
+parent: ''
+database: '0'
+require:
+  - "Chkilel.Icones"

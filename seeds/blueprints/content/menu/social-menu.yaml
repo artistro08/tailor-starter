@@ -1,0 +1,26 @@
+uuid: 614a6aef-c642-427f-a28c-343032f19deb
+handle: Content\SocialMenu
+type: structure
+name: Social Menu
+drafts: false
+
+
+navigation:
+  icon: icon-list
+  parent: Content\Page
+  order: 7
+
+structure:
+  maxDepth: 1
+
+fields:
+  url:
+    type: Text
+    label: URL
+    span: left
+  icon:
+    label: Icon
+    type: iconesfinder
+    span: right
+        
+

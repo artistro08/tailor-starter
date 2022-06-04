@@ -1,0 +1,40 @@
+uuid: b50bab4d-a3c8-4ba4-97eb-d45117f33eb8
+handle: Content\SEOFields
+type: mixin
+name: SEO Fields
+
+fields:
+  meta_title:
+    label: Meta Title
+    tab: Manage
+    type: text
+    comment: Meta Title. Used for SEO
+    attributes:
+      maxlength: 70
+    preset:
+      field: title
+      type: exact
+    span: left
+  sharing_image:
+    label: Sharing Image
+    tab: Manage
+    type: mediafinder
+    comment: Image used for social media sites (Facebook, Twitter, Etc.)
+    mode: image
+    span: right
+    maxItems: 1
+  meta_keywords:
+    label: Meta Keywords
+    type: taglist
+    tab: Manage
+    comment: Keywords used for SEO. Use a comma to separate the keywords
+
+  meta_description:
+    label: Meta Description
+    tab: Manage
+    type: textarea
+    span: full
+    comment: Meta Description. Used for SEO. Limited to 300 characters.
+    attributes:
+      maxlength: 300
+

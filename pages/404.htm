@@ -1,0 +1,8 @@
+url = "/404"
+layout = "default"
+title = 404
+meta_title = "Hmm, That Doesn't Exist..."
+==
+{% partial "utility/404" %}
+
+{% do abort(404, false) %}

@@ -1,0 +1,46 @@
+[collection secondaryMenu]
+handle = "Content\SecondaryMenu"
+
+[collection socialMenu]
+handle = "Content\SocialMenu"
+
+[global settings]
+handle = "Content\Settings"
+==
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8 mx-auto">
+                <hr>
+            </div>
+            <div class="col-12 mx-auto">
+                <ul class="nav justify-content-center flex-column flex-lg-row align-items-center">
+                    {% for item in secondaryMenu %}
+                        {% if item.is_enabled %}
+                            <li class="nav-item">
+                                {% if item.type == "url" %}
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ page.url }}">{{ item.title }}</a>
+                                {% endif %}
+                                {% if item.type == "page_entry" %}
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ item.page.slug == '' ? '/' : 'page'|page({ page: item.page.slug }) }}">{{ item.title }}</a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <ul class="nav justify-content-center flex-column flex-lg-row align-items-center">
+                    {% for item in socialMenu %}
+                        {% if item.is_enabled %}
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" target="_blank" href="{{ item.url }}" title="{{ item.title }}">{{ item.icon|iconify }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <p class="small text-uppercase text-center my-4">
+                Copyright © {{ 'now'|date('Y') }} {{ settings.website_name }}. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+</footer>

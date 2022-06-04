@@ -1,0 +1,42 @@
+description = "Default Layout for Page Tailor Entries & CMS Pages"
+title = "Default"
+
+[resources]
+js[] = "bootstrap.min.js"
+css[] = "bootstrap.min.css"
+==
+<?php
+function onStart() {
+    if($this['section']) {
+        $meta_title       = $this['section']->meta_title;
+        $meta_description = $this['section']->meta_description;
+        $sharing_image    = $this['section']->sharing_image;
+
+        if($meta_title != null) {
+            $meta_title = $this['global']->homepage->meta_title;
+        }
+
+        if($meta_description != null) {
+            $meta_description = $this['global']->homepage->meta_description;
+        }
+
+        if($sharing_image != null) {
+            $sharing_image    = $this['global']->homepage->meta_description;
+        }
+
+    }
+}
+?>
+==
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% partial 'head' %}
+    </head>
+    {% partial 'header' %}
+    <main>
+        {% page %}
+    </main>
+    {% partial 'footer' %}
+    {% partial 'foot' %}
+</html>

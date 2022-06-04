@@ -1,0 +1,43 @@
+uuid: 698afed6-70f1-47dd-9dcf-dc2a0f903ff2
+handle: Content\Page
+type: stream
+name: Pages
+drafts: true
+
+primaryNavigation:
+  label: Content
+  icon: icon-file
+  order: 140
+
+navigation:
+  icon: icon-file
+  parent: Content\Page
+  order: 1
+
+groups:
+  simple:
+    name: Simple Page
+    fields:
+      content:
+        label: Content
+        tab: Edit
+        type: richeditor
+        span: adaptive
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+  builder:
+    name: Dynamic Page
+    fields:
+      builder:
+        tab: Edit
+        type: mixin
+        name: Builder
+        source: Content\Builder
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields

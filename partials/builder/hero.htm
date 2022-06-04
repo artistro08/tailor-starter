@@ -1,0 +1,18 @@
+{% if section.content_group == 'hero' %}
+    <header class="hero {{ section.size == 'small' ? 'small-hero' }} overflow-hidden d-flex align-items-center text-light position-relative py-4">
+        <div class="container position-relative" style="z-index: 1">
+            <div class="row">
+                <div class="col-12 {{ section.position == 'center' ? 'text-center' : 'col-lg-6' }}">
+                    <h1 class="text-uppercase">{{ section.title }}</h1>
+                    {{ section.content|raw }}
+                </div>
+            </div>
+        </div>
+        {% if section.image|length %}
+            {% set heroImage = section.image|split('.')|last %}
+            <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100" style="z-index: 0">
+                <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media }}" alt="{{ section.title }}">
+            </div>
+        {% endif %}
+    </header>
+{% endif %}

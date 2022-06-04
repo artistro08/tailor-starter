@@ -1,0 +1,48 @@
+uuid: 271c984c-2b0d-498c-a782-6afaf39ee95d
+handle: Content\MainMenu
+type: structure
+name: Main Menu
+drafts: false
+
+navigation:
+  icon: icon-list
+  parent: Content\Page
+  order: 5
+
+structure:
+  maxDepth: 2
+
+fields:
+  type:
+    label: Type
+    type: dropdown
+    span: left
+    default: value[entry]
+    options:
+      page_entry: Page
+      url: URL
+  url:
+    type: text
+    label: URL
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[url]
+  page:
+    type: entries
+    source: Content\Page
+    label: Page
+    maxItems: 1
+    displayMode: balloon-selector
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[page_entry]
+  external:
+    label: External link
+    type: switch
+    default: unchecked
+
+
