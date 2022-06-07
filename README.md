@@ -16,7 +16,7 @@ php artisan theme:install Artistro08.TailorStarterTheme --from=git@github.com:ar
 Once installed, run the seeding function for the theme:
 
 ```bash
-php artisan theme:seed tailor-starter-theme
+php artisan theme:seed artistro08tailor-starter-theme --root
 ```
 
 This will initialize the Tailor structure, so you can add content.
@@ -24,7 +24,7 @@ This will initialize the Tailor structure, so you can add content.
 > ### Note
 > This theme is meant to be used as a parent theme. Create your own child theme and set this theme as a parent. More info [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html)
 > ```bash
-> php artisan theme:copy tailor-starter-theme your-theme --child
+> php artisan theme:copy artistro08tailor-starter-theme your-theme --child
 > ```
 
 ### Features
