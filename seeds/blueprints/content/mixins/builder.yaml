@@ -27,6 +27,24 @@ fields:
             mode: image
             span: right
             maxItems: 1
+          position:
+            type: dropdown
+            label: Position
+            comment: The position of the content
+            default: value[left]
+            span: left
+            options:
+              left: Left
+              center: Center
+          size:
+            type: dropdown
+            label: Size
+            comment: The size of the content
+            default: value[normal]
+            span: right
+            options:
+              normal: Normal
+              small: Small
           content:
             label: Content
             type: richeditor
