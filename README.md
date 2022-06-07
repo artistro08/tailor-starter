@@ -39,7 +39,6 @@ This will initialize the Tailor structure, so you can add content.
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
 - No default content is generated. This is intentional. I wanted to use this to quickly create and build content without having to delete anything. 
-- Since some templates cross-reference components, make sure you set `CMS_SAFE_MODE` to `false` in your .env file. Fix is coming
 
 ### Contributing
 If you would like to contribute to this theme, please submit a pull request. Any help is welcome!
