@@ -1,10 +1,34 @@
 {% if section.content_group == 'hero' %}
-    <header class="hero {{ section.size == 'small' ? 'small-hero' }} overflow-hidden d-flex align-items-center text-light position-relative py-4">
+    <header class="hero {{ section.size == 'small' ? 'small-hero' }} bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4">
         <div class="container position-relative" style="z-index: 1">
             <div class="row">
                 <div class="col-12 {{ section.position == 'center' ? 'text-center' : 'col-lg-6' }}">
                     <h1 class="text-uppercase">{{ section.title }}</h1>
                     {{ section.content|raw }}
+                    {% if section.buttons|length %}
+                        <div class="d-flex justify-content-{{ section.buttons_position }} my-2">
+                            {% for button in section.buttons %}
+                                {% if button.item_type == "url" %}
+                                    <a
+                                            href="{{ button.url|raw }}"
+                                            class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                            {{ button.external == true ? 'target="_blank"' }}
+                                    >
+                                        {{ button.title }}
+                                    </a>
+                                {% endif %}
+                                {% if button.item_type == "page" %}
+                                    <a
+                                            href="{{ 'page'|page({ page: button.page.slug }) }}"
+                                            class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                            {{ button.external == true ? 'target="_blank"' }}
+                                    >
+                                        {{ button.title }}
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

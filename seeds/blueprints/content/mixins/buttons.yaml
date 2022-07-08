@@ -1,0 +1,74 @@
+uuid: 31c7a237-fee5-11ec-b7e2-1d5410f76a4d
+handle: Content\Buttons
+type: mixin
+name: Button
+
+fields:
+  buttons:
+    type: repeater
+    label: Buttons
+    maxItems: 3
+    commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
+    form:
+      fields:
+        title:
+          type: text
+          label: Button Title
+          span: left
+          placeholder: Your button's text
+        item_type:
+          type: dropdown
+          label: Button Type
+          span: right
+          default: page
+          options:
+            page: Page
+            url: URL
+        url:
+          type: text
+          validation: url
+          span: full
+          placeholder: Your button's url (e.g. https://example.com)
+          trigger:
+            action: show
+            field: item_type
+            condition: value[url]
+        page:
+          type: entries
+          span: full
+          source: Content\Page
+          maxItems: 1
+          displayMode: recordfinder
+          prompt: Click the %s icon to find a page.
+          trigger:
+            action: show
+            field: item_type
+            condition: value[page]
+        hr_1:
+          type: ruler
+        style:
+          type: dropdown
+          label: Style
+          comment: Change the style of this button.
+          span: left
+          default: value[primary]
+          options:
+            primary: Primary
+            secondary: Secondary
+            light: Light
+            dark: Dark
+        external:
+          type: switch
+          label: Open in new tab
+          comment: If activated, when someone clicks this link, it'll open it in a new tab.
+          span: right
+          cssClass: mt-4
+  buttons_position:
+    type: dropdown
+    label: Buttons Position
+    span: full
+    comment: Changes the alignment of the buttons
+    options:
+      start: Left
+      center: Center
+      end: Right

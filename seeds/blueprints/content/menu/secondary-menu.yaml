@@ -27,6 +27,7 @@ fields:
     type: Text
     label: URL
     span: right
+    validation: url
     trigger:
       action: show
       field: type

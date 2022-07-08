@@ -32,7 +32,7 @@ handle = "Content\Settings"
                     {% for item in socialMenu %}
                         {% if item.is_enabled %}
                             <li class="nav-item">
-                                <a class="nav-link fs-4" target="_blank" href="{{ item.url }}" title="{{ item.title }}">{{ item.icon|iconify }}</a>
+                                <a class="nav-link fs-4" target="_blank" href="{{ item.url }}" title="{{ item.title }}">{{ item.icon|length ? item.icon|iconify : item.title }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
