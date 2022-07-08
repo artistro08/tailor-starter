@@ -10,13 +10,13 @@ To get started with this theme, you'll need the following
 ### Get Started
 Clone or download this theme in the October CMS themes directory or install it via `artisan`:
 ```bash
-php artisan theme:install Artistro08.TailorStarter --from=git@github.com:artistro08/tailor-starter-theme.git
+php artisan theme:install Artistro08.TailorStarter
 ```
 
 Once installed, run the seeding function for the theme:
 
 ```bash
-php artisan theme:seed artistro08tailorstarter --root
+php artisan theme:seed tailor-starter --root
 ```
 
 This will initialize the Tailor structure, so you can add content.
@@ -24,7 +24,7 @@ This will initialize the Tailor structure, so you can add content.
 > ### Note
 > This theme is meant to be used as a parent theme. Create your own child theme and set this theme as a parent. More info [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html)
 > ```bash
-> php artisan theme:copy artistro08tailor your-theme --child
+> php artisan theme:copy tailor-starter your-theme --child
 > ```
 
 Once you've seeded the theme, head over to the content settings in the backend and select the Homepage. Optionally, fill out the Site Name field as well. Find this at `/[backend_url]/tailor/globals/content_settings` where `[backend_url]` is your backend URI set in your .env
