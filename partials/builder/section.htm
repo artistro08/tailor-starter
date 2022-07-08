@@ -1,16 +1,67 @@
-<section class="{{ section.style == 'gradient' ? 'bg-primary bg-gradient text-white' }}">
-    <div class="container {{ section.overlay_content ? 'move-content-up' }}">
-        {% if section.show_title %}
-            <h2 class="fw-bold">{{ section.title }}</h2>
-        {% endif %}
-        {{ section.content|raw }}
+<section class="{{ section.style == 'light' ? 'bg-light' }}{{ section.style == 'dark' ? 'bg-dark' }}">
+    <div class="container">
         <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto">
             {% for column in section.columns %}
-                <div class="col mb-5 {{ column.position }} col-lg-{{ column.width }}">
-                    {% if column.show_title %}
-                        <h2 class="fw-bold">{{ column.title }}</h2>
+                <div class="col mb-5 {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}">
+                    {# Content Column Group #}
+                    {% if column.content_group == "content" %}
+                        {{ column.content|raw }}
+                        {% if column.buttons|length %}
+                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2">
+                                {% for button in column.buttons %}
+                                    {% if button.item_type == "url" %}
+                                        <a
+                                                href="{{ button.url|raw }}"
+                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                {{ button.external == true ? 'target="_blank"' }}
+                                        >
+                                            {{ button.title }}
+                                        </a>
+                                    {% endif %}
+                                    {% if button.item_type == "page" %}
+                                        <a
+                                                href="{{ 'page'|page({ page: button.page.slug }) }}"
+                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                {{ button.external == true ? 'target="_blank"' }}
+                                        >
+                                            {{ button.title }}
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     {% endif %}
-                    {{ column.content|raw }}
+                    {# Button Column Group #}
+                    {% if column.content_group == "buttons" %}
+                        {% if column.buttons|length %}
+                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2">
+                                {% for button in column.buttons %}
+                                    {% if button.item_type == "url" %}
+                                        <a
+                                                href="{{ button.url|raw }}"
+                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                {{ button.external == true ? 'target="_blank"' }}
+                                        >
+                                            {{ button.title }}
+                                        </a>
+                                    {% endif %}
+                                    {% if button.item_type == "page" %}
+                                        <a
+                                                href="{{ 'page'|page({ page: button.page.slug }) }}"
+                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                {{ button.external == true ? 'target="_blank"' }}
+                                        >
+                                            {{ button.title }}
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {# Image Column Group #}
+                    {% if column.content_group == "image" %}
+                        <img src="{{ column.image|media }}" alt="{{ image.alt }}" class="img-fluid">
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
