@@ -1,2 +1,3 @@
 v1.0.0: Theme initialization
 v1.1.0: Added Buttons, Images, and Content to section and hero builder blocks. Minor bugfixes. Updated Documentation.
+v1.1.2: Updated theme to not have parent direct

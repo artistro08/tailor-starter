@@ -4,7 +4,6 @@ author: 'Devin Green'
 homepage: 'https://devingreen.me'
 authorCode: Artistro08
 code: TailorStarter
-parent: ''
 database: '0'
 require:
   - "Chkilel.Icones"
