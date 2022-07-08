@@ -3,7 +3,7 @@ description: "This theme supplies the user some simple starter templates to get 
 author: 'Devin Green'
 homepage: 'https://devingreen.me'
 authorCode: Artistro08
-code: TailorStarterTheme
+code: TailorStarter
 parent: ''
 database: '0'
 require:
