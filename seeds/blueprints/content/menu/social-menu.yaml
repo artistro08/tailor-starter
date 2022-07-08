@@ -18,6 +18,7 @@ fields:
     type: Text
     label: URL
     span: left
+    validation: url
   icon:
     label: Icon
     type: iconesfinder
