@@ -3,7 +3,7 @@ This theme supplies the user some simple starter templates to get started with O
 
 ### Prerequisites
 To get started with this theme, you'll need the following
-- October CMS v3
+- October CMS v3.x
 - A knowledge of [Tailor](https://docs.octobercms.com/3.x/tailor/introduction.html)
 - Some knowledge of PHP
 
@@ -27,6 +27,8 @@ This will initialize the Tailor structure, so you can add content.
 > php artisan theme:copy artistro08tailor your-theme --child
 > ```
 
+Once you've seeded the theme, head over to the content settings in the backend and select the Homepage. Optionally, fill out the Site Name field as well. Find this at `/[backend_url]/tailor/globals/content_settings` where `[backend_url]` is your backend URI set in your .env
+
 ### Features
 - A page builder with two components (Hero, Section with columns support)
 - A "Simple Page" mode
@@ -37,7 +39,7 @@ This will initialize the Tailor structure, so you can add content.
 - Initial SEO & OG Tags support
 
 ### Things to Know
-- Upon loading the theme, you'll get a simple Home page.
+- Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
 - No default content is generated besides the Home page. This is intentional. I wanted to use this to quickly create and build content without having to delete anything. 
 
 ### Adding Builder Items (Extending)
