@@ -10,13 +10,13 @@ To get started with this theme, you'll need the following
 ### Get Started
 Clone or download this theme in the October CMS themes directory or install it via `artisan`:
 ```bash
-php artisan theme:install Artistro08.TailorStarter
+php artisan theme:install Artistro08.TailorStarter --from=git@github.com:artistro08/tailor-starter.git
 ```
 
 Once installed, run the seeding function for the theme:
 
 ```bash
-php artisan theme:seed tailor-starter --root
+php artisan theme:seed artistro08-tailorstarter --root
 ```
 
 This will initialize the Tailor structure, so you can add content.
