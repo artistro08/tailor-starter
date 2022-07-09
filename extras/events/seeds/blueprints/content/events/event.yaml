@@ -1,0 +1,155 @@
+uuid: 817ac186-fc5d-11ec-8601-6e37945c2034
+handle: Content\Event
+type: structure
+name: Event
+drafts: true
+
+structure:
+    maxDepth: 0
+
+navigation:
+    icon: icon-calendar
+    parent: Content\Page
+    order: 10
+
+fields:
+    content:
+        label: Content
+        tab: Edit
+        type: richeditor
+        span: adaptive
+
+    seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+    hr_1:
+        type: ruler
+        tab: Manage
+
+    image:
+        type: mediafinder
+        tab: Manage
+        label: Event Image
+        span: full
+        mode: image
+        maxItems: 1
+        comment: The image displayed in the Hero and builder
+    short_description:
+        label: Short Description
+        tab: Manage
+        type: textarea
+        span: full
+        size: huge
+        comment: A short description. Displayed in the dynamic page section called "Events"
+    link:
+        type: text
+        label: Event Link
+        tab: Event
+        span: left
+        comment: The link to the event. Leave empty for no link
+        validation: url
+    location_url:
+        type: text
+        label: Location Link
+        tab: Event
+        span: right
+        comment: The link to the location event. Leave empty for no link.
+        validation: url
+    location:
+        type: text
+        label: Location
+        tab: Event
+        span: left
+        comment: The address or area where the event is held.
+    is_recurring:
+        label: Recurring Event
+        tab: Event
+        type: switch
+        comment: Turn this event into a recurring event.
+        span: right
+        cssClass: mt-lg-4 mt-0
+    date:
+        label: Event Date
+        tab: Event
+        span: left
+        comment: The start time of the event
+        type: datepicker
+        minDate: now
+        mode: datetime
+        validation: required
+    end_date:
+        label: Event End Date
+        tab: Event
+        span: right
+        comment: The end of the event.
+        type: datepicker
+        minDate: now
+        mode: datetime
+        validation: required
+    hr_2:
+        type: ruler
+        tab: Event
+        trigger:
+            action: show
+            field: is_recurring
+            condition: checked
+    hint_1:
+        type: hint
+        label: Recurring Events
+        tab: Event
+        commentHtml: true
+        comment: This section allows you to create recurring events easily. If you're using the "Custom" type of recurrence (picking your own dates), <strong>the "Repeat Length" field will not be used.</strong>
+    recurrence:
+        type: dropdown
+        label: Recurrence
+        comment: How often do you want the event to repeat. (Weekly, Bi-Weekly, etc.)
+        tab: Event
+        span: left
+        options:
+            daily: Daily
+            weekly: Weekly
+            biWeekly: Bi-Weekly
+            monthly: Monthly
+            biMonthly: Bi-Montly
+            yearly: Yearly
+            custom: Custom
+        trigger:
+            action: show
+            field: is_recurring
+            condition: checked
+    recurrence_length:
+        type: number
+        label: Repeat Length
+        comment: How many times you would like the event to repeat. This is based on the recurrence.
+        tab: Event
+        span: right
+        trigger:
+            action: show
+            field: is_recurring
+            condition: checked
+    custom_recurrences:
+        type: repeater
+        label: Custom Dates
+        titleFrom: date
+        span: full
+        tab: Event
+        form:
+            fields:
+                date:
+                    type: datepicker
+                    label: Start Date
+                    mode: datetime
+                    minDate: now
+                    span: left
+                end_date:
+                    type: datepicker
+                    label: End Date
+                    mode: datetime
+                    minDate: now
+                    span: right
+        trigger:
+            action: show
+            field: recurrence
+            condition: value[custom]
