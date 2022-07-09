@@ -22,10 +22,9 @@ php artisan theme:seed artistro08-tailorstarter --root
 This will initialize the Tailor structure, so you can add content.
 
 > ### Note
-> This theme is meant to be used as a parent theme. Create your own child theme and set this theme as a parent. More info [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html)
-> ```bash
-> php artisan theme:copy tailor-starter your-theme --child
-> ```
+> This theme automatically creates a child theme. The directory name is `artistro08-tailorstarter-theme`. Use that theme to make edits to the code.
+> To learn more info about child themes, check [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html)
+> Whenever you make changes to the theme in the editor, it copies the data and puts it in the child theme. 
 
 Once you've seeded the theme, head over to the content settings in the backend and select the Homepage. Optionally, fill out the Site Name field as well. Find this at `/[backend_url]/tailor/globals/content_settings` where `[backend_url]` is your backend URI set in your .env
 
@@ -37,6 +36,7 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - Social Menu (with icon support from [Chkilel.Icones](https://octobercms.com/plugin/chkilel-icones))
 - Homepage designation using Tailor Globals
 - Initial SEO & OG Tags support
+- Events with recurring events support. (See [Extra Content](#extra-content))
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
@@ -75,8 +75,30 @@ The last thing you need to do is update the page templates. Luckily, there is so
 {% endif %}
 ```
 
+### Extra Content
+This theme has some extra Tailor fields and builder blocks you can use. You just have to set it up. To do so, follow these steps:
 
+#### Step 1: Copy over the content to your child theme
+In this case, I want to install the `events` Tailor options.
+```bash
+cp -r themes/artistro08-tailorstarter/extras/events/* themes/artistro08-tailorstarter-child/
+```
 
+#### Step #2: Seed your child theme
+```bash
+php artisan theme:seed artistro08-tailorstarter-child --root #if you're using the default setup
+```
+
+#### Step #3: Uncomment Files
+You'll need to uncomment the respective code in the following files:
+- `pages/index.htm`
+- `pages/page.htm`
+- `app/blueprints/content/mixins/builder.yaml`
+
+Once done, run migrations:
+```bash
+php artisan tailor:migrate
+```
 
 ### Contributing
 If you would like to contribute to this theme, please submit a pull request. Any help is welcome!
