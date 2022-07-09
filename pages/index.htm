@@ -39,12 +39,19 @@ handle = "Content\Settings"
     
     {% if page.entry_type == 'builder' %}
         {% for section in page.builder %}
+            {# Hero #}
             {% if section.content_group == 'hero' %}
                 {% partial 'builder/hero' section=section %}
             {% endif %}
+            {# Section #}
             {% if section.content_group == 'section' %}
                 {% partial 'builder/section' section=section %}
             {% endif %}
+            {# Extra Content. More information in the documentation. #}
+            {# Events #}
+{#            {% if section.content_group == 'events' %}#}
+{#                {% partial 'builder/events' section=section %}#}
+{#            {% endif %}#}
         {% endfor %}
     {% endif %}
 {% endif %}

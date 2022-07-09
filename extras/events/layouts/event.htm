@@ -1,0 +1,18 @@
+description = "Page Layout for Event Entries"
+title = "Page"
+
+[resources]
+js[] = "bootstrap.min.js"
+css[] = "bootstrap.min.css"
+==
+<html lang="en">
+    <head>
+        {% partial 'head' %}
+    </head>
+    {% partial 'header' %}
+    <main>
+        {% page %}
+    </main>
+    {% partial 'footer' %}
+    {% partial 'foot' %}
+</html>
