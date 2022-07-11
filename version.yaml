@@ -2,3 +2,4 @@ v1.0.0: Theme initialization
 v1.1.0: Added Buttons, Images, and Content to section and hero builder blocks. Minor bugfixes. Updated Documentation.
 v1.1.2: Updated theme to not have parent direct
 v1.1.4: Added extra content [Events]. See documentation on how to implement.
+v1.1.5: Create Mixin for builder item to simplify things
