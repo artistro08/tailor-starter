@@ -1,0 +1,17 @@
+uuid: c59d8718-0115-11ed-98c7-806b464850f0
+handle: Content\Product\Category
+type: structure
+name: Product Category
+drafts: false
+
+navigation:
+  icon: icon-square
+  parent: Content\Page
+  order: 8
+
+fields:
+  seo_fields:
+    tab: Manage
+    type: mixin
+    name: SEO Fields
+    source: Content\SEOFields

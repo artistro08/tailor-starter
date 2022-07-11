@@ -1,0 +1,42 @@
+uuid: 48f99bd7-0145-11ed-97db-6626fd3ef6ad
+handle: Content\ProductAttributes
+type: mixin
+name: Builder
+
+fields:
+
+  description:
+    type: richeditor
+    label: Description
+    commentAbove: The description of your product
+    tab: Edit
+    span: left
+  short_description:
+    type: textarea
+    label: Short Description
+    commentAbove: The simple and sweet description of your product.
+    tab: Edit
+    span: right
+    size: huge
+  images:
+    type: fileupload
+    label: Images
+    commentAbove: The images of your product. The first image will be used as the main image
+    mode: image
+    tab: Edit
+    span: left
+  categories:
+    type: entries
+    tab: Edit
+    source: Content\Product\Category
+    label: Categories
+    commentAbove: Add Categories for this specific product. Categories are defined under <a href="../tailor/entries/content_product_category">Content > Categories</a>
+    commentHtml: true
+    displayMode: relation
+    span: right
+  allow_purchases:
+    tab: Edit
+    type: switch
+    label: Allow Purchases
+    comment: Let people purchase this product.
+    default: true

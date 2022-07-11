@@ -1,0 +1,186 @@
+uuid: 2a9a76d0-010c-11ed-90b6-fc95f7401555
+handle: Content\Product
+type: stream
+name: Product
+drafts: true
+
+navigation:
+  icon: icon-cube
+  parent: Content\Page
+  order: 8
+
+groups:
+  simple:
+    name: Simple
+    fields:
+      price:
+        type: number
+        label: Price
+        comment: The price of your product.
+        tab: Edit
+        span: left
+        validation:
+          - numeric
+      quantity:
+        type: number
+        label: Quantity
+        comment: The quantity of your product.
+        tab: Edit
+        span: right
+        validation:
+          - numeric
+      product_attributes:
+        type: mixin
+        name: Product Attributes
+        source: Content\ProductAttributes
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+  variant:
+    name: Variant
+    fields:
+      price:
+        type: number
+        label: Price
+        comment: The price of your product.
+        tab: Edit
+        span: full
+        validation:
+          - numeric
+      product_attributes:
+        type: mixin
+        name: Product Attributes
+        source: Content\ProductAttributes
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+      variants:
+        tab: Variants
+        type: repeater
+        label: Variants
+        commentAbove: Add Variants to this product. All variant pricing defaults to the price under the the Manage tab.
+        commentHtml: true
+        displayMode: builder
+        prompt: Add New Variant
+        groups:
+          property_set:
+            name: Property Set
+            description: Pick from Content > Product Property.
+            fields:
+              section:
+                type: section
+                comment: This block does not support quantities or pricing. Use the "Custom Properties" block to add price and quantity per each variant.
+              title:
+                label: Variant Set Title
+                type: Text
+                commentAbove: Title of the Variant Set. Used for organizational purposes.
+                span: left
+              property:
+                label: Property Set
+                type: entries
+                maxItems: 1
+                displayMode: recordfinder
+                commentAbove: Select a property from your Product Properties. Product Properties are defined in <a href="../content_product_properties">Content > Product Property</a>
+                commentHtml: true
+                source: Content\Product\Properties
+                span: right
+                prompt: Click %s to select a property.
+          custom_properties:
+            name: Custom Properties
+            description: Create custom variants with pricing and quantity.
+            fields:
+              title:
+                label: Variant Property Title
+                type: text
+                span: left
+                commentAbove: The title of the variant property. Used for organizational purposes.
+              property_type:
+                label: Variant Property Type
+                commentAbove: The type of property.
+                type: dropdown
+                span: right
+                options:
+                  dropdown: Dropdown
+                  color: Color
+              colors:
+                type: repeater
+                name: Colors
+                label: Colors
+                prompt: Add New Color
+                commentAbove: A Collection of colors with pricing for each one.
+                trigger:
+                  action: show
+                  field: property_type
+                  condition: value[color]
+                form:
+                  fields:
+                    title:
+                      type: text
+                      label: Color Title
+                      span: left
+                      comment: Title of this color
+                    color_hex:
+                      type: colorpicker
+                      label: Color
+                      span: right
+                    price:
+                      type: number
+                      label: Price
+                      commentAbove: Price of this variant. Leave empty to inherit the default price.
+                      span: left
+                      validation:
+                        - numeric
+                    quantity:
+                      type: number
+                      label: Quantity
+                      commentAbove: Quantity of this variant.
+                      span: left
+                      validation:
+                        - numeric
+              dropdown_items:
+                type: repeater
+                name: Dropdown Items
+                label: Dropdown Items
+                commentAbove: A set of options with pricing for each one.
+                prompt: Add New Option
+                trigger:
+                  action: show
+                  field: property_type
+                  condition: value[dropdown]
+                form:
+                  fields:
+                    title:
+                      type: text
+                      label: Dropdown Item Title
+                      span: left
+                    slug:
+                      type: text
+                      label: Dropdown Item Slug
+                      span: right
+                      preset:
+                        field: title
+                        type: slug
+                      validation:
+                        - alpha_dash
+                    price:
+                      type: number
+                      label: Price
+                      commentAbove: Price of this variant. Leave empty to inherit the default price.
+                      span: left
+                      validation:
+                        - numeric
+                    quantity:
+                      type: number
+                      label: Quantity
+                      commentAbove: Quantity of this variant.
+                      span: right
+                      validation:
+                        - numeric
+
+
+
+
