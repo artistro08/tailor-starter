@@ -46,7 +46,7 @@ fields:
     mode: array
     separator: comma
     tab: Shipping
-
+  # TODO: Add "Use Cart" switch for cart tab.
   shipping_methods:
     label: Shipping Methods
     tab: Shipping
