@@ -1,0 +1,89 @@
+uuid: fcadac58-0158-11ed-98ec-90205b56e652
+handle: Content\Shop\Settings
+type: global
+name: Shop Settings
+
+navigation:
+  parent: Content\Page
+  icon: icon-shopping-bag
+  order: 11
+
+fields:
+  section:
+    type: section
+    label: Stripe Keys
+    tab: Stripe
+  stripe_public_key:
+    label: Stripe Public Key
+    tab: Stripe
+    type: sensitive
+    span: left
+  stripe_secret_key:
+    label: Stripe Secret Key
+    tab: Stripe
+    span: right
+    type: sensitive
+  stripe_checkout_success_page:
+    label: Stripe Checkout Success Page
+    tab: Stripe
+    commentAbove: The page to redirect to upon success.
+    span: left
+    type: entries
+    source: Content\Page
+    maxItems: 1
+  stripe_checkout_cancel_page:
+    label: Stripe Checkout Cancel Page
+    tab: Stripe
+    commentAbove: The page to redirect to upon cancelling.
+    span: right
+    type: entries
+    source: Content\Page
+    maxItems: 1
+  available_countries:
+    label: Countries to ship to
+    commentAbove: A comma-separated list of country codes you would like to ship to.
+    type: taglist
+    mode: array
+    separator: comma
+    tab: Shipping
+
+  shipping_methods:
+    label: Shipping Methods
+    tab: Shipping
+    commentAbove: Available shipping methods.
+    type: repeater
+    prompt: Add new method.
+    form:
+      fields:
+        title:
+          label: Shipping Method Name
+          type: text
+          commentAbove: Name of your shipping method.
+          span: left
+        price:
+          label: Shipping Price
+          type: number
+          commentAbove: Price of the shipping method.
+          span: right
+          validation:
+            - numeric
+        section:
+          label: Delivery Estimate
+          type: section
+          comment: The estimate time-window the delivery will arrive in business days.
+        delivery_estimate_min:
+          label: Minimum
+          commentAbove: The minimum time that a package may arrive.
+          type: number
+          span: left
+          validation:
+            - integer
+        delivery_estimate_max:
+          label: Maximum
+          commentAbove: The maximum time that a package may arrive.
+          type: number
+          span: right
+          validation:
+            - integer
+
+

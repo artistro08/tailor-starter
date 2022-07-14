@@ -1,0 +1,170 @@
+description = "Page Layout for Product Entries"
+title = "Page"
+
+[resources]
+js[] = "bootstrap.min.js"
+css[] = "bootstrap.min.css"
+==
+<?php
+use Stripe\Stripe as Stripe;
+use Stripe\Checkout as Checkout;
+use Tailor\Models\GlobalRecord as GlobalRecord;
+use Tailor\Models\EntryRecord as EntryRecord;
+
+// function to check if string is json format.
+function isJson($string) {
+   json_decode($string);
+   return json_last_error() === JSON_ERROR_NONE;
+}
+
+// Buy button submit
+function onBuySubmit() {
+    
+    // Grab Shop settings from Content -> Shop -> Settings
+    $shop_settings = GlobalRecord::findForGlobal('Content\Shop\Settings');
+    $success_url = 
+        Config::get('app.url') .
+        '/' .
+        EntryRecord::inSection('Content\Page')->
+        find($shop_settings->stripe_checkout_success_page)[0]->
+        slug;
+    $cancel_url =
+        Config::get('app.url') .
+        '/' .
+        EntryRecord::inSection('Content\Page')->
+        find($shop_settings->stripe_checkout_cancel_page)[0]->
+        slug;
+
+    // Set Stripe Key from Settings
+    Stripe::setApiKey($shop_settings->stripe_secret_key);
+
+    // Get Input data from October CMS AJAX Request
+    $product_details = input();
+
+    // Set non-dynamic variables (name, price, etc)
+    $product_name = input('name');
+    $product_price_unformatted = input('price');
+    $product_price = input('price');
+    $product_description = input('description');
+    $product_image = input('image');
+
+    // Declare arrays for dynamic variables
+    $pricing = [];
+    $pre_product_data = [];
+    $metadata = [];
+    $option_pricing = [];
+
+    // Add dynamic content to their respective arrays. (pricing, metadata)
+    foreach ($product_details as $product_value) {
+        if ($product_image != $product_value) {
+            if (is_numeric($product_value)) {
+                $pricing[] = $product_value;
+            }
+            if(input('price') != $product_value) {
+                if ($this->isJson($product_value)) {
+                    $pre_product_data[] = json_decode($product_value, true);
+                }
+            }
+            if (!is_numeric($product_value)) {
+                if (!$this->isJson($product_value)) {
+                    if($product_value != $product_description) {
+                        if($product_value != $product_name){
+                            $metadata[] = $product_value;
+                        }
+                    }
+                }
+            }
+        }
+        
+    };
+
+    foreach ($pre_product_data as $product_data) {
+        foreach($product_data as $item) {
+            if (is_numeric($item)) {
+                $option_pricing[] = $item;
+            }
+        }
+    }
+
+    foreach ($pre_product_data as $product_data) {
+        foreach($product_data as $item) {
+            if (!is_numeric($item)) {
+                $metadata[] = $item;
+            }
+        }
+    }
+
+    // Prepare pricing for stripe checkout
+    $option_pricing = array_sum($option_pricing);
+    $pricing_sum = array_sum($pricing) + $option_pricing;
+    $total = $pricing_sum * 100;
+
+
+    // Prepare shipping methods for checkout
+
+    $available_countries = $shop_settings->available_countries;
+    $shipping_rate_data = [];
+
+    foreach ($shop_settings->shipping_methods as $shipping_method) {
+        $shipping_rate_data[] = [
+            'shipping_rate_data' => [
+                'type' => 'fixed_amount',
+                'fixed_amount' => [
+                    'amount' => $shipping_method->price * 100,
+                    'currency' => 'usd',
+                ],
+                'display_name' => $shipping_method->title,
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_min,
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_max,
+                    ],
+                ]
+            ]
+        ];
+    }
+
+    // Initiate Checkout Session
+    $checkout_session = Checkout\Session::create([
+        'shipping_address_collection' => [
+            'allowed_countries' => $available_countries,
+        ],
+        'shipping_options' => $shipping_rate_data,
+        'line_items' => [[
+            'price_data' => [
+                'currency'     => 'USD',
+                'product_data' => [
+                    'name'        => $product_name,
+                    'description' => $product_description . ' - ' . implode(' - ', $metadata),
+                    'images'      => [
+                        $product_image,
+                    ],
+                    'metadata'    => $metadata,
+                ],
+                'unit_amount' => $total,
+            ],
+            'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'success_url' =>  $success_url,
+        'cancel_url'  => $cancel_url,
+    ]);
+    return redirect($checkout_session->url);
+}
+?>
+==
+<html lang="en">
+    <head>
+        {% partial 'head' %}
+    </head>
+    {% partial 'header' %}
+    <main>
+        {% page %}
+    </main>
+    {% partial 'footer' %}
+    {% partial 'foot' %}
+</html>
