@@ -207,3 +207,12 @@ fields:
           #events:
             #type: mixin
             #source: Content\Events
+      #products:
+        #name: Products
+        #icon: icon-cube
+        #description: Section with products.
+        #titleFrom: title
+        #fields:
+          #events:
+            #type: mixin
+            #source: Content\Products
