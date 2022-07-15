@@ -21,14 +21,6 @@ groups:
         span: left
         validation:
           - numeric
-      quantity:
-        type: number
-        label: Quantity
-        comment: The quantity of your product.
-        tab: Edit
-        span: right
-        validation:
-          - numeric
       product_attributes:
         type: mixin
         name: Product Attributes
@@ -46,7 +38,7 @@ groups:
         label: Price
         comment: The price of your product.
         tab: Edit
-        span: full
+        span: left
         validation:
           - numeric
       product_attributes:
@@ -134,13 +126,13 @@ groups:
                       span: left
                       validation:
                         - numeric
-                    quantity:
-                      type: number
-                      label: Quantity
-                      commentAbove: Quantity of this variant.
-                      span: left
-                      validation:
-                        - numeric
+                    is_enabled:
+                      type: switch
+                      label: Enable Variant
+                      comment: Enable this variant for purchase.
+                      span: right
+                      default: checked
+                      cssClass: mt-4
               dropdown_items:
                 type: repeater
                 name: Dropdown Items
@@ -173,14 +165,10 @@ groups:
                       span: left
                       validation:
                         - numeric
-                    quantity:
-                      type: number
-                      label: Quantity
-                      commentAbove: Quantity of this variant.
+                    is_enabled:
+                      type: switch
+                      label: Enable Variant
+                      comment: Enable this variant for purchase.
                       span: right
-                      validation:
-                        - numeric
-
-
-
-
+                      default: checked
+                      cssClass: mt-4

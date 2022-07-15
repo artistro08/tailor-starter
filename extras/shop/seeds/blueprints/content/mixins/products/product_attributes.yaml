@@ -4,7 +4,14 @@ type: mixin
 name: Builder
 
 fields:
-
+  allow_purchases:
+    tab: Edit
+    type: switch
+    label: Allow Purchases
+    comment: Let people purchase this product.
+    default: true
+    cssClass: mt-4
+    span: right
   description:
     type: richeditor
     label: Description
@@ -34,9 +41,3 @@ fields:
     commentHtml: true
     displayMode: relation
     span: right
-  allow_purchases:
-    tab: Edit
-    type: switch
-    label: Allow Purchases
-    comment: Let people purchase this product.
-    default: true

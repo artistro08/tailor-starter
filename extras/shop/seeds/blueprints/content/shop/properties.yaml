@@ -38,6 +38,13 @@ groups:
                 type: slug
               validation:
                 - alpha_dash
+            is_enabled:
+              type: switch
+              label: Enable Property
+              comment: Enable this property.
+              span: left
+              default: checked
+              cssClass: mt-4
   colors:
     name: Color
     icon: icon-circle
@@ -59,208 +66,10 @@ groups:
               label: Color
               commentAbove: Pick a color or select a custom one.
               span: right
-
-fields:
-  builder:
-    type: repeater
-    name: Builder
-    displayMode: builder
-    groups:
-      hero:
-        name: Hero
-        icon: icon-laptop
-        description: A section with a background image
-        titleFrom: title
-        fields:
-          title:
-            label: Title
-            comment: Title of the section. Used for organizational purposes.
-            type: text
-            span: left
-          image:
-            label: Background Image
-            type: mediafinder
-            comment: Background image to the hero.
-            span: right
-            mode: image
-            maxItems: 1
-          position:
-            label: Position
-            type: dropdown
-            comment: The position of the content
-            span: left
-            default: value[left]
-            options:
-              left: Left
-              center: Center
-          size:
-            label: Size
-            type: dropdown
-            comment: The size of the content
-            span: right
-            default: value[normal]
-            options:
-              normal: Normal
-              small: Small
-          content:
-            label: Content
-            type: richeditor
-            span: full
-          buttons:
-            type: mixin
-            source: Content\Buttons
-            maxItems: 3
-            commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
-      section:
-        name: Section
-        icon: icon-columns
-        description: Section with configurable columns
-        titleFrom: title
-        fields:
-          title:
-            label: Title
-            type: text
-            comment: Title of the section. Used for organizational purposes.
-            span: left
-          style:
-            label: Style
-            type: dropdown
-            comment: Style of this section.
-            span: right
-            options:
-              none: None
-              light: Light
-              dark: Dark
-          hr_1:
-            type: ruler
-          columns:
-            label: Content
-            type: repeater
-            commentAbove: Create content for this section. Each content block uses it's own column. Max of 4 per section.
-            span: full
-            displayMode: builder
-            maxItems: 4
-            groups:
-              content:
-                name: Text With Buttons
-                icon: icon-align-left
-                description: Add text and buttons to your section.
-                fields:
-                  title:
-                    label: Title
-                    commentAbove: Name of this content. Used for organizational purposes.
-                    type: text
-                  content:
-                    type: richeditor
-                  hr_1:
-                    type: ruler
-                  buttons:
-                    type: mixin
-                    source: Content\Buttons
-                    maxItems: 3
-                    commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
-                  hr_2:
-                    type: ruler
-                  width:
-                    type: number
-                    label: Column Width
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    type: dropdown
-                    span: right
-                    label: Position
-                    comment: The position of the column.
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
-              buttons:
-                name: Buttons
-                icon: icon-link
-                description: Add buttons to your section.
-                fields:
-                  title:
-                    label: Title
-                    type: text
-                    commentAbove: Name of this content. Used for organizational purposes.
-                  buttons:
-                    type: mixin
-                    source: Content\Buttons
-                    maxItems: 3
-                    commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
-                  hr_2:
-                    type: ruler
-                  width:
-                    type: number
-                    label: Column Width
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    type: dropdown
-                    span: right
-                    label: Position
-                    comment: The position of the column.
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
-              image:
-                name: Image
-                icon: icon-image
-                description: Add an image to your section.
-                fields:
-                  title:
-                    label: Title
-                    type: text
-                    commentAbove: Name of this content. Used for organizational purposes.
-                    span: full
-                  hr_1:
-                    type: ruler
-                  image:
-                    label: Image
-                    type: mediafinder
-                    span: left
-                    mode: image
-                    maxItems: 1
-                  alt:
-                    label: Alt Description
-                    type: text
-                    comment: The Description of the image. Use for SEO purposes.
-                    span: right
-                  hr_2:
-                    type: ruler
-                  width:
-                    label: Column Width
-                    type: number
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    label: Position
-                    type: dropdown
-                    comment: The position of the column.
-                    span: right
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
-      #Extra Content. More information in the documentation.
-      #Events
-      #events:
-        #name: Events
-        #icon: icon-calendar
-        #description: Section with events.
-        #titleFrom: title
-        #fields:
-          #events:
-            #type: mixin
-            #source: Content\Events
+            is_enabled:
+              type: switch
+              label: Enable Property
+              comment: Enable this property.
+              span: left
+              default: checked
+              cssClass: mt-4
