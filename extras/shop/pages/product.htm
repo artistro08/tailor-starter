@@ -1,0 +1,201 @@
+url = "/products/:product"
+layout = "product"
+title = "Product"
+
+[section]
+handle = "Content\Product"
+entrySlug = "{{ :product }}"
+entryDefault = 1
+fullSlug = 0
+==
+{% set product = section %}
+
+{% if product is empty %}
+    {% do redirect('404') %}
+{% else %}
+    <header class="product d-flex align-items-center py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6">
+                    {% for image in product.images|slice(0,1) %}
+                        <img
+                                class="img-fluid w-100 mb-4"
+                                src="{{ image.path|resize(700, 700, {mode: "crop"}) }}"
+                                alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
+                        >
+                    {% endfor %}
+                    <div class="row row-cols-5">
+                        {% for image in product.images|slice(0,1) %}
+                            <div class="col">
+                                <img
+                                        class="img-fluid w-100 mb-4"
+                                        src="{{ image.path|resize(200, 200, {mode: "crop"}) }}"
+                                        alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
+                                >
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <h1>{{ product.title }}</h1>
+                    {% if product.allow_purchases %}
+                        <h2>{% partial 'shop/price' product=product %}</h2>
+                    {% endif %}
+                    <p>{{ product.short_description|nl2br }}</p>
+                    {% if product.allow_purchases %}
+                        <form id="cart-form">
+                            {# Insert the product details into the form #}
+                            <input type="hidden" name="name" value="{{ product.title }}">
+                            <input type="hidden" name="price" value="{{ product.price }}">
+                            <input type="hidden" name="description" value="{{ product.short_description }}">
+                            {% for image in product.images|slice(0,1)  %}
+                                <input type="hidden" name="image" value="{{ image.path|resize(700, 700, {mode: 'crop'}) }}">
+                            {% endfor %}
+                            
+                            {# Check if Variant Options exist #}
+                            {% if product.content_group == "variant" %}
+                                {# if so, loop over the blocks in the variants section #}
+                                {% for variant in product.variants %}
+                                    {# Check if variant is a property set #}
+                                    {% if variant.content_group == "property_set" %}
+                                        {# if variant is dropdown, init select box, then loop over options in the property set #}
+                                        {% if variant.property.content_group == "dropdown" %}
+                                            {% if variant.property.items.where('is_enabled', true)|length %}
+                                                <label for="{{ variant.property.slug }}">{{ variant.property.title }}:</label>
+                                                <select class="form-select mb-4" name="{{ variant.property.title|lower }}" id="{{ variant.property.slug }}" onchange="onChange()">
+                                                    <option value="" selected>Select an option...</option>
+                                                    {% for option in variant.property.items.where('is_enabled', true) %}
+                                                        <option value="{{ variant.property.title }}: {{ option.title }}">{{ option.title }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endif %}
+                                        {% endif %}
+                                        {# if variant is color, init radios, then loop over options in the property set #}
+                                        {% if variant.property.content_group == "colors" %}
+                                            {% if variant.property.color.where('is_enabled', true)|length %}
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <label class="me-2">{{ variant.property.title }}:</label>
+                                                    <input class="position-fixed opacity-0" style="pointer-events: none" type="radio" name="{{ variant.title|lower }}" checked value="0">
+                                                    {% for color in variant.property.color.where('is_enabled', true) %}
+                                                        <input
+                                                                type="radio"
+                                                                class="btn-check"
+                                                                value="{{ variant.property.title }}: {{ color.title }}"
+                                                                name="{{ variant.property.slug }}"
+                                                                id="{{ color.title|lower }}"
+                                                                autocomplete="off"
+                                                                onchange="onChange()"
+                                                        >
+                                                        <label class="btn btn-outline-primary {{ not loop.last ? 'me-2' }}" for="{{ color.title|lower }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="{{ color.color }}" class="bi bi-square-fill" viewBox="0 0 16 16">
+                                                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                                                            </svg>
+                                                            &nbsp;{{ color.title }}
+                                                        </label>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                        
+                                    {% endif %}
+                                    
+                                    {# Check if variant is a custom property #}
+                                    {% set purchasable = true %}
+                                    {% if variant.content_group == "custom_properties" %}
+                                        {# if variant is dropdown, init select box, then loop over options in the property set #}
+                                        {% if variant.property_type == "dropdown" %}
+                                            <label for="{{ variant.title|lower }}">{{ variant.title }}:</label>
+                                            <select
+                                                    required
+                                                    class="form-select mb-4"
+                                                    name="{{ variant.title|lower }}"
+                                                    id="{{ variant.title|lower }}"
+                                                    onchange="onChange()"
+                                            >
+                                                <option value="" selected>Select an option...</option>
+                                                {% for option in variant.dropdown_items %}
+                                                    <option
+                                                            value='{"option_title":"{{ variant.title }}: {{ option.title }}","price":"{{ option.price }}"}'
+                                                            {{ option.is_enabled ? '' : 'disabled' }}
+                                                    >
+                                                        {{ option.title }}{{ option.is_enabled ? '' : ' - Out of Stock' }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        {% endif %}
+                                        {# if variant is color, init radios, then loop over options in the property set #}
+                                        {% if variant.property_type == "color" %}
+                                            {% if variant.colors.where('is_enabled', true)|length %}
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <label class="me-2">{{ variant.title }}:</label>
+                                                    <input class="position-fixed opacity-0" style="pointer-events: none" type="radio" name="{{ variant.title|lower }}" checked value="0">
+                                                    {% for color in variant.colors.where('is_enabled', true) %}
+                                                        <input
+                                                                required
+                                                                type="radio"
+                                                                class="btn-check"
+                                                                name="{{ variant.title|lower }}"
+                                                                id="{{ color.title|lower }}"
+                                                                autocomplete="off"
+                                                                value='{"option_title":"{{ variant.title }}: {{ color.title }}","price":"{{ color.price }}"}'
+                                                                onchange="onChange()"
+                                                                
+                                                        >
+                                                        <label class="btn btn-outline-primary {{ not loop.last ? 'me-2' }}" for="{{ color.title|lower }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="{{ color.color_hex }}" class="bi bi-square-fill" viewBox="0 0 16 16">
+                                                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                                                            </svg>
+                                                            &nbsp;{{ color.title }}{{ color.is_enabled ? '' : ' - Out of Stock' }}
+                                                        </label>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                    
+                                    
+                                {% endfor %}
+                                
+                            {% endif %}
+                            {# Add Quantity #}
+                            <label for="quantity">Quantity</label>
+                            <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" id="quantity">
+                            
+    
+                            {% partial 'shop/buy-button' %}
+                        </form>
+                    {% else %}
+                        <p class="fs-5">This product is out of stock</p>
+                    {% endif %}
+                    {% put scripts %}
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                oc.request('#cart-form', 'onLoad', {
+                                    update: {'shop/price': '#price'},
+                                });
+                                oc.request('#cart-form', 'onLoad', {
+                                    update: {'shop/buy-button': '#button'},
+                                });
+                            });
+                            
+                            function onChange() {
+                                oc.request('#cart-form', 'onLoad', {
+                                    update: {'shop/price': '#price'},
+                                });
+                                oc.request('#cart-form', 'onLoad', {
+                                    update: {'shop/buy-button': '#button'},
+                                });
+                            }
+                            
+                        </script>
+                    {% endput %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="">
+        <div class="container">
+            {{ product.description|raw }}
+        </div>
+    </section>
+{% endif %}
