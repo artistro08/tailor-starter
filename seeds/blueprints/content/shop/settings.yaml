@@ -6,7 +6,7 @@ name: Shop Settings
 navigation:
   parent: Content\Page
   icon: icon-shopping-bag
-  order: 11
+  order: 12
 
 fields:
   section:
