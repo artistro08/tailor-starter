@@ -36,7 +36,8 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - Social Menu (with icon support from [Chkilel.Icones](https://octobercms.com/plugin/chkilel-icones))
 - Homepage designation using Tailor Globals
 - Initial SEO & OG Tags support
-- Events with recurring events support. (See [Extra Content](#extra-content))
+- Events with recurring events support. (See [Events](#events))
+- Shop with Stripe Support (See [Shop](#events))
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
@@ -75,30 +76,37 @@ The last thing you need to do is update the page templates. Luckily, there is so
 {% endif %}
 ```
 
-### Extra Content
-This theme has some extra Tailor fields and builder blocks you can use. You just have to set it up. To do so, follow these steps:
+### Events
+This theme has events with recurring events out of the box. Just make sure you seed the theme.
 
-#### Step 1: Copy over the content to your child theme
-In this case, I want to install the `events` Tailor options.
-```bash
-cp -r themes/artistro08-tailorstarter/extras/events/* themes/artistro08-tailorstarter-child/
-```
+The locations for the event markup files are:
+- `layouts/event.htm`
+- `pages/event.htm`
+- `partial/builder/events.htm`
 
-#### Step #2: Seed your child theme
-```bash
-php artisan theme:seed artistro08-tailorstarter-child --root #if you're using the default setup
-```
+This content is used for the layout, single pages, and builder items, respectively.
 
-#### Step #3: Uncomment Files
-You'll need to uncomment the respective code in the following files:
-- `pages/index.htm`
-- `pages/page.htm`
-- `app/blueprints/content/mixins/builder.yaml`
 
-Once done, run migrations:
-```bash
-php artisan tailor:migrate
-```
+### Shop
+This theme has a simple shop with Stripe support. Webhooks are supported too, under the condition that **variant products do not work**.
+If you need a more robust shop, I recommend checking out [OFFLINE.Mall](https://octobercms.com/plugin/offline-mall) from the marketplace.
 
-### Contributing
+#### Features of the shop
+- Stripe Checkout Support. Just add your keys
+- Stripe Webhooks Support (Also required). Make sure you add your Webhook Secret
+- Variants (Without Stripe Webhooks Support).
+- Simple Products (With Stripe Webhooks Support).
+  - Quantity is automatically updated on `checkout.session.completed`.
+- Support for Categories out of the box. 
+
+The locations for the product markup files are:
+- `layouts/product.htm`
+- `pages/products.htm`
+- `pages/product.htm`
+- `pages/product_category.htm`
+- `partial/builder/products.htm`
+
+This content is used for the layout, product listings, single pages, product categories, and builder items respectively.
+
+#### Contributing
 If you would like to contribute to this theme, please submit a pull request. Any help is welcome!

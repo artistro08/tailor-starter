@@ -28,7 +28,6 @@ groups:
         tab: Edit
         span: right
         validation:
-          - numeric
       product_attributes:
         type: mixin
         name: Product Attributes
@@ -70,10 +69,8 @@ groups:
           property_set:
             name: Property Set
             description: Pick from Content > Product Property.
+            icon: icon-tags
             fields:
-              section:
-                type: section
-                comment: This block does not support quantities or pricing. Use the "Custom Properties" block to add price and quantity per each variant.
               title:
                 label: Variant Set Title
                 type: Text
@@ -91,6 +88,7 @@ groups:
                 prompt: Click %s to select a property.
           custom_properties:
             name: Custom Properties
+            icon: icon-cog
             description: Create custom variants with pricing and quantity.
             fields:
               title:
@@ -134,13 +132,13 @@ groups:
                       span: left
                       validation:
                         - numeric
-                    quantity:
-                      type: number
-                      label: Quantity
-                      commentAbove: Quantity of this variant.
-                      span: left
-                      validation:
-                        - numeric
+                    is_enabled:
+                      type: switch
+                      label: Enable Variant
+                      comment: Enable this variant for purchase.
+                      span: right
+                      default: checked
+                      cssClass: mt-4
               dropdown_items:
                 type: repeater
                 name: Dropdown Items
@@ -173,14 +171,21 @@ groups:
                       span: left
                       validation:
                         - numeric
-                    quantity:
-                      type: number
-                      label: Quantity
-                      commentAbove: Quantity of this variant.
+                    is_enabled:
+                      type: switch
+                      label: Enable Variant
+                      comment: Enable this variant for purchase.
                       span: right
-                      validation:
-                        - numeric
-
-
-
-
+                      default: checked
+                      cssClass: mt-4
+      info_title:
+        tab: Info
+        type: section
+        label: Variant Info
+      info_hint:
+        tab: Info
+        type: hint
+        mode: info
+        label: Variants
+        comment: Variant quantities are not supported. The object of this shop is to quickly build a simple shop mechanism. If this is not your desired outcome, I recommend you use <a href='https://octobercms.com/plugin/offline-mall' target='_blank'>OFFLINE.Mall</a> in the October CMS Marketplace or extend the markup of this theme.
+        commentHtml: true

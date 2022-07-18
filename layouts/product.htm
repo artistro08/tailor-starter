@@ -62,6 +62,7 @@ function onBuySubmit() {
 
     // Set non-dynamic variables (name, price, etc)
     $product_name = input('name');
+    $product_id = input('id');
     $product_price_unformatted = input('price');
     $product_price = input('price');
     $product_description = input('description');
@@ -78,7 +79,9 @@ function onBuySubmit() {
         if ($product_image != $product_value) {
             if (is_numeric($product_value)) {
                 if(input('quantity') != $product_value) {
-                    $pricing[] = $product_value;
+                    if(input('id') != $product_value) {
+                        $pricing[] = $product_value;
+                    }
                 }
             }
             if ($this->isJson($product_value)) {
@@ -112,6 +115,16 @@ function onBuySubmit() {
             }
         }
     }
+
+    $all_metadata = [];
+
+    foreach($metadata as $pair) {
+        list($a, $b) = explode(':', $pair);
+        $all_metadata[$a] = $b;
+    }
+
+    $all_metadata['tailor_id'] = $product_id;
+
 
     // Prepare pricing for stripe checkout
     $option_pricing = array_sum($option_pricing);
@@ -163,7 +176,7 @@ function onBuySubmit() {
                     'images'      => [
                         $product_image,
                     ],
-                    'metadata'    => $metadata,
+                    'metadata'    => $all_metadata,
                 ],
                 'unit_amount' => $total,
             ],
@@ -183,10 +196,12 @@ function onLoad() {
 
     // Set non-dynamic variables (name, price, etc)
     $product_name = input('name');
+    $product_id = input('id');
     $product_price_unformatted = input('price');
     $product_price = input('price');
     $product_description = input('description');
     $product_image = input('image');
+    $tailor_product = EntryRecord::inSection('Content\Product')->where('id', $product_id)->get()[0];
 
     // Declare arrays for dynamic variables
     $pricing = [];
@@ -201,7 +216,9 @@ function onLoad() {
         if ($product_image != $product_value) {
             if (is_numeric($product_value)) {
                 if(input('quantity') != $product_value) {
-                    $pricing[] = $product_value;
+                    if(input('id') != $product_value) {
+                        $pricing[] = $product_value;
+                    }
                 }
             }
             if(!empty($product_value)) {
@@ -248,11 +265,24 @@ function onLoad() {
     $product_total = array_sum($pricing) + $option_pricing;
 
     // Make items available through twig
-    if(count(array_filter(input())) == count(input())) {
-        $this['form_enabled'] = true;
-    } else {
-        $this['form_enabled'] = false;
+
+    if($tailor_product->content_group == "simple") {
+        if($tailor_product->quantity > 0) {
+            $this['form_enabled'] = true;
+        } else {
+            $this['form_enabled'] = false;
+        }
     }
+
+    if($tailor_product->content_group == "variant") {
+        if(count(array_filter(input())) == count(input())) {
+            $this['form_enabled'] = true;
+        } else {
+            $this['form_enabled'] = false;
+        }
+    }
+    
+    
 
     
     $this['product_details']           = $product_details;

@@ -23,6 +23,13 @@ fields:
     tab: Stripe
     span: right
     type: sensitive
+  stripe_webhook_secret_key:
+    label: Stripe Webhook Secret Key
+    tab: Stripe
+    span: full
+    type: sensitive
+    comment: The webhook secret to sign requests. The shop will not work without it. For step-by-step instructions on how to get it, <a href='https://scribehow.com/shared/Obtain_a_Stripe_Webhook_Secret__5lTS37MMRnu_hhGzWJe07w' target='_blank'>click here</a>.
+    commentHtml: true
   stripe_checkout_success_page:
     label: Stripe Checkout Success Page
     tab: Stripe

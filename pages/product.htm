@@ -48,6 +48,7 @@ fullSlug = 0
                             <input type="hidden" name="name" value="{{ product.title }}">
                             <input type="hidden" name="price" value="{{ product.price }}">
                             <input type="hidden" name="description" value="{{ product.short_description }}">
+                            <input type="hidden" name="id" value="{{ product.id }}">
                             {% for image in product.images|slice(0,1)  %}
                                 <input type="hidden" name="image" value="{{ image.path|resize(700, 700, {mode: 'crop'}) }}">
                             {% endfor %}
@@ -158,8 +159,23 @@ fullSlug = 0
                                 
                             {% endif %}
                             {# Add Quantity #}
-                            <label for="quantity">Quantity</label>
-                            <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" id="quantity">
+                            {% if product.content_group == "simple" %}
+                                {% if product.quantity == 0 %}
+                                    <p class="fs-5">This product is out of stock</p>
+                                {% endif %}
+                                {% if product.quantity == 1 %}
+                                    <input type="hidden" name="quantity" value="1" min="1" max="{{ product.quantity }}" id="quantity">
+                                {% endif %}
+                                {% if product.quantity > 1 %}
+                                    <label for="quantity">Quantity</label>
+                                    <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" max="{{ product.quantity }}" id="quantity">
+                                {% endif %}
+                            {% endif %}
+    
+                            {% if product.content_group == "variant" %}
+                                <label for="quantity">Quantity</label>
+                                <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" id="quantity">
+                            {% endif %}
                             
     
                             {% partial 'shop/buy-button' %}
@@ -167,28 +183,60 @@ fullSlug = 0
                     {% else %}
                         <p class="fs-5">This product is out of stock</p>
                     {% endif %}
-                    {% put scripts %}
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                oc.request('#cart-form', 'onLoad', {
-                                    update: {'shop/price': '#price'},
+    
+                    {% if product.content_group == "variant" %}
+                        {% if product.allow_purchases %}
+                            {% put scripts %}
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        oc.request('#cart-form', 'onLoad', {
+                                            update: {'shop/price': '#price'},
+                                        });
+                                        oc.request('#cart-form', 'onLoad', {
+                                            update: {'shop/buy-button': '#button'},
+                                        });
+                                    });
+
+                                    function onChange() {
+                                        oc.request('#cart-form', 'onLoad', {
+                                            update: {'shop/price': '#price'},
+                                        });
+                                        oc.request('#cart-form', 'onLoad', {
+                                            update: {'shop/buy-button': '#button'},
+                                        });
+                                    }
+        
+                                </script>
+                            {% endput %}
+                        {% endif %}
+                    {% endif %}
+    
+                    {% if product.content_group == "simple" %}
+                        {% put scripts %}
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    oc.request('#cart-form', 'onLoad', {
+                                        update: {'shop/price': '#price'},
+                                    });
+                                    oc.request('#cart-form', 'onLoad', {
+                                        update: {'shop/buy-button': '#button'},
+                                    });
                                 });
-                                oc.request('#cart-form', 'onLoad', {
-                                    update: {'shop/buy-button': '#button'},
-                                });
-                            });
-                            
-                            function onChange() {
-                                oc.request('#cart-form', 'onLoad', {
-                                    update: {'shop/price': '#price'},
-                                });
-                                oc.request('#cart-form', 'onLoad', {
-                                    update: {'shop/buy-button': '#button'},
-                                });
-                            }
-                            
-                        </script>
-                    {% endput %}
+
+                                function onChange() {
+                                    oc.request('#cart-form', 'onLoad', {
+                                        update: {'shop/price': '#price'},
+                                    });
+                                    oc.request('#cart-form', 'onLoad', {
+                                        update: {'shop/buy-button': '#button'},
+                                    });
+                                }
+        
+                            </script>
+                        {% endput %}
+                    {% endif %}
+                    
+                    
                 </div>
             </div>
         </div>

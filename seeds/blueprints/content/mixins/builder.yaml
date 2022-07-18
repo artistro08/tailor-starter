@@ -196,23 +196,21 @@ fields:
                       me-auto: Left
                       mx-auto: Center
                       ms-auto: Right
-      #Extra Content. More information in the documentation.
-      #Events
-      #events:
-        #name: Events
-        #icon: icon-calendar
-        #description: Section with events.
-        #titleFrom: title
-        #fields:
-          #events:
-            #type: mixin
-            #source: Content\Events
-      #products:
-        #name: Products
-        #icon: icon-cube
-        #description: Section with products.
-        #titleFrom: title
-        #fields:
-          #events:
-            #type: mixin
-            #source: Content\Products
+      events:
+        name: Events
+        icon: icon-calendar
+        description: Section with events.
+        titleFrom: title
+        fields:
+          events:
+            type: mixin
+            source: Content\Events
+      products:
+        name: Products
+        icon: icon-cube
+        description: Section with products.
+        titleFrom: title
+        fields:
+          events:
+            type: mixin
+            source: Content\Products

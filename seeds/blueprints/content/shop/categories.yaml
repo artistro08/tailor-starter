@@ -5,7 +5,7 @@ name: Product Category
 drafts: false
 
 navigation:
-  icon: icon-square
+  icon: icon-th
   parent: Content\Page
   order: 8
 

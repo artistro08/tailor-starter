@@ -10,8 +10,7 @@ fields:
     label: Allow Purchases
     comment: Let people purchase this product.
     default: true
-    cssClass: mt-4
-    span: right
+    span: full
   description:
     type: richeditor
     label: Description

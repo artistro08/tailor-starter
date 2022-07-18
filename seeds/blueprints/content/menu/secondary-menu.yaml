@@ -21,7 +21,6 @@ fields:
     default: value[entry]
     options:
       page_entry: Page
-      tournament_entry: Tournament
       url: URL
   url:
     type: Text

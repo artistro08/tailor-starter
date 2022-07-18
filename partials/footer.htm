@@ -19,7 +19,7 @@ handle = "Content\Settings"
                         {% if item.is_enabled %}
                             <li class="nav-item">
                                 {% if item.type == "url" %}
-                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ page.url }}">{{ item.title }}</a>
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ item.url }}">{{ item.title }}</a>
                                 {% endif %}
                                 {% if item.type == "page_entry" %}
                                     <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ item.page.slug == '' ? '/' : 'page'|page({ page: item.page.slug }) }}">{{ item.title }}</a>

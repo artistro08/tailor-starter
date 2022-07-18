@@ -1,15 +1,17 @@
 url = "/products/category/:slug"
-layout = "default"
+layout = "product"
 title = "Product Category"
 
-[section category]
+[section]
 handle = "Content\Product\Category"
 entrySlug = "{{ :slug }}"
 
 [collection products]
 handle = "Content\Product"
 ==
-{% set products = products.whereRelation('categories', 'slug', category.slug).paginate(12) %}
+{% set category = section %}
+
+{% set products = products.whereRelation('categories', 'slug', section.slug).paginate(12) %}
 
 <header>
     <div class="container">
