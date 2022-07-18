@@ -33,11 +33,12 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - A "Simple Page" mode
 - Main Menu with dropdown support (Max depth of 1)
 - Secondary Menu 
-- Social Menu (with icon support from [Chkilel.Icones](https://octobercms.com/plugin/chkilel-icones))
+- Social Menu with icon support. (See [Icons](#icons)
 - Homepage designation using Tailor Globals
 - Initial SEO & OG Tags support
 - Events with recurring events support. (See [Events](#events))
 - Shop with Stripe Support (See [Shop](#events))
+- Icons with Bootstrap Icons (See [Icons](#icons))
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
@@ -107,6 +108,20 @@ The locations for the product markup files are:
 - `partial/builder/products.htm`
 
 This content is used for the layout, product listings, single pages, product categories, and builder items respectively.
+
+### Icons
+This theme has seed data for the Bootstrap Icons library. The last generated icon set was `v1.8.3`. The Social menu uses these icons. Use that as an example to extend into your theme.
+
+#### Updating the icon set
+You can update the icon set by using the `update_icons.sh` script in the `scripts` directory. Here's how:
+- Download the icons from [icons.getbootstrap.com](https://icons.getbootstrap.com).
+- Unzip the icons
+- Place the script inside the unzipped folder (alongside the SVGs).
+- run the script `./update_icons.sh` once you verify the script is safe.
+  - you may need to mark the script as executable. 
+- Grab the generated `bootstrap-icons.json` file and import it via Tailor
+
+This script will run under Ubuntu 18.04+ but other versions are not tested. Use at your own risk.
 
 #### Contributing
 If you would like to contribute to this theme, please submit a pull request. Any help is welcome!

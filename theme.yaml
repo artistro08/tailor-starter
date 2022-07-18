@@ -6,4 +6,3 @@ authorCode: Artistro08
 code: TailorStarter
 database: '0'
 require:
-  - "Chkilel.Icones"

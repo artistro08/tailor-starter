@@ -1,0 +1,18 @@
+uuid: 2dcfff94-63ce-4c7e-a8a9-b032bec5ec8a
+handle: Content\Icon
+type: stream
+name: Icons
+drafts: false
+
+navigation:
+  icon: icon-bookmark
+  parent: Content\Page
+  order: 11
+
+fields:
+  svg_code:
+    type: textarea
+    label: SVG Code
+    language: html
+    size: huge
+    attributes: disabled
