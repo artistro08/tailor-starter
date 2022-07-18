@@ -19,3 +19,10 @@
   attributes:
     file_format: json
     blueprint_uuid: 614a6aef-c642-427f-a28c-343032f19deb
+-
+  name: Icon Data
+  class: Tailor\Models\EntryRecordImport
+  file: seeds/data/icons.json
+  attributes:
+    file_format: json
+    blueprint_uuid: 2dcfff94-63ce-4c7e-a8a9-b032bec5ec8a

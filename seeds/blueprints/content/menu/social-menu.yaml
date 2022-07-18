@@ -21,7 +21,10 @@ fields:
     validation: url
   icon:
     label: Icon
-    type: iconesfinder
+    type: entries
+    maxItems: 1
+    displayMode: recordfinder
     span: right
+    source: Content\Icon
         
 
