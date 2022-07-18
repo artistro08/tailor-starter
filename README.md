@@ -29,11 +29,11 @@ This will initialize the Tailor structure, so you can add content.
 Once you've seeded the theme, head over to the content settings in the backend and select the Homepage. Optionally, fill out the Site Name field as well. Find this at `/[backend_url]/tailor/globals/content_settings` where `[backend_url]` is your backend URI set in your .env
 
 ### Features
-- A page builder with two components (Hero, Section with columns support)
+- A page builder with components (Hero, Section with columns support, events, and products)
 - A "Simple Page" mode
 - Main Menu with dropdown support (Max depth of 1)
 - Secondary Menu 
-- Social Menu with icon support. (See [Icons](#icons)
+- Social Menu with icon support. (See [Icons](#icons))
 - Homepage designation using Tailor Globals
 - Initial SEO & OG Tags support
 - Events with recurring events support. (See [Events](#events))
