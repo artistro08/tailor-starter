@@ -1,0 +1,47 @@
+url = "/products/category/:slug"
+layout = "product"
+title = "Product Category"
+
+[section]
+handle = "Content\Product\Category"
+entrySlug = "{{ :slug }}"
+
+[collection products]
+handle = "Content\Product"
+==
+{% set category = section %}
+
+{% set products = products.whereRelation('categories', 'slug', section.slug).paginate(12) %}
+
+<header>
+    <div class="container">
+        <h1 class="text-center">{{ category.title }}</h1>
+    </div>
+</header>
+<div class="section">
+    <div class="container">
+        <div class="row row-cols-lg-4">
+            {% for product in products %}
+                <div class="col mb-4">
+                    <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                        <div class="card">
+                            <img
+                                    src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                    alt="{{ product.title }}" class="card-img-top"
+                            >
+                            <div class="card-body d-flex justify-content-between">
+                                <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                                <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container d-flex justify-content-center">
+        {{ products.links|raw }}
+    </div>
+</div>
