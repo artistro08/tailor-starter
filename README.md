@@ -33,12 +33,12 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - A "Simple Page" mode
 - Main Menu with dropdown support (Max depth of 1)
 - Secondary Menu 
-- Social Menu (with icon support from [Chkilel.Icones](https://octobercms.com/plugin/chkilel-icones))
+- Social Menu with icon support. (See [Icons](#icons)
 - Homepage designation using Tailor Globals
 - Initial SEO & OG Tags support
 - Events with recurring events support. (See [Events](#events))
 - Shop with Stripe Support (See [Shop](#events))
-- Icons with Bootstrap Icons (See [Icons](#events))
+- Icons with Bootstrap Icons (See [Icons](#icons))
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
