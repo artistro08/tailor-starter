@@ -1,0 +1,85 @@
+description = "layout without any content"
+==
+<?php
+use Stripe\Stripe as Stripe;
+use Stripe\Checkout as Checkout;
+use Stripe\Webhook as Webhook;
+use Stripe\Exception as Exception;
+use Tailor\Models\GlobalRecord as GlobalRecord;
+use Tailor\Models\EntryRecord as EntryRecord;
+use Stripe\StripeClient as Client;
+
+
+function onInit() {
+
+    // Config::set('system.enable_csrf_protection', false);
+
+    
+
+    $request = Request::instance();
+
+    // Grab Shop settings from Content -> Shop -> Settings
+    $shop_settings   = GlobalRecord::findForGlobal('Content\Shop\Settings');
+    $stripe_key      = $shop_settings->stripe_secret_key;
+    $endpoint_secret = $shop_settings->stripe_webhook_secret_key;
+
+    // Set Stripe Key from Settings
+    Stripe::setApiKey($stripe_key);
+
+
+    $payload    = $request->getContent();
+    $sig_header = array_key_exists('HTTP_STRIPE_SIGNATURE', $_SERVER) ? $_SERVER['HTTP_STRIPE_SIGNATURE'] : null;
+    $event      = null;
+
+    try {
+        $event = Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
+    } catch(\UnexpectedValueException $e) {
+        // Invalid payload
+        Log::info('Invalid payload. Maybe someone was doing something nasty?');
+        http_response_code(400);
+        exit();
+    } catch(\Stripe\Exception\SignatureVerificationException $e) {
+        Log::info($e);
+        Log::info($payload);
+        // Invalid signature
+        http_response_code(400);
+        exit();
+    }
+
+    if ($event->type == 'checkout.session.completed') {
+        $session = $event->data->object;
+
+        $stripe = new Client($stripe_key);
+        $line_items = $stripe->checkout->sessions->allLineItems($session['id']);
+        
+
+        // Fulfill the purchase...
+
+        foreach($line_items['data'] as $item){
+            $line_item_price = $stripe->prices->retrieve($item['price']['id'],[]);
+            $product         = $stripe->products->retrieve($line_item_price['product'],[]);
+            $quantity        = $item['quantity'];
+            $tailor_id       = $product['metadata']['tailor_id'];
+
+            $tailor_product = EntryRecord::inSection('Content\Product')->where('id', $tailor_id)->get();
+
+            if($tailor_product[0]->content_group == "simple") {
+
+                $tailor_product[0]->quantity = ($tailor_product[0]->quantity - $quantity);
+                Log::info($tailor_product[0]->quantity);
+                $tailor_product[0]->save();
+            }
+
+            // $product_tailor[0]->save();
+
+            // Log:info($tailor_product);
+
+        }
+    }
+
+    // Log::info('Passed Signature Verification!');
+    http_response_code(200);
+    
+}
+?>
+==

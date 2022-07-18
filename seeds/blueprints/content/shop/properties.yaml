@@ -1,0 +1,75 @@
+uuid: 01d7c870-0144-11ed-b008-4dca43b459ab
+handle: Content\Product\Properties
+type: structure
+name: Product Property
+
+navigation:
+  icon: icon-tags
+  parent: Content\Page
+  order: 10
+
+structure:
+  maxDepth: 1
+
+groups:
+  dropdown:
+    name: Dropdown
+    icon: icon-caret-down
+    description: Add a dropdown to the product. Useful if you need to add sizes.
+    fields:
+      items:
+        type: repeater
+        label: Dropdown Items
+        commentAbove: Add dropdown items to this dropdown.
+        form:
+          fields:
+            title:
+              type: text
+              label: Title
+              commentAbove: Title of this variant.
+              span: left
+            slug:
+              type: text
+              label: Dropdown Item Slug
+              span: right
+              commentAbove: The slug of this item. Used for developer purposes.
+              preset:
+                field: title
+                type: slug
+              validation:
+                - alpha_dash
+            is_enabled:
+              type: switch
+              label: Enable Property
+              comment: Enable this property.
+              span: left
+              default: checked
+              cssClass: mt-4
+  colors:
+    name: Color
+    icon: icon-circle
+    description: Add Colors to your product.
+    fields:
+      color:
+        type: repeater
+        label: Color
+        comment: Add a colors to this product.
+        form:
+          fields:
+            title:
+              type: text
+              label: Title
+              commentAbove: Title of this variant.
+              span: left
+            color:
+              type: colorpicker
+              label: Color
+              commentAbove: Pick a color or select a custom one.
+              span: right
+            is_enabled:
+              type: switch
+              label: Enable Property
+              comment: Enable this property.
+              span: left
+              default: checked
+              cssClass: mt-4

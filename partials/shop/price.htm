@@ -1,0 +1,5 @@
+{% if product_total|length %}
+    <span id="price">${{ product_total }}</span>
+{% else %}
+    <span id="price">${{ product.price }}</span>
+{% endif %}
