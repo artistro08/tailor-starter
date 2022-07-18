@@ -25,14 +25,16 @@ fullSlug = 0
                         >
                     {% endfor %}
                     <div class="row row-cols-5">
-                        {% for image in product.images|slice(0,1) %}
-                            <div class="col">
-                                <img
-                                        class="img-fluid w-100 mb-4"
-                                        src="{{ image.path|resize(200, 200, {mode: "crop"}) }}"
-                                        alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
-                                >
-                            </div>
+                        {% for image in product.images %}
+                            {% if not loop.first %}
+                                <div class="col">
+                                    <img
+                                            class="img-fluid w-100 mb-4"
+                                            src="{{ image.path|resize(200, 200, {mode: "crop"}) }}"
+                                            alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
+                                    >
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
