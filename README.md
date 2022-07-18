@@ -23,7 +23,7 @@ This will initialize the Tailor structure, so you can add content.
 
 > ### Note
 > This theme automatically creates a child theme. The directory name is `artistro08-tailorstarter-theme`. Use that theme to make edits to the code.
-> To learn more info about child themes, check [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html)
+> To learn more info about child themes, check [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html).
 > Whenever you make changes to the theme in the editor, it copies the data and puts it in the child theme. 
 
 Once you've seeded the theme, head over to the content settings in the backend and select the Homepage. Optionally, fill out the Site Name field as well. Find this at `/[backend_url]/tailor/globals/content_settings` where `[backend_url]` is your backend URI set in your .env
