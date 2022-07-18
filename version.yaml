@@ -5,3 +5,4 @@ v1.1.4: Added extra content [Events]. See documentation on how to implement.
 v1.1.5: Create Mixin for builder item to simplify things
 v1.2.0: Introduced a simple shop. Moved all extra content into the root directory, making it easier to get started. Cleaned up code.
 v1.2.1: Added Bootstrap Icons support. Remove support for Chkilel.Icones. Updated Social Menu with Icons from the Icons blueprint.
+v1.2.2: Fix "undefined array key" when allow_purchases isn't enabled. Updated README.md.
