@@ -18,23 +18,32 @@ fields:
     type: text
     label: Customer Name
     tab: Order Info
-    span: full
+    span: left
     trigger:
       action: enable
-      field: update_address
+      field: update_customer_details
       condition: checked
-  address:
+  customer_email:
+    type: text
+    label: Customer Email
+    tab: Order Info
+    span: right
+    trigger:
+      action: enable
+      field: update_customer_details
+      condition: checked
+  customer_address:
     type: textarea
-    label: Address
+    label: Customer Address
     span: full
     tab: Order Info
     trigger:
       action: enable
-      field: update_address
+      field: update_customer_details
       condition: checked
-  update_address:
+  update_customer_details:
     type: switch
-    label: Update Address & Name
+    label: Update Customer Details
     tab: Order Info
     span: full
     comment: Enable the address & customer name fields so you can edit the address.

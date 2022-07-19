@@ -1,4 +1,4 @@
-description = "layout without any content"
+description = "layout without any content. For Stripe Webhooks"
 ==
 <?php
 use Stripe\Stripe as Stripe;
@@ -47,14 +47,18 @@ function onInit() {
     }
 
     if ($event->type == 'checkout.session.completed') {
-        $session = $event->data->object;
-
-        $stripe = new Client($stripe_key);
-        $line_items = $stripe->checkout->sessions->allLineItems($session['id']);
+        $session          = $event->data->object;
+        $session_data     = json_decode($session->toJSON(), true);
+        $stripe           = new Client($stripe_key);
+        $line_items       = $stripe->checkout->sessions->allLineItems($session['id']);
+        $shipping_rate    = $stripe->shippingRates->retrieve($session_data['shipping_rate'],[]);
+        $products_summary = [];
+        $customer_info    = [];
+        $order_info       = [];
         
 
-        // Fulfill the purchase...
 
+        // Fulfill the purchase
         foreach($line_items['data'] as $item){
             $line_item_price = $stripe->prices->retrieve($item['price']['id'],[]);
             $product         = $stripe->products->retrieve($line_item_price['product'],[]);
@@ -66,18 +70,38 @@ function onInit() {
             if($tailor_product[0]->content_group == "simple") {
 
                 $tailor_product[0]->quantity = ($tailor_product[0]->quantity - $quantity);
-                Log::info($tailor_product[0]->quantity);
                 $tailor_product[0]->save();
             }
 
-            // $product_tailor[0]->save();
-
-            // Log:info($tailor_product);
+            $products_summary['name']     = $product['name'];
+            $products_summary['quantity'] = $quantity;
+            $products_summary['metadata'] = json_decode($product['metadata']->toJSON(), true);
 
         }
+
+        $products_summary_metadata = implode(PHP_EOL . '- ', array_map(function ($a, $b) { return "$a: $b"; },array_keys($products_summary['metadata']),array_values($products_summary['metadata'])));
+
+        $customer_info['name']             = $session_data['customer_details']['name'];
+        $customer_info['email']            = $session_data['customer_details']['email'];
+        $customer_info['shipping_address'] = $session_data['shipping'];
+
+        $order_info['shipping_rate'] = $shipping_rate['display_name'];
+        $order_info['total'] = number_format(($session_data['amount_total'] /100), 2, '.', ' ');
+
+        $order                    = EntryRecord::inSection('Content\Orders');
+        $order->title             = 'Order - ' . $customer_info['name'];
+        $order->customer_email    = $customer_info['email'];
+        $order->customer_name     = $customer_info['name'];
+        $order->total             = $order_info['total'];
+        $order->shipping_method   = $order_info['shipping_rate'];
+        $order->order_contents    = 'Product Name: ' . $products_summary['name'] . PHP_EOL . 'Quantity: ' . $products_summary['quantity'] . PHP_EOL . 'Options: ' . PHP_EOL . '- ' . $products_summary_metadata;
+        $order->customer_address  = $customer_info['shipping_address']['address']['line1'] . PHP_EOL . $customer_info['shipping_address']['address']['line2'] . PHP_EOL . $customer_info['shipping_address']['address']['city'] . ', ' . $customer_info['shipping_address']['address']['state'] . ', '. $customer_info['shipping_address']['address']['postal_code'] . PHP_EOL . $customer_info['shipping_address']['address']['country'];
+        $order->is_enabled        = 1;
+        $order->save();
+
+        Log::info($products_summary['metadata']);
     }
 
-    // Log::info('Passed Signature Verification!');
     http_response_code(200);
     
 }
