@@ -19,7 +19,7 @@ function onInit() {
     $request = Request::instance();
 
     // Grab Shop settings from Content -> Shop -> Settings
-    $shop_settings   = GlobalRecord::findForGlobal('Content\Shop\Settings');
+    $shop_settings   = GlobalRecord::findForGlobal('Content\Settings');
     $stripe_key      = $shop_settings->stripe_secret_key;
     $endpoint_secret = $shop_settings->stripe_webhook_secret_key;
 

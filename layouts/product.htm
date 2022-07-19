@@ -40,7 +40,7 @@ function isJson($json) {
 function onBuySubmit() {
     
     // Grab Shop settings from Content -> Shop -> Settings
-    $shop_settings = GlobalRecord::findForGlobal('Content\Shop\Settings');
+    $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
     $success_url = 
         Config::get('app.url') .
         '/' .
@@ -91,7 +91,9 @@ function onBuySubmit() {
                 if (!$this->isJson($product_value)) {
                     if($product_value != $product_description) {
                         if($product_value != $product_name){
-                            $metadata[] = $product_value;
+                            if($product_id != $product_value) {
+                                $metadata[] = $product_value;
+                            }
                         }
                     }
                 }
@@ -118,10 +120,13 @@ function onBuySubmit() {
 
     $all_metadata = [];
 
-    foreach($metadata as $pair) {
-        list($a, $b) = explode(':', $pair);
-        $all_metadata[$a] = $b;
+    if(in_array(':', $metadata)) {
+        foreach($metadata as $pair) {
+            list($a, $b) = explode(':', $pair);
+            $all_metadata[$a] = $b;
+        }
     }
+    
 
     $all_metadata['tailor_id'] = $product_id;
 
