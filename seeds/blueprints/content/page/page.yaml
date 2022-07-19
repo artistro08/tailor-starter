@@ -6,7 +6,7 @@ drafts: true
 
 primaryNavigation:
   label: Content
-  icon: icon-file
+  icon: icon-archive
   order: 140
 
 navigation:
