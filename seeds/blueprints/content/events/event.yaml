@@ -101,6 +101,10 @@ fields:
         tab: Event
         commentHtml: true
         comment: This section allows you to create recurring events easily. If you're using the "Custom" type of recurrence (picking your own dates), <strong>the "Repeat Length" field will not be used.</strong>
+        trigger:
+            action: show
+            field: is_recurring
+            condition: checked
     recurrence:
         type: dropdown
         label: Recurrence
