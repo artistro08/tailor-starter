@@ -11,3 +11,4 @@ v1.2.4: Moved all globals to one file. Fixed some product logic in the event tha
 v1.2.5: Added orders to shop. Cleaned up code. Added plugin dependency via git for mail partials.
 v1.2.6: Disabled shop if Stripe Keys are not set.
 v1.2.7: Added new menu item types to theme.
+v1.2.8: Updated section columns to have events and products.
