@@ -18,3 +18,4 @@ v2.0.1: Fixed homepage displaying slug in sitemap
 v2.0.2: Fixed an issue where the products were not being shown in the sitemap.
 v2.0.3: Potential fix for an issue where installing the theme via git errors out because it cant find the companion plugin
 v2.0.4: Potential fix for an issue where installing the theme via git errors out because it cant find the companion plugin
+v2.0.5: Potential fix for an issue where installing the theme via git errors out because it cant find the companion plugin
