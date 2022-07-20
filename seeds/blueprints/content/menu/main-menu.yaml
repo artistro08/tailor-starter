@@ -21,6 +21,7 @@ fields:
     options:
       page_entry: Page
       product_entry: Product
+      product_list: Product List
       product_category_entry: Product Category
       event_entry: Event
       url: URL
