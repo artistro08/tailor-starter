@@ -48,6 +48,7 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - Events with recurring events support. (See [Events](#events))
 - Shop with Stripe Support (See [Shop](#events))
 - Icons with Bootstrap Icons (See [Icons](#icons))
+- Automatic Sitemap generation for all front facing pages created by Tailor.
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
