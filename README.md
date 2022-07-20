@@ -7,6 +7,15 @@ To get started with this theme, you'll need the following
 - A knowledge of [Tailor](https://docs.octobercms.com/3.x/tailor/introduction.html)
 - Some knowledge of PHP
 
+#### Plugin Dependencies
+This theme depends on the following plugins:
+- [Artistro08.TailorStarter](https://github.com/artistro08/tailor-starter-plugin) 
+  - For Order Email management with the [Shop Feature](#shop)
+- [JanVince.SmallContactForm](https://github.com/jan-vince/smallcontactform)
+  - For Contact form blocks in the builder
+
+The theme will attempt to automatically install the plugins when you install it. 
+
 ### Get Started
 Clone or download this theme in the October CMS themes directory or install it via `artisan`:
 ```bash
