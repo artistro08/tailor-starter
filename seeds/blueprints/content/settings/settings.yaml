@@ -40,7 +40,6 @@ fields:
     tab: Settings
     maxItems: 1
     span: right
-
   section:
     type: section
     label: Stripe Keys
@@ -371,3 +370,10 @@ fields:
           span: right
           validation:
             - integer
+  notification_email:
+    type: text
+    label: Notification Email
+    comment: Specify an email to send order notifications to.
+    tab: Notifications
+    validation:
+      - email
