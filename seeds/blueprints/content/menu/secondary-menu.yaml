@@ -21,6 +21,10 @@ fields:
     default: value[entry]
     options:
       page_entry: Page
+      product_entry: Product
+      product_list: Product List
+      product_category_entry: Product Category
+      event_entry: Event
       url: URL
   url:
     type: Text
@@ -42,6 +46,39 @@ fields:
       action: show
       field: type
       condition: value[page_entry]
+  product:
+    type: entries
+    source: Content\Product
+    label: Product
+    maxItems: 1
+    displayMode: balloon-selector
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[product_entry]
+  product_category:
+    type: entries
+    source: Content\Product\Category
+    label: Product Category
+    maxItems: 1
+    displayMode: balloon-selector
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[product_category_entry]
+  event:
+    type: entries
+    source: Content\Event
+    label: Page
+    maxItems: 1
+    displayMode: balloon-selector
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[event_entry]
   external:
     label: External link
     type: switch
