@@ -1,0 +1,17 @@
+uuid: c808dc5c-083a-11ed-9c1c-11d5091d81d2
+handle: Content\ProductsColumn
+type: mixin
+name: Products
+fields:
+  title:
+    label: Title
+    type: text
+    span: full
+    comment: Title of the section. Used for organizational purposes.
+  limit:
+    type: number
+    span: full
+    label: Product Limit
+    comment: How many products would you like to show?
+    min: 3
+    max: 5

@@ -204,7 +204,7 @@ fields:
                 fields:
                   events:
                     type: mixin
-                    source: Content\Events
+                    source: Content\EventsColumn
                   hr_1:
                     type: ruler
                   width:
@@ -230,9 +230,9 @@ fields:
                 description: Column with products.
                 titleFrom: title
                 fields:
-                  events:
+                  products:
                     type: mixin
-                    source: Content\Products
+                    source: Content\ProductsColumn
                   hr_1:
                     type: ruler
                   width:
