@@ -7,7 +7,7 @@ fields:
     label: Title
     type: text
     span: full
-    comment: Title of the section. Used for organizational purposes.
+    comment: Title of the column. Used for organizational purposes.
   show:
     type: dropdown
     span: full

@@ -12,3 +12,4 @@ v1.2.5: Added orders to shop. Cleaned up code. Added plugin dependency via git f
 v1.2.6: Disabled shop if Stripe Keys are not set.
 v1.2.7: Added new menu item types to theme.
 v1.2.8: Updated section columns to have events and products.
+v1.2.9: Added contact form to builder and builder > section > columns.
