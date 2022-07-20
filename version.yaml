@@ -14,3 +14,4 @@ v1.2.7: Added new menu item types to theme.
 v1.2.8: Updated section columns to have events and products.
 v1.2.9: Added contact form to builder and builder > section > columns.
 v2.0.0: Added sitemap auto generation for front facing pages in Tailor
+v2.0.1: Fixed homepage displaying slug in sitemap
