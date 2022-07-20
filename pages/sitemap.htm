@@ -1,0 +1,56 @@
+url = "/sitemap.xml"
+title = "Sitemap"
+
+[collection pages]
+handle = "Content\Page"
+
+[collection events]
+handle = "Content\Event"
+
+[collection product]
+handle = "Content\Product"
+
+[collection product_categories]
+handle = "Content\Product\Category"
+==
+<?php
+function onStart() {
+    $this->setResponseHeader('Content-Type', 'application/xml');
+}
+?>
+==
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	{% for page in pages %}
+		<url>
+	    	<loc>{{ 'page'|page({page: page.slug}) }}</loc>
+	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
+	    	<changefreq>daily</changefreq>
+	    	<priority>0.8</priority>
+	    </url>
+	{% endfor %}
+	{% for event in events %}
+		<url>
+	    	<loc>{{ 'event'|page({event: event.slug}) }}</loc>
+	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
+	    	<changefreq>daily</changefreq>
+	    	<priority>0.8</priority>
+	    </url>
+	{% endfor %}
+	{% for product in products %}
+		<url>
+	    	<loc>{{ 'product'|page({product: product.slug}) }}</loc>
+	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
+	    	<changefreq>daily</changefreq>
+	    	<priority>0.8</priority>
+	    </url>
+	{% endfor %}
+	{% for category in product_categories %}
+		<url>
+	    	<loc>{{ 'product_category'|page({product_category: category.slug}) }}</loc>
+	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
+	    	<changefreq>daily</changefreq>
+	    	<priority>0.8</priority>
+	    </url>
+	{% endfor %}
+</urlset>
