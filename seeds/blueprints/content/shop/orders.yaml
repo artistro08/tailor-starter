@@ -47,6 +47,7 @@ fields:
     tab: Order Info
     span: full
     comment: Enable the address & customer name fields so you can edit the address.
+    value: unchecked
   order_section:
     type: section
     tab: Order Info
@@ -73,12 +74,12 @@ fields:
   status_section:
     type: section
     label: Order Status
-    comment: Use this section to mark an order as shipped once you've fulfilled the order.
+    comment: Use this section to update the status of an order and send emails.
     tab: Status
   warning_section:
     type: hint
     mode: warning
-    comment:  Be careful! This sends an email <strong>every time you save it.</strong>
+    comment:  Be careful! Changing the status sends an email <strong>once you save it.</strong>
     commentHtml: true
     tab: Status
   order_status:
@@ -116,3 +117,52 @@ fields:
       action: show
       field: order_status
       condition: value[shipped]
+  cancellation_message:
+    label: Cancellation Message
+    type: textarea
+    tab: Status
+    validation:
+      - required_if:order_status,cancelled
+    trigger:
+      action: show
+      field: order_status
+      condition: value[cancelled]
+  resend_email:
+    tab: Status
+    type: switch
+    label: Resend Email
+    comment: Resend this email to the customer on saving the order.
+    value: unchecked
+    attributes:
+      onclick: alert("Resend Email is enabled. \nOnce you save, make sure to refresh. Otherwise, you'll send multiple emails.")
+    trigger:
+      action: hide
+      field: resend_email
+      condition: checked
+  cancel_resend:
+    tab: Status
+    type: hint
+    mode: success
+    label: Email will be sent on save.
+    comment: Cancel the resend of this email to the customer by <a href="">refreshing the page</a>.
+    commentHtml: true
+    trigger:
+      action: show
+      field: resend_email
+      condition: checked
+  sent_email_receipt:
+    type: checkbox
+    tab: Status
+    hidden: true
+  sent_tracking_receipt:
+    type: checkbox
+    tab: Status
+    hidden: true
+  sent_in_progress:
+    type: checkbox
+    tab: Status
+    hidden: true
+  sent_cancelled:
+    type: checkbox
+    tab: Status
+    hidden: true
