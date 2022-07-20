@@ -6,4 +6,5 @@ authorCode: Artistro08
 code: TailorStarter
 database: '0'
 require:
+  - "Artistro08.TailorStarter"
   - "JanVince.SmallContactForm"
