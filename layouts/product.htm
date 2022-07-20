@@ -120,14 +120,13 @@ function onBuySubmit() {
 
     $all_metadata = [];
 
-    if(in_array(':', $metadata)) {
-        foreach($metadata as $pair) {
-            list($a, $b) = explode(':', $pair);
-            $all_metadata[$a] = $b;
-        }
+
+    foreach($metadata as $pair) {
+        list($a, $b) = explode(':', $pair);
+        $all_metadata[$a] = $b;
     }
     
-
+    
     $all_metadata['tailor_id'] = $product_id;
 
 

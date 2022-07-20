@@ -13,6 +13,7 @@ fullSlug = 0
 {% if product is empty %}
     {% do redirect('404') %}
 {% else %}
+    {% set preview_url = ''|page %}
     <header class="product d-flex align-items-center py-4">
         <div class="container">
             <div class="row align-items-center">
@@ -178,67 +179,78 @@ fullSlug = 0
                                 <label for="quantity">Quantity</label>
                                 <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" id="quantity">
                             {% endif %}
-                            
     
-                            {% partial 'shop/buy-button' %}
+                            {% if 'default' not in preview_url %}
+                                {% partial 'shop/buy-button' %}
+                            {% else %}
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <p>You can't purchase products in preview mode.</p>
+                                        <a href="{{ 'product'|page({product: product.slug}) }}" class="btn btn-primary">View Live Product</a>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </form>
                     {% else %}
                         <p class="fs-5">This product is out of stock</p>
                     {% endif %}
     
-                    {% if product.content_group == "variant" %}
-                        {% if product.allow_purchases %}
-                            {% put scripts %}
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function() {
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/price': '#price'},
+                    {% if 'default' not in preview_url %}
+                        {% if product.content_group == "variant" %}
+                            {% if product.allow_purchases %}
+                                {% put scripts %}
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/price': '#price'},
+                                            });
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/buy-button': '#button'},
+                                            });
                                         });
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/buy-button': '#button'},
-                                        });
-                                    });
-
-                                    function onChange() {
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/price': '#price'},
-                                        });
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/buy-button': '#button'},
-                                        });
-                                    }
-        
-                                </script>
-                            {% endput %}
-                        {% endif %}
-                    {% endif %}
-    
-                    {% if product.content_group == "simple" %}
-                        {% if product.allow_purchases %}
-                            {% put scripts %}
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function() {
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/price': '#price'},
-                                        });
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/buy-button': '#button'},
-                                        });
-                                    });
-    
-                                    function onChange() {
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/price': '#price'},
-                                        });
-                                        oc.request('#cart-form', 'onLoad', {
-                                            update: {'shop/buy-button': '#button'},
-                                        });
-                                    }
             
-                                </script>
-                            {% endput %}
+                                        function onChange() {
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/price': '#price'},
+                                            });
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/buy-button': '#button'},
+                                            });
+                                        }
+                
+                                    </script>
+                                {% endput %}
+                            {% endif %}
+                        {% endif %}
+    
+                        {% if product.content_group == "simple" %}
+                            {% if product.allow_purchases %}
+                                {% put scripts %}
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/price': '#price'},
+                                            });
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/buy-button': '#button'},
+                                            });
+                                        });
+            
+                                        function onChange() {
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/price': '#price'},
+                                            });
+                                            oc.request('#cart-form', 'onLoad', {
+                                                update: {'shop/buy-button': '#button'},
+                                            });
+                                        }
+                
+                                    </script>
+                                {% endput %}
+                            {% endif %}
                         {% endif %}
                     {% endif %}
+                    
                     
                     
                 </div>
