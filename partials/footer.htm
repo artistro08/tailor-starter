@@ -22,7 +22,19 @@ handle = "Content\Settings"
                                     <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ item.url }}">{{ item.title }}</a>
                                 {% endif %}
                                 {% if item.type == "page_entry" %}
-                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ item.page.slug == '' ? '/' : 'page'|page({ page: item.page.slug }) }}">{{ item.title }}</a>
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) ? '/' : 'page'|page({ page: item.page.slug }) }}">{{ item.title }}</a>
+                                {% endif %}
+                                {% if item.type == "event_entry" %}
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ 'event'|page({ event: item.event.slug }) }}">{{ item.title }}</a>
+                                {% endif %}
+                                {% if item.type == "product_entry" %}
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ 'product'|page({ product: item.product.slug }) }}">{{ item.title }}</a>
+                                {% endif %}
+                                {% if item.type == "product_category_entry" %}
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ 'product_category'|page({ product_category: item.product_category.slug }) }}">{{ item.title }}</a>
+                                {% endif %}
+                                {% if item.type == "product_list" %}
+                                    <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ 'products'|page }}">{{ item.title }}</a>
                                 {% endif %}
                             </li>
                         {% endif %}
