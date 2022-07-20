@@ -187,6 +187,13 @@ handle = "Content\Product"
                             {% endfor %}
                         </div>
                     {% endif %}
+                    {% if column.content_group == "form" %}
+                        <div class="card">
+                            <div class="card-body">
+                                {% component "contactForm" %}
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
