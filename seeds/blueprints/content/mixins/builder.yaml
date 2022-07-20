@@ -196,6 +196,62 @@ fields:
                       me-auto: Left
                       mx-auto: Center
                       ms-auto: Right
+              events:
+                name: Events
+                icon: icon-calendar
+                description: Column with events.
+                titleFrom: title
+                fields:
+                  events:
+                    type: mixin
+                    source: Content\EventsColumn
+                  hr_1:
+                    type: ruler
+                  width:
+                    label: Column Width
+                    type: number
+                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
+                    span: left
+                    min: 0
+                    max: 12
+                    default: 0
+                  position:
+                    label: Position
+                    type: dropdown
+                    comment: The position of the column.
+                    span: right
+                    options:
+                      me-auto: Left
+                      mx-auto: Center
+                      ms-auto: Right
+              products:
+                name: Products
+                icon: icon-cube
+                description: Column with products.
+                titleFrom: title
+                fields:
+                  products:
+                    type: mixin
+                    source: Content\ProductsColumn
+                  hr_1:
+                    type: ruler
+                  width:
+                    label: Column Width
+                    type: number
+                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
+                    span: left
+                    min: 0
+                    max: 12
+                    default: 0
+                  position:
+                    label: Position
+                    type: dropdown
+                    comment: The position of the column.
+                    span: right
+                    options:
+                      me-auto: Left
+                      mx-auto: Center
+                      ms-auto: Right
       events:
         name: Events
         icon: icon-calendar

@@ -1,0 +1,18 @@
+uuid: 8e643e71-083a-11ed-b17e-7b1059f5289f
+handle: Content\EventsColumn
+type: mixin
+name: Events
+fields:
+  title:
+    label: Title
+    type: text
+    span: full
+    comment: Title of the section. Used for organizational purposes.
+  show:
+    type: dropdown
+    span: full
+    label: Events to Show
+    comment: Choose to show upcoming or all events.
+    options:
+      upcoming: Upcoming Events
+      all: All Events
