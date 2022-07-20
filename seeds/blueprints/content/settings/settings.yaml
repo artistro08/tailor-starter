@@ -373,7 +373,14 @@ fields:
   notification_email:
     type: text
     label: Notification Email
-    comment: Specify an email to send order notifications to.
+    commentAbove: Specify an email to send order notifications to.
     tab: Notifications
+    span: left
     validation:
       - email
+  notification_email_recipient_name:
+    type: text
+    label: Recipient Name
+    tab: Notifications
+    commentAbove: The name of the person receiving the notification email
+    span: right
