@@ -79,7 +79,7 @@ fields:
   warning_section:
     type: hint
     mode: warning
-    comment:  <strong>Be careful!</strong> Changing the status sends an email <strong>once you save it.</strong><br> It only sends the email once unless the "Resend Email" switch is enabled.
+    comment:  <strong>Be careful!</strong> Changing the status of the order sends an email <strong>once you save it.</strong><br> The system only sends the email once unless the "Resend Email" switch is enabled.
     commentHtml: true
     tab: Status
   order_status:
