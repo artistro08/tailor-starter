@@ -8,3 +8,4 @@ v1.2.1: Added Bootstrap Icons support. Remove support for Chkilel.Icones. Update
 v1.2.2: Fix "undefined array key" when allow_purchases isn't enabled. Updated README.md.
 v1.2.3: Fix images not being displayed in bottom portion of product.
 v1.2.4: Moved all globals to one file. Fixed some product logic in the event that a product didn't have metadata.
+v1.2.5: Added orders to shop. Cleaned up code. Added plugin dependency via git for mail partials.

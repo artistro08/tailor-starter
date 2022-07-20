@@ -7,7 +7,7 @@ drafts: false
 navigation:
   icon: icon-bookmark
   parent: Content\Page
-  order: 11
+  order: 13
 
 fields:
   svg_code:

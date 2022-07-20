@@ -10,7 +10,7 @@ structure:
 navigation:
     icon: icon-calendar
     parent: Content\Page
-    order: 10
+    order: 12
 
 fields:
     content:

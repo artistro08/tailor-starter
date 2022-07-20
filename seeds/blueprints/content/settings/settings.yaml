@@ -7,7 +7,7 @@ name: Settings
 navigation:
   parent: Content\Page
   icon: icon-cog
-  order: 11
+  order: 24
 
 fields:
   homepage:
@@ -40,7 +40,6 @@ fields:
     tab: Settings
     maxItems: 1
     span: right
-
   section:
     type: section
     label: Stripe Keys
@@ -371,3 +370,17 @@ fields:
           span: right
           validation:
             - integer
+  notification_email:
+    type: text
+    label: Notification Email
+    commentAbove: Specify an email to send order notifications to.
+    tab: Notifications
+    span: left
+    validation:
+      - email
+  notification_email_recipient_name:
+    type: text
+    label: Recipient Name
+    tab: Notifications
+    commentAbove: The name of the person receiving the notification email
+    span: right

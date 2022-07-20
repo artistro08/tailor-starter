@@ -1,0 +1,168 @@
+uuid: a3436526-073e-11ed-a6a5-a871a8b74bb8
+handle: Content\Orders
+type: stream
+name: Orders
+drafts: false
+
+navigation:
+  icon: icon-cube
+  parent: Content\Page
+  order: 12
+
+fields:
+  shipping_section:
+    tab: Order Info
+    type: section
+    label: Shipping Address & Name
+  customer_name:
+    type: text
+    label: Customer Name
+    tab: Order Info
+    span: left
+    trigger:
+      action: enable
+      field: update_customer_details
+      condition: checked
+  customer_email:
+    type: text
+    label: Customer Email
+    tab: Order Info
+    span: right
+    trigger:
+      action: enable
+      field: update_customer_details
+      condition: checked
+  customer_address:
+    type: textarea
+    label: Customer Address
+    span: full
+    tab: Order Info
+    trigger:
+      action: enable
+      field: update_customer_details
+      condition: checked
+  update_customer_details:
+    type: switch
+    label: Update Customer Details
+    tab: Order Info
+    span: full
+    comment: Enable the address & customer name fields so you can edit the address.
+    value: unchecked
+  order_section:
+    type: section
+    tab: Order Info
+    label: Order Info
+    comment: Info about the customer's order.
+  total:
+    type: number
+    label: Total
+    span: left
+    tab: Order Info
+    disabled: true
+  shipping_method:
+    type: text
+    span: right
+    label: Shipping Method
+    tab: Order Info
+    disabled: true
+  order_contents:
+    type: textarea
+    span: full
+    label: Order Contents
+    tab: Order Info
+    attributes: disabled
+  status_section:
+    type: section
+    label: Order Status
+    comment: Use this section to update the status of an order and send emails.
+    tab: Status
+  warning_section:
+    type: hint
+    mode: warning
+    comment:  <strong>Be careful!</strong> Changing the status of the order sends an email <strong>once you save it.</strong><br> The system only sends the email once unless the "Resend Email" switch is enabled.
+    commentHtml: true
+    tab: Status
+  order_status:
+    type: dropdown
+    label: Order Status
+    commentAbove: The status of the order
+    options:
+      new: New
+      in_progress: In Progress
+      cancelled: Cancelled
+      shipped: Shipped
+    span: full
+    tab: Status
+  tracking_number:
+    type: text
+    label: Tracking Number
+    span: left
+    commentAbove: The tracking number of the package.
+    tab: Status
+    validation:
+      - required_if:order_status,shipped
+    trigger:
+      action: show
+      field: order_status
+      condition: value[shipped]
+  tracking_url:
+    label: Tracking URL
+    type: text
+    span: right
+    tab: Status
+    commentAbove: The tracking URL, if applicable.
+    validation:
+      - url
+    trigger:
+      action: show
+      field: order_status
+      condition: value[shipped]
+  cancellation_message:
+    label: Cancellation Message
+    type: textarea
+    tab: Status
+    validation:
+      - required_if:order_status,cancelled
+    trigger:
+      action: show
+      field: order_status
+      condition: value[cancelled]
+  resend_email:
+    tab: Status
+    type: switch
+    label: Resend Email
+    comment: Resend this email to the customer on saving the order.
+    value: unchecked
+    attributes:
+      onclick: alert("Resend Email is enabled. \nOnce you save, make sure to refresh. Otherwise, you'll send multiple emails.")
+    trigger:
+      action: hide
+      field: resend_email
+      condition: checked
+  cancel_resend:
+    tab: Status
+    type: hint
+    mode: success
+    label: Email will be sent on save.
+    comment: Cancel the resend of this email to the customer by <a href="">refreshing the page</a>.
+    commentHtml: true
+    trigger:
+      action: show
+      field: resend_email
+      condition: checked
+  sent_email_receipt:
+    type: checkbox
+    tab: Status
+    hidden: true
+  sent_tracking_receipt:
+    type: checkbox
+    tab: Status
+    hidden: true
+  sent_in_progress:
+    type: checkbox
+    tab: Status
+    hidden: true
+  sent_cancelled:
+    type: checkbox
+    tab: Status
+    hidden: true
