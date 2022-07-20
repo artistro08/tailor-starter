@@ -16,3 +16,4 @@ v1.2.9: Added contact form to builder and builder > section > columns.
 v2.0.0: Added sitemap auto generation for front facing pages in Tailor
 v2.0.1: Fixed homepage displaying slug in sitemap
 v2.0.2: Fixed an issue where the products were not being shown in the sitemap.
+v2.0.3: Potential fix for an issue where installing the theme via git errors out because it can't find the companion plugin
