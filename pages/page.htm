@@ -47,6 +47,10 @@ fullSlug = 0
             {% if section.content_group == 'products' %}
                 {% partial 'builder/products' section=section %}
             {% endif %}
+            {# Form #}
+            {% if section.content_group == 'form' %}
+                {% partial 'builder/form' section=section %}
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endif %}
