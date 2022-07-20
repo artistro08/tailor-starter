@@ -49,7 +49,7 @@ handle = "Content\Settings"
                                                     </a>
                                                 {% endif %}
                                                 {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
                                                 {% endif %}
                                                 {% if child.type == "event_entry" %}
                                                     <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
@@ -69,9 +69,9 @@ handle = "Content\Settings"
                                 {% endif %}
                                 {% if item.type == "page_entry" %}
                                     <a
-                                            class="nav-link {{ (section.slug == item.page.slug) and (section.id == item.page.id) ? 'active' }} {{ (global.homepage.id == item.page.id) and (global.homepage.slug == item.page.slug) ? 'active' }} {{ item.children|length ? 'dropdown-toggle' : '' }}"
+                                            class="nav-link {{ (section.slug == item.page.slug) and (section.id == item.page.id) ? 'active' }} {{ (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) ? 'active' }} {{ item.children|length ? 'dropdown-toggle' : '' }}"
                                             {{ item.external ? 'target="_blank" '}}
-                                            href="{{ (global.homepage.id == item.page.id) and (global.homepage.slug == item.page.slug) ? '/' : 'page'|page({ page: item.page.slug }) }}"
+                                            href="{{ (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) ? '/' : 'page'|page({ page: item.page.slug }) }}"
                                             {% if item.children|length %}
                                                 data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                                             {% endif %}
@@ -91,7 +91,7 @@ handle = "Content\Settings"
                                                     </a>
                                                 {% endif %}
                                                 {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
                                                 {% endif %}
                                                 {% if child.type == "event_entry" %}
                                                     <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
@@ -133,7 +133,7 @@ handle = "Content\Settings"
                                                     </a>
                                                 {% endif %}
                                                 {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
                                                 {% endif %}
                                                 {% if child.type == "event_entry" %}
                                                     <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
@@ -175,7 +175,7 @@ handle = "Content\Settings"
                                                     </a>
                                                 {% endif %}
                                                 {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
                                                 {% endif %}
                                                 {% if child.type == "event_entry" %}
                                                     <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
@@ -217,7 +217,7 @@ handle = "Content\Settings"
                                                     </a>
                                                 {% endif %}
                                                 {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
                                                 {% endif %}
                                                 {% if child.type == "event_entry" %}
                                                     <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
@@ -259,7 +259,7 @@ handle = "Content\Settings"
                                                     </a>
                                                 {% endif %}
                                                 {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (global.homepage.id == child.page.id) and (global.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? 'active' }}"  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
                                                 {% endif %}
                                                 {% if child.type == "event_entry" %}
                                                     <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
