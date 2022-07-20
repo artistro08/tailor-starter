@@ -1,0 +1,12 @@
+uuid: 1a55cbd0-0840-11ed-900b-0e02148bcfbe
+handle: Content\FormColumn
+type: mixin
+name: Form
+fields:
+  title:
+    label: Title
+    type: text
+    span: left
+    comment: Title of the column. Title of the section. Used for organizational purposes.
+  hr_1:
+    type: ruler
