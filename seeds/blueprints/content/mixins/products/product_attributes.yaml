@@ -36,7 +36,7 @@ fields:
     tab: Edit
     source: Content\Product\Category
     label: Categories
-    commentAbove: Add Categories for this specific product. Categories are defined under <a href="../tailor/entries/content_product_category">Content > Categories</a>
+    commentAbove: Add Categories for this specific product. Categories are defined under <a href="../content_product_category">Content > Categories</a>
     commentHtml: true
     displayMode: relation
     span: right
