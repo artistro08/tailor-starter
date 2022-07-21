@@ -43,16 +43,12 @@ function onBuySubmit() {
     $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
     $success_url = 
         Config::get('app.url') .
-        '/' .
-        EntryRecord::inSection('Content\Page')->
-        find($shop_settings->stripe_checkout_success_page)[0]->
-        slug;
+        '/' . 
+        $shop_settings->stripe_checkout_success_page->slug;
     $cancel_url =
         Config::get('app.url') .
         '/' .
-        EntryRecord::inSection('Content\Page')->
-        find($shop_settings->stripe_checkout_cancel_page)[0]->
-        slug;
+        $shop_settings->stripe_checkout_cancel_page->slug;
 
     // Set Stripe Key from Settings
     Stripe::setApiKey($shop_settings->stripe_secret_key);
