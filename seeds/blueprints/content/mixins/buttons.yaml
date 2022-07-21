@@ -63,6 +63,11 @@ fields:
           comment: If activated, when someone clicks this link, it'll open it in a new tab.
           span: right
           cssClass: mt-4
+        outline:
+          type: switch
+          label: Outline this button
+          comment: If activated, the button will be outlined
+          span: left
   buttons_position:
     type: dropdown
     label: Buttons Position
