@@ -45,10 +45,7 @@ function onBuySubmit() {
         Config::get('app.url') .
         '/' . 
         $shop_settings->stripe_checkout_success_page->slug;
-    $cancel_url =
-        Config::get('app.url') .
-        '/' .
-        $shop_settings->stripe_checkout_cancel_page->slug;
+    $cancel_url = $this->currentPageUrl();
 
     // Set Stripe Key from Settings
     Stripe::setApiKey($shop_settings->stripe_secret_key);
