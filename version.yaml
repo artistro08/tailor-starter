@@ -20,3 +20,4 @@ v2.0.3: Potential fix for an issue where installing the theme via git errors out
 v2.0.4: Potential fix for an issue where installing the theme via git errors out because it cant find the companion plugin
 v2.0.5: Potential fix for an issue where installing the theme via git errors out because it cant find the companion plugin
 v2.0.6: Fix for an issue where installing the theme via git errors out because it cant find the companion plugin
+v2.0.7: Fix for an issue where the success and cancel urls weren't set correctly
