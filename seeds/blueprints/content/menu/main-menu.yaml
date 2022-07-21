@@ -70,7 +70,7 @@ fields:
   event:
     type: entries
     source: Content\Event
-    label: Page
+    label: Event
     maxItems: 1
     displayMode: balloon-selector
     span: right

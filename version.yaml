@@ -22,3 +22,4 @@ v2.0.5: Potential fix for an issue where installing the theme via git errors out
 v2.0.6: Fix for an issue where installing the theme via git errors out because it cant find the companion plugin
 v2.0.7: Fix for an issue where the success and cancel urls weren't set correctly
 v2.0.8: Fixed an issue where the active state of the home menu item was set incorrectly. Removed the title from the hero component. Removed Unused resources from simple page. Fix buttons that go to the homepage slug instead of the root path. Added option to reverse the columns on mobile. Added Outlines to buttons.
+v2.0.9: Added front facing tailor pages to buttons in the Hero and Section Builder items
