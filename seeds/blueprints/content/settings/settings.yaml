@@ -57,22 +57,14 @@ fields:
   stripe_webhook_secret_key:
     label: Stripe Webhook Secret Key
     tab: Stripe
-    span: full
+    span: left
     type: sensitive
     comment: The webhook secret to sign requests. The shop will not work without it. For step-by-step instructions on how to get it, <a href='https://scribehow.com/shared/Obtain_a_Stripe_Webhook_Secret__5lTS37MMRnu_hhGzWJe07w' target='_blank'>click here</a>.
     commentHtml: true
   stripe_checkout_success_page:
     label: Stripe Checkout Success Page
     tab: Stripe
-    commentAbove: The page to redirect to upon success.
-    span: left
-    type: entries
-    source: Content\Page
-    maxItems: 1
-  stripe_checkout_cancel_page:
-    label: Stripe Checkout Cancel Page
-    tab: Stripe
-    commentAbove: The page to redirect to upon cancelling.
+    comment: The page to redirect to upon success.
     span: right
     type: entries
     source: Content\Page
