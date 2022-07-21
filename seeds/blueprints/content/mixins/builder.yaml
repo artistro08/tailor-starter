@@ -74,6 +74,10 @@ fields:
               none: None
               light: Light
               dark: Dark
+          reverse_columns_on_mobile:
+            label: Reverse Columns on Mobile
+            comment: Useful if you have content that needs to be stacked a different way on a phone.
+            type: switch
           hr_1:
             type: ruler
           columns:

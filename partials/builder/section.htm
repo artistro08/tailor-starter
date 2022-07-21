@@ -3,10 +3,13 @@ handle = "Content\Event"
 
 [collection products]
 handle = "Content\Product"
+
+[global settings]
+handle = "Content\Settings"
 ==
 <section class="{{ section.style == 'light' ? 'bg-light' }}{{ section.style == 'dark' ? 'bg-dark' }}">
     <div class="container">
-        <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto">
+        <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto {{ section.reverse_columns_on_mobile ? 'flex-lg-row flex-column-reverse' }}">
             {% for column in section.columns %}
                 <div class="col mb-5 {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}">
                     {# Content Column Group #}
@@ -18,7 +21,7 @@ handle = "Content\Product"
                                     {% if button.item_type == "url" %}
                                         <a
                                                 href="{{ button.url|raw }}"
-                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -26,8 +29,8 @@ handle = "Content\Product"
                                     {% endif %}
                                     {% if button.item_type == "page" %}
                                         <a
-                                                href="{{ 'page'|page({ page: button.page.slug }) }}"
-                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -45,7 +48,7 @@ handle = "Content\Product"
                                     {% if button.item_type == "url" %}
                                         <a
                                                 href="{{ button.url|raw }}"
-                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -53,8 +56,8 @@ handle = "Content\Product"
                                     {% endif %}
                                     {% if button.item_type == "page" %}
                                         <a
-                                                href="{{ 'page'|page({ page: button.page.slug }) }}"
-                                                class="btn btn-{{ button.style }} {{ not loop.last ? "me-2" }}"
+                                                href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
