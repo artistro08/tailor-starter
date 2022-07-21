@@ -19,9 +19,45 @@ handle = "Content\Settings"
                                         {{ button.title }}
                                     </a>
                                 {% endif %}
-                                {% if button.item_type == "page" %}
+                                {% if button.item_type == "page_entry" %}
                                     <a
                                             href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            {{ button.external == true ? 'target="_blank"' }}
+                                    >
+                                        {{ button.title }}
+                                    </a>
+                                {% endif %}
+                                {% if button.item_type == "product_entry" %}
+                                    <a
+                                            href="{{ 'product'|page({ product: button.product.slug }) }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            {{ button.external == true ? 'target="_blank"' }}
+                                    >
+                                        {{ button.title }}
+                                    </a>
+                                {% endif %}
+                                {% if button.item_type == "product_category_entry" %}
+                                    <a
+                                            href="{{ 'product_category'|page({ product_category: button.product_category.slug }) }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            {{ button.external == true ? 'target="_blank"' }}
+                                    >
+                                        {{ button.title }}
+                                    </a>
+                                {% endif %}
+                                {% if button.item_type == "product_list" %}
+                                    <a
+                                            href="{{ 'products'|page }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            {{ button.external == true ? 'target="_blank"' }}
+                                    >
+                                        {{ button.title }}
+                                    </a>
+                                {% endif %}
+                                {% if button.item_type == "event_entry" %}
+                                    <a
+                                            href="{{ 'event'|page({ event: button.event.slug }) }}"
                                             class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
