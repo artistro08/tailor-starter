@@ -25,3 +25,4 @@ v2.0.8: Fixed an issue where the active state of the home menu item was set inco
 v2.0.9: Added front facing tailor pages to buttons in the Hero and Section Builder items
 v2.0.11: Removed the checkout cancel page from settings and made the back button go to the current page.
 v2.0.12: Code cleanup.
+v2.0.13: Fix OG Image not showing

@@ -40,14 +40,18 @@ handle = "Content\Settings"
     <meta property="og:url" content="{{ ''|app }}">
     <meta property="og:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
     <meta property="og:description" content="{{ section.meta_description }}">
-    <meta property="og:image" content="{{ section.sharing_image }}">
+    {% if section.sharing_image|length %}
+        <meta property="og:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+    {% endif %}
     
     {# Twitter #}
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ ''|app }}">
     <meta property="twitter:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
     <meta property="twitter:description" content="{{ section.meta_description }}">
-    <meta property="twitter:image" content="{{ section.sharing_image }}">
+    {% if section.sharing_image|length %}
+        <meta property="twitter:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+    {% endif %}
 
 {% else %}
     
@@ -64,14 +68,18 @@ handle = "Content\Settings"
     <meta property="og:url" content="{{ ''|app }}">
     <meta property="og:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
     <meta property="og:description" content="{{ section.meta_description }}">
-    <meta property="og:image" content="{{ section.sharing_image }}">
+    {% if section.sharing_image|length %}
+        <meta property="og:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+    {% endif %}
     
     {# Twitter #}
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ ''|app }}">
     <meta property="twitter:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
     <meta property="twitter:description" content="{{ section.meta_description }}">
-    <meta property="twitter:image" content="{{ section.sharing_image }}">
+    {% if section.sharing_image|length %}
+        <meta property="twitter:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+    {% endif %}
 
 {% endif  %}
 
