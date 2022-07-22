@@ -141,7 +141,7 @@ handle = "Content\Settings"
                     {% endif %}
                     {# Image Column Group #}
                     {% if column.content_group == "image" %}
-                        <img src="{{ column.image|media }}" alt="{{ image.alt }}" class="img-fluid">
+                        <img src="{{ column.image|media }}" alt="{{ column.alt }}" class="img-fluid">
                     {% endif %}
                     {% if column.content_group == "events" %}
                         {% set today = 'now'|date('Y-m-d h:i:s') %}
