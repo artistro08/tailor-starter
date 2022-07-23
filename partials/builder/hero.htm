@@ -73,7 +73,7 @@ handle = "Content\Settings"
         {% if section.image|length %}
             {% set heroImage = section.image|split('.')|last %}
             <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100" style="z-index: 0">
-                <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media }}" alt="{{ section.image_description }}">
+                <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media|resize(1920) }}" alt="{{ section.image_description }}">
             </div>
         {% endif %}
     </header>
