@@ -7,12 +7,12 @@ fields:
     label: Title
     type: text
     span: left
-    comment: Title of the section. Title of the section. Used for organizational purposes.
+    commentAbove: Title of this section. Title of the section. Used for organizational purposes.
   style:
     label: Style
     type: dropdown
     span: right
-    comment: Style of the background
+    commentAbove: Style of the background
     options:
       none: None
       light: Light

@@ -1,0 +1,23 @@
+uuid: 36453aa4-0a9e-11ed-a47a-18661a9443af
+handle: Content\ColumnOptions
+type: mixin
+name: Button
+
+fields:
+  width:
+    label: Column Width
+    type: number
+    commentAbove: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
+    span: left
+    min: 0
+    max: 12
+    default: 0
+  position:
+    label: Position
+    type: dropdown
+    commentAbove: The position of the column.
+    span: right
+    options:
+      me-auto: Left
+      mx-auto: Center
+      ms-auto: Right

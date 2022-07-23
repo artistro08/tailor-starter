@@ -16,12 +16,12 @@ handle = "Content\Settings"
                     {% if column.content_group == "content" %}
                         {{ column.content|raw }}
                         {% if column.buttons|length %}
-                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2">
+                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2 flex-wrap">
                                 {% for button in column.buttons %}
                                     {% if button.item_type == "url" %}
                                         <a
                                                 href="{{ button.url|raw }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -30,7 +30,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "page_entry" %}
                                         <a
                                                 href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -39,7 +39,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "product_entry" %}
                                         <a
                                                 href="{{ 'product'|page({ product: button.product.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -48,7 +48,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "product_category_entry" %}
                                         <a
                                                 href="{{ 'product_category'|page({ product_category: button.product_category.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -57,7 +57,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "product_list" %}
                                         <a
                                                 href="{{ 'products'|page }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -66,7 +66,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "event_entry" %}
                                         <a
                                                 href="{{ 'event'|page({ event: button.event.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -79,12 +79,12 @@ handle = "Content\Settings"
                     {# Button Column Group #}
                     {% if column.content_group == "buttons" %}
                         {% if column.buttons|length %}
-                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2">
+                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2 flex-wrap">
                                 {% for button in column.buttons %}
                                     {% if button.item_type == "url" %}
                                         <a
                                                 href="{{ button.url|raw }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -93,7 +93,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "page_entry" %}
                                         <a
                                                 href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -102,7 +102,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "product_entry" %}
                                         <a
                                                 href="{{ 'product'|page({ product: button.product.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -111,7 +111,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "product_category_entry" %}
                                         <a
                                                 href="{{ 'product_category'|page({ product_category: button.product_category.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -120,7 +120,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "product_list" %}
                                         <a
                                                 href="{{ 'products'|page }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -129,7 +129,7 @@ handle = "Content\Settings"
                                     {% if button.item_type == "event_entry" %}
                                         <a
                                                 href="{{ 'event'|page({ event: button.event.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                                 {{ button.external == true ? 'target="_blank"' }}
                                         >
                                             {{ button.title }}
@@ -141,7 +141,7 @@ handle = "Content\Settings"
                     {% endif %}
                     {# Image Column Group #}
                     {% if column.content_group == "image" %}
-                        <img src="{{ column.image|media }}" alt="{{ column.alt }}" class="img-fluid">
+                        <img src="{{ column.image|media }}" alt="{{ column.image_description }}" class="img-fluid">
                     {% endif %}
                     {% if column.content_group == "events" %}
                         {% set today = 'now'|date('Y-m-d h:i:s') %}
@@ -244,22 +244,42 @@ handle = "Content\Settings"
                     {% endif %}
                     {% if column.content_group == "products" %}
                         <div class="row row-cols-lg-{{ column.limit }}">
-                            {% for product in products|slice(0, column.limit) %}
-                                <div class="col mb-4">
-                                    <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
-                                        <div class="card">
-                                            <img
-                                                    src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
-                                                    alt="{{ product.title }}" class="card-img-top"
-                                            >
-                                            <div class="card-body d-flex justify-content-between">
-                                                <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
-                                                <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+                            {% if column.show == "new" %}
+                                {% for product in products.orderBy('published_at_date').limit(column.limit).get() %}
+                                    <div class="col mb-4">
+                                        <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                                            <div class="card">
+                                                <img
+                                                        src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                                        alt="{{ product.title }}" class="card-img-top"
+                                                >
+                                                <div class="card-body d-flex justify-content-between">
+                                                    <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                                                    <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            {% endfor %}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% if column.show == "category" %}
+                                {% for product in products.whereRelation('categories', 'id', column.product_category_filter.id).limit(column.limit).get() %}
+                                    <div class="col mb-4">
+                                        <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                                            <div class="card">
+                                                <img
+                                                        src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                                        alt="{{ product.title }}" class="card-img-top"
+                                                >
+                                                <div class="card-body d-flex justify-content-between">
+                                                    <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                                                    <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     {% endif %}
                     {% if column.content_group == "form" %}

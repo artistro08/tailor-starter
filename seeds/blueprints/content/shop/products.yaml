@@ -1,8 +1,11 @@
 uuid: 2a9a76d0-010c-11ed-90b6-fc95f7401555
 handle: Content\Product
-type: stream
+type: structure
 name: Product
 drafts: true
+
+structure:
+  maxDepth: 0
 
 navigation:
   icon: icon-cube
@@ -16,7 +19,7 @@ groups:
       price:
         type: number
         label: Price
-        comment: The price of your product.
+        commentAbove: The price of your product.
         tab: Edit
         span: left
         validation:
@@ -24,7 +27,7 @@ groups:
       quantity:
         type: number
         label: Quantity
-        comment: The quantity of your product.
+        commentAbove: The quantity of your product.
         tab: Edit
         span: right
         validation:
@@ -43,7 +46,7 @@ groups:
       price:
         type: number
         label: Price
-        comment: The price of your product.
+        commentAbove: The price of your product.
         tab: Edit
         span: full
         validation:
@@ -61,10 +64,10 @@ groups:
         tab: Variants
         type: repeater
         label: Variants
-        commentAbove: Add Variants to this product. All variant pricing defaults to the price under the the Manage tab.
         commentHtml: true
         displayMode: builder
         prompt: Add New Variant
+        span: adaptive
         groups:
           property_set:
             name: Property Set
@@ -74,7 +77,7 @@ groups:
               title:
                 label: Variant Set Title
                 type: Text
-                commentAbove: Title of the Variant Set. Used for organizational purposes.
+                commentAbove: The title of this Variant Set. Used for organizational purposes.
                 span: left
               property:
                 label: Property Set
@@ -95,7 +98,7 @@ groups:
                 label: Variant Property Title
                 type: text
                 span: left
-                commentAbove: The title of the variant property. Used for organizational purposes.
+                commentAbove: The title of this variant property. Used for organizational purposes.
               property_type:
                 label: Variant Property Type
                 commentAbove: The type of property.
@@ -144,7 +147,7 @@ groups:
                 name: Dropdown Items
                 label: Dropdown Items
                 commentAbove: A set of options with pricing for each one.
-                prompt: Add New Option
+                prompt: Add new Option
                 trigger:
                   action: show
                   field: property_type
@@ -182,6 +185,13 @@ groups:
         tab: Info
         type: section
         label: Variant Info
+      info_hint_pricing:
+        tab: Info
+        type: hint
+        mode: info
+        label: Variant Pricing
+        comment: All variant pricing defaults to the price under the the Manage tab.
+        commentHtml: true
       info_hint:
         tab: Info
         type: hint

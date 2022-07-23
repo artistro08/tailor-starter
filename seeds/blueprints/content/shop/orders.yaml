@@ -5,7 +5,7 @@ name: Orders
 drafts: false
 
 navigation:
-  icon: icon-cube
+  icon: icon-shopping-bag
   parent: Content\Page
   order: 12
 

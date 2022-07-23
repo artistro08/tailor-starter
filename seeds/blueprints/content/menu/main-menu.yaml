@@ -17,7 +17,8 @@ fields:
     label: Type
     type: dropdown
     span: left
-    default: value[entry]
+    default: value[page_entry]
+    commentAbove: The type of item you want to add to the menu.
     options:
       page_entry: Page
       product_entry: Product
@@ -39,7 +40,8 @@ fields:
     source: Content\Page
     label: Page
     maxItems: 1
-    displayMode: balloon-selector
+    commentAbove: Choose a Page
+    displayMode: recordfinder
     span: right
     trigger:
       action: show
@@ -50,7 +52,8 @@ fields:
     source: Content\Product
     label: Product
     maxItems: 1
-    displayMode: balloon-selector
+    commentAbove: Choose a Product
+    displayMode: recordfinder
     span: right
     trigger:
       action: show
@@ -61,7 +64,8 @@ fields:
     source: Content\Product\Category
     label: Product Category
     maxItems: 1
-    displayMode: balloon-selector
+    commentAbove: Choose a Product Category
+    displayMode: recordfinder
     span: right
     trigger:
       action: show
@@ -72,7 +76,8 @@ fields:
     source: Content\Event
     label: Event
     maxItems: 1
-    displayMode: balloon-selector
+    commentAbove: Choose an Event
+    displayMode: recordfinder
     span: right
     trigger:
       action: show

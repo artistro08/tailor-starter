@@ -8,12 +8,12 @@ handle = "Content\Settings"
                 <div class="col-12 {{ section.position == 'center' ? 'text-center' : 'col-lg-6' }}">
                     {{ section.content|raw }}
                     {% if section.buttons|length %}
-                        <div class="d-flex justify-content-{{ section.buttons_position }} my-2">
+                        <div class="d-flex justify-content-{{ section.buttons_position }} my-2 flex-wrap">
                             {% for button in section.buttons %}
                                 {% if button.item_type == "url" %}
                                     <a
                                             href="{{ button.url|raw }}"
-                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} {{ button }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
                                         {{ button.title }}
@@ -22,7 +22,7 @@ handle = "Content\Settings"
                                 {% if button.item_type == "page_entry" %}
                                     <a
                                             href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
-                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}  mb-2"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
                                         {{ button.title }}
@@ -31,7 +31,7 @@ handle = "Content\Settings"
                                 {% if button.item_type == "product_entry" %}
                                     <a
                                             href="{{ 'product'|page({ product: button.product.slug }) }}"
-                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}  mb-2"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
                                         {{ button.title }}
@@ -40,7 +40,7 @@ handle = "Content\Settings"
                                 {% if button.item_type == "product_category_entry" %}
                                     <a
                                             href="{{ 'product_category'|page({ product_category: button.product_category.slug }) }}"
-                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}  mb-2"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
                                         {{ button.title }}
@@ -49,7 +49,7 @@ handle = "Content\Settings"
                                 {% if button.item_type == "product_list" %}
                                     <a
                                             href="{{ 'products'|page }}"
-                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}  mb-2"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
                                         {{ button.title }}
@@ -58,7 +58,7 @@ handle = "Content\Settings"
                                 {% if button.item_type == "event_entry" %}
                                     <a
                                             href="{{ 'event'|page({ event: button.event.slug }) }}"
-                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}"
+                                            class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}  mb-2"
                                             {{ button.external == true ? 'target="_blank"' }}
                                     >
                                         {{ button.title }}
@@ -73,7 +73,7 @@ handle = "Content\Settings"
         {% if section.image|length %}
             {% set heroImage = section.image|split('.')|last %}
             <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100" style="z-index: 0">
-                <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media }}" alt="{{ section.title }}">
+                <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media }}" alt="{{ section.image_description }}">
             </div>
         {% endif %}
     </header>

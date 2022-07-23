@@ -6,31 +6,38 @@ name: Builder
 fields:
   builder:
     type: repeater
-    name: Builder
+    label: Builder
     displayMode: builder
+    span: adaptive
+    prompt: Add a Block
     groups:
       hero:
         name: Hero
         icon: icon-laptop
-        description: A section with a background image
+        description: A section with a background image.
         titleFrom: title
         fields:
           title:
             label: Title
-            comment: Title of the section. Used for organizational purposes.
+            commentAbove: Title of this section. Used for organizational purposes.
             type: text
-            span: left
+            span: full
           image:
-            label: Background Image
+            label: Image
             type: mediafinder
-            comment: Background image to the hero.
-            span: right
+            commentAbove: Background image to the hero.
+            span: left
             mode: image
             maxItems: 1
+          image_description:
+            label: Image Description
+            type: text
+            commentAbove: The Description of the image. Use for SEO purposes.
+            span: right
           position:
             label: Position
             type: dropdown
-            comment: The position of the content
+            commentAbove: The position of the content.
             span: left
             default: value[left]
             options:
@@ -39,7 +46,7 @@ fields:
           size:
             label: Size
             type: dropdown
-            comment: The size of the content
+            commentAbove: The size of the content.
             span: right
             default: value[normal]
             options:
@@ -57,18 +64,18 @@ fields:
       section:
         name: Section
         icon: icon-columns
-        description: Section with configurable columns
+        description: Section with configurable columns.
         titleFrom: title
         fields:
           title:
             label: Title
             type: text
-            comment: Title of the section. Used for organizational purposes.
+            commentAbove: Title of this section. Used for organizational purposes.
             span: left
           style:
             label: Style
             type: dropdown
-            comment: Style of this section.
+            commentAbove: Style of this section.
             span: right
             options:
               none: None
@@ -92,12 +99,14 @@ fields:
                 name: Text With Buttons
                 icon: icon-align-left
                 description: Add text and buttons to your section.
+                titleFrom: title
                 fields:
                   title:
                     label: Title
-                    commentAbove: Name of this content. Used for organizational purposes.
+                    commentAbove: Title of this column. Used for organizational purposes.
                     type: text
                   content:
+                    label: Content
                     type: richeditor
                   hr_1:
                     type: ruler
@@ -108,32 +117,19 @@ fields:
                     commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
                   hr_2:
                     type: ruler
-                  width:
-                    type: number
-                    label: Column Width
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    type: dropdown
-                    span: right
-                    label: Position
-                    comment: The position of the column.
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
+                  column_options:
+                    type: mixin
+                    source: Content\ColumnOptions
               buttons:
                 name: Buttons
                 icon: icon-link
+                titleFrom: title
                 description: Add buttons to your section.
                 fields:
                   title:
                     label: Title
                     type: text
-                    commentAbove: Name of this content. Used for organizational purposes.
+                    commentAbove: Title of this column. Used for organizational purposes.
                   buttons:
                     type: mixin
                     source: Content\Buttons
@@ -141,65 +137,39 @@ fields:
                     commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
                   hr_2:
                     type: ruler
-                  width:
-                    type: number
-                    label: Column Width
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    type: dropdown
-                    span: right
-                    label: Position
-                    comment: The position of the column.
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
+                  column_options:
+                    type: mixin
+                    source: Content\ColumnOptions
               image:
                 name: Image
                 icon: icon-image
                 description: Add an image to your section.
+                titleFrom: title
                 fields:
                   title:
                     label: Title
                     type: text
-                    commentAbove: Name of this content. Used for organizational purposes.
+                    commentAbove: Title of this column. Used for organizational purposes.
                     span: full
                   hr_1:
                     type: ruler
                   image:
                     label: Image
                     type: mediafinder
+                    commentAbove: Pick an image for this column.
                     span: left
                     mode: image
                     maxItems: 1
-                  alt:
-                    label: Alt Description
+                  image_description:
+                    label: Image Description
                     type: text
-                    comment: The Description of the image. Use for SEO purposes.
+                    commentAbove: The Description of the image. Use for SEO purposes.
                     span: right
                   hr_2:
                     type: ruler
-                  width:
-                    label: Column Width
-                    type: number
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    label: Position
-                    type: dropdown
-                    comment: The position of the column.
-                    span: right
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
+                  column_options:
+                    type: mixin
+                    source: Content\ColumnOptions
               events:
                 name: Events
                 icon: icon-calendar
@@ -211,23 +181,9 @@ fields:
                     source: Content\EventsColumn
                   hr_1:
                     type: ruler
-                  width:
-                    label: Column Width
-                    type: number
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    label: Position
-                    type: dropdown
-                    comment: The position of the column.
-                    span: right
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
+                  column_options:
+                    type: mixin
+                    source: Content\ColumnOptions
               products:
                 name: Products
                 icon: icon-cube
@@ -239,51 +195,23 @@ fields:
                     source: Content\ProductsColumn
                   hr_1:
                     type: ruler
-                  width:
-                    label: Column Width
-                    type: number
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    label: Position
-                    type: dropdown
-                    comment: The position of the column.
-                    span: right
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
+                  column_options:
+                    type: mixin
+                    source: Content\ColumnOptions
               form:
                 name: Form
                 icon: icon-list-alt
                 description: Section with a form.
                 titleFrom: title
                 fields:
-                  events:
+                  form:
                     type: mixin
                     source: Content\FormColumn
                   hr_1:
                     type: ruler
-                  width:
-                    label: Column Width
-                    type: number
-                    comment: The width of the column. Based on a 12 column layout. Leave at 0 to automatically adjust
-                    span: left
-                    min: 0
-                    max: 12
-                    default: 0
-                  position:
-                    label: Position
-                    type: dropdown
-                    comment: The position of the column.
-                    span: right
-                    options:
-                      me-auto: Left
-                      mx-auto: Center
-                      ms-auto: Right
+                  column_options:
+                    type: mixin
+                    source: Content\ColumnOptions
       events:
         name: Events
         icon: icon-calendar

@@ -23,6 +23,14 @@ groups:
         tab: Edit
         type: richeditor
         span: adaptive
+      image:
+        tab: Manage
+        label: Image
+        commentAbove: An image to represent this page. Used on the top section of this page.
+        type: mediafinder
+        mode: image
+        maxItems: 1
+        span: full
       seo_fields:
         tab: Manage
         type: mixin

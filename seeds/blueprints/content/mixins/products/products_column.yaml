@@ -6,12 +6,32 @@ fields:
   title:
     label: Title
     type: text
+    span: left
+    commentAbove: Title of this column. Used for organizational purposes.
+  show:
+    type: dropdown
+    span: right
+    label: Products to Show
+    commentAbove: Choose what products you want to show.
+    options:
+      new: Show New Products
+      category: Show Products from a category
+  product_category_filter:
+    label: Filter by Category
+    type: entries
     span: full
-    comment: Title of the column. Used for organizational purposes.
+    maxItems: 1
+    displayMode: recordfinder
+    prompt: Click the %s to find a product category.
+    source: Content\Product\Category
+    trigger:
+      action: show
+      field: show
+      condition: value[category]
   limit:
     type: number
     span: full
     label: Product Limit
-    comment: How many products would you like to show?
+    commentAbove: How many products would you like to show? Min of 3, max of 5.
     min: 3
     max: 5

@@ -19,6 +19,7 @@ fields:
     label: URL
     span: left
     validation: url
+    commentAbove: Social profile you would like to link to.
   icon:
     label: Icon
     type: entries
@@ -26,5 +27,6 @@ fields:
     displayMode: recordfinder
     span: right
     source: Content\Icon
+    commentAbove: The icon related to the social media service.
         
 
