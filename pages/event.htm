@@ -14,7 +14,7 @@ handle = "Content\Settings"
 {% set event = section %}
 
 {% if event is empty %}
-    {% do redirect('404') %}
+    {% do abort('404') %}
 {% else %}
     <header class="hero {{ section.size == 'small' ? 'small-hero' }} bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4">
         <div class="container" style="z-index: 1;">

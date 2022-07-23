@@ -14,7 +14,7 @@ handle = "Content\Settings"
 {% set product = section %}
 
 {% if product is empty %}
-    {% do redirect('404') %}
+    {% do abort('404') %}
 {% else %}
     {% set preview_url = ''|page %}
     {% set keys_set = true %}

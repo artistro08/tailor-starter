@@ -11,7 +11,7 @@ fullSlug = 0
 {% set page = section %}
 
 {% if page is empty %}
-    {% do redirect('404') %}
+    {% do abort('404') %}
 {% else %}
     {% if page.entry_type == 'simple' %}
         <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
