@@ -8,33 +8,51 @@ fields:
     label: Meta Title
     tab: Manage
     type: text
-    comment: Meta Title. Used for SEO
+    commentAbove: Meta Title. Used for SEO
     attributes:
       maxlength: 70
     preset:
       field: title
       type: exact
     span: left
-  sharing_image:
-    label: Sharing Image
-    tab: Manage
-    type: mediafinder
-    comment: Image used for social media sites (Facebook, Twitter, Etc.)
-    mode: image
-    span: right
-    maxItems: 1
   meta_keywords:
     label: Meta Keywords
     type: taglist
     tab: Manage
-    comment: Keywords used for SEO. Use a comma to separate the keywords
-
+    commentAbove: Keywords used for SEO. Use a comma to separate the keywords
+    span: right
+  sharing_image:
+    label: Sharing Image
+    tab: Manage
+    type: mediafinder
+    commentAbove: Image used for social media sites (Facebook, Twitter, Etc.)
+    mode: image
+    span: left
+    maxItems: 1
+  exclude_in_sitemap:
+    label: Remove from Sitemap
+    type: switch
+    tab: Manage
+    span: right
+    cssClass: mt-4
+    comment: Remove this item from the <a target="_blank" href="/sitemap.xml">sitemap.xml</a> file. Useful if you don't want search engines to index this page.
+    commentHtml: true
+    default: unchecked
   meta_description:
     label: Meta Description
     tab: Manage
     type: textarea
-    span: full
-    comment: Meta Description. Used for SEO. Limited to 300 characters.
+    span: left
+    commentAbove: Meta Description. Used for SEO. Limited to 300 characters.
     attributes:
       maxlength: 300
-
+  robots:
+    label: Robots Info
+    commentAbove: Use this section to determine what search engine robots should do when they reach your page.
+    tab: Manage
+    type: checkboxlist
+    span: right
+    quickselect: true
+    options:
+      noindex: [No Index, Disallow search engine robots to index this page.]
+      nofollow: [No Follow, Disallow disallow search engines from crawling the links on this page.]
