@@ -7,55 +7,62 @@ handle = "Content\Page"
 entrySlug = "{{ :page }}"
 entryDefault = 1
 fullSlug = 0
+
+[global settings]
+handle = "Content\Settings"
 ==
 {% set page = section %}
 
 {% if page is empty %}
     {% do abort('404') %}
 {% else %}
-    {% if page.entry_type == 'simple' %}
-        <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
-            <div class="container position-relative" style="z-index: 1">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h1>{{ page.title }}</h1>
+    {% if (settings.homepage.id == page.id) and (settings.homepage.slug == page.slug) %}
+        {% do redirect('/', 301) %}
+    {% else %}
+        {% if page.entry_type == 'simple' %}
+            <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
+                <div class="container position-relative" style="z-index: 1">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h1>{{ page.title }}</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% if page.image|length %}
-                <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
-                    <img src="{{ page.image|media|resize(1920) }}" alt="{{ page.title }}" class="w-100 h-100" style="object-fit: cover; ">
+                {% if page.image|length %}
+                    <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
+                        <img src="{{ page.image|media|resize(1920) }}" alt="{{ page.title }}" class="w-100 h-100" style="object-fit: cover; ">
+                    </div>
+                {% endif %}
+            </header>
+            <section>
+                <div class="container">
+                    {{ page.content|raw }}
                 </div>
-            {% endif %}
-        </header>
-        <section>
-            <div class="container">
-                {{ page.content|raw }}
-            </div>
-        </section>
-    {% endif %}
-
-    {% if page.entry_type == 'builder' %}
-        {% for section in page.builder %}
-            {# Hero #}
-            {% if section.content_group == 'hero' %}
-                {% partial 'builder/hero' section=section %}
-            {% endif %}
-            {# Section #}
-            {% if section.content_group == 'section' %}
-                {% partial 'builder/section' section=section %}
-            {% endif %}
-            {% if section.content_group == 'events' %}
-                {% partial 'builder/events' section=section %}
-            {% endif %}
-            {# Products #}
-            {% if section.content_group == 'products' %}
-                {% partial 'builder/products' section=section %}
-            {% endif %}
-            {# Form #}
-            {% if section.content_group == 'form' %}
-                {% partial 'builder/form' section=section %}
-            {% endif %}
-        {% endfor %}
+            </section>
+        {% endif %}
+    
+        {% if page.entry_type == 'builder' %}
+            {% for section in page.builder %}
+                {# Hero #}
+                {% if section.content_group == 'hero' %}
+                    {% partial 'builder/hero' section=section %}
+                {% endif %}
+                {# Section #}
+                {% if section.content_group == 'section' %}
+                    {% partial 'builder/section' section=section %}
+                {% endif %}
+                {% if section.content_group == 'events' %}
+                    {% partial 'builder/events' section=section %}
+                {% endif %}
+                {# Products #}
+                {% if section.content_group == 'products' %}
+                    {% partial 'builder/products' section=section %}
+                {% endif %}
+                {# Form #}
+                {% if section.content_group == 'form' %}
+                    {% partial 'builder/form' section=section %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     {% endif %}
 {% endif %}

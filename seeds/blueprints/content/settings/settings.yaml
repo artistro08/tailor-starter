@@ -49,11 +49,17 @@ fields:
     tab: Stripe
     type: sensitive
     span: left
+    validation:
+      - required_with:stripe_secret_key
+      - required_with:stripe_webhook_secret_key
   stripe_secret_key:
     label: Stripe Secret Key
     tab: Stripe
     span: right
     type: sensitive
+    validation:
+      - required_with:stripe_public_key
+      - required_with:stripe_webhook_secret_key
   stripe_webhook_secret_key:
     label: Stripe Webhook Secret Key
     tab: Stripe
@@ -61,6 +67,9 @@ fields:
     type: sensitive
     comment: The webhook secret to sign requests. The shop will not work without it. For step-by-step instructions on how to get it, <a href='https://scribehow.com/shared/Obtain_a_Stripe_Webhook_Secret__5lTS37MMRnu_hhGzWJe07w' target='_blank'>click here</a>.
     commentHtml: true
+    validation:
+      - required_with:stripe_public_key
+      - required_with:stripe_secret_key
   stripe_checkout_success_page:
     label: Stripe Checkout Success Page
     tab: Stripe
@@ -69,6 +78,10 @@ fields:
     type: entries
     source: Content\Page
     maxItems: 1
+    validation:
+      - required_with:stripe_public_key
+      - required_with:stripe_secret_key
+      - required_with:stripe_webhook_secret_key
   available_countries:
     label: Countries to ship to
     commentAbove: A list of country codes you would like to ship to. (Ex. US for United States, CA for Canada, etc.) <a href="https://countrycode.org/" target="_blank">Find a country code</a>
@@ -323,7 +336,9 @@ fields:
       - ZM
       - ZW
     validation:
-      - required
+      - required_with:stripe_public_key
+      - required_with:stripe_secret_key
+      - required_with:stripe_webhook_secret_key
   shipping_methods:
     label: Shipping Methods
     tab: Shipping
@@ -370,9 +385,14 @@ fields:
     span: left
     validation:
       - email
+      - required_with:stripe_public_key
+      - required_with:stripe_secret_key
+      - required_with:stripe_webhook_secret_key
   notification_email_recipient_name:
     type: text
     label: Recipient Name
     tab: Notifications
     commentAbove: The name of the person receiving the notification email
     span: right
+    validation:
+      - required_with:notification_email
