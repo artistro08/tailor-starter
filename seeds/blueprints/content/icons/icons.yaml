@@ -13,6 +13,5 @@ fields:
   svg_code:
     type: textarea
     label: SVG Code
-    language: html
     size: huge
     attributes: disabled
