@@ -26,3 +26,4 @@ v2.0.9: Added front facing tailor pages to buttons in the Hero and Section Build
 v2.0.11: Removed the checkout cancel page from settings and made the back button go to the current page.
 v2.0.12: Code cleanup.
 v2.0.13: Fix OG Image not showing
+v2.0.15: Code cleanup.
