@@ -7,6 +7,6 @@ fields:
     label: Title
     type: text
     span: full
-    comment: Title of the column. Title of the section. Used for organizational purposes.
+    commentAbove: Title of this column. Used for organizational purposes.
   hr_1:
     type: ruler

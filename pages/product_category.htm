@@ -32,10 +32,20 @@ handle = "Content\Settings"
         </div>
     </section>
 {% endif %}
-<header>
-    <div class="container">
-        <h1 class="text-center">{{ category.title }}</h1>
+<header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
+    <div class="container position-relative" style="z-index: 1">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>{{ category.title }}</h1>
+                <p>{{ category.description|nl2br }}</p>
+            </div>
+        </div>
     </div>
+    {% if category.image|length %}
+        <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
+            <img src="{{ category.image|media|resize(1920) }}" alt="{{ category.description }}" class="w-100 h-100" style="object-fit: cover; ">
+        </div>
+    {% endif %}
 </header>
 <div class="section">
     <div class="container">

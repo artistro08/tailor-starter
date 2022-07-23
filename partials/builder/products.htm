@@ -5,22 +5,42 @@ handle = "Content\Product"
     <div class="container">
         <h2 class="text-center mb-4">{{ section.title }}</h2>
         <div class="row row-cols-lg-{{ section.limit }}">
-            {% for product in products|slice(0, section.limit) %}
-                <div class="col mb-4">
-                    <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
-                        <div class="card">
-                            <img
-                                    src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
-                                    alt="{{ product.title }}" class="card-img-top"
-                            >
-                            <div class="card-body d-flex justify-content-between">
-                                <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
-                                <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+            {% if section.show == "new" %}
+                {% for product in products.orderBy('published_at_date').limit(section.limit).get() %}
+                    <div class="col mb-4">
+                        <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                            <div class="card">
+                                <img
+                                        src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                        alt="{{ product.title }}" class="card-img-top"
+                                >
+                                <div class="card-body d-flex justify-content-between">
+                                    <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                                    <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if section.show == "category" %}
+                {% for product in products.whereRelation('categories', 'id', section.product_category_filter.id).limit(section.limit).get() %}
+                    <div class="col mb-4">
+                        <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                            <div class="card">
+                                <img
+                                        src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                        alt="{{ product.title }}" class="card-img-top"
+                                >
+                                <div class="card-body d-flex justify-content-between">
+                                    <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                                    <span class="text-decoration-none text-dark fw-bold">${{ product.price }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 </section>

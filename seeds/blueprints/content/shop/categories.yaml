@@ -10,6 +10,20 @@ navigation:
   order: 8
 
 fields:
+  image:
+    tab: Edit
+    label: Image
+    commentAbove: An image to represent this category. Used on the category page.
+    type: mediafinder
+    mode: image
+    maxItems: 1
+    span: left
+  description:
+    tab: Edit
+    label: Description
+    commentAbove: The description of this category. Used on the Category page.
+    type: textarea
+    span: right
   seo_fields:
     tab: Manage
     type: mixin
