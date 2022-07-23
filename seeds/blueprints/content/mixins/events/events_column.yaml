@@ -7,12 +7,12 @@ fields:
     label: Title
     type: text
     span: full
-    comment: Title of the column. Used for organizational purposes.
+    commentAbove: Title of this column. Used for organizational purposes.
   show:
     type: dropdown
     span: full
     label: Events to Show
-    comment: Choose to show upcoming or all events.
+    commentAbove: Choose to show upcoming or all events.
     options:
       upcoming: Upcoming Events
       all: All Events

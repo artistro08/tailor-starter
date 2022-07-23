@@ -9,6 +9,7 @@ fields:
     label: Buttons
     maxItems: 3
     commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
+    prompt: Add a Button
     form:
       fields:
         title:
@@ -83,25 +84,24 @@ fields:
         style:
           type: dropdown
           label: Style
-          comment: Change the style of this button.
-          span: left
+          commentAbove: Change the style of this button.
+          span: full
           default: value[primary]
           options:
             primary: Primary
             secondary: Secondary
             light: Light
             dark: Dark
-        external:
-          type: switch
-          label: Open in new tab
-          comment: If activated, when someone clicks this link, it'll open it in a new tab.
-          span: right
-          cssClass: mt-4
         outline:
           type: switch
           label: Outline this button
           comment: If activated, the button will be outlined
           span: left
+        external:
+          type: switch
+          label: Open in new tab
+          comment: If activated, when someone clicks this link, it'll open it in a new tab.
+          span: right
   buttons_position:
     type: dropdown
     label: Buttons Position

@@ -7,11 +7,11 @@ fields:
     label: Title
     type: text
     span: left
-    comment: Title of the section. Used for organizational purposes.
+    commentAbove: Title of this section. Used for organizational purposes.
   style:
     label: Style
     type: dropdown
-    comment: Style of this section.
+    commentAbove: Style of this section.
     span: right
     options:
       none: None
@@ -21,7 +21,7 @@ fields:
     type: dropdown
     span: full
     label: Events to Show
-    comment: Choose to show upcoming or all events.
+    commentAbove: Choose to show upcoming or all events.
     options:
       upcoming: Upcoming Events
       all: All Events

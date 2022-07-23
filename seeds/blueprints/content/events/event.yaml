@@ -17,62 +17,53 @@ fields:
         label: Content
         tab: Edit
         type: richeditor
-        span: adaptive
-
-    seo_fields:
-        tab: Manage
-        type: mixin
-        name: SEO Fields
-        source: Content\SEOFields
-    hr_1:
-        type: ruler
-        tab: Manage
-
+        span: left
+        commentAbove: Content for this event.
+    short_description:
+        label: Short Description
+        tab: Edit
+        type: textarea
+        span: right
+        size: huge
+        commentAbove: A short description. Displayed in the Hero and Builder items.
     image:
         type: mediafinder
-        tab: Manage
+        tab: Edit
         label: Event Image
         span: full
         mode: image
         maxItems: 1
-        comment: The image displayed in the Hero and builder
-    short_description:
-        label: Short Description
-        tab: Manage
-        type: textarea
-        span: full
-        size: huge
-        comment: A short description. Displayed in the dynamic page section called "Events"
+        commentAbove: The image displayed in the Hero and Builder items.
     link:
         type: text
         label: Event Link
-        tab: Event
+        tab: Edit
         span: left
         comment: The link to the event. Leave empty for no link
         validation: url
     location_url:
         type: text
         label: Location Link
-        tab: Event
+        tab: Edit
         span: right
         comment: The link to the location event. Leave empty for no link.
         validation: url
     location:
         type: text
         label: Location
-        tab: Event
+        tab: Edit
         span: left
         comment: The address or area where the event is held.
     is_recurring:
         label: Recurring Event
-        tab: Event
+        tab: Edit
         type: switch
         comment: Turn this event into a recurring event.
         span: right
         cssClass: mt-lg-4 mt-0
     date:
         label: Event Date
-        tab: Event
+        tab: Edit
         span: left
         comment: The start time of the event
         type: datepicker
@@ -81,7 +72,7 @@ fields:
         validation: required
     end_date:
         label: Event End Date
-        tab: Event
+        tab: Edit
         span: right
         comment: The end of the event.
         type: datepicker
@@ -90,7 +81,7 @@ fields:
         validation: required
     hr_2:
         type: ruler
-        tab: Event
+        tab: Edit
         trigger:
             action: show
             field: is_recurring
@@ -98,7 +89,7 @@ fields:
     hint_1:
         type: hint
         label: Recurring Events
-        tab: Event
+        tab: Edit
         commentHtml: true
         comment: This section allows you to create recurring events easily. If you're using the "Custom" type of recurrence (picking your own dates), <strong>the "Repeat Length" field will not be used.</strong>
         trigger:
@@ -109,7 +100,7 @@ fields:
         type: dropdown
         label: Recurrence
         comment: How often do you want the event to repeat. (Weekly, Bi-Weekly, etc.)
-        tab: Event
+        tab: Edit
         span: left
         options:
             daily: Daily
@@ -127,7 +118,7 @@ fields:
         type: number
         label: Repeat Length
         comment: How many times you would like the event to repeat. This is based on the recurrence.
-        tab: Event
+        tab: Edit
         span: right
         trigger:
             action: show
@@ -138,7 +129,7 @@ fields:
         label: Custom Dates
         titleFrom: date
         span: full
-        tab: Event
+        tab: Edit
         form:
             fields:
                 date:
@@ -157,3 +148,8 @@ fields:
             action: show
             field: recurrence
             condition: value[custom]
+    seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
