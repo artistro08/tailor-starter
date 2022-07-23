@@ -116,7 +116,7 @@ fields:
             weekly: Weekly
             biWeekly: Bi-Weekly
             monthly: Monthly
-            biMonthly: Bi-Montly
+            biMonthly: Bi-Monthly
             yearly: Yearly
             custom: Custom
         trigger:
