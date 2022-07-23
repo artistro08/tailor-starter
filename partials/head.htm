@@ -35,6 +35,12 @@ handle = "Content\Settings"
         <meta name="keywords" content="{{ section.meta_keywords }}">
     {% endif %}
     
+    {# Robot Info #}
+    {% if section.robots|length %}
+        <meta name="robots" content="{% for item in section.robots %}{{ item }}{{ not loop.last ? ', ' }}{% endfor %}">
+    {% endif %}
+    
+    
     {# Open Graph / Facebook #}
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ ''|app }}">
@@ -61,6 +67,11 @@ handle = "Content\Settings"
     <meta name="description" content="{{ section.meta_description }}">
     {% if section.meta_keywords|length %}
         <meta name="keywords" content="{{ section.meta_keywords }}">
+    {% endif %}
+    
+    {# Robot Info #}
+    {% if section.robots|length %}
+        <meta name="robots" content="{% for item in section.robots %}{{ item }}{{ not loop.last ? ', ' }}{% endfor %}">
     {% endif %}
     
     {# Open Graph / Facebook #}
