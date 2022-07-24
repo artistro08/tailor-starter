@@ -8,6 +8,109 @@ css[] = "bootstrap.min.css"
 [contactForm]
 ==
 <?php
+use Stripe\Stripe as Stripe;
+use Stripe\Checkout as Checkout;
+use Tailor\Models\GlobalRecord as GlobalRecord;
+use Tailor\Models\EntryRecord as EntryRecord;
+
+function onRemoveFromCart() {
+    $cart_session = Session::get('cart_items');
+    unset($cart_session[input('index')]);
+    $cart_session = array_values($cart_session);
+    Session::put('cart_items', $cart_session, 4320);
+
+    $this['cart_items'] = Session::get('cart_items');
+}
+
+function onCheckout() {
+    // Grab Shop settings from Content -> Shop -> Settings
+    $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
+    $success_url = 
+        Config::get('app.url') .
+        '/' . 
+        $shop_settings->stripe_checkout_success_page->slug;
+    $cancel_url = $this->currentPageUrl();
+
+    // Set Stripe Key from Settings
+    Stripe::setApiKey($shop_settings->stripe_secret_key);
+
+    // Get Cart Data from Session
+    $cart_data = Session::get('cart_items');
+
+    // Set Line Items
+
+    $line_items = [];
+
+    foreach($cart_data as $line_item) {
+        $all_metadata = [];
+        foreach($line_item['metadata'] as $pair) {
+            list($a, $b) = explode(':', $pair);
+            $all_metadata[$a] = $b;
+        }
+        $line_items[] = [
+            'price_data' => [
+                'currency'     => 'USD',
+                'product_data' => [
+                    'name'        => $line_item['product_name'],
+                    'description' => $line_item['product_description'] . ' - ' . implode(' - ', $line_item['metadata']),
+                    'images'      => [
+                        $line_item['image'],
+                    ],
+                    'metadata'    => $all_metadata,
+                ],
+                'unit_amount' => $line_item['unit_amount'],
+            ],
+            'quantity' => $line_item['quantity'],
+        ];
+    }
+
+
+    // Set Shipping Stuff
+    $available_countries = $shop_settings->available_countries;
+    $shipping_rate_data = [];
+
+    foreach ($shop_settings->shipping_methods as $shipping_method) {
+        $shipping_rate_data[] = [
+            'shipping_rate_data' => [
+                'type' => 'fixed_amount',
+                'fixed_amount' => [
+                    'amount' => $shipping_method->price * 100,
+                    'currency' => 'usd',
+                ],
+                'display_name' => $shipping_method->title,
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_min,
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_max,
+                    ],
+                ]
+            ]
+        ];
+    }
+
+    // Initiate Checkout Session
+    $checkout_session = Checkout\Session::create([
+        'shipping_address_collection' => [
+            'allowed_countries' => $available_countries,
+        ],
+        'shipping_options' => $shipping_rate_data,
+        'line_items' => $line_items,
+        'mode' => 'payment',
+        'success_url' =>  $success_url,
+        'cancel_url'  => $cancel_url,
+    ]);
+
+    return redirect($checkout_session->url);
+}
+
+function onLoad() {
+    $this['cart_items'] = Session::get('cart_items');
+}
+
 function onStart() {
     if($this['section']) {
         $meta_title       = $this['section']->meta_title;
@@ -27,6 +130,8 @@ function onStart() {
         }
 
     }
+
+    $this['cart_items'] = Session::get('cart_items');
 }
 ?>
 ==
@@ -39,6 +144,9 @@ function onStart() {
     <main>
         {% page %}
     </main>
+    <div id="cart-data">
+        {% partial 'shop/cart-data' %}
+    </div>
     {% partial 'footer' %}
     {% partial 'foot' %}
 </html>

@@ -1,3 +1,20 @@
+{% put scripts %}
+    <script>
+        function onCartUpdate() {
+            let cartToastElement = document.getElementById('cart-toast');
+            let cartToast = new bootstrap.Toast(cartToastElement, {autohide: false});
+            cartToast.show();
+
+            oc.request('#cart-form', 'onLoad', {
+                update: {
+                    'shop/buy-button': '#button',
+                    'shop/price': '#price',
+                    'shop/global-cart-button': '#global-cart-button'
+                },
+            });
+        }
+    </script>
+{% endput %}
 {% scripts %}
 
 {% framework extras %}

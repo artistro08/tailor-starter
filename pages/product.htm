@@ -201,7 +201,15 @@ handle = "Content\Settings"
     
                             {% if keys_set %}
                                 {% if 'default' not in preview_url %}
-                                    {% partial 'shop/buy-button' %}
+                                    <div class="d-flex">
+                                        <div id="button">
+                                            {% partial 'shop/buy-button' %}
+                                        </div>
+                                        <div id="cart-button">
+                                            {% partial 'shop/cart-button' %}
+                                        </div>
+                                    </div>
+                                    
                                 {% else %}
                                     <div class="card bg-light">
                                         <div class="card-body">

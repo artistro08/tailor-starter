@@ -186,6 +186,135 @@ function onBuySubmit() {
     return redirect($checkout_session->url);
 }
 
+// Buy button submit
+function onAddToCart() {
+    
+    // Grab Shop settings from Content -> Shop -> Settings
+    $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
+    $success_url = 
+        Config::get('app.url') .
+        '/' . 
+        $shop_settings->stripe_checkout_success_page->slug;
+    $cancel_url = $this->currentPageUrl();
+
+    // Set Stripe Key from Settings
+    Stripe::setApiKey($shop_settings->stripe_secret_key);
+
+    // Get Input data from October CMS AJAX Request
+    $product_details = input();
+
+    // Set non-dynamic variables (name, price, etc)
+    $product_name = input('name');
+    $product_id = input('id');
+    $product_price_unformatted = input('price');
+    $product_price = input('price');
+    $product_description = input('description');
+    $product_image = input('image');
+
+    // Declare arrays for dynamic variables
+    $pricing = [];
+    $pre_product_data = [];
+    $metadata = [];
+    $option_pricing = [];
+
+    // Add dynamic content to their respective arrays. (pricing, metadata)
+    foreach ($product_details as $product_value) {
+        if ($product_image != $product_value) {
+            if (is_numeric($product_value)) {
+                if(input('quantity') != $product_value) {
+                    if(input('id') != $product_value) {
+                        $pricing[] = $product_value;
+                    }
+                }
+            }
+            if ($this->isJson($product_value)) {
+                $pre_product_data[] = json_decode($product_value, true);
+            }
+            if (!is_numeric($product_value)) {
+                if (!$this->isJson($product_value)) {
+                    if($product_value != $product_description) {
+                        if($product_value != $product_name){
+                            if($product_id != $product_value) {
+                                $metadata[] = $product_value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    };
+
+    foreach ($pre_product_data as $product_data) {
+        foreach($product_data as $item) {
+            if (is_numeric($item)) {
+                $option_pricing[] = $item;
+            }
+        }
+    }
+
+    foreach ($pre_product_data as $product_data) {
+        foreach($product_data as $item) {
+            if (!is_numeric($item)) {
+                $metadata[] = $item;
+            }
+        }
+    }
+
+    $all_metadata = [];
+
+
+    foreach($metadata as $pair) {
+        list($a, $b) = explode(':', $pair);
+        $all_metadata[$a] = $b;
+    }
+    
+    
+    $all_metadata['tailor_id'] = $product_id;
+
+
+    // Prepare pricing for stripe checkout
+    $option_pricing = array_sum($option_pricing);
+    $pricing_sum = array_sum($pricing) + $option_pricing;
+    $total = $pricing_sum * 100;
+    $quantity = input('quantity');
+
+
+    $cart_data = [
+        'product_id'          => $product_id,
+        'product_name'        => $product_name,
+        'product_description' => $product_description,
+        'metadata'            => $metadata,
+        'image'               => $product_image,
+        'unit_amount'         => $total,
+        'quantity'            => $quantity
+    ];
+
+    $cart_stuff = [];
+
+    if (Session::has('cart_items')) {
+        $cart_session = Session::get('cart_items');
+        $cart_session[] = $cart_data;
+        Session::put('cart_items', $cart_session, 4320);
+    } else {
+        Session::put('cart_items', [$cart_data], 4320);
+    }
+
+    $cart_items = Session::get('cart_items');
+    $this['cart_items'] = Session::get('cart_items');
+    
+
+}
+
+function onRemoveFromCart() {
+    $cart_session = Session::get('cart_items');
+    unset($cart_session[input('index')]);
+    $cart_session = array_values($cart_session);
+    Session::put('cart_items', $cart_session, 4320);
+
+    $this['cart_items'] = Session::get('cart_items');
+}
+
 function onLoad() {
 
     // Get Input data from October CMS AJAX Request
@@ -198,7 +327,6 @@ function onLoad() {
     $product_price = input('price');
     $product_description = input('description');
     $product_image = input('image');
-    $tailor_product = EntryRecord::inSection('Content\Product')->where('id', $product_id)->get()[0];
 
     // Declare arrays for dynamic variables
     $pricing = [];
@@ -260,27 +388,6 @@ function onLoad() {
 
     $option_pricing = array_sum($option_pricing);
     $product_total = array_sum($pricing) + $option_pricing;
-
-    // Make items available through twig
-
-    if($tailor_product->content_group == "simple") {
-        if($tailor_product->quantity > 0) {
-            $this['form_enabled'] = true;
-        } else {
-            $this['form_enabled'] = false;
-        }
-    }
-
-    if($tailor_product->content_group == "variant") {
-        if(count(array_filter(input())) == count(input())) {
-            $this['form_enabled'] = true;
-        } else {
-            $this['form_enabled'] = false;
-        }
-    }
-    
-    
-
     
     $this['product_details']           = $product_details;
     $this['product_name']              = $product_name;
@@ -294,7 +401,98 @@ function onLoad() {
     $this['option_pricing']            = $option_pricing;
     $this['product_total']             = $product_total;
     
+    $this['cart_items'] = Session::get('cart_items');
+}
 
+function onStart() {
+    $this['cart_items'] = Session::get('cart_items');
+}
+
+function onCheckout() {
+    // Grab Shop settings from Content -> Shop -> Settings
+    $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
+    $success_url = 
+        Config::get('app.url') .
+        '/' . 
+        $shop_settings->stripe_checkout_success_page->slug;
+    $cancel_url = $this->currentPageUrl();
+
+    // Set Stripe Key from Settings
+    Stripe::setApiKey($shop_settings->stripe_secret_key);
+
+    // Get Cart Data from Session
+    $cart_data = Session::get('cart_items');
+
+    // Set Line Items
+
+    $line_items = [];
+
+    foreach($cart_data as $line_item) {
+        $all_metadata = [];
+        foreach($line_item['metadata'] as $pair) {
+            list($a, $b) = explode(':', $pair);
+            $all_metadata[$a] = $b;
+        }
+
+        $all_metadata['tailor_id'] = $line_item['product_id'];
+        $line_items[] = [
+            'price_data' => [
+                'currency'     => 'USD',
+                'product_data' => [
+                    'name'        => $line_item['product_name'],
+                    'description' => $line_item['product_description'] . ' - ' . implode(' - ', $line_item['metadata']),
+                    'images'      => [
+                        $line_item['image'],
+                    ],
+                    'metadata'    => $all_metadata,
+                ],
+                'unit_amount' => $line_item['unit_amount'],
+            ],
+            'quantity' => $line_item['quantity'],
+        ];
+    }
+
+
+    // Set Shipping Stuff
+    $available_countries = $shop_settings->available_countries;
+    $shipping_rate_data = [];
+
+    foreach ($shop_settings->shipping_methods as $shipping_method) {
+        $shipping_rate_data[] = [
+            'shipping_rate_data' => [
+                'type' => 'fixed_amount',
+                'fixed_amount' => [
+                    'amount' => $shipping_method->price * 100,
+                    'currency' => 'usd',
+                ],
+                'display_name' => $shipping_method->title,
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_min,
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_max,
+                    ],
+                ]
+            ]
+        ];
+    }
+
+    // Initiate Checkout Session
+    $checkout_session = Checkout\Session::create([
+        'shipping_address_collection' => [
+            'allowed_countries' => $available_countries,
+        ],
+        'shipping_options' => $shipping_rate_data,
+        'line_items' => $line_items,
+        'mode' => 'payment',
+        'success_url' =>  $success_url,
+        'cancel_url'  => $cancel_url,
+    ]);
+
+    return redirect($checkout_session->url);
 }
 ?>
 ==
@@ -306,6 +504,10 @@ function onLoad() {
     <main>
         {% page %}
     </main>
+    
+    <div id="cart-data">
+        {% partial 'shop/cart-data' %}
+    </div>
     {% partial 'footer' %}
     {% partial 'foot' %}
 </html>
