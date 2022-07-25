@@ -242,7 +242,6 @@ function onAddToCart() {
                 }
             }
         }
-        
     };
 
     foreach ($pre_product_data as $product_data) {
@@ -263,7 +262,6 @@ function onAddToCart() {
 
     $all_metadata = [];
 
-
     foreach($metadata as $pair) {
         list($a, $b) = explode(':', $pair);
         $all_metadata[$a] = $b;
@@ -272,13 +270,11 @@ function onAddToCart() {
     
     $all_metadata['tailor_id'] = $product_id;
 
-
     // Prepare pricing for stripe checkout
     $option_pricing = array_sum($option_pricing);
     $pricing_sum = array_sum($pricing) + $option_pricing;
     $total = $pricing_sum * 100;
     $quantity = input('quantity');
-
 
     $cart_data = [
         'product_id'          => $product_id,
@@ -302,8 +298,6 @@ function onAddToCart() {
 
     $cart_items = Session::get('cart_items');
     $this['cart_items'] = Session::get('cart_items');
-    
-
 }
 
 function onRemoveFromCart() {
@@ -333,8 +327,6 @@ function onLoad() {
     $pre_product_data = [];
     $metadata = [];
     $option_pricing = [];
-
-    
 
     // Add dynamic content to their respective arrays. (pricing, metadata)
     foreach ($product_details as $product_value) {
@@ -424,7 +416,6 @@ function onCheckout() {
     $cart_data = Session::get('cart_items');
 
     // Set Line Items
-
     $line_items = [];
 
     foreach($cart_data as $line_item) {
@@ -451,7 +442,6 @@ function onCheckout() {
             'quantity' => $line_item['quantity'],
         ];
     }
-
 
     // Set Shipping Stuff
     $available_countries = $shop_settings->available_countries;

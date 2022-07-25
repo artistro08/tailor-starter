@@ -53,18 +53,14 @@ function onInit() {
         $customer_info    = [];
         $order_info       = [];
         
-
         foreach($line_items['data'] as $item){
             $line_item_price = $stripe->prices->retrieve($item['price']['id'],[]);
             $product         = $stripe->products->retrieve($line_item_price['product'],[]);
             $quantity        = $item['quantity'];
             $tailor_id       = $product['metadata']['tailor_id'];
-
-
-            $tailor_product = EntryRecord::inSection('Content\Product')->where('id', $tailor_id)->get();
+            $tailor_product  = EntryRecord::inSection('Content\Product')->where('id', $tailor_id)->get();
 
             if($tailor_product[0]->content_group == "simple") {
-
                 $tailor_product[0]->quantity = ($tailor_product[0]->quantity - $quantity);
                 $tailor_product[0]->save();
             }
@@ -94,7 +90,7 @@ function onInit() {
         $customer_info['shipping_address'] = $session_data['shipping'];
 
         $order_info['shipping_rate'] = $shipping_rate['display_name'];
-        $order_info['total'] = number_format(($session_data['amount_total'] /100), 2, '.', ' ');
+        $order_info['total']         = number_format(($session_data['amount_total'] /100), 2, '.', ' ');
 
         $order                    = EntryRecord::inSection('Content\Orders');
         $order->title             = 'Order - ' . $customer_info['name'];
@@ -107,7 +103,6 @@ function onInit() {
         $order->is_enabled        = 1;
         $order->order_status      = 'new';
         $order->save();
-
     }
 
     http_response_code(200);

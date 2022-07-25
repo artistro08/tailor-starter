@@ -38,7 +38,6 @@ function onCheckout() {
     $cart_data = Session::get('cart_items');
 
     // Set Line Items
-
     $line_items = [];
 
     foreach($cart_data as $line_item) {
@@ -129,7 +128,6 @@ function onStart() {
         if($sharing_image != null) {
             $sharing_image    = $this['global']->homepage->meta_description;
         }
-
     }
 
     $this['cart_items'] = Session::get('cart_items');

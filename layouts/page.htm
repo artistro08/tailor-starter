@@ -18,7 +18,6 @@ function onRemoveFromCart() {
     unset($cart_session[input('index')]);
     $cart_session = array_values($cart_session);
     Session::put('cart_items', $cart_session, 4320);
-
     $this['cart_items'] = Session::get('cart_items');
 }
 
@@ -38,7 +37,6 @@ function onCheckout() {
     $cart_data = Session::get('cart_items');
 
     // Set Line Items
-
     $line_items = [];
 
     $all_metadata = [];
@@ -104,8 +102,6 @@ function onCheckout() {
         'success_url' =>  $success_url.'?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url'  => $cancel_url,
     ]);
-
-
 
     return redirect($checkout_session->url);
 }
