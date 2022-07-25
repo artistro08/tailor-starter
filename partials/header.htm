@@ -6,20 +6,20 @@ handle = "Content\Settings"
 ==
 <nav class="navbar navbar-light navbar-expand-lg sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ '/'|app }}">
+        <a class="navbar-brand order-1" href="{{ '/'|app }}">
             {% if settings.logo|length %}
                 <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">
             {% else %}
                 {{ settings.website_name }}
             {% endif %}
         </a>
-        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+        <button data-bs-toggle="collapse" class="navbar-toggler order-4 order-lg-2" data-bs-target="#navcol-1">
             <span class="visually-hidden">Toggle navigation</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
             </svg>
         </button>
-        <div class="collapse navbar-collapse" id="navcol-1">
+        <div class="collapse navbar-collapse order-4 order-lg-4" id="navcol-1">
             <ul class="navbar-nav">
                 {% for item in mainMenu %}
                     {% if item.is_enabled %}
@@ -282,6 +282,9 @@ handle = "Content\Settings"
                     {% endif %}
                 {% endfor %}
             </ul>
+        </div>
+        <div class="me-1 ms-auto order-3 order-lg-4" id="global-cart-button">
+            {% partial 'shop/global-cart-button' %}
         </div>
     </div>
 </nav>

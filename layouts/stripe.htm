@@ -9,12 +9,7 @@ use Tailor\Models\GlobalRecord as GlobalRecord;
 use Tailor\Models\EntryRecord as EntryRecord;
 use Stripe\StripeClient as Client;
 
-
 function onInit() {
-
-    // Config::set('system.enable_csrf_protection', false);
-
-    
 
     $request = Request::instance();
 
@@ -26,11 +21,12 @@ function onInit() {
     // Set Stripe Key from Settings
     Stripe::setApiKey($stripe_key);
 
-
+    // Get Payload
     $payload    = $request->getContent();
     $sig_header = array_key_exists('HTTP_STRIPE_SIGNATURE', $_SERVER) ? $_SERVER['HTTP_STRIPE_SIGNATURE'] : null;
     $event      = null;
 
+    // Determine if payload came from stripe
     try {
         $event = Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
     } catch(\UnexpectedValueException $e) {
@@ -46,6 +42,7 @@ function onInit() {
         exit();
     }
 
+    // Fulfill checkout and create order
     if ($event->type == 'checkout.session.completed') {
         $session          = $event->data->object;
         $session_data     = json_decode($session->toJSON(), true);
@@ -56,37 +53,44 @@ function onInit() {
         $customer_info    = [];
         $order_info       = [];
         
-
-
-        // Fulfill the purchase
         foreach($line_items['data'] as $item){
             $line_item_price = $stripe->prices->retrieve($item['price']['id'],[]);
             $product         = $stripe->products->retrieve($line_item_price['product'],[]);
             $quantity        = $item['quantity'];
             $tailor_id       = $product['metadata']['tailor_id'];
-
-            $tailor_product = EntryRecord::inSection('Content\Product')->where('id', $tailor_id)->get();
+            $tailor_product  = EntryRecord::inSection('Content\Product')->where('id', $tailor_id)->get();
 
             if($tailor_product[0]->content_group == "simple") {
-
                 $tailor_product[0]->quantity = ($tailor_product[0]->quantity - $quantity);
                 $tailor_product[0]->save();
             }
 
-            $products_summary['name']     = $product['name'];
-            $products_summary['quantity'] = $quantity;
-            $products_summary['metadata'] = json_decode($product['metadata']->toJSON(), true);
+            $meta = $sep = '';
+            foreach(json_decode($product['metadata']->toJSON(), true) as $key => $value ) {
+                $meta .= $sep . $key . ': ' . $value;
+                $sep = PHP_EOL;
+            }
+
+            $products_summary[] = [
+                'name' => PHP_EOL.$product['name'],
+                'quantity' => 'Quantity: ' . $quantity,
+                'metadata' => $meta . PHP_EOL
+            ];
 
         }
 
-        $products_summary_metadata = implode(PHP_EOL . '- ', array_map(function ($a, $b) { return "$a: $b"; },array_keys($products_summary['metadata']),array_values($products_summary['metadata'])));
+        $product_list = '';
+
+        foreach($products_summary as $item) {
+            $product_list .= implode(PHP_EOL, $item);
+        }
 
         $customer_info['name']             = $session_data['customer_details']['name'];
         $customer_info['email']            = $session_data['customer_details']['email'];
         $customer_info['shipping_address'] = $session_data['shipping'];
 
         $order_info['shipping_rate'] = $shipping_rate['display_name'];
-        $order_info['total'] = number_format(($session_data['amount_total'] /100), 2, '.', ' ');
+        $order_info['total']         = number_format(($session_data['amount_total'] /100), 2, '.', ' ');
 
         $order                    = EntryRecord::inSection('Content\Orders');
         $order->title             = 'Order - ' . $customer_info['name'];
@@ -94,12 +98,11 @@ function onInit() {
         $order->customer_name     = $customer_info['name'];
         $order->total             = $order_info['total'];
         $order->shipping_method   = $order_info['shipping_rate'];
-        $order->order_contents    = 'Product Name: ' . $products_summary['name'] . PHP_EOL . 'Quantity: ' . $products_summary['quantity'] . PHP_EOL . 'Options: ' . PHP_EOL . '- ' . $products_summary_metadata;
+        $order->order_contents    = $product_list;
         $order->customer_address  = $customer_info['shipping_address']['address']['line1'] . PHP_EOL . $customer_info['shipping_address']['address']['line2'] . PHP_EOL . $customer_info['shipping_address']['address']['city'] . ', ' . $customer_info['shipping_address']['address']['state'] . ', '. $customer_info['shipping_address']['address']['postal_code'] . PHP_EOL . $customer_info['shipping_address']['address']['country'];
         $order->is_enabled        = 1;
         $order->order_status      = 'new';
         $order->save();
-
     }
 
     http_response_code(200);

@@ -201,7 +201,15 @@ handle = "Content\Settings"
     
                             {% if keys_set %}
                                 {% if 'default' not in preview_url %}
-                                    {% partial 'shop/buy-button' %}
+                                    <div class="d-flex">
+                                        <div id="button">
+                                            {% partial 'shop/buy-button' product=product %}
+                                        </div>
+                                        <div id="cart-button">
+                                            {% partial 'shop/cart-button' product=product %}
+                                        </div>
+                                    </div>
+                                    
                                 {% else %}
                                     <div class="card bg-light">
                                         <div class="card-body">
@@ -225,18 +233,13 @@ handle = "Content\Settings"
                                             oc.request('#cart-form', 'onLoad', {
                                                 update: {'shop/price': '#price'},
                                             });
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/buy-button': '#button'},
-                                            });
                                         });
             
                                         function onChange() {
                                             oc.request('#cart-form', 'onLoad', {
                                                 update: {'shop/price': '#price'},
                                             });
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/buy-button': '#button'},
-                                            });
+
                                         }
                 
                                     </script>
@@ -252,17 +255,11 @@ handle = "Content\Settings"
                                             oc.request('#cart-form', 'onLoad', {
                                                 update: {'shop/price': '#price'},
                                             });
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/buy-button': '#button'},
-                                            });
                                         });
             
                                         function onChange() {
                                             oc.request('#cart-form', 'onLoad', {
                                                 update: {'shop/price': '#price'},
-                                            });
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/buy-button': '#button'},
                                             });
                                         }
                 
