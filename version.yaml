@@ -31,3 +31,4 @@ v2.0.16: Code cleanup.
 v2.0.17: Minor code refactoring, grammar cleanup, and code organization. Added filtering to the product builder items
 v2.0.18: Added sitemap switch. Added robots checklist. added validation for stripe stuff. Updated 404 behaviors.
 v2.0.19: Minor code update to hero builder item.
+v3.0.0: Adds support of a cart via a Session.

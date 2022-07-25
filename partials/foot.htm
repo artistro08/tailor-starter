@@ -1,3 +1,40 @@
+{% put scripts %}
+    <script>
+        const mediaQuery = window.matchMedia('(max-width: 767px)');
+        function onCartUpdate() {
+            let cartToastSuccessElement = document.getElementById('cart-toast-success');
+            let cartToastSuccess = bootstrap.Toast.getOrCreateInstance(cartToastSuccessElement, {autohide: true});
+            let cartToastElement = document.getElementById('cart-toast');
+            let cartToast = bootstrap.Toast.getOrCreateInstance(cartToastElement, {autohide: false});
+
+            if (!mediaQuery.matches) {
+                cartToast.show();
+            }
+            cartToastSuccess.show();
+
+            oc.request('#cart-form', 'onLoad', {
+                update: {
+                    'shop/buy-button': '#button',
+                    'shop/price': '#price',
+                    'shop/global-cart-button': '#global-cart-button'
+                },
+            });
+        }
+        function onCartShow() {
+            let cartToastElement = document.getElementById('cart-toast');
+            let cartToast = bootstrap.Toast.getOrCreateInstance(cartToastElement, {autohide: false});
+            cartToast.show();
+
+            oc.request('#cart-form', 'onLoad', {
+                update: {
+                    'shop/buy-button': '#button',
+                    'shop/price': '#price',
+                    'shop/global-cart-button': '#global-cart-button'
+                },
+            });
+        }
+    </script>
+{% endput %}
 {% scripts %}
 
 {% framework extras %}
