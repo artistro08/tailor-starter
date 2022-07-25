@@ -47,6 +47,7 @@ function onCheckout() {
             list($a, $b) = explode(':', $pair);
             $all_metadata[$a] = $b;
         }
+        $all_metadata['tailor_id'] = $line_item['product_id'];
         $line_items[] = [
             'price_data' => [
                 'currency'     => 'USD',
@@ -100,7 +101,7 @@ function onCheckout() {
         'shipping_options' => $shipping_rate_data,
         'line_items' => $line_items,
         'mode' => 'payment',
-        'success_url' =>  $success_url,
+        'success_url' =>  $success_url.'?session_id={CHECKOUT_SESSION_ID}',
         'cancel_url'  => $cancel_url,
     ]);
 

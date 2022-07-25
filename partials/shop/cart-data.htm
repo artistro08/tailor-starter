@@ -1,4 +1,20 @@
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast align-items-center bg-success text-white border-0" role="alert" aria-live="assertive" aria-atomic="true" id="cart-toast-success">
+        <div class="d-flex">
+            <div class="toast-body align-items-center justify-content-between w-100">
+                <span class="mb-2 d-block">Successfully added to Cart!</span>
+                <div class="d-flex">
+                    <a href="{{ 'products'|page }}" class="btn btn-sm btn-dark me-2">Shop More</a>
+                    <button href="{{ 'products'|page }}" class="btn btn-sm btn-dark d-flex align-items-center" data-request="onCheckout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                        </svg>&nbsp;Checkout
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 mt-2 mb-auto" data-bs-dismiss="toast" data-bs-target="#cart-toast-success" aria-label="Close"></button>
+        </div>
+    </div>
     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cart-toast">
         <div class="toast-header">
             <strong class="me-auto">
@@ -8,47 +24,49 @@
                 Your Cart
             </strong>
             <small class="text-muted"></small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" data-bs-target="#cart-toast" ></button>
         </div>
         <div class="toast-body pt-0 pe-0">
             <div class="pt-2 bg-white" style="max-height: 45vh; overflow-y: auto; overflow-x: hidden">
                 {% if cart_items|length %}
-                {% for item in cart_items %}
-                    <div class="row pt-2 g-0" >
-                        <div class="col-4 mb-3">
-                            {% if item.image|length %}
-                                <img class="rounded-2 img-fluid" src="{{ item.image }}" alt="{{ item.product_name }}">
-                            {% endif %}
-                        </div>
-                        <div class="col-6 mb-3 p-2">
-                            <h5 class="mb-0">{{ item.product_name }}</h5>
-                            <span class="d-block">
-                                Quantity: {{ item.quantity }}
-                            </span>
+                    {% set subtotal = 0 %}
+                    {% for item in cart_items %}
+                        {% set subtotal = subtotal+item.unit_amount %}
+                        <div class="row pt-2 g-0" >
+                            <div class="col-4 mb-3">
+                                {% if item.image|length %}
+                                    <img class="rounded-2 img-fluid" src="{{ item.image }}" alt="{{ item.product_name }}">
+                                {% endif %}
+                            </div>
+                            <div class="col-6 mb-3 p-2">
+                                <h5 class="mb-0">{{ item.product_name }}</h5>
                                 <span class="d-block">
-                                {% for data in item.metadata %}
-                                    <span class="d-block">{{ data }}</span>
-                                {% endfor %}
-                            </span>
-                                <span class="d-block">
-                                Price: ${{ (item.unit_amount / 100)|number_format(2,'.',',') }}
-                            </span>
+                                    Quantity: {{ item.quantity }}
+                                </span>
+                                    <span class="d-block">
+                                    {% for data in item.metadata %}
+                                        <span class="d-block">{{ data }}</span>
+                                    {% endfor %}
+                                </span>
+                                    <span class="d-block">
+                                    Price: ${{ (item.unit_amount / 100)|number_format(2,'.',',') }}
+                                </span>
+                            </div>
+                            <div class="col-2 align-self-center mb-3 text-center">
+                                <button
+                                        class="btn btn-light fs-6 px-2"
+                                        data-request="onRemoveFromCart"
+                                        data-request-data="index: {{ loop.index0 }}"
+                                        data-request-update="'shop/cart-data': '#cart-data'"
+                                        data-request-success="onCartShow()"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-2 align-self-center mb-3 text-center">
-                            <button
-                                    class="btn btn-light fs-6 px-2"
-                                    data-request="onRemoveFromCart"
-                                    data-request-data="index: {{ loop.index0 }}"
-                                    data-request-update="'shop/cart-data': '#cart-data'"
-                                    data-request-success="onCartUpdate()"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
-                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
                 {% else %}
                     <div class="d-flex flex-column text-center align-items-center justify-content-center py-5">
                         <h6>You've got nothing in your cart</h6>
@@ -57,7 +75,8 @@
                 {% endif %}
                 
             </div>
-            <div class="pt-2 pe-2">
+            <div class="pt-2 pe-2 d-flex align-items-center justify-content-between w-100">
+                <div><strong>Subtotal: </strong>${{ (subtotal / 100)|number_format(2,'.',',') }}</div>
                 <button class="btn-primary btn d-flex align-items-center" data-request="onCheckout">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
@@ -67,4 +86,5 @@
             </div>
         </div>
     </div>
+    
 </div>

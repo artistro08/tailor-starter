@@ -39,12 +39,16 @@ function onCheckout() {
 
     $line_items = [];
 
+    $all_metadata = [];
     foreach($cart_data as $line_item) {
-        $all_metadata = [];
         foreach($line_item['metadata'] as $pair) {
-            list($a, $b) = explode(':', $pair);
-            $all_metadata[$a] = $b;
+            if(str_contains($pair, ':')) {
+                list($a, $b) = explode(':', $pair);
+                $all_metadata[$a] = $b;
+            }
+            
         }
+        $all_metadata['tailor_id'] = $line_item['product_id'];
         $line_items[] = [
             'price_data' => [
                 'currency'     => 'USD',

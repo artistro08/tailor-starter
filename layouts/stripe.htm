@@ -9,17 +9,7 @@ use Tailor\Models\GlobalRecord as GlobalRecord;
 use Tailor\Models\EntryRecord as EntryRecord;
 use Stripe\StripeClient as Client;
 
-
-function convertMultiArray($array) {
-  $out = implode(PHP_EOL,array_map(function($a) {return implode("~",$a);},$array));
-  print_r($out);
-}
-
 function onInit() {
-
-    // Config::set('system.enable_csrf_protection', false);
-
-    
 
     $request = Request::instance();
 
@@ -31,11 +21,12 @@ function onInit() {
     // Set Stripe Key from Settings
     Stripe::setApiKey($stripe_key);
 
-
+    // Get Payload
     $payload    = $request->getContent();
     $sig_header = array_key_exists('HTTP_STRIPE_SIGNATURE', $_SERVER) ? $_SERVER['HTTP_STRIPE_SIGNATURE'] : null;
     $event      = null;
 
+    // Determine if payload came from stripe
     try {
         $event = Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
     } catch(\UnexpectedValueException $e) {
@@ -51,6 +42,7 @@ function onInit() {
         exit();
     }
 
+    // Fulfill checkout and create order
     if ($event->type == 'checkout.session.completed') {
         $session          = $event->data->object;
         $session_data     = json_decode($session->toJSON(), true);
@@ -62,9 +54,6 @@ function onInit() {
         $order_info       = [];
         
 
-
-        $products_summary = [];
-        // Fulfill the purchase
         foreach($line_items['data'] as $item){
             $line_item_price = $stripe->prices->retrieve($item['price']['id'],[]);
             $product         = $stripe->products->retrieve($line_item_price['product'],[]);
@@ -87,9 +76,9 @@ function onInit() {
             }
 
             $products_summary[] = [
-                'name' => $product['name'],
+                'name' => PHP_EOL.$product['name'],
                 'quantity' => 'Quantity: ' . $quantity,
-                'metadata' => $meta
+                'metadata' => $meta . PHP_EOL
             ];
 
         }
@@ -97,7 +86,7 @@ function onInit() {
         $product_list = '';
 
         foreach($products_summary as $item) {
-            $product_list = implode(PHP_EOL, $item);
+            $product_list .= implode(PHP_EOL, $item);
         }
 
         $customer_info['name']             = $session_data['customer_details']['name'];

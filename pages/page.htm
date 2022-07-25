@@ -11,6 +11,17 @@ fullSlug = 0
 [global settings]
 handle = "Content\Settings"
 ==
+<?php
+function onInit() {
+    $request = request()->get('session_id');
+
+    if($request) {
+        Session::forget('cart_items');
+    }
+
+}
+?>
+==
 {% set page = section %}
 
 {% if page is empty %}
