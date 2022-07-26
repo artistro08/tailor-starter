@@ -33,3 +33,4 @@ v2.0.18: Added sitemap switch. Added robots checklist. added validation for stri
 v2.0.19: Minor code update to hero builder item.
 v3.0.0: Adds support of a cart via a Session.
 v3.0.1: Fixed a bug where options were not validated for a product.
+v3.0.3: Fixed background in cart-data.htm partial
