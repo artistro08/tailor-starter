@@ -48,6 +48,18 @@ function onCheckout() {
             }
             
         }
+        
+        $product_line_item = EntryRecord::inSection('Content\Product')->find($line_item['product_id']);
+
+        if($product_line_item->content_group == "simple") {
+            $items_in_question = [];
+            if($line_item['quantity'] > $product_line_item->quantity) {
+                $items_in_question[] = ['name' => $line_item['product_name']];
+                $this['items_in_question'] = $items_in_question;
+                throw new AjaxException(['#items-out-of-stock' => $this->renderPartial('shop/items-out-of-stock-message')]);
+            }
+        }
+
         $all_metadata['tailor_id'] = $line_item['product_id'];
         $line_items[] = [
             'price_data' => [
