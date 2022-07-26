@@ -15,7 +15,7 @@
             <button type="button" class="btn-close btn-close-white me-2 mt-2 mb-auto" data-bs-dismiss="toast" data-bs-target="#cart-toast-success" aria-label="Close"></button>
         </div>
     </div>
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cart-toast">
+    <div class="toast bg-white" role="alert" aria-live="assertive" aria-atomic="true" id="cart-toast">
         <div class="toast-header">
             <strong class="me-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
@@ -27,7 +27,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" data-bs-target="#cart-toast" ></button>
         </div>
         <div class="toast-body pt-0 pe-0">
-            <div class="pt-2 bg-white" style="max-height: 45vh; overflow-y: auto; overflow-x: hidden">
+            <div class="pt-2" style="max-height: 45vh; overflow-y: auto; overflow-x: hidden">
                 {% if cart_items|length %}
                     {% set subtotal = 0 %}
                     {% for item in cart_items %}
