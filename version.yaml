@@ -36,3 +36,4 @@ v3.0.1: Fixed a bug where options were not validated for a product.
 v3.0.3: Fixed background in cart-data.htm partial
 v3.0.4: Fixed a bug where you could add more than the available items in the cart for simple products
 v3.0.5: Fixed a bug in v3.0.4
+v3.0.6: Fixed a cart bug in v3.0.4
