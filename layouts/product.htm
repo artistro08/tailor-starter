@@ -188,7 +188,7 @@ function onBuySubmit() {
     return redirect($checkout_session->url);
 }
 
-// Buy button submit
+// Cart button submit
 function onAddToCart() {
     
     // Grab Shop settings from Content -> Shop -> Settings
@@ -299,7 +299,7 @@ function onAddToCart() {
         foreach($cart_session as $cart_item) {
             if($cart_item['product_id'] = $cart_data['product_id']) {
                 $cart_quantity = $cart_item['quantity']+$cart_quantity;
-                $product = EntryRecord::inSection('Content\Product')->find($cart_item['product_id']);
+                $product = EntryRecord::inSection('Content\Product')->find($cart_data['product_id']);
                 $product_quantity = $product->quantity;
                 $product_type = $product->content_group;
 
