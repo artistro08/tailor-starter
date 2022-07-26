@@ -1,0 +1,9 @@
+<div class="alert alert-warning alert-dismissible fade show d-flex align-items-center justify-content-between me-3 mt-2">
+    <div>
+        <span class="d-block">Looks one of the items in your cart is out of stock. Please remove the following to continue:</span>
+        {% for item in items_in_question %}
+            <span class="d-block fw-bold">{{ item.name }}</span>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn-close m-auto bottom-0" aria-label="Close" data-bs-dismiss="alert" style="z-index: 0"></button>
+</div>
