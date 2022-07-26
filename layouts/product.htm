@@ -115,8 +115,10 @@ function onBuySubmit() {
 
 
     foreach($metadata as $pair) {
-        list($a, $b) = explode(':', $pair);
-        $all_metadata[$a] = $b;
+        if(str_contains($pair, ':')){
+            list($a, $b) = explode(':', $pair);
+            $all_metadata[$a] = $b;
+        }
     }
     
     
@@ -263,8 +265,10 @@ function onAddToCart() {
     $all_metadata = [];
 
     foreach($metadata as $pair) {
-        list($a, $b) = explode(':', $pair);
-        $all_metadata[$a] = $b;
+        if(str_contains($pair, ':')){
+            list($a, $b) = explode(':', $pair);
+            $all_metadata[$a] = $b;
+        }
     }
     
     

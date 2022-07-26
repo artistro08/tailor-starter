@@ -85,7 +85,7 @@ handle = "Content\Settings"
                                         {% if variant.property.content_group == "dropdown" %}
                                             {% if variant.property.items.where('is_enabled', true)|length %}
                                                 <label for="{{ variant.property.slug }}">{{ variant.property.title }}:</label>
-                                                <select class="form-select mb-4" name="{{ variant.property.title|lower }}" id="{{ variant.property.slug }}" onchange="onChange()">
+                                                <select required class="form-select mb-4" name="{{ variant.property.title|lower }}" id="{{ variant.property.slug }}" onchange="onChange()">
                                                     <option value="" selected>Select an option...</option>
                                                     {% for option in variant.property.items.where('is_enabled', true) %}
                                                         <option value="{{ variant.property.title }}: {{ option.title }}">{{ option.title }}</option>
@@ -98,9 +98,9 @@ handle = "Content\Settings"
                                             {% if variant.property.color.where('is_enabled', true)|length %}
                                                 <div class="d-flex align-items-center mb-3">
                                                     <label class="me-2">{{ variant.property.title }}:</label>
-                                                    <input class="position-fixed opacity-0" style="pointer-events: none" type="radio" name="{{ variant.title|lower }}" checked value="0">
                                                     {% for color in variant.property.color.where('is_enabled', true) %}
                                                         <input
+                                                                required
                                                                 type="radio"
                                                                 class="btn-check"
                                                                 value="{{ variant.property.title }}: {{ color.title }}"
@@ -151,7 +151,6 @@ handle = "Content\Settings"
                                             {% if variant.colors.where('is_enabled', true)|length %}
                                                 <div class="d-flex align-items-center mb-3">
                                                     <label class="me-2">{{ variant.title }}:</label>
-                                                    <input class="position-fixed opacity-0" style="pointer-events: none" type="radio" name="{{ variant.title|lower }}" checked value="0">
                                                     {% for color in variant.colors.where('is_enabled', true) %}
                                                         <input
                                                                 required
