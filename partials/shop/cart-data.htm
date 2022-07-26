@@ -27,6 +27,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" data-bs-target="#cart-toast" ></button>
         </div>
         <div class="toast-body pt-0 pe-0">
+            <div id="items-out-of-stock"></div>
             <div class="pt-2" style="max-height: 45vh; overflow-y: auto; overflow-x: hidden">
                 {% if cart_items|length %}
                     {% set subtotal = 0 %}
