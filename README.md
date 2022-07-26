@@ -100,16 +100,18 @@ This content is used for the layout, single pages, and builder items, respective
 
 
 ### Shop
-This theme has a simple shop with Stripe support. Webhooks are supported too, under the condition that **variant products do not work**.
+This theme has a simple shop with Stripe Checkout support. It has a cart stored in the `Session`. Webhooks are used to send out emails with the companion plugin and add orders to the backend. While quantity deduction works for simple products, **they do not work for variants**.
 If you need a more robust shop, I recommend checking out [OFFLINE.Mall](https://octobercms.com/plugin/offline-mall) from the marketplace.
 
 #### Features of the shop
 - Stripe Checkout Support. Just add your keys
 - Stripe Webhooks Support (Also required). Make sure you add your Webhook Secret
-- Variants (Without Stripe Webhooks Support).
-- Simple Products (With Stripe Webhooks Support).
+- Variants
+  - Quantity is not autmatically updated for Variants.
+- Simple Products.
   - Quantity is automatically updated on `checkout.session.completed`.
 - Support for Categories out of the box. 
+- Cart Support via `Session`
 
 The locations for the product markup files are:
 - `layouts/product.htm`
@@ -117,8 +119,9 @@ The locations for the product markup files are:
 - `pages/product.htm`
 - `pages/product_category.htm`
 - `partial/builder/products.htm`
+- `partials/shop/*` (Everything under this folder)
 
-This content is used for the layout, product listings, single pages, product categories, and builder items respectively.
+This content is used for the layout, product listings, single pages, product categories, builder items, and cart AJAX functions respectively.
 
 ### Icons
 This theme has seed data for the Bootstrap Icons library. The last generated icon set was `v1.8.3`. The Social menu uses these icons. Use that as an example to extend into your theme.
