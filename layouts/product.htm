@@ -297,8 +297,9 @@ function onAddToCart() {
         $cart_quantity = 0;
         $should_add_to_cart = true;
         foreach($cart_session as $cart_item) {
-            if($cart_item['product_id'] = $cart_data['product_id']) {
-                $cart_quantity = $cart_item['quantity']+$cart_quantity;
+            if($cart_item['product_id'] == $cart_data['product_id']) {
+                Log::info($cart_item['product_id'].' - '. $cart_data['product_id']);
+                $cart_quantity = $cart_data['quantity']+$cart_quantity;
                 $product = EntryRecord::inSection('Content\Product')->find($cart_data['product_id']);
                 $product_quantity = $product->quantity;
                 $product_type = $product->content_group;
