@@ -28,5 +28,7 @@ fields:
     span: right
     source: Content\Icon
     commentAbove: The icon related to the social media service.
+    scope: false
+    column: false
         
 

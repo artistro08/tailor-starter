@@ -19,6 +19,7 @@ fields:
         type: richeditor
         span: left
         commentAbove: Content for this event.
+        column: false
     short_description:
         label: Short Description
         tab: Edit
@@ -26,6 +27,8 @@ fields:
         span: right
         size: huge
         commentAbove: A short description. Displayed in the Hero and Builder items.
+        column:
+            type: summary
     image:
         type: mediafinder
         tab: Edit
@@ -48,6 +51,7 @@ fields:
         span: right
         comment: The link to the location event. Leave empty for no link.
         validation: url
+        column: false
     location:
         type: text
         label: Location
@@ -102,6 +106,7 @@ fields:
         comment: How often do you want the event to repeat. (Weekly, Bi-Weekly, etc.)
         tab: Edit
         span: left
+        column: false
         options:
             daily: Daily
             weekly: Weekly

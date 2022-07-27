@@ -48,6 +48,8 @@ fields:
     span: full
     comment: Enable the address & customer name fields so you can edit the address.
     value: unchecked
+    column: false
+    scope: false
   order_section:
     type: section
     tab: Order Info
@@ -127,6 +129,8 @@ fields:
       action: show
       field: order_status
       condition: value[cancelled]
+    column: false
+    scope: false
   resend_email:
     tab: Status
     type: switch
@@ -139,6 +143,8 @@ fields:
       action: hide
       field: resend_email
       condition: checked
+    column: false
+    scope: false
   cancel_resend:
     tab: Status
     type: hint
@@ -150,19 +156,29 @@ fields:
       action: show
       field: resend_email
       condition: checked
+    column: false
+    scope: false
   sent_email_receipt:
     type: checkbox
     tab: Status
     hidden: true
+    column: false
+    scope: false
   sent_tracking_receipt:
     type: checkbox
     tab: Status
     hidden: true
+    column: false
+    scope: false
   sent_in_progress:
     type: checkbox
     tab: Status
     hidden: true
+    column: false
+    scope: false
   sent_cancelled:
     type: checkbox
     tab: Status
     hidden: true
+    column: false
+    scope: false

@@ -15,3 +15,6 @@ fields:
     label: SVG Code
     size: huge
     attributes: disabled
+    column:
+      type: partial
+      path: "#/artistro08-tailorstarter/partials/columns/_icon"
