@@ -8,6 +8,7 @@
         "expired_at": null,
         "content_group": null,
         "parent_id": null,
+        "type": "page_entry",
         "page": 1
     }
 ]
