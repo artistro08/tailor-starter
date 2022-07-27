@@ -35,6 +35,8 @@ fields:
       action: show
       field: type
       condition: value[url]
+    column: false
+    scope: false
   page:
     type: entries
     source: Content\Page
@@ -47,6 +49,8 @@ fields:
       action: show
       field: type
       condition: value[page_entry]
+    column: false
+    scope: false
   product:
     type: entries
     source: Content\Product
@@ -59,6 +63,8 @@ fields:
       action: show
       field: type
       condition: value[product_entry]
+    column: false
+    scope: false
   product_category:
     type: entries
     source: Content\Product\Category
@@ -71,6 +77,8 @@ fields:
       action: show
       field: type
       condition: value[product_category_entry]
+    column: false
+    scope: false
   event:
     type: entries
     source: Content\Event
@@ -83,9 +91,13 @@ fields:
       action: show
       field: type
       condition: value[event_entry]
+    column: false
+    scope: false
   external:
     label: External link
     type: switch
     default: unchecked
+    column: false
+    scope: false
 
 

@@ -15,12 +15,14 @@ fields:
       field: title
       type: exact
     span: left
+    column: false
   meta_keywords:
     label: Meta Keywords
     type: taglist
     tab: Manage
     commentAbove: Keywords used for SEO. Use a comma to separate the keywords
     span: right
+    column: false
   sharing_image:
     label: Sharing Image
     tab: Manage
@@ -29,6 +31,7 @@ fields:
     mode: image
     span: left
     maxItems: 1
+    column: false
   exclude_in_sitemap:
     label: Remove from Sitemap
     type: switch
@@ -38,6 +41,8 @@ fields:
     comment: Remove this item from the <a target="_blank" href="/sitemap.xml">sitemap.xml</a> file. Useful if you don't want search engines to index this page.
     commentHtml: true
     default: unchecked
+    column: false
+    scope: false
   meta_description:
     label: Meta Description
     tab: Manage
@@ -53,6 +58,8 @@ fields:
     type: checkboxlist
     span: right
     quickselect: true
+    column: false
+    scope: false
     options:
       noindex: [No Index, Disallow search engine robots to index this page.]
       nofollow: [No Follow, Disallow disallow search engines from crawling the links on this page.]
