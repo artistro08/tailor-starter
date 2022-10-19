@@ -43,3 +43,4 @@ v3.0.9: Fixed an issue where a person could still order an out of stock product 
 v3.0.11: Updated columns
 v3.0.12: Updated bootstrap icons to v1.9.1. Updated seeds
 v3.0.13: Updated seeds. fixed social menu icons.
+v3.0.14: Updated Bootstrap to version 5.2
