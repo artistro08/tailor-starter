@@ -3,20 +3,10 @@ handle: Content\Products
 type: mixin
 name: Products
 fields:
-  title:
-    label: Title
-    type: text
-    span: left
-    commentAbove: Title of this section. Used for organizational purposes.
-  style:
-    label: Style
-    type: dropdown
-    commentAbove: Style of this section.
-    span: right
-    options:
-      none: None
-      light: Light
-      dark: Dark
+  section_header:
+    type: mixin
+    label: Section Header
+    source: Content\SectionHeader
   show:
     type: dropdown
     span: left

@@ -1,8 +1,9 @@
 uuid: 2a9a76d0-010c-11ed-90b6-fc95f7401555
 handle: Content\Product
 type: structure
-name: Product
+name: Products
 drafts: true
+multisite: sync
 
 structure:
   maxDepth: 0
@@ -11,6 +12,9 @@ navigation:
   icon: icon-cube
   parent: Content\Page
   order: 8
+
+customMessages:
+  buttonCreate: New Product
 
 groups:
   simple:

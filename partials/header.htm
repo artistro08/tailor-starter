@@ -3,10 +3,17 @@ handle = "Content\MainMenu"
 
 [global settings]
 handle = "Content\Settings"
+
+[sitePicker]
 ==
+{% set availableSites = sitePicker.sites %}
+{% set locale = '' %}
+{% if availableSites|length > 1 %}
+    {% set locale = this.locale %}
+{% endif %}
 <nav class="navbar navbar-light navbar-expand-lg sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand order-1" href="{{ '/'|app }}">
+        <a class="navbar-brand order-1" href="{{ '/'|app ~ '/' ~ locale }}">
             {% if settings.logo|length %}
                 <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">
             {% else %}
@@ -28,7 +35,7 @@ handle = "Content\Settings"
                                 {% if item.type == "url" %}
                                     <a
                                             class="nav-link {{ item.children|length ? 'dropdown-toggle' : '' }}"
-                                            href="{{ item.url }}"
+                                            href="{{ item.url|length ? item.url : '#' }}"
                                             {{ item.external ? 'target="_blank" '}}
                                             {% if item.children|length %}
                                                 data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
@@ -37,41 +44,43 @@ handle = "Content\Settings"
                                         {{ item.title }}
                                     </a>
                                     {% if item.children %}
-                                        <div class="dropdown-menu">
+                                        <ul class="dropdown-menu">
                                             {% for child in item.children %}
-                                                {% if child.type == "url" %}
-                                                    <a
-                                                            class="dropdown-item"
-                                                            href="{{ child.url }}"
-                                                            {{ child.external ? 'target="_blank" '}}
-                                                    >
-                                                        {{ child.title }}
-                                                    </a>
-                                                {% endif %}
-                                                {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "event_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_category_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_list" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
-                                                {% endif %}
+                                                <li>
+                                                    {% if child.type == "url" %}
+                                                        <a
+                                                                class="dropdown-item"
+                                                                href="{{ child.url|length ? child.url : '#' }}"
+                                                                {{ child.external ? 'target="_blank" '}}
+                                                        >
+                                                            {{ child.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if child.type == "page_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' ~ locale : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "event_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_category_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_list" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                </li>
                                             {% endfor %}
-                                        </div>
+                                        </ul>
                                     {% endif %}
                                 {% endif %}
                                 {% if item.type == "page_entry" %}
                                     <a
-                                            class="nav-link {{ (section.slug == item.page.slug) and (section.id == item.page.id) ? 'active' }} {% if (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %}  {{ item.children|length ? 'dropdown-toggle' : '' }}"
+                                            class="nav-link {{ (section.slug == item.page.slug) and (section.id == item.page.id) ? 'active' }} {% if (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %}  {{ item.children|length ? 'dropdown-toggle' : '' }}"
                                             {{ item.external ? 'target="_blank" '}}
-                                            href="{{ (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) ? '/' : 'page'|page({ page: item.page.slug }) }}"
+                                            href="{{ (settings.homepage.id == item.page.id) and (settings.homepage.slug == item.page.slug) ? '/' ~ locale : 'page'|page({ page: item.page.slug }) }}"
                                             {% if item.children|length %}
                                                 data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                                             {% endif %}
@@ -79,34 +88,36 @@ handle = "Content\Settings"
                                         {{ item.title }}
                                     </a>
                                     {% if item.children %}
-                                        <div class="dropdown-menu">
+                                        <ul class="dropdown-menu">
                                             {% for child in item.children %}
-                                                {% if child.type == "url" %}
-                                                    <a
-                                                            class="dropdown-item"
-                                                            href="{{ child.url }}"
-                                                            {{ child.external ? 'target="_blank" '}}
-                                                    >
-                                                        {{ child.title }}
-                                                    </a>
-                                                {% endif %}
-                                                {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "event_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_category_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_list" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
-                                                {% endif %}
+                                                <li>
+                                                    {% if child.type == "url" %}
+                                                        <a
+                                                                class="dropdown-item"
+                                                                href="{{ child.url|length ? child.url : '#' }}"
+                                                                {{ child.external ? 'target="_blank" '}}
+                                                        >
+                                                            {{ child.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if child.type == "page_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' ~ locale : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "event_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_category_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_list" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                </li>
                                             {% endfor %}
-                                        </div>
+                                        </ul>
                                     {% endif %}
                                 {% endif %}
                                 {% if item.type == "event_entry" %}
@@ -121,34 +132,36 @@ handle = "Content\Settings"
                                         {{ item.title }}
                                     </a>
                                     {% if item.children %}
-                                        <div class="dropdown-menu">
+                                        <ul class="dropdown-menu">
                                             {% for child in item.children %}
-                                                {% if child.type == "url" %}
-                                                    <a
-                                                            class="dropdown-item"
-                                                            href="{{ child.url }}"
-                                                            {{ child.external ? 'target="_blank" '}}
-                                                    >
-                                                        {{ child.title }}
-                                                    </a>
-                                                {% endif %}
-                                                {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "event_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_category_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_list" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
-                                                {% endif %}
+                                                <li>
+                                                    {% if child.type == "url" %}
+                                                        <a
+                                                                class="dropdown-item"
+                                                                href="{{ child.url|length ? child.url : '#' }}"
+                                                                {{ child.external ? 'target="_blank" '}}
+                                                        >
+                                                            {{ child.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if child.type == "page_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' ~ locale : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "event_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_category_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_list" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                </li>
                                             {% endfor %}
-                                        </div>
+                                        </ul>
                                     {% endif %}
                                 {% endif %}
                                 {% if item.type == "product_entry" %}
@@ -163,34 +176,36 @@ handle = "Content\Settings"
                                         {{ item.title }}
                                     </a>
                                     {% if item.children %}
-                                        <div class="dropdown-menu">
+                                        <ul class="dropdown-menu">
                                             {% for child in item.children %}
-                                                {% if child.type == "url" %}
-                                                    <a
-                                                            class="dropdown-item"
-                                                            href="{{ child.url }}"
-                                                            {{ child.external ? 'target="_blank" '}}
-                                                    >
-                                                        {{ child.title }}
-                                                    </a>
-                                                {% endif %}
-                                                {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "event_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_category_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_list" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
-                                                {% endif %}
+                                                <li>
+                                                    {% if child.type == "url" %}
+                                                        <a
+                                                                class="dropdown-item"
+                                                                href="{{ child.url|length ? child.url : '#' }}"
+                                                                {{ child.external ? 'target="_blank" '}}
+                                                        >
+                                                            {{ child.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if child.type == "page_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' ~ locale : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "event_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_category_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_list" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                </li>
                                             {% endfor %}
-                                        </div>
+                                        </ul>
                                     {% endif %}
                                 {% endif %}
                                 {% if item.type == "product_category_entry" %}
@@ -205,34 +220,36 @@ handle = "Content\Settings"
                                         {{ item.title }}
                                     </a>
                                     {% if item.children %}
-                                        <div class="dropdown-menu">
+                                        <ul class="dropdown-menu">
                                             {% for child in item.children %}
-                                                {% if child.type == "url" %}
-                                                    <a
-                                                            class="dropdown-item"
-                                                            href="{{ child.url }}"
-                                                            {{ child.external ? 'target="_blank" '}}
-                                                    >
-                                                        {{ child.title }}
-                                                    </a>
-                                                {% endif %}
-                                                {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "event_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_category_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_list" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
-                                                {% endif %}
+                                                <li>
+                                                    {% if child.type == "url" %}
+                                                        <a
+                                                                class="dropdown-item"
+                                                                href="{{ child.url|length ? child.url : '#' }}"
+                                                                {{ child.external ? 'target="_blank" '}}
+                                                        >
+                                                            {{ child.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if child.type == "page_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' ~ locale : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "event_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_category_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_list" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                </li>
                                             {% endfor %}
-                                        </div>
+                                        </ul>
                                     {% endif %}
                                 {% endif %}
                                 {% if item.type == "product_list" %}
@@ -247,34 +264,36 @@ handle = "Content\Settings"
                                         {{ item.title }}
                                     </a>
                                     {% if item.children %}
-                                        <div class="dropdown-menu">
+                                        <ul class="dropdown-menu">
                                             {% for child in item.children %}
-                                                {% if child.type == "url" %}
-                                                    <a
-                                                            class="dropdown-item"
-                                                            href="{{ child.url }}"
-                                                            {{ child.external ? 'target="_blank" '}}
-                                                    >
-                                                        {{ child.title }}
-                                                    </a>
-                                                {% endif %}
-                                                {% if child.type == "page_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "event_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_category_entry" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
-                                                {% endif %}
-                                                {% if child.type == "product_list" %}
-                                                    <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
-                                                {% endif %}
+                                                <li>
+                                                    {% if child.type == "url" %}
+                                                        <a
+                                                                class="dropdown-item"
+                                                                href="{{ child.url|length ? child.url : '#' }}"
+                                                                {{ child.external ? 'target="_blank" '}}
+                                                        >
+                                                            {{ child.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                    {% if child.type == "page_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.page.slug) and (section.id == child.page.id) ? 'active' }}{% if (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) %}{{ '/' ~ locale == this.page.url ? 'active' }}{% endif %} "  href="{{ (settings.homepage.id == child.page.id) and (settings.homepage.slug == child.page.slug) ? '/' ~ locale : 'page'|page({ page: child.page.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "event_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.event.slug) and (section.id == child.event.id)  ? 'active' }}"  href="{{ 'event'|page({ event: child.event.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product.slug) and (section.id == child.product.id)  ? 'active' }}"  href="{{ 'product'|page({ product: child.product.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_category_entry" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ (section.slug == child.product_category.slug) and (section.id == child.product_category.id) ? 'active' }}"  href="{{ 'product_category'|page({ product_category: child.product_category.slug }) }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                    {% if child.type == "product_list" %}
+                                                        <a {{ child.external ? 'target="_blank" '}} class="dropdown-item {{ 'products'|page == ''|page ? 'active' }}"  href="{{ 'products'|page }}">{{ child.title }}</a>
+                                                    {% endif %}
+                                                </li>
                                             {% endfor %}
-                                        </div>
+                                        </ul>
                                     {% endif %}
                                 {% endif %}
                             </li>
