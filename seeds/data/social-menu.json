@@ -8,7 +8,7 @@
         "expired_at": null,
         "content_group": null,
         "parent_id": null,
-        "icon": 770,
+        "icon": 826,
         "url": "https://facebook.com"
     },
     {
@@ -20,7 +20,7 @@
         "expired_at": null,
         "content_group": null,
         "parent_id": null,
-        "icon": 1708,
+        "icon": 1849,
         "url": "https://twitter.com"
     },
     {
@@ -32,7 +32,7 @@
         "expired_at": null,
         "content_group": null,
         "parent_id": null,
-        "icon": 1110,
+        "icon": 1192,
         "url": "https://instagram.com"
     },
     {
@@ -44,7 +44,7 @@
         "expired_at": null,
         "content_group": null,
         "parent_id": null,
-        "icon": 1170,
+        "icon": 1251,
         "url": "https://facebook.com"
     }
 ]

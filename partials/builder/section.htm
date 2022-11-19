@@ -16,6 +16,9 @@ handle = "Content\Settings"
                     {% if column.content_group == "content" %}
                         {{ column.content|raw }}
                         {% if column.buttons|length %}
+                            {% partial 'builder/buttons' column=column %}
+                        {% endif %}
+                        {% if column.buttons|length %}
                             <div class="d-flex justify-content-{{ column.buttons_position }} my-2 flex-wrap">
                                 {% for button in column.buttons %}
                                     {% if button.item_type == "url" %}
@@ -79,64 +82,7 @@ handle = "Content\Settings"
                     {# Button Column Group #}
                     {% if column.content_group == "buttons" %}
                         {% if column.buttons|length %}
-                            <div class="d-flex justify-content-{{ column.buttons_position }} my-2 flex-wrap">
-                                {% for button in column.buttons %}
-                                    {% if button.item_type == "url" %}
-                                        <a
-                                                href="{{ button.url|raw }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
-                                                {{ button.external == true ? 'target="_blank"' }}
-                                        >
-                                            {{ button.title }}
-                                        </a>
-                                    {% endif %}
-                                    {% if button.item_type == "page_entry" %}
-                                        <a
-                                                href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
-                                                {{ button.external == true ? 'target="_blank"' }}
-                                        >
-                                            {{ button.title }}
-                                        </a>
-                                    {% endif %}
-                                    {% if button.item_type == "product_entry" %}
-                                        <a
-                                                href="{{ 'product'|page({ product: button.product.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
-                                                {{ button.external == true ? 'target="_blank"' }}
-                                        >
-                                            {{ button.title }}
-                                        </a>
-                                    {% endif %}
-                                    {% if button.item_type == "product_category_entry" %}
-                                        <a
-                                                href="{{ 'product_category'|page({ product_category: button.product_category.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
-                                                {{ button.external == true ? 'target="_blank"' }}
-                                        >
-                                            {{ button.title }}
-                                        </a>
-                                    {% endif %}
-                                    {% if button.item_type == "product_list" %}
-                                        <a
-                                                href="{{ 'products'|page }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
-                                                {{ button.external == true ? 'target="_blank"' }}
-                                        >
-                                            {{ button.title }}
-                                        </a>
-                                    {% endif %}
-                                    {% if button.item_type == "event_entry" %}
-                                        <a
-                                                href="{{ 'event'|page({ event: button.event.slug }) }}"
-                                                class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }} mb-2"
-                                                {{ button.external == true ? 'target="_blank"' }}
-                                        >
-                                            {{ button.title }}
-                                        </a>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+                            {% partial 'builder/buttons' column=column %}
                         {% endif %}
                     {% endif %}
                     {# Image Column Group #}

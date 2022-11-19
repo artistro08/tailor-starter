@@ -2,10 +2,11 @@ uuid: 533c314d-6e80-430c-b278-272cbc6632cf
 handle: Content\Settings
 type: global
 name: Settings
+multisite: sync
+description: Adjust the default settings of the site.
 
 
 navigation:
-  parent: Content\Page
   icon: icon-cog
   order: 24
 
@@ -19,7 +20,6 @@ fields:
     span: left
     comment: The default homepage
     displayMode: recordfinder
-    value: 1
   website_name:
     label: Website Name
     tab: Settings

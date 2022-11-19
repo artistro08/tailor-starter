@@ -1,0 +1,14 @@
+uuid: 1a55cbd0-0840-11ed-900b-0e02148bcfbe
+handle: Content\FormColumn
+type: mixin
+name: Form
+fields:
+  column_header:
+    type: mixin
+    label: Column Header
+    source: Content\ColumnHeader
+  hr_1:
+    type: ruler
+  column_options:
+    type: mixin
+    source: Content\ColumnOptions

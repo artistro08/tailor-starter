@@ -3,6 +3,7 @@ handle: Content\SocialMenu
 type: structure
 name: Social Menu
 drafts: false
+multisite: sync
 
 
 navigation:
@@ -12,6 +13,9 @@ navigation:
 
 structure:
   maxDepth: 1
+
+customMessages:
+  buttonCreate: New Menu Item
 
 fields:
   url:

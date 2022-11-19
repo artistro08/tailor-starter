@@ -3,6 +3,7 @@ handle: Content\Page
 type: stream
 name: Pages
 drafts: true
+multisite: sync
 
 primaryNavigation:
   label: Content
@@ -13,6 +14,9 @@ navigation:
   icon: icon-file
   parent: Content\Page
   order: 1
+  
+customMessages:
+  buttonCreate: New Page
 
 groups:
   simple:

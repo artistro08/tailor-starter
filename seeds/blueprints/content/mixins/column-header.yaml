@@ -1,0 +1,10 @@
+uuid: 081bb446-6813-11ed-86f4-400fe7756560
+handle: Content\ColumnHeader
+type: mixin
+name: Column Header
+
+fields:
+  title:
+    label: Title
+    commentAbove: Title of this column. Used for organizational purposes.
+    type: text

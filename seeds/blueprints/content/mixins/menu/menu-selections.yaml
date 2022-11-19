@@ -1,0 +1,94 @@
+uuid: 9802e96c-6804-11ed-ac29-da4e53baa622
+handle: Content\MenuSelections
+type: mixin
+name: Menu Selections
+
+fields:
+  type:
+    label: Type
+    type: dropdown
+    span: left
+    default: value[page_entry]
+    commentAbove: The type of item you want to add to the menu.
+    options:
+      page_entry: Page
+      product_entry: Product
+      product_list: Product List
+      product_category_entry: Product Category
+      event_entry: Event
+      url: URL
+  url:
+    type: text
+    label: URL
+    span: right
+    validation: url
+    commentAbove: The url that you want to point to. Defaults to '#' if empty. Leave empty if you this item has children.
+    placeholder: '#'
+    trigger:
+      action: show
+      field: type
+      condition: value[url]
+    column: false
+    scope: false
+  page:
+    type: entries
+    source: Content\Page
+    label: Page
+    maxItems: 1
+    commentAbove: Choose a Page
+    displayMode: recordfinder
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[page_entry]
+    column: false
+    scope: false
+  product:
+    type: entries
+    source: Content\Product
+    label: Product
+    maxItems: 1
+    commentAbove: Choose a Product
+    displayMode: recordfinder
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[product_entry]
+    column: false
+    scope: false
+  product_category:
+    type: entries
+    source: Content\Product\Category
+    label: Product Category
+    maxItems: 1
+    commentAbove: Choose a Product Category
+    displayMode: recordfinder
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[product_category_entry]
+    column: false
+    scope: false
+  event:
+    type: entries
+    source: Content\Event
+    label: Event
+    maxItems: 1
+    commentAbove: Choose an Event
+    displayMode: recordfinder
+    span: right
+    trigger:
+      action: show
+      field: type
+      condition: value[event_entry]
+    column: false
+    scope: false
+  external:
+    label: External link
+    type: switch
+    default: unchecked
+    column: false
+    scope: false

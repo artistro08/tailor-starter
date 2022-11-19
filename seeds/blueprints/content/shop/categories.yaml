@@ -1,14 +1,18 @@
 uuid: c59d8718-0115-11ed-98c7-806b464850f0
 handle: Content\Product\Category
 type: structure
-name: Product Category
+name: Product Categories
 drafts: false
+multisite: sync
 
 navigation:
   icon: icon-th
   parent: Content\Page
   order: 8
 
+customMessages:
+  buttonCreate: New Category
+  
 fields:
   image:
     tab: Edit

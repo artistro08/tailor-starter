@@ -3,6 +3,7 @@ handle: Content\Icon
 type: stream
 name: Icons
 drafts: false
+multisite: sync
 
 navigation:
   icon: icon-bookmark
