@@ -3,6 +3,7 @@ handle: Content\Event
 type: structure
 name: Event
 drafts: true
+multisite: sync
 
 structure:
     maxDepth: 0

@@ -3,6 +3,7 @@ handle: Content\SecondaryMenu
 type: structure
 name: Secondary Menu
 drafts: false
+multisite: sync
 
 
 navigation:

@@ -27,7 +27,7 @@ function onInit() {
     {% do abort('404') %}
 {% else %}
     {% if (settings.homepage.id == page.id) and (settings.homepage.slug == page.slug) %}
-        {% do redirect('/', 301) %}
+        {% do redirect(this.locale ~ '/', 301) %}
     {% else %}
         {% if page.entry_type == 'simple' %}
             <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">

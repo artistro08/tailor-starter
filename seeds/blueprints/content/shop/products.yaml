@@ -3,6 +3,7 @@ handle: Content\Product
 type: structure
 name: Product
 drafts: true
+multisite: sync
 
 structure:
   maxDepth: 0

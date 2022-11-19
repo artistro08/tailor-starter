@@ -3,6 +3,7 @@ handle: Content\Product\Category
 type: structure
 name: Product Category
 drafts: false
+multisite: sync
 
 navigation:
   icon: icon-th

@@ -3,6 +3,7 @@ handle: Content\MainMenu
 type: structure
 name: Main Menu
 drafts: false
+multisite: sync
 
 navigation:
   icon: icon-list

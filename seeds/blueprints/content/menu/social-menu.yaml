@@ -3,6 +3,7 @@ handle: Content\SocialMenu
 type: structure
 name: Social Menu
 drafts: false
+multisite: sync
 
 
 navigation:
