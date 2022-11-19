@@ -1,7 +1,7 @@
 uuid: 01d7c870-0144-11ed-b008-4dca43b459ab
 handle: Content\Product\Properties
 type: structure
-name: Product Property
+name: Product Properties
 multisite: sync
 
 navigation:

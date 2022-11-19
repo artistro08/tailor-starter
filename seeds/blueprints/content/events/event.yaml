@@ -1,7 +1,7 @@
 uuid: 817ac186-fc5d-11ec-8601-6e37945c2034
 handle: Content\Event
 type: structure
-name: Event
+name: EventS
 drafts: true
 multisite: sync
 
