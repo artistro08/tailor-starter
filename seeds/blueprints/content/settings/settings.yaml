@@ -40,10 +40,20 @@ fields:
     tab: Settings
     maxItems: 1
     span: right
+  enable_shop:
+    type: switch
+    comment: Enable the shop on the site
+    label: Enable Shop
+    default: false
+    tab: Settings
   section:
     type: section
     label: Stripe Keys
     tab: Stripe
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   stripe_public_key:
     label: Stripe Public Key
     tab: Stripe
@@ -52,6 +62,10 @@ fields:
     validation:
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   stripe_secret_key:
     label: Stripe Secret Key
     tab: Stripe
@@ -60,6 +74,10 @@ fields:
     validation:
       - required_with:stripe_public_key
       - required_with:stripe_webhook_secret_key
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   stripe_webhook_secret_key:
     label: Stripe Webhook Secret Key
     tab: Stripe
@@ -70,6 +88,10 @@ fields:
     validation:
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   stripe_checkout_success_page:
     label: Stripe Checkout Success Page
     tab: Stripe
@@ -83,6 +105,10 @@ fields:
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   available_countries:
     label: Countries to ship to
     commentAbove: A list of country codes you would like to ship to. (Ex. US for United States, CA for Canada, etc.) <a href="https://countrycode.org/" target="_blank">Find a country code</a>
@@ -340,6 +366,10 @@ fields:
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   shipping_methods:
     label: Shipping Methods
     tab: Shipping
@@ -378,6 +408,10 @@ fields:
           span: right
           validation:
             - integer
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   notification_email:
     type: text
     label: Notification Email
@@ -389,6 +423,10 @@ fields:
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   notification_email_recipient_name:
     type: text
     label: Recipient Name
@@ -397,3 +435,7 @@ fields:
     span: right
     validation:
       - required_with:notification_email
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
