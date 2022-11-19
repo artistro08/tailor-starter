@@ -11,6 +11,9 @@ navigation:
     icon: icon-calendar
     parent: Content\Page
     order: 12
+    
+customMessages:
+    buttonCreate: New Event
 
 fields:
     content:

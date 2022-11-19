@@ -13,6 +13,9 @@ navigation:
 structure:
   maxDepth: 1
 
+customMessages:
+  buttonCreate: New Menu Item
+
 fields:
   url:
     type: Text
