@@ -9,6 +9,9 @@ navigation:
   parent: Content\Page
   order: 12
 
+customMessages:
+  buttonCreate: New Order
+
 fields:
   shipping_section:
     tab: Order Info

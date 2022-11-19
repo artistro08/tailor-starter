@@ -10,6 +10,9 @@ navigation:
   parent: Content\Page
   order: 8
 
+customMessages:
+  buttonCreate: New Category
+  
 fields:
   image:
     tab: Edit

@@ -13,6 +13,9 @@ navigation:
   parent: Content\Page
   order: 8
 
+customMessages:
+  buttonCreate: New Product
+
 groups:
   simple:
     name: Simple

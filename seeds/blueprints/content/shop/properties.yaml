@@ -12,6 +12,9 @@ navigation:
 structure:
   maxDepth: 1
 
+customMessages:
+  buttonCreate: New Property
+
 groups:
   dropdown:
     name: Dropdown
