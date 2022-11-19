@@ -50,10 +50,12 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - Shop with Stripe Support (See [Shop](#events))
 - Icons with Bootstrap Icons (See [Icons](#icons))
 - Automatic Sitemap generation for all front facing pages created by Tailor.
+- Multisite Support out of the box.
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
 - No default content is generated besides the Home page. This is intentional. I wanted to use this to quickly create and build content without having to delete anything. 
+- Multisite is supported out of the box. Whenever you add or delete a site, the theme will automatically generate the appropriate urls. Just make sure your `APP_URL` is set, and you're accessing it from that url.  
 
 ### Adding Builder Items (Extending)
 Adding your own builder items is pretty simple. Follow the steps below to add them.

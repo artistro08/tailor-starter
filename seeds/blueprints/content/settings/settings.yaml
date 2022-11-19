@@ -20,7 +20,6 @@ fields:
     span: left
     comment: The default homepage
     displayMode: recordfinder
-    value: 1
   website_name:
     label: Website Name
     tab: Settings

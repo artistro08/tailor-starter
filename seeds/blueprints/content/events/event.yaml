@@ -23,7 +23,7 @@ fields:
         type: richeditor
         span: left
         commentAbove: Content for this event.
-        column: false
+        column: invisible
     short_description:
         label: Short Description
         tab: Edit
@@ -49,22 +49,22 @@ fields:
         label: Event Link
         tab: Edit
         span: left
-        comment: The link to the event. Leave empty for no link
+        commentAbove: The link to the event. Leave empty for no link
         validation: url
     location_url:
         type: text
         label: Location Link
         tab: Edit
         span: right
-        comment: The link to the location event. Leave empty for no link.
+        commentAbove: The link to the location event. Leave empty for no link.
         validation: url
-        column: false
+        column: invisible
     location:
         type: text
         label: Location
         tab: Edit
         span: left
-        comment: The address or area where the event is held.
+        commentAbove: The address or area where the event is held.
     is_recurring:
         label: Recurring Event
         tab: Edit
@@ -76,7 +76,7 @@ fields:
         label: Event Date
         tab: Edit
         span: left
-        comment: The start time of the event
+        commentAbove: The start time of the event
         type: datepicker
         minDate: now
         mode: datetime
@@ -85,7 +85,7 @@ fields:
         label: Event End Date
         tab: Edit
         span: right
-        comment: The end of the event.
+        commentAbove: The end of the event.
         type: datepicker
         minDate: now
         mode: datetime
@@ -102,7 +102,7 @@ fields:
         label: Recurring Events
         tab: Edit
         commentHtml: true
-        comment: This section allows you to create recurring events easily. If you're using the "Custom" type of recurrence (picking your own dates), <strong>the "Repeat Length" field will not be used.</strong>
+        commentAbove: This section allows you to create recurring events easily. If you're using the "Custom" type of recurrence (picking your own dates), <strong>the "Repeat Length" field will not be used.</strong>
         trigger:
             action: show
             field: is_recurring
@@ -110,10 +110,10 @@ fields:
     recurrence:
         type: dropdown
         label: Recurrence
-        comment: How often do you want the event to repeat. (Weekly, Bi-Weekly, etc.)
+        commentAbove: How often do you want the event to repeat. (Weekly, Bi-Weekly, etc.)
         tab: Edit
         span: left
-        column: false
+        column: invisible
         options:
             daily: Daily
             weekly: Weekly
@@ -129,7 +129,7 @@ fields:
     recurrence_length:
         type: number
         label: Repeat Length
-        comment: How many times you would like the event to repeat. This is based on the recurrence.
+        commentAbove: How many times you would like the event to repeat. This is based on the recurrence.
         tab: Edit
         span: right
         trigger:
