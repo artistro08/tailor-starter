@@ -29,6 +29,9 @@ fields:
         commentAbove: A short description. Displayed in the Hero and Builder items.
         column:
             type: summary
+    hr_1:
+        type: ruler
+        tab: Edit
     image:
         type: mediafinder
         tab: Edit
