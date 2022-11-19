@@ -3,11 +3,10 @@ handle: Content\EventsColumn
 type: mixin
 name: Events
 fields:
-  title:
-    label: Title
-    type: text
-    span: full
-    commentAbove: Title of this column. Used for organizational purposes.
+  column_header:
+    type: mixin
+    label: Column Header
+    source: Content\ColumnHeader
   show:
     type: dropdown
     span: full
@@ -16,3 +15,8 @@ fields:
     options:
       upcoming: Upcoming Events
       all: All Events
+  hr_1:
+    type: ruler
+  column_options:
+    type: mixin
+    source: Content\ColumnOptions

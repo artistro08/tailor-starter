@@ -3,17 +3,7 @@ handle: Content\Form
 type: mixin
 name: Form
 fields:
-  title:
-    label: Title
-    type: text
-    span: left
-    commentAbove: Title of this section. Title of the section. Used for organizational purposes.
-  style:
-    label: Style
-    type: dropdown
-    span: right
-    commentAbove: Style of the background
-    options:
-      none: None
-      light: Light
-      dark: Dark
+  section_header:
+    type: mixin
+    label: Section Header
+    source: Content\SectionHeader

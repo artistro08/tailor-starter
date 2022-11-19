@@ -3,10 +3,12 @@ handle: Content\FormColumn
 type: mixin
 name: Form
 fields:
-  title:
-    label: Title
-    type: text
-    span: full
-    commentAbove: Title of this column. Used for organizational purposes.
+  column_header:
+    type: mixin
+    label: Column Header
+    source: Content\ColumnHeader
   hr_1:
     type: ruler
+  column_options:
+    type: mixin
+    source: Content\ColumnOptions

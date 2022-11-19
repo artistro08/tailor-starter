@@ -1,0 +1,20 @@
+uuid: cbe97761-6810-11ed-a1b7-7575a4dff238
+handle: Content\SectionHeader
+type: mixin
+name: Section Header
+
+fields:
+  title:
+    label: Title
+    type: text
+    span: left
+    commentAbove: Title of this section. Title of the section. Used for organizational purposes.
+  style:
+    label: Style
+    type: dropdown
+    span: right
+    commentAbove: Style of the background
+    options:
+      none: None
+      light: Light
+      dark: Dark

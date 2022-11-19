@@ -93,18 +93,17 @@ fields:
             commentAbove: Create content for this section. Each content block uses it's own column. Max of 4 per section.
             span: full
             displayMode: builder
-            maxItems: 4
             groups:
               content:
-                name: Text With Buttons
+                name: Content
                 icon: icon-align-left
-                description: Add text and buttons to your section.
+                description: Add content to your section. Has buttons as well.
                 titleFrom: title
                 fields:
-                  title:
-                    label: Title
-                    commentAbove: Title of this column. Used for organizational purposes.
-                    type: text
+                  column_header:
+                    type: mixin
+                    label: Column Header
+                    source: Content\ColumnHeader
                   content:
                     label: Content
                     type: richeditor
@@ -126,10 +125,10 @@ fields:
                 titleFrom: title
                 description: Add buttons to your section.
                 fields:
-                  title:
-                    label: Title
-                    type: text
-                    commentAbove: Title of this column. Used for organizational purposes.
+                  column_header:
+                    type: mixin
+                    label: Column Header
+                    source: Content\ColumnHeader
                   buttons:
                     type: mixin
                     source: Content\Buttons
@@ -146,11 +145,10 @@ fields:
                 description: Add an image to your section.
                 titleFrom: title
                 fields:
-                  title:
-                    label: Title
-                    type: text
-                    commentAbove: Title of this column. Used for organizational purposes.
-                    span: full
+                  column_header:
+                    type: mixin
+                    label: Column Header
+                    source: Content\ColumnHeader
                   hr_1:
                     type: ruler
                   image:
@@ -179,11 +177,6 @@ fields:
                   events:
                     type: mixin
                     source: Content\EventsColumn
-                  hr_1:
-                    type: ruler
-                  column_options:
-                    type: mixin
-                    source: Content\ColumnOptions
               products:
                 name: Products
                 icon: icon-cube
