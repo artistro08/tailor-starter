@@ -22,7 +22,7 @@ fields:
     label: URL
     span: right
     validation: url
-    commentAbove: The url that you want to point to. Defaults to '#' if empty
+    commentAbove: The url that you want to point to. Defaults to '#' if empty. Leave empty if you this item has children.
     placeholder: '#'
     trigger:
       action: show
