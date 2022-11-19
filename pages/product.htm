@@ -11,273 +11,279 @@ fullSlug = 0
 [global settings]
 handle = "Content\Settings"
 ==
-{% set product = section %}
 
-{% if product is empty %}
-    {% do abort('404') %}
-{% else %}
-    {% set preview_url = ''|page %}
-    {% set keys_set = true %}
-    {% if settings.stripe_public_key is empty or settings.stripe_public_key is empty or settings.stripe_webhook_secret_key is empty %}
-        {% set keys_set = false %}
-        <section>
+{% if settings.enable_shop == true %}
+    {% set product = section %}
+
+    {% if product is empty %}
+        {% do abort('404') %}
+    {% else %}
+        {% set preview_url = ''|page %}
+        {% set keys_set = true %}
+        {% if settings.stripe_public_key is empty or settings.stripe_public_key is empty or settings.stripe_webhook_secret_key is empty %}
+            {% set keys_set = false %}
+            <section>
+                <div class="container">
+                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-exclamation-square-fill me-2" viewBox="0 0 16 16">
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                        <div>
+                            Your Stripe Keys are not set! <strong>The shop won't work unless you set them.</strong> Set them in the backend under <pre class="mb-0">Content > Settings > Stripe</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        <header class="product d-flex align-items-center py-4">
             <div class="container">
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-exclamation-square-fill me-2" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                    </svg>
-                    <div>
-                        Your Stripe Keys are not set! <strong>The shop won't work unless you set them.</strong> Set them in the backend under <pre class="mb-0">Content > Settings > Stripe</pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-    {% endif %}
-    <header class="product d-flex align-items-center py-4">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-lg-6">
-                    {% for image in product.images|slice(0,1) %}
-                        <img
-                                class="img-fluid w-100 mb-4"
-                                src="{{ image.path|resize(700, 700, {mode: "crop"}) }}"
-                                alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
-                        >
-                    {% endfor %}
-                    <div class="row row-cols-5">
-                        {% for image in product.images %}
-                            {% if not loop.first %}
-                                <div class="col">
-                                    <img
-                                            class="img-fluid w-100 mb-4"
-                                            src="{{ image.path|resize(200, 200, {mode: "crop"}) }}"
-                                            alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
-                                    >
-                                </div>
-                            {% endif %}
+                <div class="row align-items-center">
+                    <div class="col-12 col-lg-6">
+                        {% for image in product.images|slice(0,1) %}
+                            <img
+                                    class="img-fluid w-100 mb-4"
+                                    src="{{ image.path|resize(700, 700, {mode: "crop"}) }}"
+                                    alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
+                            >
                         {% endfor %}
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <h1>{{ product.title }}</h1>
-                    {% if product.allow_purchases %}
-                        <h2>{% partial 'shop/price' product=product %}</h2>
-                    {% endif %}
-                    <p>{{ product.short_description|nl2br }}</p>
-                    {% if product.allow_purchases %}
-                        <form id="cart-form">
-                            {# Insert the product details into the form #}
-                            <input type="hidden" name="name" value="{{ product.title }}">
-                            <input type="hidden" name="price" value="{{ product.price }}">
-                            <input type="hidden" name="description" value="{{ product.short_description }}">
-                            <input type="hidden" name="id" value="{{ product.id }}">
-                            {% for image in product.images|slice(0,1)  %}
-                                <input type="hidden" name="image" value="{{ image.path|resize(700, 700, {mode: 'crop'}) }}">
+                        <div class="row row-cols-5">
+                            {% for image in product.images %}
+                                {% if not loop.first %}
+                                    <div class="col">
+                                        <img
+                                                class="img-fluid w-100 mb-4"
+                                                src="{{ image.path|resize(200, 200, {mode: "crop"}) }}"
+                                                alt="{{ image.description|length ? image.title ~ ' - ' ~ image.description : image.title }}"
+                                        >
+                                    </div>
+                                {% endif %}
                             {% endfor %}
-                            
-                            {# Check if Variant Options exist #}
-                            {% if product.content_group == "variant" %}
-                                {# if so, loop over the blocks in the variants section #}
-                                {% for variant in product.variants %}
-                                    {# Check if variant is a property set #}
-                                    {% if variant.content_group == "property_set" %}
-                                        {# if variant is dropdown, init select box, then loop over options in the property set #}
-                                        {% if variant.property.content_group == "dropdown" %}
-                                            {% if variant.property.items.where('is_enabled', true)|length %}
-                                                <label for="{{ variant.property.slug }}">{{ variant.property.title }}:</label>
-                                                <select required class="form-select mb-4" name="{{ variant.property.title|lower }}" id="{{ variant.property.slug }}" onchange="onChange()">
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <h1>{{ product.title }}</h1>
+                        {% if product.allow_purchases %}
+                            <h2>{% partial 'shop/price' product=product %}</h2>
+                        {% endif %}
+                        <p>{{ product.short_description|nl2br }}</p>
+                        {% if product.allow_purchases %}
+                            <form id="cart-form">
+                                {# Insert the product details into the form #}
+                                <input type="hidden" name="name" value="{{ product.title }}">
+                                <input type="hidden" name="price" value="{{ product.price }}">
+                                <input type="hidden" name="description" value="{{ product.short_description }}">
+                                <input type="hidden" name="id" value="{{ product.id }}">
+                                {% for image in product.images|slice(0,1)  %}
+                                    <input type="hidden" name="image" value="{{ image.path|resize(700, 700, {mode: 'crop'}) }}">
+                                {% endfor %}
+                                
+                                {# Check if Variant Options exist #}
+                                {% if product.content_group == "variant" %}
+                                    {# if so, loop over the blocks in the variants section #}
+                                    {% for variant in product.variants %}
+                                        {# Check if variant is a property set #}
+                                        {% if variant.content_group == "property_set" %}
+                                            {# if variant is dropdown, init select box, then loop over options in the property set #}
+                                            {% if variant.property.content_group == "dropdown" %}
+                                                {% if variant.property.items.where('is_enabled', true)|length %}
+                                                    <label for="{{ variant.property.slug }}">{{ variant.property.title }}:</label>
+                                                    <select required class="form-select mb-4" name="{{ variant.property.title|lower }}" id="{{ variant.property.slug }}" onchange="onChange()">
+                                                        <option value="" selected>Select an option...</option>
+                                                        {% for option in variant.property.items.where('is_enabled', true) %}
+                                                            <option value="{{ variant.property.title }}: {{ option.title }}">{{ option.title }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                {% endif %}
+                                            {% endif %}
+                                            {# if variant is color, init radios, then loop over options in the property set #}
+                                            {% if variant.property.content_group == "colors" %}
+                                                {% if variant.property.color.where('is_enabled', true)|length %}
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <label class="me-2">{{ variant.property.title }}:</label>
+                                                        {% for color in variant.property.color.where('is_enabled', true) %}
+                                                            <input
+                                                                    required
+                                                                    type="radio"
+                                                                    class="btn-check"
+                                                                    value="{{ variant.property.title }}: {{ color.title }}"
+                                                                    name="{{ variant.property.slug }}"
+                                                                    id="{{ color.title|lower }}"
+                                                                    autocomplete="off"
+                                                                    onchange="onChange()"
+                                                            >
+                                                            <label class="btn btn-outline-primary {{ not loop.last ? 'me-2' }}" for="{{ color.title|lower }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="{{ color.color }}" class="bi bi-square-fill" viewBox="0 0 16 16">
+                                                                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                                                                </svg>
+                                                                &nbsp;{{ color.title }}
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            
+                                        {% endif %}
+                                        
+                                        {# Check if variant is a custom property #}
+                                        {% set purchasable = true %}
+                                        {% if variant.content_group == "custom_properties" %}
+                                            {# if variant is dropdown, init select box, then loop over options in the property set #}
+                                            {% if variant.property_type == "dropdown" %}
+                                                <label for="{{ variant.title|lower }}">{{ variant.title }}:</label>
+                                                <select
+                                                        required
+                                                        class="form-select mb-4"
+                                                        name="{{ variant.title|lower }}"
+                                                        id="{{ variant.title|lower }}"
+                                                        onchange="onChange()"
+                                                >
                                                     <option value="" selected>Select an option...</option>
-                                                    {% for option in variant.property.items.where('is_enabled', true) %}
-                                                        <option value="{{ variant.property.title }}: {{ option.title }}">{{ option.title }}</option>
+                                                    {% for option in variant.dropdown_items %}
+                                                        <option
+                                                                value='{"option_title":"{{ variant.title }}: {{ option.title }}","price":"{{ option.price }}"}'
+                                                                {{ option.is_enabled ? '' : 'disabled' }}
+                                                        >
+                                                            {{ option.title }}{{ option.is_enabled ? '' : ' - Out of Stock' }}
+                                                        </option>
                                                     {% endfor %}
                                                 </select>
                                             {% endif %}
-                                        {% endif %}
-                                        {# if variant is color, init radios, then loop over options in the property set #}
-                                        {% if variant.property.content_group == "colors" %}
-                                            {% if variant.property.color.where('is_enabled', true)|length %}
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <label class="me-2">{{ variant.property.title }}:</label>
-                                                    {% for color in variant.property.color.where('is_enabled', true) %}
-                                                        <input
-                                                                required
-                                                                type="radio"
-                                                                class="btn-check"
-                                                                value="{{ variant.property.title }}: {{ color.title }}"
-                                                                name="{{ variant.property.slug }}"
-                                                                id="{{ color.title|lower }}"
-                                                                autocomplete="off"
-                                                                onchange="onChange()"
-                                                        >
-                                                        <label class="btn btn-outline-primary {{ not loop.last ? 'me-2' }}" for="{{ color.title|lower }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="{{ color.color }}" class="bi bi-square-fill" viewBox="0 0 16 16">
-                                                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
-                                                            </svg>
-                                                            &nbsp;{{ color.title }}
-                                                        </label>
-                                                    {% endfor %}
-                                                </div>
+                                            {# if variant is color, init radios, then loop over options in the property set #}
+                                            {% if variant.property_type == "color" %}
+                                                {% if variant.colors.where('is_enabled', true)|length %}
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <label class="me-2">{{ variant.title }}:</label>
+                                                        {% for color in variant.colors.where('is_enabled', true) %}
+                                                            <input
+                                                                    required
+                                                                    type="radio"
+                                                                    class="btn-check"
+                                                                    name="{{ variant.title|lower }}"
+                                                                    id="{{ color.title|lower }}"
+                                                                    autocomplete="off"
+                                                                    value='{"option_title":"{{ variant.title }}: {{ color.title }}","price":"{{ color.price }}"}'
+                                                                    onchange="onChange()"
+                                                                    
+                                                            >
+                                                            <label class="btn btn-outline-primary {{ not loop.last ? 'me-2' }}" for="{{ color.title|lower }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="{{ color.color_hex }}" class="bi bi-square-fill" viewBox="0 0 16 16">
+                                                                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                                                                </svg>
+                                                                &nbsp;{{ color.title }}{{ color.is_enabled ? '' : ' - Out of Stock' }}
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
                                             {% endif %}
                                         {% endif %}
                                         
-                                    {% endif %}
+                                        
+                                    {% endfor %}
                                     
-                                    {# Check if variant is a custom property #}
-                                    {% set purchasable = true %}
-                                    {% if variant.content_group == "custom_properties" %}
-                                        {# if variant is dropdown, init select box, then loop over options in the property set #}
-                                        {% if variant.property_type == "dropdown" %}
-                                            <label for="{{ variant.title|lower }}">{{ variant.title }}:</label>
-                                            <select
-                                                    required
-                                                    class="form-select mb-4"
-                                                    name="{{ variant.title|lower }}"
-                                                    id="{{ variant.title|lower }}"
-                                                    onchange="onChange()"
-                                            >
-                                                <option value="" selected>Select an option...</option>
-                                                {% for option in variant.dropdown_items %}
-                                                    <option
-                                                            value='{"option_title":"{{ variant.title }}: {{ option.title }}","price":"{{ option.price }}"}'
-                                                            {{ option.is_enabled ? '' : 'disabled' }}
-                                                    >
-                                                        {{ option.title }}{{ option.is_enabled ? '' : ' - Out of Stock' }}
-                                                    </option>
-                                                {% endfor %}
-                                            </select>
-                                        {% endif %}
-                                        {# if variant is color, init radios, then loop over options in the property set #}
-                                        {% if variant.property_type == "color" %}
-                                            {% if variant.colors.where('is_enabled', true)|length %}
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <label class="me-2">{{ variant.title }}:</label>
-                                                    {% for color in variant.colors.where('is_enabled', true) %}
-                                                        <input
-                                                                required
-                                                                type="radio"
-                                                                class="btn-check"
-                                                                name="{{ variant.title|lower }}"
-                                                                id="{{ color.title|lower }}"
-                                                                autocomplete="off"
-                                                                value='{"option_title":"{{ variant.title }}: {{ color.title }}","price":"{{ color.price }}"}'
-                                                                onchange="onChange()"
-                                                                
-                                                        >
-                                                        <label class="btn btn-outline-primary {{ not loop.last ? 'me-2' }}" for="{{ color.title|lower }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="{{ color.color_hex }}" class="bi bi-square-fill" viewBox="0 0 16 16">
-                                                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
-                                                            </svg>
-                                                            &nbsp;{{ color.title }}{{ color.is_enabled ? '' : ' - Out of Stock' }}
-                                                        </label>
-                                                    {% endfor %}
-                                                </div>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endif %}
-                                    
-                                    
-                                {% endfor %}
-                                
-                            {% endif %}
-                            {# Add Quantity #}
-                            {% if product.content_group == "simple" %}
-                                {% if product.quantity == 0 %}
-                                    <p class="fs-5">This product is out of stock</p>
                                 {% endif %}
-                                {% if product.quantity == 1 %}
-                                    <input type="hidden" name="quantity" value="1" min="1" max="{{ product.quantity }}" id="quantity">
+                                {# Add Quantity #}
+                                {% if product.content_group == "simple" %}
+                                    {% if product.quantity == 0 %}
+                                        <p class="fs-5">This product is out of stock</p>
+                                    {% endif %}
+                                    {% if product.quantity == 1 %}
+                                        <input type="hidden" name="quantity" value="1" min="1" max="{{ product.quantity }}" id="quantity">
+                                    {% endif %}
+                                    {% if product.quantity > 1 %}
+                                        <label for="quantity">Quantity</label>
+                                        <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" max="{{ product.quantity }}" id="quantity">
+                                    {% endif %}
                                 {% endif %}
-                                {% if product.quantity > 1 %}
+        
+                                {% if product.content_group == "variant" %}
                                     <label for="quantity">Quantity</label>
-                                    <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" max="{{ product.quantity }}" id="quantity">
+                                    <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" id="quantity">
                                 {% endif %}
-                            {% endif %}
-    
+        
+                                {% if keys_set %}
+                                    {% if 'default' not in preview_url %}
+                                        <div class="d-flex">
+                                            <div id="button">
+                                                {% partial 'shop/buy-button' product=product %}
+                                            </div>
+                                            <div id="cart-button">
+                                                {% partial 'shop/cart-button' product=product %}
+                                            </div>
+                                        </div>
+                                        
+                                    {% else %}
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <p>You can't purchase products in preview mode.</p>
+                                                <a href="{{ 'product'|page({product: product.slug}) }}" class="btn btn-primary">View Live Product</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </form>
+                            <div id="quantity-error-message"></div>
+                        {% else %}
+                            <p class="fs-5">This product is out of stock</p>
+                        {% endif %}
+        
+                        {% if 'default' not in preview_url %}
                             {% if product.content_group == "variant" %}
-                                <label for="quantity">Quantity</label>
-                                <input class="form-control mb-4" type="number" name="quantity" value="1" min="1" id="quantity">
-                            {% endif %}
+                                {% if product.allow_purchases %}
+                                    {% put scripts %}
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                oc.request('#cart-form', 'onLoad', {
+                                                    update: {'shop/price': '#price'},
+                                                });
+                                            });
+                
+                                            function onChange() {
+                                                oc.request('#cart-form', 'onLoad', {
+                                                    update: {'shop/price': '#price'},
+                                                });
     
-                            {% if keys_set %}
-                                {% if 'default' not in preview_url %}
-                                    <div class="d-flex">
-                                        <div id="button">
-                                            {% partial 'shop/buy-button' product=product %}
-                                        </div>
-                                        <div id="cart-button">
-                                            {% partial 'shop/cart-button' product=product %}
-                                        </div>
-                                    </div>
-                                    
-                                {% else %}
-                                    <div class="card bg-light">
-                                        <div class="card-body">
-                                            <p>You can't purchase products in preview mode.</p>
-                                            <a href="{{ 'product'|page({product: product.slug}) }}" class="btn btn-primary">View Live Product</a>
-                                        </div>
-                                    </div>
+                                            }
+                    
+                                        </script>
+                                    {% endput %}
                                 {% endif %}
                             {% endif %}
-                        </form>
-                        <div id="quantity-error-message"></div>
-                    {% else %}
-                        <p class="fs-5">This product is out of stock</p>
-                    {% endif %}
-    
-                    {% if 'default' not in preview_url %}
-                        {% if product.content_group == "variant" %}
-                            {% if product.allow_purchases %}
-                                {% put scripts %}
-                                    <script>
-                                        document.addEventListener("DOMContentLoaded", function() {
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/price': '#price'},
+        
+                            {% if product.content_group == "simple" %}
+                                {% if product.allow_purchases %}
+                                    {% put scripts %}
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                oc.request('#cart-form', 'onLoad', {
+                                                    update: {'shop/price': '#price'},
+                                                });
                                             });
-                                        });
-            
-                                        function onChange() {
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/price': '#price'},
-                                            });
-
-                                        }
                 
-                                    </script>
-                                {% endput %}
+                                            function onChange() {
+                                                oc.request('#cart-form', 'onLoad', {
+                                                    update: {'shop/price': '#price'},
+                                                });
+                                            }
+                    
+                                        </script>
+                                    {% endput %}
+                                {% endif %}
                             {% endif %}
                         {% endif %}
-    
-                        {% if product.content_group == "simple" %}
-                            {% if product.allow_purchases %}
-                                {% put scripts %}
-                                    <script>
-                                        document.addEventListener("DOMContentLoaded", function() {
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/price': '#price'},
-                                            });
-                                        });
-            
-                                        function onChange() {
-                                            oc.request('#cart-form', 'onLoad', {
-                                                update: {'shop/price': '#price'},
-                                            });
-                                        }
-                
-                                    </script>
-                                {% endput %}
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                    
-                    
-                    
+                        
+                        
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <section class="">
-        <div class="container">
-            {{ product.description|raw }}
-        </div>
-    </section>
+        </header>
+        <section class="">
+            <div class="container">
+                {{ product.description|raw }}
+            </div>
+        </section>
+    {% endif %}
+
+{% else %}
+    {% do abort('404') %}
 {% endif %}
