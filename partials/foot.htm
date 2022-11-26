@@ -1,3 +1,6 @@
+[global settings]
+handle = "Content\Settings"
+==
 {% put scripts %}
     <script>
         const mediaQuery = window.matchMedia('(max-width: 767px)');
@@ -38,3 +41,5 @@
 {% scripts %}
 
 {% framework extras %}
+
+{{ settings.footer_code|raw }}
