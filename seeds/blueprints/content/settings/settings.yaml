@@ -54,6 +54,27 @@ fields:
     default: false
     tab: Settings
     span: right
+  header_code:
+    label: Header Code
+    type: codeeditor
+    language: html
+    commentAbove: Insert code inside the <code>&lt;header&gt;</code> on every page. Useful if you have some tracking code that needs to be entered.
+    commentHtml: true
+    tab: Code
+  body_code:
+    label: Body Code
+    type: codeeditor
+    language: html
+    commentAbove: Insert code right after the opening <code>&lt;body&gt;</code> tag on every page. Useful if you have some tracking code that needs to be entered.
+    commentHtml: true
+    tab: Code
+  footer_code:
+    label: Footer Code
+    type: codeeditor
+    language: html
+    commentAbove: Insert code right before the closing <code>&lt;/body&gt;</code> tag on every page. Useful if you have some tracking code that needs to be entered.
+    commentHtml: true
+    tab: Code
   section:
     type: section
     label: Stripe Keys
