@@ -12,6 +12,7 @@ handle = "Content\Settings"
         <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto {{ section.reverse_columns_on_mobile ? 'flex-lg-row flex-column-reverse' }}">
             {% for column in section.columns %}
                 <div class="col {{ column.disable_bottom_spacing == true ? 'mb-0' : 'mb-5' }} {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}">
+                    
                     {# Content Column Group #}
                     {% if column.content_group == "content" %}
                         {{ column.content|raw }}
@@ -79,23 +80,55 @@ handle = "Content\Settings"
                             </div>
                         {% endif %}
                     {% endif %}
+                    
                     {# Button Column Group #}
                     {% if column.content_group == "buttons" %}
                         {% if column.buttons|length %}
                             {% partial 'builder/buttons' column=column %}
                         {% endif %}
                     {% endif %}
+                    
                     {# Image Column Group #}
                     {% if column.content_group == "image" %}
                         <img src="{{ column.image|media }}" alt="{{ column.image_description }}" class="img-fluid">
                     {% endif %}
+                    
+                    {# Event Column Group #}
                     {% if settings.enable_events == true %}
                         {% if column.content_group == "events" %}
+                            
+                            {% set time_only = "g:i A" %}
+                            {% set month_only = "M" %}
+                            {% set day_only = "d" %}
+                            {% set day_and_time = "D - g:i A" %}
+                            {% set day_month_and_time = "jS - g:i A" %}
+                            {% set month_day_and_time = "M d - g:i A" %}
+                            {% set month_day_year_and_time = "M d, Y - g:i A" %}
+                            
                             {% set today = 'now'|date('Y-m-d h:i:s') %}
                             {% if section.show == 'upcoming' %}
                                 {% set events = events.whereDate('date', '>=', today).get() %}
                             {% endif %}
                             {% for event in events %}
+                                {% if event.hide_date == true %}
+                                    {% set time_only = "g:i A" %}
+                                    {% set month_only = "" %}
+                                    {% set day_only = "" %}
+                                    {% set day_and_time = "g:i A" %}
+                                    {% set day_month_and_time = "g:i A" %}
+                                    {% set month_day_and_time = "g:i A" %}
+                                    {% set month_day_year_and_time = "g:i A" %}
+                                {% endif %}
+    
+                                {% if event.hide_time == true %}
+                                    {% set time_only = "" %}
+                                    {% set month_only = "M" %}
+                                    {% set day_only = "d" %}
+                                    {% set day_and_time = "D" %}
+                                    {% set day_month_and_time = "jS" %}
+                                    {% set month_day_and_time = "M d" %}
+                                    {% set month_day_year_and_time = "M d, Y" %}
+                                {% endif %}
                                 <div class="col-12 mb-4">
                                     <div class="card shadow-lg">
                                         <div class="row g-0">
@@ -110,11 +143,11 @@ handle = "Content\Settings"
                                                         </span>
                                                     {% endif %}
                                                     <span class="display-4 mx-auto text-center">
-                                                        <span class="text-center">{{ event.date|date("M") }}</span>
-                                                        {{ event.date|date("d") }}
+                                                        <span class="text-center">{{ event.date|date(month_only) }}</span>
+                                                        {{ event.date|date(day_only) }}
                                                     </span>
                                                     <span class="text-center fs-5 fw-bold">
-                                                    {{ event.date|date("g:i A") }}{{ event.end_date|date("Y-m-d") == event.date|date("Y-m-d") ? ' - ' ~ event.end_date|date("g:i A") }}
+                                                    {{ event.date|date(time_only) }}{{ event.end_date|date("Y-m-d") == event.date|date("Y-m-d") ? ' - ' ~ event.end_date|date(time_only) }}
                                                 </span>
                                                 </a>
                                             </div>
@@ -137,22 +170,22 @@ handle = "Content\Settings"
                                                     {% if event.is_recurring %}
                                                         {# Display Date Logic #}
                                                         {% if event.recurrence == "daily" %}
-                                                            Every Day - {{ event.date|date("g:i A") }}
+                                                            Every Day {{ event.date|date(time_only) }}
                                                         {% elseif event.recurrence == "weekly" %}
-                                                            Every Week - {{ event.date|date("D - g:i A") }}
+                                                            Every Week {{ event.date|date(day_and_time) }}
                                                         {% elseif event.recurrence == "biWeekly" %}
-                                                            Every Other Week - {{ event.date|date("D - g:i A") }}
+                                                            Every Other Week {{ event.date|date(day_and_time) }}
                                                         {% elseif event.recurrence == "monthly" %}
-                                                            Every Month - {{ event.date|date("jS - g:i A") }}
+                                                            Every Month {{ event.date|date(day_month_and_time) }}
                                                         {% elseif event.recurrence == "biMonthly" %}
-                                                            Every Other Month - {{ event.date|date("jS - g:i A") }}
+                                                            Every Other Month {{ event.date|date(day_month_and_time) }}
                                                         {% elseif event.recurrence == "yearly" %}
-                                                            Every Year - {{ event.date|date("M d - g:i A") }}
+                                                            Every Year {{ event.date|date(month_day_and_time) }}
                                                         {% elseif event.recurrence == "custom" %}
                                                             Recurring Event
                                                         {% endif %}
                                                     {% else %}
-                                                        {{ event.date|date("M d, Y - g:i A") }}
+                                                        {{ event.date|date(month_day_year_and_time) }}
                                                     {% endif %}
                                             </span>
                                                 {% if event.end_date|length %}
@@ -162,7 +195,7 @@ handle = "Content\Settings"
                                                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
                                                             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
                                                         </svg>
-                                                        Ends: {{ event.end_date|date("M d, Y - g:i A") }}
+                                                        Ends: {{ event.end_date|date(month_day_year_and_time) }}
                                                     </span>
                                                     {% endif %}
                                                 {% endif %}
@@ -190,6 +223,8 @@ handle = "Content\Settings"
                             {% endfor %}
                         {% endif %}
                     {% endif %}
+                    
+                    {# Shop Column Group #}
                     {% if settings.enable_shop == true %}
                         {% if column.content_group == "products" %}
                             <div class="row row-cols-lg-{{ column.limit }}">
