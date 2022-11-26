@@ -67,20 +67,10 @@ fields:
         description: Section with configurable columns.
         titleFrom: title
         fields:
-          title:
-            label: Title
-            type: text
-            commentAbove: Title of this section. Used for organizational purposes.
-            span: left
-          style:
-            label: Style
-            type: dropdown
-            commentAbove: Style of this section.
-            span: right
-            options:
-              none: None
-              light: Light
-              dark: Dark
+          section_header:
+            type: mixin
+            label: Section Header
+            source: Content\SectionHeader
           reverse_columns_on_mobile:
             label: Reverse Columns on Mobile
             comment: Useful if you have content that needs to be stacked a different way on a phone.
