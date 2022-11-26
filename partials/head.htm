@@ -102,3 +102,5 @@ handle = "Content\Settings"
     <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon|media|resize(32) }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon|media|resize(16) }}">
 {% endif %}
+
+{{ settings.header_code|raw }}

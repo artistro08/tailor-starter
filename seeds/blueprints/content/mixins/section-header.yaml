@@ -18,3 +18,13 @@ fields:
       none: None
       light: Light
       dark: Dark
+  disable_top_spacing:
+    type: switch
+    label: Disable Top Spacing
+    comment: Remove top spacing from this section
+    span: left
+  disable_bottom_spacing:
+    type: switch
+    label: Disable Bottom Spacing
+    comment: Remove bottom spacing from this section
+    span: right

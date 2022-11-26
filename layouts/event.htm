@@ -4,6 +4,9 @@ title = "Page"
 [resources]
 js[] = "bootstrap.bundle.js"
 css[] = "bootstrap.css"
+
+[global settings]
+handle = "Content\Settings"
 ==
 <?php
 use Stripe\Stripe as Stripe;
@@ -134,9 +137,12 @@ function onStart() {
         {% partial 'head' %}
     </head>
     {% partial 'header' %}
-    <main>
-        {% page %}
-    </main>
+    <body>
+        {{ settings.body_code|raw }}
+        <main>
+            {% page %}
+        </main>
+    </body>
     <div id="cart-data">
         {% partial 'shop/cart-data' %}
     </div>

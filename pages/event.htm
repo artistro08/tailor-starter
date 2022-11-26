@@ -17,62 +17,90 @@ handle = "Content\Settings"
     {% if event is empty %}
         {% do abort('404') %}
     {% else %}
+        
+        {% set time_only = "g:i A" %}
+        {% set day_only = "j" %}
+        {% set day_and_time = "D - g:i A" %}
+        {% set day_month_and_time = "jS - g:i A" %}
+        {% set month_day_and_time = "M d - g:i A" %}
+        {% set month_day_year_and_time = "M d, Y - g:i A" %}
+        
+        {% if event.hide_date == true %}
+            {% set time_only = "g:i A" %}
+            {% set day_only = "" %}
+            {% set day_and_time = "g:i A" %}
+            {% set day_month_and_time = "g:i A" %}
+            {% set month_day_and_time = "g:i A" %}
+            {% set month_day_year_and_time = "g:i A" %}
+        {% endif %}
+        
+        {% if event.hide_time == true %}
+            {% set time_only = "" %}
+            {% set day_only = "j" %}
+            {% set day_and_time = "D" %}
+            {% set day_month_and_time = "jS" %}
+            {% set month_day_and_time = "M d" %}
+            {% set month_day_year_and_time = "M d, Y" %}
+        {% endif %}
+        
         <header class="hero {{ section.size == 'small' ? 'small-hero' }} bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4">
             <div class="container" style="z-index: 1;">
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-8 mx-auto text-center">
                         <h1>{{ event.title }}</h1>
-                        <span class="badge bg-primary rounded-pill mb-3">
-                            {% if event.is_recurring %}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-arrow-repeat me-1" viewBox="0 0 16 16">
-                                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
-                                </svg>
-                            {% else %}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-2" viewBox="0 0 16 16">
-                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                                </svg>
-                            {% endif %}
-                            {% if event.is_recurring %}
-                                {# Display Date Logic #}
-                                {% if event.recurrence == "daily" %}
-                                    Every Day - {{ event.date|date("g:i A") }}
-                                {% elseif event.recurrence == "weekly" %}
-                                    Every Week - {{ event.date|date("D - g:i A") }}
-                                {% elseif event.recurrence == "biWeekly" %}
-                                    Every Other Week - {{ event.date|date("D - g:i A") }}
-                                {% elseif event.recurrence == "monthly" %}
-                                    Every Month - {{ event.date|date("jS - g:i A") }}
-                                {% elseif event.recurrence == "biMonthly" %}
-                                    Every Other Month - {{ event.date|date("jS - g:i A") }}
-                                {% elseif event.recurrence == "yearly" %}
-                                    Every Year - {{ event.date|date("M d - g:i A") }}
-                                {% elseif event.recurrence == "custom" %}
-                                    Recurring Event
-                                {% endif %}
-                            {% else %}
-                                {{ event.date|date("M d, Y - g:i A") }}
-                            {% endif %}
-                        </span>
-                        {% if event.is_recurring %}
+                        {% if not (event.hide_date == true and event.hide_time == true) %}
                             <span class="badge bg-primary rounded-pill mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-2" viewBox="0 0 16 16">
-                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                                </svg>
-                                {{ event.date|date('U') > "now"|date('U') ? "Starts:" : "Started:" }} {{ event.date|date("M d, Y - g:i A") }}{{ event.end_date|date("Y-m-d") == event.date|date("Y-m-d") ? ' - ' ~ event.end_date|date("g:i A") }}
-                            </span>
-                        {% endif %}
-                        {% if event.end_date|length %}
-                            {% if event.end_date|date("Y-m-d") != event.date|date("Y-m-d") %}
-                                <span class="badge bg-primary rounded-pill mb-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-2" viewBox="0 0 16 16">
+                                {% if event.is_recurring %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-arrow-repeat me-1" viewBox="0 0 16 16">
+                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-1" viewBox="0 0 16 16">
                                         <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
                                         <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
                                     </svg>
-                                    Ends: {{ event.end_date|date("M d, Y - g:i A") }}
+                                {% endif %}
+                                {% if event.is_recurring %}
+                                    {# Display Date Logic #}
+                                    {% if event.recurrence == "daily" %}
+                                        Every Day - {{ event.date|date(time_only) }}
+                                    {% elseif event.recurrence == "weekly" %}
+                                        Every Week - {{ event.date|date(day_and_time) }}
+                                    {% elseif event.recurrence == "biWeekly" %}
+                                        Every Other Week - {{ event.date|date(day_and_time) }}
+                                    {% elseif event.recurrence == "monthly" %}
+                                        Every Month - {{ event.date|date(day_month_and_time) }}
+                                    {% elseif event.recurrence == "biMonthly" %}
+                                        Every Other Month - {{ event.date|date(day_month_and_time) }}
+                                    {% elseif event.recurrence == "yearly" %}
+                                        Every Year - {{ event.date|date(month_day_and_time) }}
+                                    {% elseif event.recurrence == "custom" %}
+                                        Recurring Event
+                                    {% endif %}
+                                {% else %}
+                                    {{ event.date|date(month_day_year_and_time) }}
+                                {% endif %}
+                            </span>
+                            {% if event.is_recurring %}
+                                <span class="badge bg-primary rounded-pill mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-1" viewBox="0 0 16 16">
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                                    </svg>
+                                    {{ event.date|date('U') > "now"|date('U') ? "Starts:" : "Started:" }} {{ event.date|date(month_day_year_and_time) }}{{ event.end_date|date("Y-m-d") == event.date|date("Y-m-d") ? ' - ' ~ event.end_date|date(time_only) }}
                                 </span>
+                            {% endif %}
+                            {% if event.end_date|length %}
+                                {% if event.end_date|date("Y-m-d") != event.date|date("Y-m-d") %}
+                                    <span class="badge bg-primary rounded-pill mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-1" viewBox="0 0 16 16">
+                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                                        </svg>
+                                        Ends: {{ event.end_date|date(month_day_year_and_time) }}
+                                    </span>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                         {% if event.location|length %}
@@ -100,183 +128,185 @@ handle = "Content\Settings"
                 </div>
             {% endif %}
         </header>
-        {% if event.is_recurring %}
-            <section class="pt-1">
-                <div class="container">
-                    <h2 class="text-center">Event Schedule</h2>
-                    
-                    {# Daily Occurence #}
-                    {% if event.recurrence == "daily" %}
-                        <div class="row">
-                            {# Subtract the Event recurrence. Offsets it so it #}
-                            {# displays the right amount of events.            #}
-                            {% set recurrence_offset = event.recurrence_length-1 %}
-                            {% for i in 0..recurrence_offset %}
-                                <div class="col-12 col-lg-4 my-2">
-                                    <div class="row">
-                                        <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " day")|date("j") }}
-                                        </div>
-                                        <div class="col-9 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " day")|date("M d, Y - g:i A") }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-        
-                    {# Weekly Occurence #}
-                    {% if event.recurrence == "weekly" %}
-                        <div class="row">
-                            {# Subtract the Event recurrence. Offsets it so it #}
-                            {# displays the right amount of events.            #}
-                            {% set recurrence_offset = event.recurrence_length-1 %}
-                            {% for i in 0..recurrence_offset %}
-                                <div class="col-12 col-lg-4 my-2">
-                                    <div class="row">
-                                        <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " week")|date("j") }}
-                                        </div>
-                                        <div class="col-9 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " week")|date("M d, Y - g:i A") }}
+        {% if not (event.hide_date == true and event.hide_time == true) %}
+            {% if event.is_recurring %}
+                <section class="pt-1">
+                    <div class="container">
+                        <h2 class="text-center">Event Schedule</h2>
+                        
+                        {# Daily Occurence #}
+                        {% if event.recurrence == "daily" %}
+                            <div class="row">
+                                {# Subtract the Event recurrence. Offsets it so it #}
+                                {# displays the right amount of events.            #}
+                                {% set recurrence_offset = event.recurrence_length-1 %}
+                                {% for i in 0..recurrence_offset %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " day")|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " day")|date(month_day_year_and_time) }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-        
-                    {# Bi-Weekly Occurence #}
-                    {% if event.recurrence == "biWeekly" %}
-                        <div class="row">
-                            {# Subtract the Event recurrence. Offsets it so it #}
-                            {# displays the right amount of events.            #}
-                            {% set recurrence_offset = event.recurrence_length-1 %}
-                            {% for i in 0..recurrence_offset %}
-                                <div class="col-12 col-lg-4 my-2">
-                                    <div class="row">
-                                        <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date("j") }}
-                                        </div>
-                                        <div class="col-9 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date("M d, Y - g:i A") }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-        
-                    {# Monthly Occurence #}
-                    {% if event.recurrence == "monthly" %}
-                        <div class="row">
-                            {# Subtract the Event recurrence. Offsets it so it #}
-                            {# displays the right amount of events.            #}
-                            {% set recurrence_offset = event.recurrence_length-1 %}
-                            {% for i in 0..recurrence_offset %}
-                                <div class="col-12 col-lg-4 my-2">
-                                    <div class="row">
-                                        <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " month")|date("j") }}
-                                        </div>
-                                        <div class="col-9 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " month")|date("M d, Y - g:i A") }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-        
-                    {# Bi-Monthly Occurence #}
-                    {% if event.recurrence == "biMonthly" %}
-                        <div class="row">
-                            {# Subtract the Event recurrence. Offsets it so it #}
-                            {# displays the right amount of events.            #}
-                            {% set recurrence_offset = event.recurrence_length-1 %}
-                            {% for i in 0..recurrence_offset %}
-                                <div class="col-12 col-lg-4 my-2">
-                                    <div class="row">
-                                        <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i*2 ~ " months")|date("j") }}
-                                        </div>
-                                        <div class="col-9 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i*2 ~ " months")|date("M d, Y - g:i A") }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-        
-                    {# Yearly Occurence #}
-                    {% if event.recurrence == "yearly" %}
-                        <div class="row">
-                            {# Subtract the Event recurrence. Offsets it so it #}
-                            {# displays the right amount of events.            #}
-                            {% set recurrence_offset = event.recurrence_length-1 %}
-                            {% for i in 0..recurrence_offset %}
-                                <div class="col-12 col-lg-4 my-2">
-                                    <div class="row">
-                                        <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " year")|date("j") }}
-                                        </div>
-                                        <div class="col-9 align-self-center">
-                                            {{ event.date|date_modify("+" ~ i ~ " year")|date("M d, Y - g:i A") }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-        
-                    {# Custom Occurence #}
-                    {% if event.recurrence == "custom" %}
-                        <div class="row">
-                            <div class="col-12 col-lg-4 my-2">
-                                <div class="row">
-                                    <div class="col-3 text-center display-3 align-self-center">
-                                        {{ event.date|date("j") }}
-                                    </div>
-                                    <div class="col-9 align-self-center">
-                                        {% if event.end_date|length %}
-                                            {% if event.end_date|date("Y-m-d") == event.date|date("Y-m-d") %}
-                                                {{ event.date|date("M d, Y - g:i A") }} - {{ event.end_date|date("g:i A") }}
-                                            {% else %}
-                                                Starts: {{ event.date|date("M d, Y - g:i A") }}<br>Ends: {{ event.end_date|date("M d, Y - g:i A") }}
-                                            {% endif %}
-                                        {% else %}
-                                            {{ event.date|date("M d, Y - g:i A") }}
-                                        {% endif %}
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
-                            {% for event in event.custom_recurrences %}
+                        {% endif %}
+            
+                        {# Weekly Occurence #}
+                        {% if event.recurrence == "weekly" %}
+                            <div class="row">
+                                {# Subtract the Event recurrence. Offsets it so it #}
+                                {# displays the right amount of events.            #}
+                                {% set recurrence_offset = event.recurrence_length-1 %}
+                                {% for i in 0..recurrence_offset %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " week")|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " week")|date(month_day_year_and_time) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+            
+                        {# Bi-Weekly Occurence #}
+                        {% if event.recurrence == "biWeekly" %}
+                            <div class="row">
+                                {# Subtract the Event recurrence. Offsets it so it #}
+                                {# displays the right amount of events.            #}
+                                {% set recurrence_offset = event.recurrence_length-1 %}
+                                {% for i in 0..recurrence_offset %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date(month_day_year_and_time) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+            
+                        {# Monthly Occurence #}
+                        {% if event.recurrence == "monthly" %}
+                            <div class="row">
+                                {# Subtract the Event recurrence. Offsets it so it #}
+                                {# displays the right amount of events.            #}
+                                {% set recurrence_offset = event.recurrence_length-1 %}
+                                {% for i in 0..recurrence_offset %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " month")|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " month")|date(month_day_year_and_time) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+            
+                        {# Bi-Monthly Occurence #}
+                        {% if event.recurrence == "biMonthly" %}
+                            <div class="row">
+                                {# Subtract the Event recurrence. Offsets it so it #}
+                                {# displays the right amount of events.            #}
+                                {% set recurrence_offset = event.recurrence_length-1 %}
+                                {% for i in 0..recurrence_offset %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " months")|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " months")|date(month_day_year_and_time) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+            
+                        {# Yearly Occurence #}
+                        {% if event.recurrence == "yearly" %}
+                            <div class="row">
+                                {# Subtract the Event recurrence. Offsets it so it #}
+                                {# displays the right amount of events.            #}
+                                {% set recurrence_offset = event.recurrence_length-1 %}
+                                {% for i in 0..recurrence_offset %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " year")|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {{ event.date|date_modify("+" ~ i ~ " year")|date(month_day_year_and_time) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+            
+                        {# Custom Occurence #}
+                        {% if event.recurrence == "custom" %}
+                            <div class="row">
                                 <div class="col-12 col-lg-4 my-2">
                                     <div class="row">
                                         <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date("j") }}
+                                            {{ event.date|date(day_only) }}
                                         </div>
                                         <div class="col-9 align-self-center">
                                             {% if event.end_date|length %}
                                                 {% if event.end_date|date("Y-m-d") == event.date|date("Y-m-d") %}
-                                                    {{ event.date|date("M d, Y - g:i A") }} - {{ event.end_date|date("g:i A") }}
+                                                    {{ event.date|date(month_day_year_and_time) }} - {{ event.end_date|date(time_only) }}
                                                 {% else %}
-                                                    Starts: {{ event.date|date("M d, Y - g:i A") }}<br>Ends: {{ event.end_date|date("M d, Y - g:i A") }}
+                                                    Starts: {{ event.date|date(month_day_year_and_time) }}<br>Ends: {{ event.end_date|date(month_day_year_and_time) }}
                                                 {% endif %}
                                             {% else %}
-                                                {{ event.date|date("M d, Y - g:i A") }}
+                                                {{ event.date|date(month_day_year_and_time) }}
                                             {% endif %}
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-                
-            </section>
+                                {% for event in event.custom_recurrences %}
+                                    <div class="col-12 col-lg-4 my-2">
+                                        <div class="row">
+                                            <div class="col-3 text-center display-3 align-self-center">
+                                                {{ event.date|date(day_only) }}
+                                            </div>
+                                            <div class="col-9 align-self-center">
+                                                {% if event.end_date|length %}
+                                                    {% if event.end_date|date("Y-m-d") == event.date|date("Y-m-d") %}
+                                                        {{ event.date|date(month_day_year_and_time) }} - {{ event.end_date|date(time_only) }}
+                                                    {% else %}
+                                                        Starts: {{ event.date|date(month_day_year_and_time) }}<br>Ends: {{ event.end_date|date(month_day_year_and_time) }}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {{ event.date|date(month_day_year_and_time) }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                </section>
+            {% endif %}
         {% endif %}
         <section class="">
             <div class="container">
