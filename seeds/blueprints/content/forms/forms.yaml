@@ -1,0 +1,126 @@
+uuid: f04b58ea-6d80-11ed-aa98-d348ccf890ef
+handle: Content\Forms
+type: stream
+name: Forms
+drafts: true
+multisite: sync
+
+navigation:
+  icon: icon-inbox
+  parent: Content\Page
+  order: 12
+
+customMessages:
+  buttonCreate: New Form
+
+fields:
+  fields:
+    type: repeater
+    prompt: Add New Field
+    label: Fields
+    displayMode: builder
+    titleFrom: Label
+    tab: Form Fields
+    form:
+      fields:
+        label:
+          label: Field Label
+          type: text
+          commentAbove: The name of the field
+          validation: required
+          tab: Form Fields
+          span: left
+        slug:
+          type: text
+          label: Field Slug
+          commentAbove: Used to identify the field in the form. If Unsure, match it to the label with letters, numbers, and dashes only.
+          span: right
+          validation: alpha_dash|required
+          preset:
+            field: label
+            type: slug
+        field_type:
+          label: Field Type
+          validation: required
+          type: dropdown
+          tab: Form Fields
+          span: full
+          commentAbove: Choose the type of this field.
+          options:
+            text: Text
+            email: Email
+            textarea: Multi-line Text
+            checkbox: Checkbox
+            select: Dropdown
+            file: File Upload
+        validation:
+          label: Enable Field Validation
+          comment: Enable this field to be required with rules you specify
+          type: switch
+          tab: Form Fields
+        validation_rules:
+          label: Validation Rules
+          type: repeater
+          tab: Form Fields
+          form:
+            fields:
+              type:
+                type: dropdown
+                label: Validation Type
+                span: left
+                options:
+                  required: Required
+                  email: Email
+                  numeric: Numeric
+              error_message:
+                span: right
+                label: Validation Error Message
+                type: text
+                placeholder: Please enter valid data
+          trigger:
+            action: show
+            field: validation
+            condition: checked
+        hr_1:
+          type: ruler
+          tab: Form Fields
+        width:
+          label: Field Width
+          type: dropdown
+          commentAbove: Choose how wide this field should be
+          tab: Form Fields
+          options:
+            full_width: Full Width
+            half_width: Half Width
+  enable_recaptcha:
+    label: Enable reCAPTCHA
+    type: switch
+    tab: Manage
+    comment: Enable reCAPTCHA spam prevention to prevent unwanted form submissions. Make sure you have <a href="../../../system/settings/update/blakejones/magicforms/config#primarytab-recaptcha">reCAPTCHA keys</a> set
+    commentHtml: true
+    span: right
+    spanClass: col-lg-2 col-12
+  enable_notifications:
+    label: Enable Notifications
+    tab: Manage
+    comment: Enable notifications for this form
+    type: switch
+    span: left
+    spanClass: col-lg-2 col-12
+  emails:
+    label: Emails
+    tab: Manage
+    type: repeater
+    commentAbove: Add email recipients for this form.
+    span: full
+    icon: icon-email
+    form:
+      fields:
+        email:
+          label: Email Recipient
+          type: text
+          validation: required|email
+    trigger:
+      action: show
+      field: enable_notifications
+      condition: checked
