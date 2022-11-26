@@ -4,14 +4,20 @@ title = "Default"
 [resources]
 js[] = "bootstrap.bundle.js"
 css[] = "bootstrap.css"
+
+[global settings]
+handle = "Content\Settings"
 ==
 <!DOCTYPE html>
 <html lang="en">
     <head>
         {% partial 'head' %}
     </head>
-    <main>
-        {% page %}
-    </main>
+    <body>
+        {{ settings.body_code|raw }}
+        <main>
+            {% page %}
+        </main>
+    </body>
     {% partial 'foot' %}
 </html>
