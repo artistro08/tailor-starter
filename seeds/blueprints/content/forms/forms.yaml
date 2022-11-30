@@ -2,7 +2,7 @@ uuid: f04b58ea-6d80-11ed-aa98-d348ccf890ef
 handle: Content\Forms
 type: stream
 name: Forms
-drafts: true
+drafts: false
 multisite: sync
 
 navigation:

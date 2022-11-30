@@ -7,3 +7,10 @@ fields:
     type: mixin
     label: Section Header
     source: Content\SectionHeader
+  form:
+    type: entries
+    label: Form
+    commentAbove: Choose a form you want to display.
+    source: Content\Forms
+    displayMode: recordfinder
+    maxItems: 1

@@ -7,6 +7,13 @@ fields:
     type: mixin
     label: Column Header
     source: Content\ColumnHeader
+  form:
+    type: entries
+    label: Form
+    commentAbove: Choose a form you want to display.
+    source: Content\Forms
+    displayMode: recordfinder
+    maxItems: 1
   hr_1:
     type: ruler
   column_options:
