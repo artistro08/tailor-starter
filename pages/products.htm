@@ -10,6 +10,19 @@ handle = "Content\Product"
 handle = "Content\Settings"
 ==
 {% if settings.enable_shop == true %}
+    
+    {% put header_code %}
+        {{ settings.products_header_code|raw }}
+    {% endput %}
+    
+    {% put body_code %}
+        {{ settings.products_body_code|raw }}
+    {% endput %}
+    
+    {% put footer_code %}
+        {{ settings.products_footer_code|raw }}
+    {% endput %}
+    
     {% set products = products.paginate(12) %}
     {% set keys_set = true %}
     {% if settings.stripe_public_key is empty or settings.stripe_public_key is empty or settings.stripe_webhook_secret_key is empty %}

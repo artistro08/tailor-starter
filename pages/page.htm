@@ -23,6 +23,18 @@ function onInit() {
 ==
 {% set page = section %}
 
+{% put header_code %}
+    {{ page.header_code|raw }}
+{% endput %}
+
+{% put body_code %}
+    {{ page.body_code|raw }}
+{% endput %}
+
+{% put footer_code %}
+    {{ page.footer_code|raw }}
+{% endput %}
+
 {% if page is empty %}
     {% do abort('404') %}
 {% else %}

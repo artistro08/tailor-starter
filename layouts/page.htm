@@ -138,6 +138,7 @@ function onStart() {
     {% partial 'header' %}
     <body>
         {{ settings.body_code|raw }}
+        {% placeholder body_code %}
         <main>
             {% page %}
         </main>

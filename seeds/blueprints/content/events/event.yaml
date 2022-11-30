@@ -178,3 +178,8 @@ fields:
     type: mixin
     name: SEO Fields
     source: Content\SEOFields
+  code_fields:
+    tab: Manage
+    type: mixin
+    name: SEO Fields
+    source: Content\CodeFields
