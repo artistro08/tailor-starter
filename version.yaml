@@ -46,3 +46,4 @@ v3.0.13: Updated seeds. fixed social menu icons.
 v3.0.14: Updated Bootstrap to version 5.2
 v3.1.0: Updated code to be more consistent. Fixed event export issue. Added multisite support. Refactored code for easier editing of templates and blueprints. Added an option to turn off the shop in the backend. Added an option to turn off events in the backend.
 v3.1.1: Added global option to embed code across pages. Added option to page builder to disable spacing on sections and columns. Added option to hide event times individually for each event.
+v3.1.2: Added option to embed code across front facing pages (Products, product, page, events).
