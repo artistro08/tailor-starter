@@ -40,6 +40,11 @@ groups:
         type: mixin
         name: SEO Fields
         source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields
   builder:
     name: Dynamic Page
     fields:
@@ -53,3 +58,8 @@ groups:
         type: mixin
         name: SEO Fields
         source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields

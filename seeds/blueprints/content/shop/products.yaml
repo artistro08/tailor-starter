@@ -44,6 +44,11 @@ groups:
         type: mixin
         name: SEO Fields
         source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields
   variant:
     name: Variant
     fields:
@@ -64,6 +69,11 @@ groups:
         type: mixin
         name: SEO Fields
         source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields
       variants:
         tab: Variants
         type: repeater

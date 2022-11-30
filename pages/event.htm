@@ -14,6 +14,18 @@ handle = "Content\Settings"
 {% if settings.enable_events == true %}
     {% set event = section %}
     
+    {% put header_code %}
+        {{ event.header_code|raw }}
+    {% endput %}
+    
+    {% put body_code %}
+        {{ event.body_code|raw }}
+    {% endput %}
+    
+    {% put footer_code %}
+        {{ event.footer_code|raw }}
+    {% endput %}
+    
     {% if event is empty %}
         {% do abort('404') %}
     {% else %}
