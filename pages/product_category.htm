@@ -15,6 +15,18 @@ handle = "Content\Settings"
 {% if settings.enable_shop == true %}
     {% set category = section %}
     
+    {% put header_code %}
+        {{ category.header_code|raw }}
+    {% endput %}
+    
+    {% put body_code %}
+        {{ category.body_code|raw }}
+    {% endput %}
+    
+    {% put footer_code %}
+        {{ category.footer_code|raw }}
+    {% endput %}
+    
     {% set products = products.whereRelation('categories', 'slug', section.slug).paginate(12) %}
     
     {% if section is empty %}

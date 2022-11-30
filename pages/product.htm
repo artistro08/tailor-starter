@@ -14,6 +14,18 @@ handle = "Content\Settings"
 
 {% if settings.enable_shop == true %}
     {% set product = section %}
+    
+    {% put header_code %}
+        {{ product.header_code|raw }}
+    {% endput %}
+    
+    {% put body_code %}
+        {{ product.body_code|raw }}
+    {% endput %}
+    
+    {% put footer_code %}
+        {{ product.footer_code|raw }}
+    {% endput %}
 
     {% if product is empty %}
         {% do abort('404') %}

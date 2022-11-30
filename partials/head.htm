@@ -103,4 +103,6 @@ handle = "Content\Settings"
     <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon|media|resize(16) }}">
 {% endif %}
 
+{# Header Code Placeholders #}
 {{ settings.header_code|raw }}
+{% placeholder header_code %}
