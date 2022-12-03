@@ -1,0 +1,5 @@
+{% if (recaptcha_enabled) %}
+    <div id="{{ genericForm }}" class="g-recaptcha" data-sitekey="{{ genericForm.settings.recaptcha_site_key }}" data-theme="{{ genericForm.property('recaptcha_theme') }}" data-type="{{ genericForm.property('recaptcha_type') }}" data-size="{{ genericForm.property('recaptcha_size') }}"></div>
+{% elseif (recaptcha_misconfigured) %}
+    <h5>{{ recaptcha_warn }}</h5>
+{% endif %}

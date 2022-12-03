@@ -53,6 +53,31 @@ fields:
             checkbox: Checkbox
             select: Dropdown
             file: File Upload
+        options:
+          type: repeater
+          label: Field Options
+          commentAbove: Add items to the dropdown
+          form:
+            fields:
+              label:
+                type: text
+                label: Option Name
+                commentAbove: The name of the option
+                validation: required
+                span: left
+              slug:
+                type: text
+                label: Option Slug
+                commentAbove: Used to identify the option in the dropdown. If Unsure, match it to the label with letters, numbers, and dashes only.
+                validation: alpha_dash|required
+                span: right
+                preset:
+                  field: label
+                  type: slug
+          trigger:
+            action: show
+            field: type
+            condition: value[select]
         validation:
           label: Enable Field Validation
           comment: Enable this field to be required with rules you specify

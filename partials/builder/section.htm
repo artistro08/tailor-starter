@@ -270,7 +270,7 @@ handle = "Content\Settings"
                     {% if column.content_group == "form" %}
                         <div class="card">
                             <div class="card-body">
-                                {% component "contactForm" %}
+                                {% partial 'components/form' content=column %}
                             </div>
                         </div>
                     {% endif %}
