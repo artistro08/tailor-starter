@@ -5,8 +5,6 @@ title = "Default"
 js[] = "bootstrap.bundle.js"
 css[] = "bootstrap.css"
 
-[genericForm]
-
 [global settings]
 handle = "Content\Settings"
 ==
@@ -146,6 +144,39 @@ function onStart() {
     }
 
     $this['cart_items'] = Session::get('cart_items');
+}
+
+function onFormSubmit() {
+
+    $form_input = input();
+    $form_id = $form_input["form_id"];
+    $form_success_message = $form_input["success_message"];
+    $form = EntryRecord::inSection('Content\Forms')->find($form_id);
+    $form_validation_rules = [];
+    
+    // Get Form Validation and Validate
+    foreach ($form->fields as $field) {
+        
+        $field_validation_rules = [];
+
+        if($field->validation == true) {
+
+            foreach ($field->validation_rules as $validation_rule) {
+                $field_validation_rules[] = $validation_rule->attributes['type'];
+            }
+            $field_validation_rules = implode("|", $field_validation_rules);
+            $form_validation_rules[] = [$field->slug => $field_validation_rules];
+        }
+
+    }
+
+    $form_validation_rules = array_merge(...$form_validation_rules);
+
+    $validator = request()->validate($form_validation_rules);
+
+    Flash::success($form_success_message);
+
+    
 }
 ?>
 ==

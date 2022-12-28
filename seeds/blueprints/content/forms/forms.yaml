@@ -48,7 +48,6 @@ fields:
           commentAbove: Choose the type of this field.
           options:
             text: Text
-            email: Email
             textarea: Multi-line Text
             checkbox: Checkbox
             select: Dropdown
@@ -76,7 +75,7 @@ fields:
                   type: slug
           trigger:
             action: show
-            field: type
+            field: field_type
             condition: value[select]
         validation:
           label: Enable Field Validation
@@ -117,6 +116,13 @@ fields:
           options:
             full_width: Full Width
             half_width: Half Width
+  success_message:
+    label: Success Message
+    type: textarea
+    tab: Manage
+    commentAbove: The message you want to display upon successful submission of the form
+    placeholder: Thank you! We have received your submission.
+    default: Thank you! We have received your submission.
   enable_recaptcha:
     label: Enable reCAPTCHA
     type: switch
@@ -149,3 +155,4 @@ fields:
       action: show
       field: enable_notifications
       condition: checked
+      
