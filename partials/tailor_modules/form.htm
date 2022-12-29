@@ -116,7 +116,7 @@ handle = "Content\Settings"
                             {{ field.attributes.required == true ? 'required' }}
                     >
                         {% for option in field.options %}
-                            <option value="{{ option.slug }}" selected>{{ option.label }}</option>
+                            <option value="{{ option.label }}" selected>{{ option.label }}</option>
                         {% endfor %}
                     </select>
                 {% endif %}

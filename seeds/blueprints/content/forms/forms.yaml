@@ -5,9 +5,14 @@ name: Forms
 drafts: false
 multisite: sync
 
-navigation:
+primaryNavigation:
+  label: Forms
   icon: icon-inbox
-  parent: Content\Page
+  order: 140
+
+navigation:
+  icon: icon-list
+  parent: Content\Forms
   order: 12
 
 customMessages:

@@ -152,7 +152,10 @@ function onFormSubmit() {
     $form_id = $form_input["form_id"];
     $form_success_message = $form_input["success_message"];
     $form = EntryRecord::inSection('Content\Forms')->find($form_id);
+    $submission = EntryRecord::inSection('Content\Forms\Submissions');
     $form_validation_rules = [];
+    $form_input_formatted = '';
+    $form_name = '(no data)';
     
     // Get Form Validation and Validate
     foreach ($form->fields as $field) {
@@ -171,12 +174,28 @@ function onFormSubmit() {
     }
 
     $form_validation_rules = array_merge(...$form_validation_rules);
-
     $validator = request()->validate($form_validation_rules);
+    
+    foreach ($form_input as $key => $value) {
+        
+        if(($key != "g-recaptcha-response") && ($key != "form_id") && ($key != "success_message")) {
+            if($key == array_key_first($form_input)){
+                $form_name = (!empty($value)) ? $value : $form_name;
+            }
+            $key = ucwords(str_replace("-", ' ', $key));
+            $form_input_formatted .= $key . ": " . $value  . "\n";
+        }
+
+    }
+
+    $submission->title = $form_name;
+    $submission->form  = $form_input['form_id'];
+    $submission->data  = $form_input_formatted;
+    
+    $submission->save();
 
     Flash::success($form_success_message);
 
-    
 }
 ?>
 ==
