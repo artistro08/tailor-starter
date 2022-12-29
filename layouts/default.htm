@@ -169,6 +169,11 @@ function onFormSubmit() {
             }
             $field_validation_rules = implode("|", $field_validation_rules);
             $form_validation_rules[] = [$field->slug => $field_validation_rules];
+            if($form->enable_recaptcha) {
+                $form_validation_rules[] = [
+                    'g-recaptcha-response' => 'required|recaptcha'
+                ];
+            }
         }
 
     }
