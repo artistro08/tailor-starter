@@ -49,3 +49,4 @@ v3.1.1: Added global option to embed code across pages. Added option to page bui
 v3.1.2: Added option to embed code across front facing pages (Products, product, page, events).
 v4.0.0: Added form submissions via AJAX & Tailor.
 v4.0.1: Fix enable notifications switch not working.
+v4.0.2: Remove Small Contact Form dependency
