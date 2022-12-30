@@ -56,6 +56,14 @@ fields:
             textarea: Multi-line Text
             checkbox: Checkbox
             select: Dropdown
+        placeholder:
+          type: text
+          label: Placeholder
+          commentAbove: The text that appears inside the field.
+          trigger:
+            action: show
+            field: field_type
+            condition: value[select][text][dropdown][textarea]
         options:
           type: repeater
           label: Field Options

@@ -54,25 +54,7 @@ handle = "Content\Settings"
                             id="{{ field.slug }}"
                             name="{{ field.slug }}"
                             class="form-control"
-                    >
-                {% endif %}
-                {% if field.attributes.field_type == 'email' %}
-                    <label class="form-label" for="{{ field.slug }}">
-                        {{ field.label }}
-                        {% set index = 0 %}
-                        {% for validation in field.validation_rules %}
-                            {% if (validation.attributes.type == "required" and index == 0)  %}
-                                <span class="text-danger">*</span>
-                                {% set index = index+1 %}
-                            {% endif %}
-                        {% endfor %}
-                    </label>
-                    <input
-                            type="email"
-                            id="{{ field.slug }}"
-                            name="{{ field.slug }}"
-                            class="form-control"
-                            
+                            placeholder="{{ field.placeholder }}"
                     >
                 {% endif %}
                 {% if field.attributes.field_type == 'textarea' %}
@@ -89,7 +71,7 @@ handle = "Content\Settings"
                     <textarea
                             name="{{ field.slug }}"
                             class="form-control"
-                            placeholder="Leave a comment here"
+                            placeholder="{{ field.placeholder }}"
                             id="{{ field.slug }}"
                             {{ field.attributes.required == true ? 'required' }}
                             
@@ -134,8 +116,9 @@ handle = "Content\Settings"
                             id="{{ field.slug }}"
                             {{ field.attributes.required == true ? 'required' }}
                     >
+                        <option selected disabled>{{ field.placeholder }}</option>
                         {% for option in field.options %}
-                            <option value="{{ option.label }}" {{ loop.first ? 'selected' }}>{{ option.label }}</option>
+                            <option value="{{ option.label }}">{{ option.label }}</option>
                         {% endfor %}
                     </select>
                 {% endif %}
