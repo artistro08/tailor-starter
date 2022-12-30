@@ -52,3 +52,4 @@ v4.0.1: Fix enable notifications switch not working.
 v4.0.2: Remove Small Contact Form dependency
 v4.0.3: Update form documentation
 v4.0.4: Added phone validation to forms
+v4.0.5: Fixed metadata not showing on homepage
