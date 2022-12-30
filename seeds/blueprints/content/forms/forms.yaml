@@ -106,6 +106,7 @@ fields:
                 label: Validation Error Message
                 type: text
                 placeholder: Please enter valid data
+                default: Please enter valid data
           trigger:
             action: show
             field: validation

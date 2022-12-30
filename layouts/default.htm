@@ -154,32 +154,47 @@ function onFormSubmit() {
     $form = EntryRecord::inSection('Content\Forms')->find($form_id);
     $submission = EntryRecord::inSection('Content\Forms\Submissions');
     $form_validation_rules = [];
+    $form_validation_messages = [];
     $form_input_formatted = '';
     $form_name = '(no data)';
     
-    // Get Form Validation and Validate
+    // Parse form validation data
     foreach ($form->fields as $field) {
         
         $field_validation_rules = [];
+        $field_validation_messages = [];
 
         if($field->validation == true) {
 
-            foreach ($field->validation_rules as $validation_rule) {
-                $field_validation_rules[] = $validation_rule->attributes['type'];
+            foreach ($field->validation_rules as $validation_item) {
+                $field_validation_rules[] = $validation_item->attributes['type'];
+                $field_validation_messages[$field->slug . '.' . $validation_item->attributes['type']] = $validation_item->attributes['error_message'];
             }
             $field_validation_rules = implode("|", $field_validation_rules);
             $form_validation_rules[] = [$field->slug => $field_validation_rules];
+            $form_validation_messages[] = $field_validation_messages;
             if($form->enable_recaptcha) {
                 $form_validation_rules[] = [
                     'g-recaptcha-response' => 'required|recaptcha'
+                ];
+                $form_validation_messages[] = [
+                    'g-recaptcha-response.required' => 'Please ensure you are not a robot.'
                 ];
             }
         }
 
     }
 
+    // Format Rules and messages
     $form_validation_rules = array_merge(...$form_validation_rules);
-    $validator = request()->validate($form_validation_rules);
+    $form_validation_messages = array_merge(...$form_validation_messages);
+
+    // Validate Fields
+    $validation = Validator::make(request()->all(), $form_validation_rules, $form_validation_messages);
+
+    if($validation->fails()) {
+        throw new ValidationException($validation);
+    }
     
     foreach ($form_input as $key => $value) {
         

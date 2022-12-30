@@ -1,11 +1,30 @@
 [global settings]
 handle = "Content\Settings"
+
+[viewBag]
+==
+<?php
+    function onStart() {
+        $this['backend_uri'] = Backend::url('tailor/globals/content_settings#primarytab-forms');
+    }
+?>
 ==
 {% set fields = content.form.fields %}
 {% set form = content.form %}
-<form data-request="onFormSubmit" data-request-data="form_id: {{ content.form.id }}, success_message: '{{ content.form.success_message|escape('js') }}'" data-request-flash>
+{% set form_id = content.form.slug|replace({"-" : '_'}) ~ '_' ~ random() %}
+<form
+        id="{{ form_id }}"
+        data-request="onFormSubmit"
+        data-request-data="form_id: {{ content.form.id }}, success_message: '{{ content.form.success_message|escape('js') }}'"
+        data-request-update="'tailor_modules/form': '#{{ form_id }}'"
+        {% if form.enable_recaptcha %}
+            data-request-error="recaptcha_{{ form_id }}_error()"
+        {% endif %}
+>
     {% flash %}
-        <div id="forms_flash">{{ message }}</div>
+        <div class="alert alert-{{ type }} mb-0" role="alert">
+            {{ message }}
+        </div>
     {% endflash %}
     
     <div class="row">
@@ -116,7 +135,7 @@ handle = "Content\Settings"
                             {{ field.attributes.required == true ? 'required' }}
                     >
                         {% for option in field.options %}
-                            <option value="{{ option.label }}" selected>{{ option.label }}</option>
+                            <option value="{{ option.label }}" {{ loop.first ? 'selected' }}>{{ option.label }}</option>
                         {% endfor %}
                     </select>
                 {% endif %}
@@ -141,18 +160,44 @@ handle = "Content\Settings"
                 {% endif %}
             </div>
         {% endfor %}
-    </div>
-    
-    {% if form.enable_recaptcha == true %}
-        <div class="g-recaptcha" data-sitekey="{{ settings.recaptcha_site_key }}"></div>
-    {% endif %}
-    
-    
-    <button id="form-{{ content.form.id }}" type="submit" class="btn btn-primary">Submit</button>
+        {% if form.enable_recaptcha == true %}
+            {% if (settings.recaptcha_site_key|length and settings.recaptcha_secret_key|length) %}
+                <div class="col-12">
+                    <div class="mb-4" id="recaptcha_{{ form_id }}_element"></div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-warning">
+                        You have reCAPTCHA enabled, but you haven't set your keys.
+                        Please set them in the <a href="{{ backend_uri }}" target="blank">forms settings.</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
 
+        {% if fields is not empty %}
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        {% endif %}
+    </div>
 </form>
 {% if form.enable_recaptcha == true %}
-    {% put scripts %}
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    {% endput %}
+    {% if (settings.recaptcha_site_key|length and settings.recaptcha_secret_key|length) %}
+        {% put recaptcha_variables %}
+            var recaptcha_{{ form_id }}_element;
+        {% endput %}
+        {% put recaptcha %}
+            recaptcha_{{ form_id }}_element = grecaptcha.render('recaptcha_{{ form_id }}_element', {
+                'sitekey' : '{{ settings.recaptcha_site_key }}',
+            });
+        {% endput %}
+        {% put scripts %}
+            <script>
+                function recaptcha_{{ form_id }}_error() {
+                    grecaptcha.reset(recaptcha_{{ form_id }}_element);
+                }
+            </script>
+        {% endput %}
+    {% endif %}
 {% endif %}
