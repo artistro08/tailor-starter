@@ -108,6 +108,7 @@ fields:
                   required: Required
                   email: Email
                   numeric: Numeric
+                  phone: Phone
               error_message:
                 span: right
                 label: Validation Error Message

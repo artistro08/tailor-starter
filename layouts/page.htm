@@ -149,10 +149,18 @@ function onFormSubmit() {
         if($field->validation == true) {
 
             foreach ($field->validation_rules as $validation_item) {
-                $field_validation_rules[] = $validation_item->attributes['type'];
-                $field_validation_messages[$field->slug . '.' . $validation_item->attributes['type']] = $validation_item->attributes['error_message'];
+                if($validation_item->attributes['type'] == "phone") {
+                    $field_validation_rules[] = "regex:/^([0-9\s\-\+\(\)]*)$/";
+                    $field_validation_rules[] = "min:9";
+                    $field_validation_messages[$field->slug . '.' . "regex"] = $validation_item->attributes['error_message'];
+                    $field_validation_messages[$field->slug . '.' . "min"] = $validation_item->attributes['error_message'];
+                } else {
+                    $field_validation_rules[] = $validation_item->attributes['type'];
+                    $field_validation_messages[$field->slug . '.' . $validation_item->attributes['type']] = $validation_item->attributes['error_message'];
+                }
+                
             }
-            $field_validation_rules = implode("|", $field_validation_rules);
+            
             $form_validation_rules[] = [$field->slug => $field_validation_rules];
             $form_validation_messages[] = $field_validation_messages;
             if($form->enable_recaptcha) {
