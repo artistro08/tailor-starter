@@ -11,8 +11,7 @@ To get started with this theme, you'll need the following
 This theme depends on the following plugins:
 - [Artistro08.TailorStarter](https://github.com/artistro08/tailor-starter-plugin) 
   - For Order Email management with the [Shop Feature](#shop)
-- [JanVince.SmallContactForm](https://github.com/jan-vince/smallcontactform)
-  - For Contact form blocks in the builder
+  - For Email Notifications with the [Forms Feature](#forms)
 
 The theme will attempt to automatically install the plugins when you install it. 
 
@@ -51,6 +50,7 @@ Once you've seeded the theme, head over to the content settings in the backend a
 - Icons with Bootstrap Icons (See [Icons](#icons))
 - Automatic Sitemap generation for all front facing pages created by Tailor.
 - Multisite Support out of the box.
+- Form builder with submissions (See [Forms](#forms))
 
 ### Things to Know
 - Upon loading the theme, you'll get a 404. That's normal if you don't have a Home Page setup under Content > Settings.
@@ -109,7 +109,7 @@ If you need a more robust shop, I recommend checking out [OFFLINE.Mall](https://
 - Stripe Checkout Support. Just add your keys
 - Stripe Webhooks Support (Also required). Make sure you add your Webhook Secret
 - Variants
-  - Quantity is not autmatically updated for Variants.
+  - Quantity is not automatically updated for Variants.
 - Simple Products.
   - Quantity is automatically updated on `checkout.session.completed`.
 - Support for Categories out of the box. 
@@ -138,6 +138,13 @@ You can update the icon set by using the `update_icons.sh` script in the `script
 - Grab the generated `bootstrap-icons.json` file and import it via Tailor
 
 This script will run under Ubuntu 18.04+ but other versions are not tested. Use at your own risk.
+
+### Forms
+This theme has a form builder built in. It includes Basic validation and recaptcha (v2 Checkbox only). In order to use the forms, build one in the backend. After that, add a form builder item to the website and choose the form you would like to display. 
+
+Each form is idempotent. A random string is generated upon every refresh. It is used for ids and special functions. 
+
+The recaptcha api js file will load once you set your keys in the backend. You can get your keys [here](https://www.google.com/recaptcha/admin#list)
 
 #### Contributing
 If you would like to contribute to this theme, please submit a pull request. Any help is welcome!
