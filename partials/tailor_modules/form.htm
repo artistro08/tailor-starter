@@ -1,0 +1,169 @@
+[global settings]
+handle = "Content\Settings"
+
+[viewBag]
+==
+<?php
+    function onStart() {
+        $this['backend_uri'] = Backend::url('tailor/globals/content_settings#primarytab-forms');
+    }
+?>
+==
+{% set fields = content.form.fields %}
+{% set form = content.form %}
+{% set form_id = content.form.slug|replace({"-" : '_'}) ~ '_' ~ random() %}
+<form
+        id="{{ form_id }}"
+        data-request="onFormSubmit"
+        data-request-data="form_id: {{ content.form.id }}, success_message: '{{ content.form.success_message|escape('js') }}', submitted: true"
+        data-request-update="'tailor_modules/form': '#{{ form_id }}'"
+        {% if form.enable_recaptcha %}
+            data-request-error="recaptcha_{{ form_id }}_error()"
+        {% endif %}
+>
+    {% if submitted %}
+        {% flash %}
+            <div class="alert alert-{{ type }} mb-0" role="alert">
+                {{ message }}
+            </div>
+        {% endflash %}
+    {% endif %}
+    
+    <div class="row">
+        {% for field in fields %}
+            <div class="col-lg-{{ field.attributes.width == 'half_width' ? '6' : '12' }} mb-2">
+                {% if field.attributes.field_type == 'text' %}
+                    <label class="form-label" for="{{ field.slug }}">
+                        {{ field.label }}
+                        {% set index_required = 0 %}
+                        {% for validation in field.validation_rules %}
+                            {% if (validation.attributes.type == "required" and index_required == 0)  %}
+                                <span class="text-danger">*</span>
+                                {% set index_required = index_required+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </label>
+                    <input
+                            {% set index_number = 0 %}
+                            {% set field_type = "text" %}
+                            {% for validation in field.validation_rules %}
+                                {% if (validation.attributes.type == "numeric" and index_number == 0)  %}
+                                    {% set field_type = "number" %}
+                                    {% set index_number = index_number+1 %}
+                                {% endif %}
+                            {% endfor %}
+                            type="{{ field_type }}"
+                            id="{{ field.slug }}"
+                            name="{{ field.slug }}"
+                            class="form-control"
+                            placeholder="{{ field.placeholder }}"
+                    >
+                {% endif %}
+                {% if field.attributes.field_type == 'textarea' %}
+                    <label class="form-label" for="{{ field.slug }}">
+                        {{ field.label }}
+                        {% set index = 0 %}
+                        {% for validation in field.validation_rules %}
+                            {% if (validation.attributes.type == "required" and index == 0)  %}
+                                <span class="text-danger">*</span>
+                                {% set index = index+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </label>
+                    <textarea
+                            name="{{ field.slug }}"
+                            class="form-control"
+                            placeholder="{{ field.placeholder }}"
+                            id="{{ field.slug }}"
+                            {{ field.attributes.required == true ? 'required' }}
+                            
+                    ></textarea>
+                {% endif %}
+                {% if field.attributes.field_type == 'checkbox' %}
+                    <div class="form-check">
+                        <input
+                                name="{{ field.slug }}"
+                                class="form-check-input"
+                                type="checkbox"
+                                id="{{ field.slug }}"
+                                {{ field.attributes.required == true ? 'required' }}
+                        >
+                        <label class="form-check-label" for="{{ field.slug }}">
+                            {{ field.label }}
+                            {% set index = 0 %}
+                            {% for validation in field.validation_rules %}
+                                {% if (validation.attributes.type == "required" and index == 0)  %}
+                                    <span class="text-danger">*</span>
+                                    {% set index = index+1 %}
+                                {% endif %}
+                            {% endfor %}
+                        </label>
+                    </div>
+                {% endif %}
+                {% if field.attributes.field_type == 'select' %}
+                    <label class="form-label" for="{{ field.slug }}">
+                        {{ field.label }}
+                        {% set index = 0 %}
+                        {% for validation in field.validation_rules %}
+                            {% if (validation.attributes.type == "required" and index == 0)  %}
+                                <span class="text-danger">*</span>
+                                {% set index = index+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </label>
+                    <select
+                            name="{{ field.slug }}"
+                            class="form-select"
+                            aria-label="{{ field.label }}"
+                            id="{{ field.slug }}"
+                            {{ field.attributes.required == true ? 'required' }}
+                    >
+                        <option selected disabled>{{ field.placeholder }}</option>
+                        {% for option in field.options %}
+                            <option value="{{ option.label }}">{{ option.label }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if form.enable_recaptcha == true %}
+            {% if (settings.recaptcha_site_key|length and settings.recaptcha_secret_key|length) %}
+                <div class="col-12">
+                    <div class="mb-4" id="recaptcha_{{ form_id }}_element"></div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-warning">
+                        You have reCAPTCHA enabled, but you haven't set your keys.
+                        Please set them in the <a href="{{ backend_uri }}" target="blank">forms settings.</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if fields is not empty %}
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        {% endif %}
+    </div>
+</form>
+{% if form.enable_recaptcha == true %}
+    {% if (settings.recaptcha_site_key|length and settings.recaptcha_secret_key|length) %}
+        {% put recaptcha_variables %}
+            var recaptcha_{{ form_id }}_element;
+        {% endput %}
+        {% put recaptcha %}
+            recaptcha_{{ form_id }}_element = grecaptcha.render('recaptcha_{{ form_id }}_element', {
+                'sitekey' : '{{ settings.recaptcha_site_key }}',
+            });
+        {% endput %}
+        {% put scripts %}
+            <script>
+                function recaptcha_{{ form_id }}_error() {
+                    grecaptcha.reset(recaptcha_{{ form_id }}_element);
+                }
+            </script>
+        {% endput %}
+    {% endif %}
+{% endif %}

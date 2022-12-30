@@ -2,6 +2,15 @@
 handle = "Content\Settings"
 ==
 {% put scripts %}
+    {% if (settings.recaptcha_site_key|length and settings.recaptcha_secret_key|length) %}
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+        <script>
+            {% placeholder recaptcha_variables %}
+            var onloadCallback = function() {
+                {% placeholder recaptcha %}
+            }
+        </script>
+    {% endif %}
     <script>
         const mediaQuery = window.matchMedia('(max-width: 767px)');
         function onCartUpdate() {

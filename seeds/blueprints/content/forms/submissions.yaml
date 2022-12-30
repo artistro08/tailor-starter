@@ -1,0 +1,33 @@
+uuid: 912c5956-878d-11ed-9699-df30dbea9de3
+handle: Content\Forms\Submissions
+type: stream
+name: Submissions
+drafts: false
+multisite: false
+
+navigation:
+  icon: icon-inbox
+  parent: Content\Forms
+  order: 12
+
+customMessages:
+  buttonCreate: New Submission
+
+fields:
+  form:
+    type: entries
+    source: Content\Forms
+    label: Submissions From
+    commentAbove: The form that this data came from.
+    displayMode: recordFinder
+    maxItems: 1
+    disabled: true
+  data:
+    type: textarea
+    label: Submission Data
+    disabled: true
+    column:
+      type: summary
+      label: Submission Data
+    
+    
