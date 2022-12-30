@@ -56,7 +56,6 @@ fields:
             textarea: Multi-line Text
             checkbox: Checkbox
             select: Dropdown
-            file: File Upload
         options:
           type: repeater
           label: Field Options

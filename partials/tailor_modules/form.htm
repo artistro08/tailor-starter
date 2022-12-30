@@ -139,25 +139,6 @@ handle = "Content\Settings"
                         {% endfor %}
                     </select>
                 {% endif %}
-                {% if field.attributes.field_type == 'file' %}
-                    <label class="form-label" for="{{ field.slug }}">
-                        {{ field.label }}
-                        {% set index = 0 %}
-                        {% for validation in field.validation_rules %}
-                            {% if (validation.attributes.type == "required" and index == 0)  %}
-                                <span class="text-danger">*</span>
-                                {% set index = index+1 %}
-                            {% endif %}
-                        {% endfor %}
-                    </label>
-                    <input
-                            name="{{ field.slug }}"
-                            class="form-control"
-                            type="file"
-                            id="{{ field.slug }}"
-                            {{ field.attributes.required == true ? 'required' }}
-                    >
-                {% endif %}
             </div>
         {% endfor %}
         {% if form.enable_recaptcha == true %}
