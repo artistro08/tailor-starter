@@ -1,0 +1,177 @@
+uuid: f04b58ea-6d80-11ed-aa98-d348ccf890ef
+handle: Content\Forms
+type: stream
+name: Forms
+drafts: false
+multisite: sync
+
+primaryNavigation:
+  label: Forms
+  icon: icon-inbox
+  order: 140
+
+navigation:
+  icon: icon-list
+  parent: Content\Forms
+  order: 12
+
+customMessages:
+  buttonCreate: New Form
+
+fields:
+  fields:
+    type: repeater
+    prompt: Add New Field
+    label: Fields
+    displayMode: builder
+    titleFrom: Label
+    tab: Form Fields
+    form:
+      fields:
+        label:
+          label: Field Label
+          type: text
+          commentAbove: The name of the field
+          validation: required
+          tab: Form Fields
+          span: left
+        slug:
+          type: text
+          label: Field Slug
+          commentAbove: Used to identify the field in the form. If Unsure, match it to the label with letters, numbers, and dashes only.
+          span: right
+          validation: alpha_dash|required
+          preset:
+            field: label
+            type: slug
+        field_type:
+          label: Field Type
+          validation: required
+          type: dropdown
+          tab: Form Fields
+          span: full
+          commentAbove: Choose the type of this field.
+          options:
+            text: Text
+            textarea: Multi-line Text
+            checkbox: Checkbox
+            select: Dropdown
+        placeholder:
+          type: text
+          label: Placeholder
+          commentAbove: The text that appears inside the field.
+          trigger:
+            action: show
+            field: field_type
+            condition: value[select][text][dropdown][textarea]
+        options:
+          type: repeater
+          label: Field Options
+          commentAbove: Add items to the dropdown
+          form:
+            fields:
+              label:
+                type: text
+                label: Option Name
+                commentAbove: The name of the option
+                validation: required
+                span: left
+              slug:
+                type: text
+                label: Option Slug
+                commentAbove: Used to identify the option in the dropdown. If Unsure, match it to the label with letters, numbers, and dashes only.
+                validation: alpha_dash|required
+                span: right
+                preset:
+                  field: label
+                  type: slug
+          trigger:
+            action: show
+            field: field_type
+            condition: value[select]
+        validation:
+          label: Enable Field Validation
+          comment: Enable this field to be required with rules you specify
+          type: switch
+          tab: Form Fields
+        validation_rules:
+          label: Validation Rules
+          type: repeater
+          tab: Form Fields
+          form:
+            fields:
+              type:
+                type: dropdown
+                label: Validation Type
+                span: left
+                options:
+                  required: Required
+                  email: Email
+                  numeric: Numeric
+              error_message:
+                span: right
+                label: Validation Error Message
+                type: text
+                placeholder: Please enter valid data
+                default: Please enter valid data
+          trigger:
+            action: show
+            field: validation
+            condition: checked
+        hr_1:
+          type: ruler
+          tab: Form Fields
+        width:
+          label: Field Width
+          type: dropdown
+          commentAbove: Choose how wide this field should be
+          tab: Form Fields
+          options:
+            full_width: Full Width
+            half_width: Half Width
+  success_message:
+    label: Success Message
+    type: textarea
+    tab: Manage
+    commentAbove: The message you want to display upon successful submission of the form
+    placeholder: Thank you! We have received your submission.
+    default: Thank you! We have received your submission.
+  enable_recaptcha:
+    label: Enable reCAPTCHA
+    type: switch
+    tab: Manage
+    comment: Enable reCAPTCHA spam prevention to prevent unwanted form submissions. Make sure you have <a href="../../../system/settings/update/blakejones/magicforms/config#primarytab-recaptcha">reCAPTCHA keys</a> set
+    commentHtml: true
+    span: right
+    spanClass: col-lg-2 col-12
+  enable_notifications:
+    label: Enable Notifications
+    tab: Manage
+    comment: Enable notifications for this form
+    type: switch
+    span: left
+    spanClass: col-lg-2 col-12
+  recipients:
+    label: Recipients
+    tab: Manage
+    type: repeater
+    commentAbove: Add recipients for this form. If none is set, it will default to the notification email in the settings.
+    span: full
+    icon: icon-email
+    form:
+      fields:
+        email:
+          label: Email
+          type: text
+          validation: required|email
+          span: left
+        name:
+          label: Recipient Name
+          type: text
+          validation: required
+          span: right
+    trigger:
+      action: show
+      field: enable_notifications
+      condition: checked
+      

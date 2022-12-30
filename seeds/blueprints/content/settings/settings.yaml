@@ -477,27 +477,33 @@ fields:
   notification_email:
     type: text
     label: Notification Email
-    commentAbove: Specify an email to send order notifications to.
-    tab: Notifications
+    commentAbove: Specify an email to send email notifications to. Form Submissions default to this email
+    tab: Mail Notifications
     span: left
     validation:
       - email
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
-    trigger:
-      action: show
-      field: enable_shop
-      condition: checked
   notification_email_recipient_name:
     type: text
     label: Recipient Name
-    tab: Notifications
-    commentAbove: The name of the person receiving the notification email
+    tab: Mail Notifications
+    commentAbove: The name of the person receiving the notification email. Form Submissions default to this name
     span: right
     validation:
       - required_with:notification_email
-    trigger:
-      action: show
-      field: enable_shop
-      condition: checked
+  recaptcha_section:
+    type: section
+    label: Recaptcha Keys
+    comment: Recaptcha helps limit spam from forms in the backend. Only v2 is supported. You can get your keys <a href="https://www.google.com/recaptcha/admin#list">here</a>
+    commentHtml: true
+    tab: Forms
+  recaptcha_site_key:
+    type: text
+    label: Recaptcha Site Key
+    tab: Forms
+  recaptcha_secret_key:
+    type: text
+    label: Recaptcha Secret Key
+    tab: Forms

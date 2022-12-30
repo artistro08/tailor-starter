@@ -11,6 +11,7 @@
     "require": {
         "composer/installers": "~1.0",
         "stripe/stripe-php": "^8.10",
+        "google/recaptcha": "^1.2",
         "artistro08/tailorstarter-plugin": "^1.0"
     }
 
