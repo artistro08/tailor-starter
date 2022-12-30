@@ -13,7 +13,6 @@ use Stripe\Stripe as Stripe;
 use Stripe\Checkout as Checkout;
 use Tailor\Models\GlobalRecord as GlobalRecord;
 use Tailor\Models\EntryRecord as EntryRecord;
-use Mail;
 
 function onRemoveFromCart() {
     $cart_session = Session::get('cart_items');
@@ -154,6 +153,7 @@ function onFormSubmit() {
     $form_success_message = $form_input["success_message"];
     $form = EntryRecord::inSection('Content\Forms')->find($form_id);
     $submission = EntryRecord::inSection('Content\Forms\Submissions');
+    $settings = GlobalRecord::findForGlobal('Content\Settings');
     $form_validation_rules = [];
     $form_validation_messages = [];
     $form_input_formatted = '';
@@ -215,7 +215,35 @@ function onFormSubmit() {
     
     $submission->save();
 
+    // Send Email
+    $mail_data = [
+        'form_name' => $form->title,
+        'form_data' => $form_input_formatted,
+    ];
+
+    $mail_recipients = [];
+    
+
+    if(!$form->recipients->isEmpty()){
+        foreach ($form->recipients as $recipient) {
+            $mail_recipients[$recipient->email] = $recipient->name;
+        }
+    } else {
+        $mail_recipients = [
+            $settings->notification_email => $settings->notification_email_recipient_name
+        ];
+    }
+
+    Mail::send('artistro08.tailorstarter::mail.form_submission', $mail_data, function($message) use ($mail_recipients, $form) {
+        foreach ($mail_recipients as $email => $name) {
+            $message->to($email, $name);
+            $message->subject('New Form Submission from ' . $form->title);
+        }
+    });
+
     Flash::success($form_success_message);
+
+    $this['submitted'] = $form_input['submitted'];
 
 }
 ?>

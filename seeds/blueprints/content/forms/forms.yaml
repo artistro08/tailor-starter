@@ -151,19 +151,25 @@ fields:
     type: switch
     span: left
     spanClass: col-lg-2 col-12
-  emails:
-    label: Emails
+  recipients:
+    label: Recipients
     tab: Manage
     type: repeater
-    commentAbove: Add email recipients for this form.
+    commentAbove: Add recipients for this form. If none is set, it will default to the notification email in the settings.
     span: full
     icon: icon-email
     form:
       fields:
         email:
-          label: Email Recipient
+          label: Email
           type: text
           validation: required|email
+          span: left
+        name:
+          label: Recipient Name
+          type: text
+          validation: required
+          span: right
     trigger:
       action: show
       field: enable_notifications
