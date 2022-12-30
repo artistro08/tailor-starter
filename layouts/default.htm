@@ -190,6 +190,14 @@ function onFormSubmit() {
     $form_validation_rules = array_merge(...$form_validation_rules);
     $form_validation_messages = array_merge(...$form_validation_messages);
 
+    $form_unwanted_fields = [
+        "form_id",
+        "g-recaptcha-response",
+        "success_message",
+        "submitted",
+        "_preview_token"
+    ];
+
     // Validate Fields
     $validation = Validator::make(request()->all(), $form_validation_rules, $form_validation_messages);
 
@@ -199,7 +207,7 @@ function onFormSubmit() {
     
     foreach ($form_input as $key => $value) {
         
-        if(($key != "g-recaptcha-response") && ($key != "form_id") && ($key != "success_message")) {
+        if(!in_array($key, $form_unwanted_fields)) {
             if($key == array_key_first($form_input)){
                 $form_name = (!empty($value)) ? $value : $form_name;
             }
