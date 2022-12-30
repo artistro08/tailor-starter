@@ -13,6 +13,7 @@ use Stripe\Stripe as Stripe;
 use Stripe\Checkout as Checkout;
 use Tailor\Models\GlobalRecord as GlobalRecord;
 use Tailor\Models\EntryRecord as EntryRecord;
+use Mail;
 
 function onRemoveFromCart() {
     $cart_session = Session::get('cart_items');
