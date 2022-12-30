@@ -50,3 +50,4 @@ v3.1.2: Added option to embed code across front facing pages (Products, product,
 v4.0.0: Added form submissions via AJAX & Tailor.
 v4.0.1: Fix enable notifications switch not working.
 v4.0.2: Remove Small Contact Form dependency
+v4.0.3: Update form documentation
