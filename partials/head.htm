@@ -7,56 +7,58 @@ handle = "Content\Settings"
 
 {% if section is empty  %}
     
-    {# Primary Meta Tags #}
-    <title>{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}</title>
-    <meta name="title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
-    <meta name="description" content="{{ this.page.meta_description }}">
+    {% if this.page.url == '/' %}
     
-    
-    {# Open Graph / Facebook #}
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ ''|app }}">
-    <meta property="og:title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
-    <meta property="og:description" content="{{ this.page.meta_description }}">
-    
-    {# Twitter #}
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ ''|app }}">
-    <meta property="twitter:title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
-    <meta property="twitter:description" content="{{ this.page.meta_description }}">
-
-{% elseif this.page.url == '/' %}
-    {% set section = settings.homepage %}
-    {# Primary Meta Tags #}
-    <title>{{ section.meta_title ~ ' - ' ~ settings.website_name }}</title>
-    <meta name="title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
-    <meta name="description" content="{{ section.meta_description }}">
-    {% if section.meta_keywords|length %}
-        <meta name="keywords" content="{{ section.meta_keywords }}">
-    {% endif %}
-    
-    {# Robot Info #}
-    {% if section.robots|length %}
-        <meta name="robots" content="{% for item in section.robots %}{{ item }}{{ not loop.last ? ', ' }}{% endfor %}">
-    {% endif %}
-    
-    
-    {# Open Graph / Facebook #}
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ ''|app }}">
-    <meta property="og:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
-    <meta property="og:description" content="{{ section.meta_description }}">
-    {% if section.sharing_image|length %}
-        <meta property="og:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
-    {% endif %}
-    
-    {# Twitter #}
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ ''|app }}">
-    <meta property="twitter:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
-    <meta property="twitter:description" content="{{ section.meta_description }}">
-    {% if section.sharing_image|length %}
-        <meta property="twitter:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+        {% set section = settings.homepage %}
+        {# Primary Meta Tags #}
+        <title>{{ section.meta_title ~ ' - ' ~ settings.website_name }}</title>
+        <meta name="title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
+        <meta name="description" content="{{ section.meta_description }}">
+        {% if section.meta_keywords|length %}
+            <meta name="keywords" content="{{ section.meta_keywords }}">
+        {% endif %}
+        
+        {# Robot Info #}
+        {% if section.robots|length %}
+            <meta name="robots" content="{% for item in section.robots %}{{ item }}{{ not loop.last ? ', ' }}{% endfor %}">
+        {% endif %}
+        
+        
+        {# Open Graph / Facebook #}
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ ''|app }}">
+        <meta property="og:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
+        <meta property="og:description" content="{{ section.meta_description }}">
+        {% if section.sharing_image|length %}
+            <meta property="og:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+        {% endif %}
+        
+        {# Twitter #}
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ ''|app }}">
+        <meta property="twitter:title" content="{{ section.meta_title ~ ' - ' ~ settings.website_name }}">
+        <meta property="twitter:description" content="{{ section.meta_description }}">
+        {% if section.sharing_image|length %}
+            <meta property="twitter:image" content="{{ section.sharing_image|media|resize(1200, 627, {mode: 'crop'}) }}">
+        {% endif %}
+    {% else %}
+        {# Primary Meta Tags #}
+        <title>{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}</title>
+        <meta name="title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
+        <meta name="description" content="{{ this.page.meta_description }}">
+        
+        
+        {# Open Graph / Facebook #}
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ ''|app }}">
+        <meta property="og:title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
+        <meta property="og:description" content="{{ this.page.meta_description }}">
+        
+        {# Twitter #}
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ ''|app }}">
+        <meta property="twitter:title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
+        <meta property="twitter:description" content="{{ this.page.meta_description }}">
     {% endif %}
 
 {% else %}
