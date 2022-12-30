@@ -48,3 +48,4 @@ v3.1.0: Updated code to be more consistent. Fixed event export issue. Added mult
 v3.1.1: Added global option to embed code across pages. Added option to page builder to disable spacing on sections and columns. Added option to hide event times individually for each event.
 v3.1.2: Added option to embed code across front facing pages (Products, product, page, events).
 v4.0.0: Added form submissions via AJAX & Tailor.
+v4.0.1: Fix enable notifications switch not working.

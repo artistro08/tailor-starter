@@ -237,17 +237,24 @@ function onFormSubmit() {
             $mail_recipients[$recipient->email] = $recipient->name;
         }
     } else {
-        $mail_recipients = [
-            $settings->notification_email => $settings->notification_email_recipient_name
-        ];
+        if((!empty($settings->notification_email) && (!empty($settings->notification_email_recipient_name)))) {
+            $mail_recipients = [
+                $settings->notification_email => $settings->notification_email_recipient_name
+            ];
+        }
+        
     }
 
-    Mail::send('artistro08.tailorstarter::mail.form_submission', $mail_data, function($message) use ($mail_recipients, $form) {
-        foreach ($mail_recipients as $email => $name) {
-            $message->to($email, $name);
-            $message->subject('New Form Submission from ' . $form->title);
-        }
-    });
+    if(($form->enable_notifications) && (!empty($mail_recipients))) {
+
+        Mail::send('artistro08.tailorstarter::mail.form_submission', $mail_data, function($message) use ($mail_recipients, $form) {
+            foreach ($mail_recipients as $email => $name) {
+                $message->to($email, $name);
+                $message->subject('New Form Submission from ' . $form->title);
+            }
+        });
+
+    }
 
     Flash::success($form_success_message);
 
