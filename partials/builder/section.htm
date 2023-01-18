@@ -105,7 +105,7 @@ handle = "Content\Settings"
                             {% set month_day_and_time = "M d - g:i A" %}
                             {% set month_day_year_and_time = "M d, Y - g:i A" %}
                             
-                            {% set today = 'now'|date('Y-m-d h:i:s') %}
+                            {% set today = 'now'|date('Y-m-d h:i:s', this.site.timezone) %}
                             {% if column.show == 'upcoming' %}
                                 {% set events = events.whereDate('date', '>=', today).get() %}
                             {% endif %}
@@ -139,16 +139,17 @@ handle = "Content\Settings"
                                                 <a href="{{ 'event'|page({ event: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
                                                     {% if event.is_recurring %}
                                                         <span class="text-center fw-bold">
-                                                            {{ event.date|date('U') > "now"|date('U') ? "Starts" : "Started" }}<br>
+                                                            {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts" : "Started" }}<br>
                                                         </span>
                                                     {% endif %}
                                                     <span class="display-4 mx-auto text-center">
-                                                        <span class="text-center">{{ event.date|date(month_only) }}</span>
-                                                        {{ event.date|date(day_only) }}
+                                                        <span class="text-center">{{ event.date|date(month_only, this.site.timezone) }}</span>
+                                                        {{ event.date|date(day_only, this.site.timezone) }}
                                                     </span>
                                                     <span class="text-center fs-5 fw-bold">
-                                                    {{ event.date|date(time_only) }}{{ event.end_date|date("Y-m-d") == event.date|date("Y-m-d") ? ' - ' ~ event.end_date|date(time_only) }}
-                                                </span>
+                                                        {{ event.date|date(time_only, this.site.timezone) }}{{ event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) ? ' - ' ~ event.end_date|date(time_only, this.site.timezone) }}
+                                                        {{ event.date|date('T', this.site.timezone) }}
+                                                    </span>
                                                 </a>
                                             </div>
                                             <div class="col-12 col-lg-9 card-body">
@@ -170,32 +171,36 @@ handle = "Content\Settings"
                                                     {% if event.is_recurring %}
                                                         {# Display Date Logic #}
                                                         {% if event.recurrence == "daily" %}
-                                                            Every Day {{ event.date|date(time_only) }}
+                                                            Every Day {{ event.date|date(time_only, this.site.timezone) }}
                                                         {% elseif event.recurrence == "weekly" %}
-                                                            Every Week {{ event.date|date(day_and_time) }}
+                                                            Every Week {{ event.date|date(day_and_time, this.site.timezone) }}
                                                         {% elseif event.recurrence == "biWeekly" %}
-                                                            Every Other Week {{ event.date|date(day_and_time) }}
+                                                            Every Other Week {{ event.date|date(day_and_time, this.site.timezone) }}
                                                         {% elseif event.recurrence == "monthly" %}
-                                                            Every Month {{ event.date|date(day_month_and_time) }}
+                                                            Every Month {{ event.date|date(day_month_and_time, this.site.timezone) }}
                                                         {% elseif event.recurrence == "biMonthly" %}
-                                                            Every Other Month {{ event.date|date(day_month_and_time) }}
+                                                            Every Other Month {{ event.date|date(day_month_and_time, this.site.timezone) }}
                                                         {% elseif event.recurrence == "yearly" %}
-                                                            Every Year {{ event.date|date(month_day_and_time) }}
+                                                            Every Year {{ event.date|date(month_day_and_time, this.site.timezone) }}
                                                         {% elseif event.recurrence == "custom" %}
                                                             Recurring Event
                                                         {% endif %}
                                                     {% else %}
-                                                        {{ event.date|date(month_day_year_and_time) }}
+                                                        {{ event.date|date(month_day_year_and_time, this.site.timezone) }}
+                                                        {% if event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) %}
+                                                            - {{ event.end_date|date(time_only, this.site.timezone) }}
+                                                        {% endif %}
                                                     {% endif %}
+                                                    {{ event.date|date('T', this.site.timezone) }}
                                             </span>
                                                 {% if event.end_date|length %}
-                                                    {% if event.end_date|date("Y-m-d") != event.date|date("Y-m-d") %}
+                                                    {% if event.end_date|date("Y-m-d", this.site.timezone) != event.date|date("Y-m-d", this.site.timezone) %}
                                                         <span class="mb-1 badge bg-primary rounded-pill">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-2" viewBox="0 0 16 16">
                                                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
                                                             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
                                                         </svg>
-                                                        Ends: {{ event.end_date|date(month_day_year_and_time) }}
+                                                        Ends: {{ event.end_date|date(month_day_year_and_time, this.site.timezone) }}
                                                     </span>
                                                     {% endif %}
                                                 {% endif %}
