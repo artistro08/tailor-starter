@@ -76,23 +76,27 @@ handle = "Content\Settings"
                                 {% if event.is_recurring %}
                                     {# Display Date Logic #}
                                     {% if event.recurrence == "daily" %}
-                                        Every Day - {{ event.date|date(time_only) }}
+                                        Every Day - {{ event.date|date(time_only, this.site.timezone) }}
                                     {% elseif event.recurrence == "weekly" %}
-                                        Every Week - {{ event.date|date(day_and_time) }}
+                                        Every Week - {{ event.date|date(day_and_time, this.site.timezone) }}
                                     {% elseif event.recurrence == "biWeekly" %}
-                                        Every Other Week - {{ event.date|date(day_and_time) }}
+                                        Every Other Week - {{ event.date|date(day_and_time, this.site.timezone) }}
                                     {% elseif event.recurrence == "monthly" %}
-                                        Every Month - {{ event.date|date(day_month_and_time) }}
+                                        Every Month - {{ event.date|date(day_month_and_time, this.site.timezone) }}
                                     {% elseif event.recurrence == "biMonthly" %}
-                                        Every Other Month - {{ event.date|date(day_month_and_time) }}
+                                        Every Other Month - {{ event.date|date(day_month_and_time, this.site.timezone) }}
                                     {% elseif event.recurrence == "yearly" %}
-                                        Every Year - {{ event.date|date(month_day_and_time) }}
+                                        Every Year - {{ event.date|date(month_day_and_time, this.site.timezone) }}
                                     {% elseif event.recurrence == "custom" %}
                                         Recurring Event
                                     {% endif %}
                                 {% else %}
-                                    {{ event.date|date(month_day_year_and_time) }}
+                                    {{ event.date|date(month_day_year_and_time, this.site.timezone) }}
                                 {% endif %}
+                                {% if event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) %}
+                                    - {{ event.end_date|date(time_only, this.site.timezone) }}
+                                {% endif %}
+                                {{ event.date|date('T', this.site.timezone) }}
                             </span>
                             {% if event.is_recurring %}
                                 <span class="badge bg-primary rounded-pill mb-3">
@@ -100,17 +104,17 @@ handle = "Content\Settings"
                                         <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
                                         <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
                                     </svg>
-                                    {{ event.date|date('U') > "now"|date('U') ? "Starts:" : "Started:" }} {{ event.date|date(month_day_year_and_time) }}{{ event.end_date|date("Y-m-d") == event.date|date("Y-m-d") ? ' - ' ~ event.end_date|date(time_only) }}
+                                    {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts:" : "Started:" }} {{ event.date|date(month_day_year_and_time, this.site.timezone) }}{{ event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) ? ' - ' ~ event.end_date|date(time_only, this.site.timezone) }}
                                 </span>
                             {% endif %}
                             {% if event.end_date|length %}
-                                {% if event.end_date|date("Y-m-d") != event.date|date("Y-m-d") %}
+                                {% if event.end_date|date("Y-m-d", this.site.timezone) != event.date|date("Y-m-d", this.site.timezone) %}
                                     <span class="badge bg-primary rounded-pill mb-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-1" viewBox="0 0 16 16">
                                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
                                             <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
                                         </svg>
-                                        Ends: {{ event.end_date|date(month_day_year_and_time) }}
+                                        Ends: {{ event.end_date|date(month_day_year_and_time, this.site.timezone) }}
                                     </span>
                                 {% endif %}
                             {% endif %}
@@ -156,10 +160,10 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " day")|date(day_only) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " day")|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " day")|date(month_day_year_and_time) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " day")|date(month_day_year_and_time, this.site.timezone) }}
                                             </div>
                                         </div>
                                     </div>
@@ -177,10 +181,10 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " week")|date(day_only) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " week")|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " week")|date(month_day_year_and_time) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " week")|date(month_day_year_and_time, this.site.timezone) }}
                                             </div>
                                         </div>
                                     </div>
@@ -198,10 +202,10 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date(day_only) }}
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date(month_day_year_and_time) }}
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " weeks")|date(month_day_year_and_time, this.site.timezone) }}
                                             </div>
                                         </div>
                                     </div>
@@ -219,10 +223,10 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " month")|date(day_only) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " month")|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " month")|date(month_day_year_and_time) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " month")|date(month_day_year_and_time, this.site.timezone) }}
                                             </div>
                                         </div>
                                     </div>
@@ -240,10 +244,10 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i*2 ~ " months")|date(day_only) }}
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " months")|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i*2 ~ " months")|date(month_day_year_and_time) }}
+                                                {{ event.date|date_modify("+" ~ i*2 ~ " months")|date(month_day_year_and_time, this.site.timezone) }}
                                             </div>
                                         </div>
                                     </div>
@@ -261,10 +265,10 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " year")|date(day_only) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " year")|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
-                                                {{ event.date|date_modify("+" ~ i ~ " year")|date(month_day_year_and_time) }}
+                                                {{ event.date|date_modify("+" ~ i ~ " year")|date(month_day_year_and_time, this.site.timezone) }}
                                             </div>
                                         </div>
                                     </div>
@@ -278,17 +282,17 @@ handle = "Content\Settings"
                                 <div class="col-12 col-lg-4 my-2">
                                     <div class="row">
                                         <div class="col-3 text-center display-3 align-self-center">
-                                            {{ event.date|date(day_only) }}
+                                            {{ event.date|date(day_only, this.site.timezone) }}
                                         </div>
                                         <div class="col-9 align-self-center">
                                             {% if event.end_date|length %}
-                                                {% if event.end_date|date("Y-m-d") == event.date|date("Y-m-d") %}
-                                                    {{ event.date|date(month_day_year_and_time) }} - {{ event.end_date|date(time_only) }}
+                                                {% if event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) %}
+                                                    {{ event.date|date(month_day_year_and_time, this.site.timezone) }} - {{ event.end_date|date(time_only, this.site.timezone) }}
                                                 {% else %}
-                                                    Starts: {{ event.date|date(month_day_year_and_time) }}<br>Ends: {{ event.end_date|date(month_day_year_and_time) }}
+                                                    Starts: {{ event.date|date(month_day_year_and_time, this.site.timezone) }}<br>Ends: {{ event.end_date|date(month_day_year_and_time, this.site.timezone) }}
                                                 {% endif %}
                                             {% else %}
-                                                {{ event.date|date(month_day_year_and_time) }}
+                                                {{ event.date|date(month_day_year_and_time, this.site.timezone) }}
                                             {% endif %}
                                         </div>
                                     </div>
@@ -297,17 +301,17 @@ handle = "Content\Settings"
                                     <div class="col-12 col-lg-4 my-2">
                                         <div class="row">
                                             <div class="col-3 text-center display-3 align-self-center">
-                                                {{ event.date|date(day_only) }}
+                                                {{ event.date|date(day_only, this.site.timezone) }}
                                             </div>
                                             <div class="col-9 align-self-center">
                                                 {% if event.end_date|length %}
-                                                    {% if event.end_date|date("Y-m-d") == event.date|date("Y-m-d") %}
-                                                        {{ event.date|date(month_day_year_and_time) }} - {{ event.end_date|date(time_only) }}
+                                                    {% if event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) %}
+                                                        {{ event.date|date(month_day_year_and_time, this.site.timezone) }} - {{ event.end_date|date(time_only, this.site.timezone) }}
                                                     {% else %}
-                                                        Starts: {{ event.date|date(month_day_year_and_time) }}<br>Ends: {{ event.end_date|date(month_day_year_and_time) }}
+                                                        Starts: {{ event.date|date(month_day_year_and_time, this.site.timezone) }}<br>Ends: {{ event.end_date|date(month_day_year_and_time, this.site.timezone) }}
                                                     {% endif %}
                                                 {% else %}
-                                                    {{ event.date|date(month_day_year_and_time) }}
+                                                    {{ event.date|date(month_day_year_and_time, this.site.timezone) }}
                                                 {% endif %}
                                             </div>
                                         </div>
