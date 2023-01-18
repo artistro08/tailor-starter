@@ -106,7 +106,7 @@ handle = "Content\Settings"
                             {% set month_day_year_and_time = "M d, Y - g:i A" %}
                             
                             {% set today = 'now'|date('Y-m-d h:i:s') %}
-                            {% if section.show == 'upcoming' %}
+                            {% if column.show == 'upcoming' %}
                                 {% set events = events.whereDate('date', '>=', today).get() %}
                             {% endif %}
                             {% for event in events %}
