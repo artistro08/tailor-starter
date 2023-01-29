@@ -81,6 +81,13 @@ fields:
     tab: Global Code
     span: row
     spanClass: col-12 col-lg-4
+  products_currency:
+    label: Product Currency
+    commentAbove: Currency label to display product price. Default is $.
+    type: text
+    default: '$'
+    tab: Product Page
+    required: true
   products_header_code:
     label: Product Page Header Code
     type: codeeditor
