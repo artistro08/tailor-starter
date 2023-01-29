@@ -81,6 +81,19 @@ fields:
     tab: Global Code
     span: row
     spanClass: col-12 col-lg-4
+  products_currency_symbol:
+    label: Product Currency
+    commentAbove: Currency label to display product price
+    type: text
+    default: '$'
+    tab: Product Page
+    required: true
+    span: left
+  products_place_symbol_before:
+    label: Place currency symbol before product price
+    type: checkbox
+    default: true
+    tab: Product Page
   products_header_code:
     label: Product Page Header Code
     type: codeeditor
