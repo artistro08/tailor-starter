@@ -15,9 +15,15 @@ handle = "Content\Settings"
     {% set month_day_and_time = "M d - g:i A" %}
     {% set month_day_year_and_time = "M d, Y - g:i A" %}
     
+    {% set query = events %}
     {% if section.show == 'upcoming' %}
-        {% set events = events.whereDate('date', '>=', today).get() %}
+        {% set query = query.whereDate('date', '>=', today) %}
     {% endif %}
+    {% if section.orderBySort != 'none' and section.orderByField != 'none' %}
+        {% set query = query.orderBy(section.orderByField, section.orderBySort) %}
+    {% endif %}
+    {% set events = query.get() %}
+
     <section class="{{ section.style }}">
         <div class="container">
             <div class="row">
