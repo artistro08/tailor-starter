@@ -18,7 +18,7 @@ handle = "Content\Settings"
     {% if section.show == 'upcoming' %}
         {% set events = events.whereDate('date', '>=', today).get() %}
     {% endif %}
-    <section class="{{ section.style }}">
+    <section class="{{ section.style }} {{ global.section_vertical_padding }} {{ section.disable_top_spacing == true ? 'pt-0' }} {{ section.disable_bottom_spacing == true ? 'pb-0' }}">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-10 mx-auto">
