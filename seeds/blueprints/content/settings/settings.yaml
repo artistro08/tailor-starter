@@ -54,6 +54,24 @@ fields:
     default: false
     tab: Settings
     span: right
+  hr_design:
+    type: ruler
+    tab: Settings
+    label: Design Aspect
+  section_vertical_padding:
+    type: dropdown
+    comment: Enable a vertical padding for all the sections.
+    label: Section Vertical Padding
+    default: py-3
+    tab: Settings
+    span: left
+    options:
+        'py-0': 'none'
+        'py-1': 'XS'
+        'py-2': 'SM'
+        'py-3': 'Normal'
+        'py-4': 'Large'
+        'py-5': 'XLarge'
   header_code:
     label: Header Code
     type: codeeditor
