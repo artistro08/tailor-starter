@@ -5,7 +5,7 @@ handle = "Content\Product"
 handle = "Content\Settings"
 ==
 {% if global.enable_shop == true %}
-    <section class="{{ section.style }}">
+    <section class="{{ section.style }} {{ global.section_vertical_padding }} {{ section.disable_top_spacing == true ? 'pt-0' }} {{ section.disable_bottom_spacing == true ? 'pb-0' }}">
         <div class="container">
             <h2 class="text-center mb-4">{{ section.title }}</h2>
             <div class="row row-cols-lg-{{ section.limit }}">
