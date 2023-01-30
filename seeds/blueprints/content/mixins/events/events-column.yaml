@@ -15,8 +15,27 @@ fields:
     options:
       upcoming: Upcoming Events
       all: All Events
+  orderByField:
+    type: dropdown
+    span: left
+    label: Field to sort by
+    commentAbove: Choose to the event field to sort by.
+    options:
+        none: 'Default sorting'
+        title: 'Event title'
+        date: 'Event date'
+  orderBySort:
+    type: dropdown
+    span: right
+    label: Sort Ordering
+    commentAbove: Choose the sort order to use.
+    options:
+        none: 'Default ordering'
+        asc: 'Ascendant'
+        desc: 'Descendant'
   hr_1:
     type: ruler
   column_options:
     type: mixin
     source: Content\ColumnOptions
+  
