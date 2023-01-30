@@ -289,7 +289,7 @@ handle = "Content\Settings"
                 </div>
             </div>
         </header>
-        <section class="">
+        <section class="{{ settings.section_vertical_padding }} {{ section.disable_top_spacing == true ? 'pt-0' }} {{ section.disable_bottom_spacing == true ? 'pb-0' }}">
             <div class="container">
                 {{ product.description|raw }}
             </div>
