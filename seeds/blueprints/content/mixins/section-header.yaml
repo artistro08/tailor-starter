@@ -18,6 +18,15 @@ fields:
       none: None
       light: Light
       dark: Dark
+  size:
+    label: Size
+    type: dropdown
+    span: left
+    commentAbove: Size of the container
+    default: container
+    options:
+      container: Default
+      'container-fluid': Full-width
   disable_top_spacing:
     type: switch
     label: Disable Top Spacing
