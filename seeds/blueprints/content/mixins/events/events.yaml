@@ -9,9 +9,15 @@ fields:
     source: Content\SectionHeader
   show:
     type: dropdown
-    span: full
+    span: left
     label: Events to Show
     commentAbove: Choose to show upcoming or all events.
     options:
       upcoming: Upcoming Events
       all: All Events
+  separate_events_into_past_present:
+    span: right
+    label: Group the events
+    comment: Automatically group the events into 'upcoming' and 'past' categories.
+    type: switch
+    defaut: false
