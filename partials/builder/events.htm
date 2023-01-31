@@ -18,6 +18,10 @@ handle = "Content\Settings"
     {% if section.show == 'upcoming' %}
         {% set events = events.whereDate('date', '>=', today).get() %}
     {% endif %}
+
+    {% set upcomingEventsFlag = false %}
+    {% set pastEventsFlag = false %}
+
     <section class="{{ section.style }}">
         <div class="container">
             <div class="row">
@@ -44,6 +48,20 @@ handle = "Content\Settings"
                                 {% set month_day_year_and_time = "M d, Y" %}
                             {% endif %}
                             <div class="col-12 mb-4">
+                                {% if section.separate_events_into_past_present %}
+                                    {% if not(upcomingEventsFlag) %}
+                                        {% if event.date|date('U') >= "now"|date('U') %}
+                                            <h3>Upcoming events</h3>
+                                            {% set upcomingEventsFlag = true %}
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if not(pastEventsFlag) %}
+                                        {% if event.date|date('U') < "now"|date('U') %}
+                                            <h3>Past events</h3>
+                                            {% set pastEventsFlag = true %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
                                 <div class="card shadow-lg">
                                     <div class="row g-0">
                                         <div class="col-12 col-lg-3 bg-dark position-relative">
