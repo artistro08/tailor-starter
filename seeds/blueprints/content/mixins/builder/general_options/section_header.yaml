@@ -4,6 +4,9 @@ type: mixin
 name: Section Header
 
 fields:
+  hr_tab:
+    tab: General
+    type: ruler
   title:
     label: Title
     type: text

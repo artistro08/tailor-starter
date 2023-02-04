@@ -1,0 +1,63 @@
+uuid: d52e596a-a49c-11ed-aa99-4fae4a0d1298
+handle: Content\Hero
+type: mixin
+name: Hero
+fields:
+  hr_tab:
+    tab: General
+    type: ruler
+  title:
+    label: Title
+    commentAbove: Title of this section. Used for organizational purposes.
+    type: text
+    span: full
+    tab: General
+  image:
+    label: Image
+    type: mediafinder
+    commentAbove: Background image to the hero.
+    span: left
+    mode: image
+    maxItems: 1
+    tab: General
+  image_description:
+    label: Image Description
+    type: text
+    commentAbove: The Description of the image. Use for SEO purposes.
+    span: right
+    tab: General
+  position:
+    label: Position
+    type: dropdown
+    commentAbove: The position of the content.
+    span: left
+    default: value[left]
+    tab: General
+    options:
+      left: Left
+      center: Center
+  size:
+    label: Size
+    type: dropdown
+    commentAbove: The size of the content.
+    span: right
+    default: value[normal]
+    tab: General
+    options:
+      normal: Normal
+      small: Small
+  content:
+    label: Content
+    type: richeditor
+    span: full
+    tab: General
+  buttons:
+    type: mixin
+    source: Content\Buttons
+    commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
+    tab: General
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced

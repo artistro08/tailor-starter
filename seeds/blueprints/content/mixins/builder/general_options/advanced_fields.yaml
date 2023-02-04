@@ -6,9 +6,10 @@ name: Advanced Fields
 fields:
   css_classes:
     type: taglist
-    label: CSS Class
+    label: CSS Classes
     commentAbove: Specify CSS classes for this section. Separate them with a comma.
     span: left
+    tab: Advanced
   html_anchor:
     type: text
     label: ID/Anchor
@@ -16,3 +17,4 @@ fields:
     commentHtml: true
     validation: alpha_dash
     span: right
+    tab: Advanced
