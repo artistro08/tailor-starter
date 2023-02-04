@@ -7,7 +7,7 @@ handle = "Content\Product"
 [global settings]
 handle = "Content\Settings"
 ==
-<section class="{{ section.style == 'light' ? 'bg-light' }}{{ section.style == 'dark' ? 'bg-dark' }} {{ section.disable_top_spacing == true ? 'pt-0' }} {{ section.disable_bottom_spacing == true ? 'pb-0' }}">
+<section class="{{ section.style == 'light' ? 'bg-light' }}{{ section.style == 'dark' ? 'bg-dark text-white' }} {{ section.disable_top_spacing == true ? 'pt-0' }} {{ section.disable_bottom_spacing == true ? 'pb-0' }}">
     <div class="container">
         <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto {{ section.reverse_columns_on_mobile ? 'flex-lg-row flex-column-reverse' }}">
             {% for column in section.columns %}
