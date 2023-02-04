@@ -1,0 +1,139 @@
+uuid: 1be4d611-a49d-11ed-9116-3a678152e91c
+handle: Content\Section
+type: mixin
+name: Section
+fields:
+  section_header:
+    type: mixin
+    source: Content\SectionHeader
+    tab: General
+  reverse_columns_on_mobile:
+    label: Reverse Columns on Mobile
+    comment: Useful if you have content that needs to be stacked a different way on a phone.
+    type: switch
+    tab: General
+  hr_1:
+    type: ruler
+    tab: General
+  columns:
+    label: Content
+    type: repeater
+    commentAbove: Create content for this section. Each content block uses it's own column. Max of 4 per section.
+    span: full
+    displayMode: builder
+    tab: General
+    groups:
+      content:
+        name: Content
+        icon: icon-align-left
+        description: Add content to your section. Has buttons as well.
+        titleFrom: title
+        fields:
+          column_header:
+            type: mixin
+            label: Column Header
+            source: Content\ColumnHeader
+          content:
+            label: Content
+            type: richeditor
+          hr_1:
+            type: ruler
+          buttons:
+            type: mixin
+            source: Content\Buttons
+            commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
+          hr_2:
+            type: ruler
+          column_options:
+            type: mixin
+            source: Content\ColumnOptions
+      buttons:
+        name: Buttons
+        icon: icon-link
+        titleFrom: title
+        description: Add buttons to your section.
+        fields:
+          column_header:
+            type: mixin
+            label: Column Header
+            source: Content\ColumnHeader
+          buttons:
+            type: mixin
+            source: Content\Buttons
+            commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
+          hr_2:
+            type: ruler
+          column_options:
+            type: mixin
+            source: Content\ColumnOptions
+      image:
+        name: Image
+        icon: icon-image
+        description: Add an image to your section.
+        titleFrom: title
+        fields:
+          column_header:
+            type: mixin
+            label: Column Header
+            source: Content\ColumnHeader
+          hr_1:
+            type: ruler
+          image:
+            label: Image
+            type: mediafinder
+            commentAbove: Pick an image for this column.
+            span: left
+            mode: image
+            maxItems: 1
+          image_description:
+            label: Image Description
+            type: text
+            commentAbove: The Description of the image. Use for SEO purposes.
+            span: right
+          hr_2:
+            type: ruler
+          column_options:
+            type: mixin
+            source: Content\ColumnOptions
+      events:
+        name: Events
+        icon: icon-calendar
+        description: Column with events.
+        titleFrom: title
+        fields:
+          events:
+            type: mixin
+            source: Content\EventsColumn
+      products:
+        name: Products
+        icon: icon-cube
+        description: Column with products.
+        titleFrom: title
+        fields:
+          products:
+            type: mixin
+            source: Content\ProductsColumn
+          hr_1:
+            type: ruler
+          column_options:
+            type: mixin
+            source: Content\ColumnOptions
+      form:
+        name: Form
+        icon: icon-list-alt
+        description: Section with a form.
+        titleFrom: title
+        fields:
+          form:
+            type: mixin
+            source: Content\FormColumn
+          hr_1:
+            type: ruler
+          column_options:
+            type: mixin
+            source: Content\ColumnOptions
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced

@@ -7,14 +7,9 @@ fields:
     type: mixin
     label: Column Header
     source: Content\ColumnHeader
-  show:
-    type: dropdown
-    span: full
-    label: Events to Show
-    commentAbove: Choose to show upcoming or all events.
-    options:
-      upcoming: Upcoming Events
-      all: All Events
+  common_fields:
+    type: mixin
+    source: Content\EventsCommonFields
   hr_1:
     type: ruler
   column_options:

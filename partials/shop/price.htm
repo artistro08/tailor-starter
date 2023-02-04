@@ -1,5 +1,5 @@
 {% if product_total|length %}
-    <span id="price">${{ product_total }}</span>
+    <span id="price">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product_total }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
 {% else %}
-    <span id="price">${{ product.price }}</span>
+    <span id="price">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
 {% endif %}

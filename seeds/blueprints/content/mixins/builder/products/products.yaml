@@ -1,0 +1,17 @@
+uuid: 5b840438-045b-11ed-b844-eeb80db5b5b0
+handle: Content\Products
+type: mixin
+name: Products
+fields:
+  section_header:
+    type: mixin
+    source: Content\SectionHeader
+    tab: General
+  common_fields:
+    type: mixin
+    source: Content\ProductsCommonFields
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced

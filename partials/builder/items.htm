@@ -1,0 +1,20 @@
+{# Hero #}
+{% if section.content_group == 'hero' %}
+    {% partial 'builder/sections/hero' section=section %}
+{% endif %}
+{# Section #}
+{% if section.content_group == 'section' %}
+    {% partial 'builder/sections/section' section=section %}
+{% endif %}
+{# Events #}
+{% if section.content_group == 'events' %}
+    {% partial 'builder/sections/events' section=section %}
+{% endif %}
+{# Products #}
+{% if section.content_group == 'products' %}
+    {% partial 'builder/sections/products' section=section %}
+{% endif %}
+{# Form #}
+{% if section.content_group == 'form' %}
+    {% partial 'builder/sections/form' section=section %}
+{% endif %}

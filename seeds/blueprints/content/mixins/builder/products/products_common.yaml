@@ -1,17 +1,14 @@
-uuid: 5b840438-045b-11ed-b844-eeb80db5b5b0
-handle: Content\Products
+uuid: 7ca214e5-a4b6-11ed-a554-95bb16ce6d01
+handle: Content\ProductsCommonFields
 type: mixin
 name: Products
 fields:
-  section_header:
-    type: mixin
-    label: Section Header
-    source: Content\SectionHeader
   show:
     type: dropdown
     span: left
     label: Products to Show
     commentAbove: Choose what products you want to show.
+    tab: General
     options:
       new: Show New Products
       category: Show Products from a category
@@ -22,6 +19,7 @@ fields:
     commentAbove: How many products would you like to show? Min of 3, max of 5.
     min: 3
     max: 5
+    tab: General
   product_category_filter:
     label: Filter by Category
     type: entries
@@ -30,6 +28,7 @@ fields:
     displayMode: recordfinder
     prompt: Click the %s to find a product category.
     source: Content\Product\Category
+    tab: General
     trigger:
       action: show
       field: show

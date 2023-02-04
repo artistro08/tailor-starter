@@ -1,0 +1,41 @@
+[collection products]
+handle = "Content\Product"
+==
+<div class="row row-cols-lg-{{ column.limit }}">
+    {% if column.show == "new" %}
+        {% for product in products.orderBy('published_at_date').limit(column.limit).get() %}
+            <div class="col mb-4">
+                <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                    <div class="card">
+                        <img
+                                src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                alt="{{ product.title }}" class="card-img-top"
+                        >
+                        <div class="card-body d-flex justify-content-between">
+                            <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                            <span class="text-decoration-none text-dark fw-bold">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if column.show == "category" %}
+        {% for product in products.whereRelation('categories', 'id', column.product_category_filter.id).limit(column.limit).get() %}
+            <div class="col mb-4">
+                <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                    <div class="card">
+                        <img
+                                src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                alt="{{ product.title }}" class="card-img-top"
+                        >
+                        <div class="card-body d-flex justify-content-between">
+                            <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                            <span class="text-decoration-none text-dark fw-bold">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

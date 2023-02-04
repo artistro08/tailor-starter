@@ -1,0 +1,17 @@
+uuid: c808dc5c-083a-11ed-9c1c-11d5091d81d2
+handle: Content\ProductsColumn
+type: mixin
+name: Products
+fields:
+  column_header:
+    type: mixin
+    label: Column Header
+    source: Content\ColumnHeader
+  common_fields:
+    type: mixin
+    source: Content\ProductsCommonFields
+  hr_1:
+    type: ruler
+  column_options:
+    type: mixin
+    source: Content\ColumnOptions

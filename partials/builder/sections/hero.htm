@@ -1,13 +1,28 @@
 [global settings]
 handle = "Content\Settings"
 ==
-<header class="hero {{ section.size == 'small' ? 'small-hero' }} bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4">
-    <div class="container position-relative" style="z-index: 1">
+<header {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
+        class="hero
+               {{ section.size == 'small' ? 'small-hero' }} 
+               bg-dark 
+               overflow-hidden 
+               d-flex 
+               align-items-center 
+               text-light 
+               position-relative 
+               py-4 
+               {% if section.css_classes|length %}
+                    {% for class in section.css_classes|split(',') %}
+                        {{ class ~ ' ' }}
+                    {% endfor %}
+               {% endif %}"
+>
+    <div class="{{ section.container_style }} position-relative" style="z-index: 1">
         <div class="row">
             <div class="col-12 {{ section.position == 'center' ? 'text-center' : 'col-lg-6' }}">
                 {{ section.content|raw }}
                 {% if section.buttons|length %}
-                    {% partial 'builder/buttons' section=section %}
+                    {% partial 'builder/globals/buttons' section=section %}
                 {% endif %}
             </div>
         </div>

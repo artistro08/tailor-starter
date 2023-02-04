@@ -1,0 +1,29 @@
+uuid: b40edf19-a48b-11ed-991f-e92b3ed5c133
+handle: Content\AdvancedFields
+type: mixin
+name: Advanced Fields
+
+fields:
+  css_classes:
+    type: taglist
+    label: CSS Classes
+    commentAbove: Specify CSS classes for this section. Separate them with a comma.
+    span: left
+    tab: Advanced
+  html_anchor:
+    type: text
+    label: ID/Anchor
+    commentAbove: Specify a unique ID for this section. 
+    commentHtml: true
+    validation: alpha_dash
+    span: right
+    tab: Advanced
+  container_style:
+    type: dropdown
+    label: Container Style
+    commentAbove: Choose the container style. Pick "Fluid" for full width.
+    tab: Advanced
+    span: left
+    options: 
+      container: Normal
+      container-fluid: Fluid

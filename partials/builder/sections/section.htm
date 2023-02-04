@@ -1,0 +1,58 @@
+[global settings]
+handle = "Content\Settings"
+==
+<section 
+        {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
+        class="{% if section.css_classes|length %}
+                    {% for class in section.css_classes|split(',') %}
+                        {{ class ~ ' ' }}
+                    {% endfor %}
+               {% endif %}
+               {{ section.style == 'light' ? 'bg-light' }} 
+               {{ section.style == 'dark' ? 'bg-dark text-white' }} 
+               {{ section.disable_top_spacing == true ? 'pt-0' : "pt-4" }} 
+               {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
+>
+    <div class="{{ section.container_style }}">
+        <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto {{ section.reverse_columns_on_mobile ? 'flex-lg-row flex-column-reverse' }}">
+            {% for column in section.columns %}
+                <div class="col {{ column.disable_bottom_spacing == true ? 'mb-0' : 'mb-5' }} {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}">
+                    
+                    {# Content Column Group #}
+                    {% if column.content_group == "content" %}
+                        {% partial 'builder/columns/content' column = column %}
+                    {% endif %}
+                    
+                    {# Button Column Group #}
+                    {% if column.content_group == "buttons" %}
+                        {% partial 'builder/columns/buttons' column = column %}
+                    {% endif %}
+                    
+                    {# Image Column Group #}
+                    {% if column.content_group == "image" %}
+                        {% partial 'builder/columns/image' column = column %}
+                    {% endif %}
+                    
+                    {# Event Column Group #}
+                    {% if settings.enable_events == true %}
+                        {% if column.content_group == "events" %}
+                            {% partial 'builder/columns/events' column = column %}
+                        {% endif %}
+                    {% endif %}
+                    
+                    {# Shop Column Group #}
+                    {% if settings.enable_shop == true %}
+                        {% if column.content_group == "products" %}
+                            {% partial 'builder/columns/products' column = column %}
+                        {% endif %}
+                    {% endif %}
+
+                    {# Form Column Group #}
+                    {% if column.content_group == "form" %}
+                        {% partial 'builder/columns/form' column = column %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

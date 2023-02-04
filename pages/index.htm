@@ -2,10 +2,10 @@ url = "/"
 layout = "default"
 title = "Index"
 
-[global]
+[global settings]
 handle = "Content\Settings"
 ==
-{% set page = global.homepage %}
+{% set page = settings.homepage %}
 
 {% put header_code %}
     {{ page.header_code|raw }}
@@ -19,7 +19,7 @@ handle = "Content\Settings"
     {{ page.footer_code|raw }}
 {% endput %}
 
-{% if global.homepage is empty %}
+{% if settings.homepage is empty %}
     {% do abort('404') %}
 {% else %}
 
@@ -47,26 +47,7 @@ handle = "Content\Settings"
     
     {% if page.entry_type == 'builder' %}
         {% for section in page.builder %}
-            {# Hero #}
-            {% if section.content_group == 'hero' %}
-                {% partial 'builder/hero' section=section %}
-            {% endif %}
-            {# Section #}
-            {% if section.content_group == 'section' %}
-                {% partial 'builder/section' section=section %}
-            {% endif %}
-            {# Events #}
-            {% if section.content_group == 'events' %}
-                {% partial 'builder/events' section=section %}
-            {% endif %}
-            {# Products #}
-            {% if section.content_group == 'products' %}
-                {% partial 'builder/products' section=section %}
-            {% endif %}
-            {# Form #}
-            {% if section.content_group == 'form' %}
-                {% partial 'builder/form' section=section %}
-            {% endif %}
+            {% partial 'builder/items' section=section %}
         {% endfor %}
     {% endif %}
 {% endif %}

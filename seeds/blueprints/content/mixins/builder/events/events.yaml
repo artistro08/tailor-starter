@@ -1,0 +1,16 @@
+uuid: 83b9e12a-00ae-11ed-aa21-40050015ab8d
+handle: Content\Events
+type: mixin
+name: Events
+fields:
+  section_header:
+    type: mixin
+    source: Content\SectionHeader
+  common_fields:
+    type: mixin
+    source: Content\EventsCommonFields
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced
