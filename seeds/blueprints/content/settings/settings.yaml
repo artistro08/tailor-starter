@@ -108,6 +108,24 @@ fields:
     tab: Product Page
     span: row
     spanClass: col-12 col-lg-4
+  currency_symbol:
+    label: Currency Symbol
+    commentAbove: Currency symbol to display alongside the price.
+    type: text
+    default: value[$]
+    tab: Currency
+    required: true
+    span: left
+  currency_symbol_placement:
+    label: Currency Symbol Placement
+    commentAbove: Choose where to place the currency symbol.
+    type: dropdown
+    default: value[before]
+    tab: Currency
+    span: right
+    options:
+      before: Before Price
+      after: After Price
   section:
     type: section
     label: Stripe Keys
