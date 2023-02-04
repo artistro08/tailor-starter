@@ -18,3 +18,12 @@ fields:
     validation: alpha_dash
     span: right
     tab: Advanced
+  container_style:
+    type: dropdown
+    label: Container Style
+    commentAbove: Choose the container style. Pick "Fluid" for full width.
+    tab: Advanced
+    span: left
+    options: 
+      container: Normal
+      container-fluid: Fluid

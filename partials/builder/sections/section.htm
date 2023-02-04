@@ -13,7 +13,7 @@ handle = "Content\Settings"
                {{ section.disable_top_spacing == true ? 'pt-0' : "pt-4" }} 
                {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
 >
-    <div class="container">
+    <div class="{{ section.container_style }}">
         <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto {{ section.reverse_columns_on_mobile ? 'flex-lg-row flex-column-reverse' }}">
             {% for column in section.columns %}
                 <div class="col {{ column.disable_bottom_spacing == true ? 'mb-0' : 'mb-5' }} {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}">

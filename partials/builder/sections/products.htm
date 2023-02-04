@@ -17,7 +17,7 @@ handle = "Content\Settings"
                    {{ section.disable_top_spacing == true ? 'pt-0' : "pt-4" }} 
                    {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
     >
-        <div class="container">
+        <div class="{{ section.container_style }}">
             <h2 class="text-center mb-4">{{ section.title }}</h2>
             <div class="row row-cols-lg-{{ section.limit }}">
                 {% if section.show == "new" %}
