@@ -54,3 +54,4 @@ v4.0.3: Update form documentation
 v4.0.4: Added phone validation to forms
 v4.0.5: Fixed metadata not showing on homepage
 v4.0.6: Various event related fixes
+v5.0.0: Theme restructure, Bug fixes, and filtering for events. Theme files should be much easier to edit now. 
