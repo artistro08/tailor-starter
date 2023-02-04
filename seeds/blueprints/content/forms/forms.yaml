@@ -141,7 +141,7 @@ fields:
     label: Enable reCAPTCHA
     type: switch
     tab: Manage
-    comment: Enable reCAPTCHA spam prevention to prevent unwanted form submissions. Make sure you have <a href="../../../system/settings/update/blakejones/magicforms/config#primarytab-recaptcha">reCAPTCHA keys</a> set
+    comment: Enable reCAPTCHA spam prevention to prevent unwanted form submissions. Make sure you have <a href="../../../tailor/globals/content_settings#primarytab-forms">reCAPTCHA keys</a> set
     commentHtml: true
     span: right
     spanClass: col-lg-2 col-12
