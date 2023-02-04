@@ -5,8 +5,8 @@ name: Form
 fields:
   section_header:
     type: mixin
-    label: Section Header
     source: Content\SectionHeader
+    tab: General
   form:
     type: entries
     label: Form
@@ -14,3 +14,9 @@ fields:
     source: Content\Forms
     displayMode: recordfinder
     maxItems: 1
+    tab: General
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced

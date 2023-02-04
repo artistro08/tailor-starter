@@ -1,0 +1,4 @@
+{{ column.content|raw }}
+{% if column.buttons|length %}
+    {% partial 'builder/buttons' section = column %}
+{% endif %}

@@ -5,7 +5,6 @@ name: Events
 fields:
   section_header:
     type: mixin
-    label: Section Header
     source: Content\SectionHeader
   show:
     type: dropdown
@@ -15,3 +14,8 @@ fields:
     options:
       upcoming: Upcoming Events
       all: All Events
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced
