@@ -7,36 +7,9 @@ fields:
     type: mixin
     source: Content\SectionHeader
     tab: General
-  show:
-    type: dropdown
-    span: left
-    label: Products to Show
-    commentAbove: Choose what products you want to show.
-    tab: General
-    options:
-      new: Show New Products
-      category: Show Products from a category
-  limit:
-    type: number
-    span: right
-    label: Product Limit
-    commentAbove: How many products would you like to show? Min of 3, max of 5.
-    min: 3
-    max: 5
-    tab: General
-  product_category_filter:
-    label: Filter by Category
-    type: entries
-    span: full
-    maxItems: 1
-    displayMode: recordfinder
-    prompt: Click the %s to find a product category.
-    source: Content\Product\Category
-    tab: General
-    trigger:
-      action: show
-      field: show
-      condition: value[category]
+  common_fields:
+    type: mixin
+    source: Content\ProductsCommonFields
   advanced_content:
     type: mixin
     source: Content\AdvancedFields
