@@ -9,12 +9,26 @@ fields:
     source: Content\ColumnHeader
   show:
     type: dropdown
-    span: full
+    span: left
     label: Events to Show
     commentAbove: Choose to show upcoming or all events.
     options:
       upcoming: Upcoming Events
       all: All Events
+  sort_by:
+    type: dropdown
+    span: right
+    label: Sort Events
+    commentAbove: Choose how you would like to sort your events.
+    options:
+      date: Event Date
+      title: Event Title
+  reverse_order:
+    type: switch
+    span: right
+    cssClass: mt-3
+    label: Reverse Order
+    comment: Reverse the sort order of the events (Descending). 
   hr_1:
     type: ruler
   column_options:

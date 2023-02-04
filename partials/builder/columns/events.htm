@@ -1,6 +1,8 @@
 [collection events]
 handle = "Content\Event"
 ==
+{% set today = 'now'|date('Y-m-d h:i:s', this.site.timezone) %}
+
 {% set time_only = "g:i A" %}
 {% set month_only = "M" %}
 {% set day_only = "d" %}
@@ -8,11 +10,21 @@ handle = "Content\Event"
 {% set day_month_and_time = "jS - g:i A" %}
 {% set month_day_and_time = "M d - g:i A" %}
 {% set month_day_year_and_time = "M d, Y - g:i A" %}
+{% set sort_order = column.reverse_order ? 'desc' : 'asc' %}
 
-{% set today = 'now'|date('Y-m-d h:i:s', this.site.timezone) %}
 {% if column.show == 'upcoming' %}
-    {% set events = events.whereDate('date', '>=', today).get() %}
+    {% set events = events.whereDate('date', '>=', today) %}
 {% endif %}
+
+{% if column.sort_by == 'title' %}
+    {% set events = events.orderBy('title', sort_order) %}
+{% endif %}
+
+{% if column.sort_by == 'date' %}
+    {% set events = events.orderBy('date', sort_order) %}
+{% endif %}
+
+{% set events = events.get() %}
 {% for event in events %}
     {% if event.hide_date == true %}
         {% set time_only = "g:i A" %}

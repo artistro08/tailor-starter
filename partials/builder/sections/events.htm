@@ -14,10 +14,21 @@ handle = "Content\Settings"
     {% set day_month_and_time = "jS - g:i A" %}
     {% set month_day_and_time = "M d - g:i A" %}
     {% set month_day_year_and_time = "M d, Y - g:i A" %}
+    {% set sort_order = section.reverse_order ? 'desc' : 'asc' %}
     
     {% if section.show == 'upcoming' %}
-        {% set events = events.whereDate('date', '>=', today).get() %}
+        {% set events = events.whereDate('date', '>=', today) %}
     {% endif %}
+    
+    {% if section.sort_by == 'title' %}
+        {% set events = events.orderBy('title', sort_order) %}
+    {% endif %}
+
+    {% if section.sort_by == 'date' %}
+        {% set events = events.orderBy('date', sort_order) %}
+    {% endif %}
+
+    {% set events = events.get() %}
     <section 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
             class="{% if section.css_classes|length %}
