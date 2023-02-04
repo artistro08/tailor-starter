@@ -1,10 +1,10 @@
 [collection products]
 handle = "Content\Product"
 
-[global]
+[global settings]
 handle = "Content\Settings"
 ==
-{% if global.enable_shop == true %}
+{% if settings.enable_shop == true %}
     <section 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
             class="{% if section.css_classes|length %}

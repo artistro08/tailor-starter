@@ -29,6 +29,36 @@ fields:
     cssClass: mt-3
     label: Reverse Order
     comment: Reverse the sort order of the events (Descending). 
+  show_older_events:
+    type: switch
+    span: left
+    cssClass: mt-3
+    label: Show Older Events
+    comment: Show events that have passed. Also groups the events from past to present and displays a title for each.
+    trigger: 
+      action: show
+      field: show
+      condition: value[upcoming]
+  older_events_title:
+    type: text
+    span: right
+    label: Older Events Title
+    default: Older Events
+    commentAbove: The text displayed right before the older events.
+    trigger:
+      action: show
+      field: show_older_events
+      condition: checked
+  upcoming_events_title:
+    type: text
+    span: left
+    label: Upcoming Events Title
+    default: Upcoming Events
+    commentAbove: The text displayed right before the upcoming events.
+    trigger:
+      action: show
+      field: show_older_events
+      condition: checked
   hr_1:
     type: ruler
   column_options:
