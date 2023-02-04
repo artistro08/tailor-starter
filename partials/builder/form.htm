@@ -1,4 +1,9 @@
-<section class="{{ section.style }} {{ section.fade_out == true ? 'fade-out-white' }}">
+<section 
+        class="{{ section.style == 'light' ? 'bg-light' }} 
+        {{ section.style == 'dark' ? 'bg-dark text-white' }} 
+        {{ section.disable_top_spacing == true ? 'pt-0' : "pt-4" }} 
+        {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
+>
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-8 mx-auto">
