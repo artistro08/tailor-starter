@@ -26,6 +26,7 @@ function onRemoveFromCart() {
 function onCheckout() {
     // Grab Shop settings from Content -> Shop -> Settings
     $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
+    $currency      = $shop_settings->currency;
     $success_url = 
         Config::get('app.url') .
         '/' . 
@@ -66,7 +67,7 @@ function onCheckout() {
         $all_metadata['tailor_id'] = $line_item['product_id'];
         $line_items[] = [
             'price_data' => [
-                'currency'     => 'USD',
+                'currency'     => $currency,
                 'product_data' => [
                     'name'        => $line_item['product_name'],
                     'description' => $line_item['product_description'] . ' - ' . implode(' - ', $line_item['metadata']),
@@ -91,7 +92,7 @@ function onCheckout() {
                 'type' => 'fixed_amount',
                 'fixed_amount' => [
                     'amount' => $shipping_method->price * 100,
-                    'currency' => 'usd',
+                    'currency' => strtolower($currency),
                 ],
                 'display_name' => $shipping_method->title,
                 'delivery_estimate' => [
