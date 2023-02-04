@@ -16,12 +16,17 @@ fields:
         icon: icon-laptop
         description: A section with a background image.
         titleFrom: title
+        useTabs: true
         fields:
+          hr_tab:
+            tab: General
+            type: ruler
           title:
             label: Title
             commentAbove: Title of this section. Used for organizational purposes.
             type: text
             span: full
+            tab: General
           image:
             label: Image
             type: mediafinder
@@ -29,17 +34,20 @@ fields:
             span: left
             mode: image
             maxItems: 1
+            tab: General
           image_description:
             label: Image Description
             type: text
             commentAbove: The Description of the image. Use for SEO purposes.
             span: right
+            tab: General
           position:
             label: Position
             type: dropdown
             commentAbove: The position of the content.
             span: left
             default: value[left]
+            tab: General
             options:
               left: Left
               center: Center
@@ -49,6 +57,7 @@ fields:
             commentAbove: The size of the content.
             span: right
             default: value[normal]
+            tab: General
             options:
               normal: Normal
               small: Small
@@ -56,33 +65,47 @@ fields:
             label: Content
             type: richeditor
             span: full
+            tab: General
           buttons:
             type: mixin
             source: Content\Buttons
-            maxItems: 3
             commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
+            tab: General
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFields
+            label: Advanced Settings
+            tab: Advanced
       section:
         name: Section
         icon: icon-columns
         description: Section with configurable columns.
         titleFrom: title
+        useTabs: true
         fields:
+          hr_tab:
+            tab: General
+            type: ruler
           section_header:
             type: mixin
             label: Section Header
             source: Content\SectionHeader
+            tab: General
           reverse_columns_on_mobile:
             label: Reverse Columns on Mobile
             comment: Useful if you have content that needs to be stacked a different way on a phone.
             type: switch
+            tab: General
           hr_1:
             type: ruler
+            tab: General
           columns:
             label: Content
             type: repeater
             commentAbove: Create content for this section. Each content block uses it's own column. Max of 4 per section.
             span: full
             displayMode: builder
+            tab: General
             groups:
               content:
                 name: Content
@@ -102,7 +125,6 @@ fields:
                   buttons:
                     type: mixin
                     source: Content\Buttons
-                    maxItems: 3
                     commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
                   hr_2:
                     type: ruler
@@ -122,7 +144,6 @@ fields:
                   buttons:
                     type: mixin
                     source: Content\Buttons
-                    maxItems: 3
                     commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
                   hr_2:
                     type: ruler
@@ -195,30 +216,65 @@ fields:
                   column_options:
                     type: mixin
                     source: Content\ColumnOptions
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFields
+            label: Advanced Settings
+            tab: Advanced
       events:
         name: Events
         icon: icon-calendar
         description: Section with events.
         titleFrom: title
+        useTabs: true
         fields:
+          hr_tab:
+            tab: General
+            type: ruler
           events:
             type: mixin
             source: Content\Events
+            tab: General
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFields
+            label: Advanced Settings
+            tab: Advanced
       products:
         name: Products
         icon: icon-cube
         description: Section with products.
         titleFrom: title
+        useTabs: true
         fields:
+          hr_tab:
+            tab: General
+            type: ruler
           products:
             type: mixin
             source: Content\Products
+            tab: General
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFields
+            label: Advanced Settings
+            tab: Advanced
       form:
         name: Form
         icon: icon-list-alt
         description: Section with a form.
         titleFrom: title
+        useTabs: true
         fields:
+          hr_tab:
+            tab: General
+            type: ruler
           form:
             type: mixin
             source: Content\Form
+            tab: General
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFields
+            label: Advanced Settings
+            tab: Advanced

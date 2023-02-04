@@ -8,7 +8,13 @@ handle = "Content\Product"
 handle = "Content\Settings"
 ==
 <section 
-        class="{{ section.style == 'light' ? 'bg-light' }} 
+        {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
+        class="{% if section.css_classes|length %}
+                    {% for class in section.css_classes|split(',') %}
+                        {{ class ~ ' ' }}
+                    {% endfor %}
+               {% endif %}
+               {{ section.style == 'light' ? 'bg-light' }} 
                {{ section.style == 'dark' ? 'bg-dark text-white' }} 
                {{ section.disable_top_spacing == true ? 'pt-0' : "pt-4" }} 
                {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
