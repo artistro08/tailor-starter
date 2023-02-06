@@ -90,6 +90,10 @@ fields:
     tab: Product Page
     span: row
     spanClass: col-12 col-lg-4
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   products_body_code:
     label: Product Page Body Code
     type: codeeditor
@@ -99,6 +103,10 @@ fields:
     tab: Product Page
     span: row
     spanClass: col-12 col-lg-4
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   products_footer_code:
     label: Product Page Footer Code
     type: codeeditor
@@ -108,6 +116,10 @@ fields:
     tab: Product Page
     span: row
     spanClass: col-12 col-lg-4
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   currency:
     type: dropdown
     label: Currency
@@ -417,6 +429,10 @@ fields:
       XFO: XFO
       XRE: XRE
       XFU: XFU
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   currency_symbol:
     label: Currency Symbol
     commentAbove: Currency symbol to display alongside the price.
@@ -425,6 +441,10 @@ fields:
     tab: Currency
     required: true
     span: left
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
   currency_symbol_placement:
     label: Currency Symbol Placement
     commentAbove: Choose where to place the currency symbol.
@@ -432,6 +452,10 @@ fields:
     default: value[before]
     tab: Currency
     span: right
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
     options:
       before: Before Price
       after: After Price
@@ -507,6 +531,10 @@ fields:
     tab: Shipping
     commentHtml: true
     customTags: false
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
     options:
       - AF
       - AX
@@ -755,16 +783,16 @@ fields:
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
-    trigger:
-      action: show
-      field: enable_shop
-      condition: checked
   shipping_methods:
     label: Shipping Methods
     tab: Shipping
     commentAbove: Available shipping methods.
     type: repeater
     prompt: Add new method.
+    trigger:
+      action: show
+      field: enable_shop
+      condition: checked
     form:
       fields:
         title:
@@ -797,14 +825,10 @@ fields:
           span: right
           validation:
             - integer
-    trigger:
-      action: show
-      field: enable_shop
-      condition: checked
   notification_email:
     type: text
     label: Notification Email
-    commentAbove: Specify an email to send email notifications to. Form Submissions default to this email
+    commentAbove: Specify an email to send email notifications to. Form Submissions & Shop Orders default to this email
     tab: Mail Notifications
     span: left
     validation:
@@ -816,7 +840,7 @@ fields:
     type: text
     label: Recipient Name
     tab: Mail Notifications
-    commentAbove: The name of the person receiving the notification email. Form Submissions default to this name
+    commentAbove: The name of the person receiving the notification email. Form Submissions & Shop Orders default to this name
     span: right
     validation:
       - required_with:notification_email
