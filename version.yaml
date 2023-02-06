@@ -58,3 +58,4 @@ v5.0.0: Theme restructure, Bug fixes, and filtering for events. Theme files shou
 v5.0.1: Added currency in the backend for Stripe Checkout. 
 v5.0.2: Fix partial path issue in theme
 v5.0.3: Moved all assets to the assets partial for easy asset management. 
+v5.0.4: Hide currency if shop is disabled
