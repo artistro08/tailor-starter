@@ -10,7 +10,7 @@ fields:
   enable_pagination:
     type: switch
     label: Enable Pagination
-    comment: Enable Pagination for this block.
+    comment: Enable Pagination for this block. Also disables the limit.
     span: left
     tab: General
   per_page:
@@ -19,6 +19,7 @@ fields:
     commentAbove: How many items should show per page
     default: 4
     span: right
+    min: 1
     trigger: 
       action: show
       field: enable_pagination

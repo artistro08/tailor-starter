@@ -18,8 +18,11 @@ fields:
     label: Product Limit
     commentAbove: How many products would you like to show? Min of 3, max of 5.
     min: 3
-    max: 5
     tab: General
+    trigger: 
+      action: disable
+      field: enable_pagination
+      condition: checked
   product_category_filter:
     label: Filter by Category
     type: entries
@@ -33,3 +36,7 @@ fields:
       action: show
       field: show
       condition: value[category]
+  pagination:
+    type: mixin
+    tab: General
+    source: Content\Pagination
