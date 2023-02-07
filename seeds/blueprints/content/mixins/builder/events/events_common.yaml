@@ -21,13 +21,6 @@ fields:
     options:
       date: Event Date
       title: Event Title
-  reverse_order:
-    type: switch
-    span: right
-    cssClass: mt-3
-    label: Reverse Order
-    comment: Reverse the sort order of the events (Descending). 
-    tab: General
   show_older_events:
     type: switch
     span: left
@@ -39,6 +32,25 @@ fields:
       action: show
       field: show
       condition: value[upcoming]
+  reverse_order:
+    type: switch
+    span: right
+    cssClass: mt-3
+    label: Reverse Order
+    comment: Reverse the sort order of the events (Descending). 
+    tab: General
+  limit:
+    type: number
+    span: full
+    label: Event Limit
+    commentAbove: How many events would you like to show? Min of 3. Applies to all events (old and new).
+    default: 3
+    min: 3
+    tab: General
+    trigger: 
+      action: disable
+      field: enable_pagination
+      condition: checked
   older_events_title:
     type: text
     span: right
@@ -61,3 +73,7 @@ fields:
       action: show
       field: show_older_events
       condition: checked
+  pagination:
+    type: mixin
+    tab: General
+    source: Content\Pagination

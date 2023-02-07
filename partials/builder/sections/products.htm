@@ -5,6 +5,27 @@ handle = "Content\Product"
 handle = "Content\Settings"
 ==
 {% if settings.enable_shop == true %}
+
+    {% set sort_order = section.reverse_order ? 'desc' : 'asc' %}
+
+    {% if section.filter_by_category %}
+        {% set products = products.whereRelation('categories', 'id', section.product_category_filter.id) %}
+    {% endif %}
+
+    {% if section.sort_by == 'title' %}
+        {% set products = products.orderBy('title', sort_order) %}
+    {% endif %}
+
+    {% if section.sort_by == 'date' %}
+        {% set products = products.orderBy('published_at_date', sort_order) %}
+    {% endif %}
+
+    {% if section.enable_pagination %}
+        {% set products = products.paginateCustom(section.per_page, "products") %}
+    {% else %}
+        {% set products = products.limit(section.limit).get() %}
+    {% endif %}
+
     <section 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
             class="{% if section.css_classes|length %}
@@ -18,45 +39,30 @@ handle = "Content\Settings"
                    {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
     >
         <div class="{{ section.container_style }}">
-            <h2 class="text-center mb-4">{{ section.title }}</h2>
-            <div class="row row-cols-lg-{{ section.limit }}">
-                {% if section.show == "new" %}
-                    {% for product in products.orderBy('published_at_date').limit(section.limit).get() %}
-                        <div class="col mb-4">
-                            <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
-                                <div class="card">
-                                    <img
-                                            src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
-                                            alt="{{ product.title }}" class="card-img-top"
-                                    >
-                                    <div class="card-body d-flex justify-content-between">
-                                        <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
-                                        <span class="text-decoration-none text-dark fw-bold">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
-                                    </div>
+            {% partial 'builder/globals/shop_alerts' %}
+            <div class="row row-cols-lg-{{ section.enable_pagination ? section.per_page : section.limit }}">
+                {% for product in products %}
+                    <div class="col{{ section.per_page > 4 ? "-12 col-lg-3" }}{{ section.limit > 4 ? "-12 col-lg-3" }} mb-4">
+                        <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                            <div class="card">
+                                <img
+                                        src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                        alt="{{ product.title }}" class="card-img-top"
+                                >
+                                <div class="card-body d-flex justify-content-between">
+                                    <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                                    <span class="text-decoration-none text-dark fw-bold">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
                                 </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-                {% if section.show == "category" %}
-                    {% for product in products.whereRelation('categories', 'id', section.product_category_filter.id).limit(section.limit).get() %}
-                        <div class="col mb-4">
-                            <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
-                                <div class="card">
-                                    <img
-                                            src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
-                                            alt="{{ product.title }}" class="card-img-top"
-                                    >
-                                    <div class="card-body d-flex justify-content-between">
-                                        <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
-                                        <span class="text-decoration-none text-dark fw-bold">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
+            {% if section.enable_pagination %}
+                <div class="d-flex justify-content-center">
+                    {{ products.links|raw }}
+                </div>
+            {% endif %}
         </div>
     </section>
 {% endif %}
