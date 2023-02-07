@@ -37,8 +37,13 @@ handle = "Content\Settings"
         {% set older_events = older_events.orderBy('date', sort_order) %}
     {% endif %}
 
-    {% set events = events.get() %}
-    {% set older_events = older_events.get() %}
+    {% if section.enable_pagination %}
+        {% set events = events.paginateCustom(section.per_page, 'events') %}
+        {% set older_events = older_events.paginateCustom(section.per_page, 'older_events') %}
+    {% else %}
+        {% set events = events.get() %}
+        {% set older_events = older_events.get() %}
+    {% endif %}
     <section 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
             class="{% if section.css_classes|length %}
@@ -181,8 +186,18 @@ handle = "Content\Settings"
                             </div>
                         {% endfor %}
 
+                        {% if section.enable_pagination %}
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    {{ events.links|raw }}
+                                </div>
+                            </div>
+                        {% endif %}
+
                         {% if section.show_older_events %}
-                            <h4>{{ section.older_events_title }}</h4>
+                            <div class="col-12">
+                                <h4>{{ section.older_events_title }}</h4>
+                            </div>
                             {% for event in older_events %}
                                 {% if event.hide_date == true %}
                                     {% set time_only = "g:i A" %}
@@ -304,6 +319,13 @@ handle = "Content\Settings"
                                     </div>
                                 </div>
                             {% endfor %}
+                            {% if section.enable_pagination %}
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        {{ older_events.links|raw }}
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>

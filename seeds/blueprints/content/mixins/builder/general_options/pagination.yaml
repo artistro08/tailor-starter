@@ -1,0 +1,25 @@
+uuid: 3034bbe6-a717-11ed-a6fb-c04e8b85ae38
+handle: Content\Pagination
+type: mixin
+name: Pagination
+
+fields:
+  hr_pagination:
+    type: ruler
+    tab: General
+  enable_pagination:
+    type: switch
+    label: Enable Pagination
+    comment: Enable Pagination for this block.
+    span: left
+    tab: General
+  per_page:
+    type: number
+    label: Items Per Page
+    commentAbove: How many items should show per page
+    default: 4
+    span: right
+    trigger: 
+      action: show
+      field: enable_pagination
+      condition: checked

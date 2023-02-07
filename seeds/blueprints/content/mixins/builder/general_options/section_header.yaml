@@ -31,3 +31,5 @@ fields:
     label: Disable Bottom Spacing
     comment: Remove bottom spacing from this section
     span: right
+  hr_1:
+    type: ruler

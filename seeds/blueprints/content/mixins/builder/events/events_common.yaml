@@ -61,3 +61,7 @@ fields:
       action: show
       field: show_older_events
       condition: checked
+  pagination:
+    type: mixin
+    tab: General
+    source: Content\Pagination

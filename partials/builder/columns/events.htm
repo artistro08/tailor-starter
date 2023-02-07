@@ -34,8 +34,13 @@ handle = "Content\Event"
     {% set older_events = older_events.orderBy('title', sort_order) %}
 {% endif %}
 
-{% set events = events.get() %}
-{% set older_events = older_events.get() %}
+{% if column.enable_pagination %}
+    {% set events = events.paginateCustom(column.per_page, 'events_column') %}
+    {% set older_events = older_events.paginateCustom(column.per_page, 'older_events_column') %}
+{% else %}
+    {% set events = events.get() %}
+    {% set older_events = older_events.get() %}
+{% endif %}
 
 {% if column.show_older_events %}
     <h4>{{ column.upcoming_events_title }}</h4>
@@ -159,9 +164,14 @@ handle = "Content\Event"
     </div>
 {% endfor %}
 
+{% if column.enable_pagination %}
+    <div class="d-flex justify-content-center">
+        {{ events.links|raw }}
+    </div>
+{% endif %}
 {% if column.show_older_events %}
     <h4>{{ column.older_events_title }}</h4>
-    {% for event in events %}
+    {% for event in older_events %}
         {% if event.hide_date == true %}
             {% set time_only = "g:i A" %}
             {% set month_only = "" %}
@@ -278,4 +288,9 @@ handle = "Content\Event"
             </div>
         </div>
     {% endfor %}
+    {% if column.enable_pagination %}
+        <div class="d-flex justify-content-center">
+            {{ older_events.links|raw }}
+        </div>
+    {% endif %}
 {% endif %}
