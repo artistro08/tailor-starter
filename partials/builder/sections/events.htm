@@ -23,7 +23,7 @@ handle = "Content\Settings"
         {% set events = events.whereDate('date', '>=', today) %}
     {% endif %}
 
-    {% if section.show_older_events %}
+    {% if (section.show_older_events and section.show == 'upcoming') %}
         {% set older_events = older_events.whereDate('date', '<=', today) %}
     {% endif %}
     
@@ -41,8 +41,8 @@ handle = "Content\Settings"
         {% set events = events.paginateCustom(section.per_page, 'events') %}
         {% set older_events = older_events.paginateCustom(section.per_page, 'older_events') %}
     {% else %}
-        {% set events = events.get() %}
-        {% set older_events = older_events.get() %}
+        {% set events = events.limit(section.limit).get() %}
+        {% set older_events = older_events.limit(section.limit).get() %}
     {% endif %}
     <section 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
@@ -60,7 +60,7 @@ handle = "Content\Settings"
             <div class="row">
                 <div class="col-12 col-lg-10 mx-auto">
                     <div class="row">
-                        {% if section.show_older_events %}
+                        {% if (section.show_older_events and section.show == 'upcoming') %}
                             <h4>{{ section.upcoming_events_title }}</h4>
                         {% endif %}
                             
@@ -194,7 +194,7 @@ handle = "Content\Settings"
                             </div>
                         {% endif %}
 
-                        {% if section.show_older_events %}
+                        {% if (section.show_older_events and section.show == 'upcoming') %}
                             <div class="col-12">
                                 <h4>{{ section.older_events_title }}</h4>
                             </div>

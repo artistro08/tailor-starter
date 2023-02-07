@@ -16,7 +16,8 @@ fields:
     type: number
     span: right
     label: Product Limit
-    commentAbove: How many products would you like to show? Min of 3, max of 5.
+    commentAbove: How many products would you like to show? Min of 3.
+    default: 3
     min: 3
     tab: General
     trigger: 

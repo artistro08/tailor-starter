@@ -10,7 +10,7 @@ fields:
   enable_pagination:
     type: switch
     label: Enable Pagination
-    comment: Enable Pagination for this block. Also disables the limit.
+    comment: Enable Pagination for this block. Also disables the limit. Applies to all content (old and new).
     span: left
     tab: General
   per_page:
