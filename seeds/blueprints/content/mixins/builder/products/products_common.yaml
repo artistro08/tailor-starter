@@ -3,15 +3,15 @@ handle: Content\ProductsCommonFields
 type: mixin
 name: Products
 fields:
-  show:
+  sort_by:
     type: dropdown
     span: left
-    label: Products to Show
-    commentAbove: Choose what products you want to show.
+    label: Sort Products
+    commentAbove: Choose how you would like to sort your products.
     tab: General
     options:
-      new: Show New Products
-      category: Show Products from a category
+      date: Product Published Date
+      title: Product Title
   limit:
     type: number
     span: right
@@ -23,8 +23,22 @@ fields:
       action: disable
       field: enable_pagination
       condition: checked
+  filter_by_category:
+    type: switch
+    span: left
+    cssClass: mt-3
+    label: Filter By Category
+    comment: Filter products by a specific category
+  reverse_order:
+    type: switch
+    span: right
+    cssClass: mt-3
+    label: Reverse Order
+    comment: Reverse the sort order of the products (Descending). 
+    tab: General
   product_category_filter:
-    label: Filter by Category
+    label: Choose Category
+    commentAbove: Choose a category to filter by
     type: entries
     span: full
     maxItems: 1
@@ -34,8 +48,8 @@ fields:
     tab: General
     trigger:
       action: show
-      field: show
-      condition: value[category]
+      field: filter_by_category
+      condition: checked
   pagination:
     type: mixin
     tab: General

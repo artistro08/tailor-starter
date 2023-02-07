@@ -6,12 +6,18 @@ handle = "Content\Settings"
 ==
 {% if settings.enable_shop == true %}
 
-    {% if section.show == "new" %}
-        {% set products = products.orderBy('published_at_date') %}
+    {% set sort_order = section.reverse_order ? 'desc' : 'asc' %}
+
+    {% if section.filter_by_category %}
+        {% set products = products.whereRelation('categories', 'id', section.product_category_filter.id) %}
+    {% endif %}
+    
+    {% if section.sort_by == 'title' %}
+        {% set products = products.orderBy('title', sort_order) %}
     {% endif %}
 
-    {% if section.show == "category" %}
-        {% set products = products.whereRelation('categories', 'id', section.product_category_filter.id) %}
+    {% if section.sort_by == 'date' %}
+        {% set products = products.orderBy('published_at_date', sort_order) %}
     {% endif %}
 
     {% if section.enable_pagination %}

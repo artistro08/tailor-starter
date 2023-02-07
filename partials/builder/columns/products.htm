@@ -1,12 +1,18 @@
 [collection products]
 handle = "Content\Product"
 ==
-{% if column.show == "new" %}
-    {% set products = products.orderBy('published_at_date') %}
+{% set sort_order = column.reverse_order ? 'desc' : 'asc' %}
+
+{% if column.filter_by_category %}
+    {% set products = products.whereRelation('categories', 'id', column.product_category_filter.id) %}
 {% endif %}
 
-{% if column.show == "category" %}
-    {% set products = products.whereRelation('categories', 'id', column.product_category_filter.id) %}
+{% if column.sort_by == 'title' %}
+    {% set products = products.orderBy('title', sort_order) %}
+{% endif %}
+
+{% if column.sort_by == 'date' %}
+    {% set products = products.orderBy('published_at_date', sort_order) %}
 {% endif %}
 
 {% if column.enable_pagination %}
