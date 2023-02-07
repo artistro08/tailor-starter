@@ -11,7 +11,7 @@
         {% endif %}
         {% if button.item_type == "page_entry" %}
             <a
-                    href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.slug }) }}"
+                    href="{{ (settings.homepage.id == button.page.id) and (settings.homepage.slug == button.page.slug) ? '/' : 'page'|page({ page: button.page.fullslug }) }}"
                     class="btn btn-{{ button.outline ? 'outline-' ~ button.style : button.style }} {{ not loop.last ? "me-2" }}  mb-2"
                     {{ button.external == true ? 'target="_blank"' }}
             >

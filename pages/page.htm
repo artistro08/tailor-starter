@@ -1,12 +1,12 @@
-url = "/:page"
+url = "/:page*"
 layout = "page"
 title = "Page"
 
 [section]
 handle = "Content\Page"
 entrySlug = "{{ :page }}"
+entryColumn = "fullslug"
 entryDefault = 1
-fullSlug = 0
 
 [global settings]
 handle = "Content\Settings"
