@@ -21,6 +21,7 @@ handle = "Content\Product"
     {% set products = products.limit(column.limit).get() %}
 {% endif %}
 
+{% partial 'builder/globals/shop_alerts' %}
 <div class="row row-cols-lg-{{ column.enable_pagination ? column.per_page : column.limit }}">
     {% for product in products %}
         <div class="col{{ column.per_page > 4 ? "-12 col-lg-3" }}{{ column.limit > 4 ? "-12 col-lg-3" }} mb-4">

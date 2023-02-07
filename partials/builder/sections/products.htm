@@ -11,7 +11,7 @@ handle = "Content\Settings"
     {% if section.filter_by_category %}
         {% set products = products.whereRelation('categories', 'id', section.product_category_filter.id) %}
     {% endif %}
-    
+
     {% if section.sort_by == 'title' %}
         {% set products = products.orderBy('title', sort_order) %}
     {% endif %}
@@ -39,6 +39,7 @@ handle = "Content\Settings"
                    {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
     >
         <div class="{{ section.container_style }}">
+            {% partial 'builder/globals/shop_alerts' %}
             <div class="row row-cols-lg-{{ section.enable_pagination ? section.per_page : section.limit }}">
                 {% for product in products %}
                     <div class="col{{ section.per_page > 4 ? "-12 col-lg-3" }}{{ section.limit > 4 ? "-12 col-lg-3" }} mb-4">
