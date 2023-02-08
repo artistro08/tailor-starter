@@ -2,7 +2,7 @@
 handle = "Content\Settings"
 ==
 <section 
-        {{ section.html_anchor|length ? 'id=' ~  section.html_anchor  ~ '' }}
+        {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
         class="{% if section.css_classes|length %}
                     {% for class in section.css_classes|split(',') %}
                         {{ class ~ ' ' }}
