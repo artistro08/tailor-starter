@@ -6,8 +6,8 @@ drafts: true
 multisite: sync
 
 primaryNavigation:
-  label: Content
-  icon: icon-archive
+  label: Pages & Menus
+  icon: icon-file
   order: 140
 
 navigation:

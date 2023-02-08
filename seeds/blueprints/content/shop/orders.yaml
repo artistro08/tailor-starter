@@ -6,8 +6,8 @@ drafts: false
 
 navigation:
   icon: icon-shopping-bag
-  parent: Content\Page
-  order: 12
+  parent: Content\Product
+  order: 4
 
 customMessages:
   buttonCreate: New Order

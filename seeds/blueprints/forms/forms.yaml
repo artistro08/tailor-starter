@@ -8,7 +8,7 @@ multisite: sync
 primaryNavigation:
   label: Forms
   icon: icon-inbox
-  order: 142
+  order: 145
 
 navigation:
   icon: icon-list

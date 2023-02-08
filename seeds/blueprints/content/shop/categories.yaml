@@ -7,8 +7,8 @@ multisite: sync
 
 navigation:
   icon: icon-th
-  parent: Content\Page
-  order: 8
+  parent: Content\Product
+  order: 3
 
 customMessages:
   buttonCreate: New Category
