@@ -19,8 +19,7 @@ handle = "Content\Event"
     {% set events = events.whereDate('date', '>=', today) %}
 {% endif %}
 
-
-{% if column.show_older_events %}
+{% if (column.show_older_events and column.show == 'upcoming') %}
     {% set older_events = older_events.whereDate('date', '<=', today) %}
 {% endif %}
 
@@ -34,10 +33,15 @@ handle = "Content\Event"
     {% set older_events = older_events.orderBy('title', sort_order) %}
 {% endif %}
 
-{% set events = events.get() %}
-{% set older_events = older_events.get() %}
+{% if column.enable_pagination %}
+    {% set events = events.paginateCustom(column.per_page, 'events_column') %}
+    {% set older_events = older_events.paginateCustom(column.per_page, 'older_events_column') %}
+{% else %}
+    {% set events = events.limit(column.limit).get() %}
+    {% set older_events = older_events.limit(column.limit).get() %}
+{% endif %}
 
-{% if column.show_older_events %}
+{% if (column.show_older_events and column.show == 'upcoming') %}
     <h4>{{ column.upcoming_events_title }}</h4>
 {% endif %}
 
@@ -62,13 +66,13 @@ handle = "Content\Event"
         {% set month_day_year_and_time = "M d, Y" %}
     {% endif %}
     <div class="col-12 mb-4">
-        <div class="card shadow-lg">
+        <div class="card">
             <div class="row g-0">
                 <div class="col-12 col-lg-3 bg-dark position-relative">
                     {% if event.image|length %}
                         <img class="w-100 h-100 img-fluid opacity-50" style="object-position: center; object-fit: cover;" src="{{ event.image|media }}" alt="{{ event.title }}">
                     {% endif %}
-                    <a href="{{ 'event'|page({ event: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
+                    <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
                         {% if event.is_recurring %}
                             <span class="text-center fw-bold">
                                 {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts" : "Started" }}<br>
@@ -86,7 +90,7 @@ handle = "Content\Event"
                 </div>
                 <div class="col-12 col-lg-9 card-body">
                     <h3>
-                        <a href="{{ 'event'|page({ event: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
                     </h3>
                     <span class="mb-1 badge bg-primary rounded-pill">
                     {% if event.is_recurring %}
@@ -152,16 +156,21 @@ handle = "Content\Event"
                     {% if event.link|length %}
                         <a href="{{ event.link }}" target="_blank" class="btn btn-primary" role="button">Sign Up</a>
                     {% endif %}
-                    <a href="{{ 'event'|page({ event: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
+                    <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
                 </div>
             </div>
         </div>
     </div>
 {% endfor %}
 
-{% if column.show_older_events %}
+{% if column.enable_pagination %}
+    <div class="d-flex justify-content-center">
+        {{ events.links|raw }}
+    </div>
+{% endif %}
+{% if (column.show_older_events and column.show == 'upcoming')%}
     <h4>{{ column.older_events_title }}</h4>
-    {% for event in events %}
+    {% for event in older_events %}
         {% if event.hide_date == true %}
             {% set time_only = "g:i A" %}
             {% set month_only = "" %}
@@ -182,13 +191,13 @@ handle = "Content\Event"
             {% set month_day_year_and_time = "M d, Y" %}
         {% endif %}
         <div class="col-12 mb-4">
-            <div class="card shadow-lg">
+            <div class="card">
                 <div class="row g-0">
                     <div class="col-12 col-lg-3 bg-dark position-relative">
                         {% if event.image|length %}
                             <img class="w-100 h-100 img-fluid opacity-50" style="object-position: center; object-fit: cover;" src="{{ event.image|media }}" alt="{{ event.title }}">
                         {% endif %}
-                        <a href="{{ 'event'|page({ event: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
                             {% if event.is_recurring %}
                                 <span class="text-center fw-bold">
                                     {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts" : "Started" }}<br>
@@ -206,7 +215,7 @@ handle = "Content\Event"
                     </div>
                     <div class="col-12 col-lg-9 card-body">
                         <h3>
-                            <a href="{{ 'event'|page({ event: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
+                            <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
                         </h3>
                         <span class="mb-1 badge bg-primary rounded-pill">
                         {% if event.is_recurring %}
@@ -272,10 +281,15 @@ handle = "Content\Event"
                         {% if event.link|length %}
                             <a href="{{ event.link }}" target="_blank" class="btn btn-primary" role="button">Sign Up</a>
                         {% endif %}
-                        <a href="{{ 'event'|page({ event: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
                     </div>
                 </div>
             </div>
         </div>
     {% endfor %}
+    {% if column.enable_pagination %}
+        <div class="d-flex justify-content-center">
+            {{ older_events.links|raw }}
+        </div>
+    {% endif %}
 {% endif %}

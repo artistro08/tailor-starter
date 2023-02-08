@@ -1,0 +1,40 @@
+uuid: 6947ff28-b660-47d7-9240-24ca6d58aeae
+handle: Blog\Authors
+type: entry
+name: Post Authors
+drafts: false
+multisite: sync
+
+navigation:
+  parent: Blog\Posts
+  icon: octo-icon-user
+  order: 200
+
+customMessages:
+  buttonCreate: New Author
+
+fields:
+  avatar:
+    label: Avatar
+    type: mediafinder
+    mode: image
+    tab: Edit
+    maxItems: 1
+  role:
+    label: Role
+    type: text
+    tab: Edit
+  about:
+    label: About
+    type: richeditor
+    tab: Edit
+  seo_fields:
+    tab: Manage
+    type: mixin
+    name: SEO Fields
+    source: Content\SEOFields
+  code_fields:
+    tab: Manage
+    type: mixin
+    name: SEO Fields
+    source: Content\CodeFields

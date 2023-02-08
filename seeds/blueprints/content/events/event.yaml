@@ -8,9 +8,14 @@ multisite: sync
 structure:
   maxDepth: 0
 
+primaryNavigation:
+  label: Events
+  icon: icon-calendar
+  order: 143
+
 navigation:
   icon: icon-calendar
-  parent: Content\Page
+  parent: Content\Events
   order: 12
 
 customMessages:

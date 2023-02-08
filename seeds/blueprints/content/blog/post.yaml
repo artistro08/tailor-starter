@@ -1,40 +1,38 @@
-uuid: 698afed6-70f1-47dd-9dcf-dc2a0f903ff2
-handle: Content\Page
-type: structure
-name: Pages
+uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
+handle: Blog\Posts
+type: stream
+name: Posts
 drafts: true
 multisite: sync
 
 primaryNavigation:
-  label: Pages & Menus
-  icon: icon-file
-  order: 140
+  label: Blog
+  icon: icon-newspaper-o
+  order: 142
+
+structure:
+  maxDepth: 0
 
 navigation:
-  icon: icon-file
-  parent: Content\Page
-  order: 1
+  icon: icon-pencil
+  order: 100
   
 customMessages:
-  buttonCreate: New Page
+  buttonCreate: New Post
 
 groups:
   simple:
-    name: Simple Page
+    name: Simple Post
     fields:
       content:
         label: Content
         tab: Edit
         type: richeditor
         span: adaptive
-      image:
-        tab: Manage
-        label: Image
-        commentAbove: An image to represent this page. Used on the top section of this page.
-        type: mediafinder
-        mode: image
-        maxItems: 1
-        span: full
+      post_attributes:
+        type: mixin
+        name: Post Content
+        source: Blog\PostAttributes
       seo_fields:
         tab: Manage
         type: mixin
@@ -46,13 +44,17 @@ groups:
         name: SEO Fields
         source: Content\CodeFields
   builder:
-    name: Dynamic Page
+    name: Dynamic Post
     fields:
       builder:
         tab: Edit
         type: mixin
         name: Builder
-        source: Content\Builder
+        source: Content\BlogBuilder
+      post_attributes:
+        type: mixin
+        name: Post Content
+        source: Blog\PostAttributes
       seo_fields:
         tab: Manage
         type: mixin

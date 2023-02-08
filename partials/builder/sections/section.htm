@@ -32,6 +32,13 @@ handle = "Content\Settings"
                     {% if column.content_group == "image" %}
                         {% partial 'builder/columns/image' column = column %}
                     {% endif %}
+
+                    {# Posts Column Group #}
+                    {% if settings.enable_blog == true %}
+                        {% if column.content_group == "posts" %}
+                            {% partial 'builder/columns/posts' column = column %}
+                        {% endif %}
+                    {% endif %}
                     
                     {# Event Column Group #}
                     {% if settings.enable_events == true %}

@@ -1,22 +1,22 @@
-uuid: 7ca214e5-a4b6-11ed-a554-95bb16ce6d01
-handle: Content\ProductsCommonFields
+uuid: 96a004f6-a7c0-11ed-b644-7a5c145f9873
+handle: Content\PostsCommonFields
 type: mixin
-name: Products
+name: Blog Posts Common Fields
 fields:
   sort_by:
     type: dropdown
     span: left
-    label: Sort Products
-    commentAbove: Choose how you would like to sort your products.
+    label: Sort Posts
+    commentAbove: Choose how you would like to sort your posts.
     tab: General
     options:
-      date: Product Published Date
-      title: Product Title
+      date: Post Published Date
+      title: Post Title
   limit:
     type: number
     span: right
-    label: Product Limit
-    commentAbove: How many products would you like to show? Min of 3.
+    label: Post Limit
+    commentAbove: How many posts would you like to show? Min of 3.
     default: 3
     min: 3
     tab: General
@@ -29,23 +29,23 @@ fields:
     span: left
     cssClass: mt-3
     label: Filter By Category
-    comment: Filter products by a specific category
+    comment: Filter posts by a specific category
   reverse_order:
     type: switch
     span: right
     cssClass: mt-3
     label: Reverse Order
-    comment: Reverse the sort order of the products (Descending). 
+    comment: Reverse the sort order of the posts (Descending). 
     tab: General
-  product_category_filter:
+  post_category_filter:
     label: Choose Category
     commentAbove: Choose a category to filter by
     type: entries
     span: full
     maxItems: 1
     displayMode: recordfinder
-    prompt: Click the %s to find a product category.
-    source: Content\Product\Category
+    prompt: Click the %s to find a post category.
+    source: Blog\Categories
     tab: General
     trigger:
       action: show

@@ -8,10 +8,15 @@ multisite: sync
 structure:
   maxDepth: 0
 
+primaryNavigation:
+  label: Shop
+  icon: icon-cube
+  order: 144
+
 navigation:
   icon: icon-cube
-  parent: Content\Page
-  order: 8
+  parent: Content\Product
+  order: 1
 
 customMessages:
   buttonCreate: New Product

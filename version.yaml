@@ -61,3 +61,4 @@ v5.0.3: Moved all assets to the assets partial for easy asset management.
 v5.0.4: Hide currency if shop is disabled
 v5.0.5: Hide currency if shop is disabled
 v5.1.0: Add multi-level page support
+v6.0.0: Added the pagefinder widget. Added a blog with post authors and categories. Removed Categories pages since they can be created in the builder (More flexible). 

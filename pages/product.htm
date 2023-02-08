@@ -1,10 +1,10 @@
-url = "/products/:product"
+url = "/products/:fullslug"
 layout = "product"
 title = "Product"
 
 [section]
 handle = "Content\Product"
-entrySlug = "{{ :product }}"
+entrySlug = "{{ :fullslug }}"
 entryDefault = 1
 fullSlug = 0
 
@@ -30,25 +30,14 @@ handle = "Content\Settings"
     {% if product is empty %}
         {% do abort('404') %}
     {% else %}
-        {% set preview_url = ''|page %}
+        {% set preview_url = this.request.requestUri %}
         {% set keys_set = true %}
         {% if settings.stripe_public_key is empty or settings.stripe_public_key is empty or settings.stripe_webhook_secret_key is empty %}
             {% set keys_set = false %}
-            <section>
-                <div class="container">
-                    <div class="alert alert-warning d-flex align-items-center" role="alert">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-exclamation-square-fill me-2" viewBox="0 0 16 16">
-                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                        </svg>
-                        <div>
-                            Your Stripe Keys are not set! <strong>The shop won't work unless you set them.</strong> Set them in the backend under <pre class="mb-0">Content > Settings > Stripe</pre>
-                        </div>
-                    </div>
-                </div>
-            </section>
         {% endif %}
         <header class="product d-flex align-items-center py-4">
             <div class="container">
+                {% partial 'builder/globals/shop_alerts' %}
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-6">
                         {% for image in product.images|slice(0,1) %}
@@ -213,7 +202,7 @@ handle = "Content\Settings"
                                 {% endif %}
         
                                 {% if keys_set %}
-                                    {% if 'default' not in preview_url %}
+                                    {% if 'preview_token' not in preview_url %}
                                         <div class="d-flex">
                                             <div id="button">
                                                 {% partial 'shop/buy-button' product=product %}
@@ -227,7 +216,7 @@ handle = "Content\Settings"
                                         <div class="card bg-light">
                                             <div class="card-body">
                                                 <p>You can't purchase products in preview mode.</p>
-                                                <a href="{{ 'product'|page({product: product.slug}) }}" class="btn btn-primary">View Live Product</a>
+                                                <a href="{{ 'product'|page({fullslug: product.fullslug}) }}" class="btn btn-primary">View Live Product</a>
                                             </div>
                                         </div>
                                     {% endif %}
@@ -238,7 +227,7 @@ handle = "Content\Settings"
                             <p class="fs-5">This product is out of stock</p>
                         {% endif %}
         
-                        {% if 'default' not in preview_url %}
+                        {% if 'preview_token' not in preview_url %}
                             {% if product.content_group == "variant" %}
                                 {% if product.allow_purchases %}
                                     {% put scripts %}

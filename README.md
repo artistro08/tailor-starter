@@ -178,7 +178,7 @@ The recaptcha api js file will load once you set your keys in the backend. You c
 
 #### Contributing
 
-If you would like to contribute to this theme, please submit a pull request. Any help is welcome!
+If you would like to contribute to this theme, please submit a pull request to the develop branch. Any help is welcome!
 
 ## License
 

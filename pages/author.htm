@@ -1,0 +1,88 @@
+url = "/blog/author/:slug"
+layout = "author"
+title = "Author"
+
+[section]
+handle = "Blog\Authors"
+entrySlug = "{{ :slug }}"
+entryDefault = 1
+slug = 0
+
+[collection posts]
+handle = "Blog\Posts"
+
+[global settings]
+handle = "Content\Settings"
+==
+
+{% if settings.enable_blog == true %}
+    {% set author = section %}
+
+    {% set posts = posts.whereRelation('author', 'id', author.id).orderBy('published_at_date','asc').get() %}
+    
+    {% put header_code %}
+        {{ author.header_code|raw }}
+    {% endput %}
+    
+    {% put body_code %}
+        {{ author.body_code|raw }}
+    {% endput %}
+    
+    {% put footer_code %}
+        {{ author.footer_code|raw }}
+    {% endput %}
+
+    {% if author is empty %}
+        {% do abort('404') %}
+    {% else %}
+        <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
+            <div class="container position-relative" style="z-index: 1">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="d-flex flex-column align-items-center text-center text-decoration-none text-white" >
+                            {% if author.avatar|length %}
+                                <img class="rounded-circle" width="150px" src="{{ author.avatar|media|resize(150, 150, {mode: "crop"}) }}" alt="{{ post.author.title }}">
+                            {% endif %}
+                            <h1>{{ author.title }}</h1>
+                            <span class="fs-3">{{ author.role }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if author.avatar|length %}
+                <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
+                    <img src="{{ author.avatar|media|resize(1920) }}" alt="{{ author.title }}" class="w-100 h-100" style="object-fit: cover; ">
+                </div>
+            {% endif %}
+        </header>
+        <section>
+            <div class="container">
+                {{ author.about|raw }}
+                <hr>
+                <h3 class="text-center">Posts by {{ author.title }}</h3>
+                {% for post in posts %}
+                    <div class="col-12 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <a href="{{ 'post'|page({ slug: post.slug }) }}" class="card-img-top">
+                                <img
+                                        src="{{ post.image|media|resize(700, 400, {mode: 'crop'}) }}"
+                                        alt="{{ post.title }}" class="card-img-top"
+                                >
+                            </a>
+                            <div class="card-body d-flex flex-column h-100 align-items-start">
+                                <h3 class="text-decoration-none text-dark fs-5">
+                                    <a href="{{ 'post'|page({ slug: post.slug }) }}" class="text-decoration-none text-reset">{{ post.title }}</a>
+                                </h3>
+                                <p>{{ post.excerpt }}</p>
+                                <a href="{{ 'post'|page({ slug: post.slug }) }}" class="btn btn-primary mt-auto">Read</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+{% else %}
+    {% do abort('404') %}
+{% endif %}
