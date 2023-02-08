@@ -17,7 +17,7 @@ fields:
   image:
     tab: Edit
     label: Image
-    commentAbove: An image to represent this category. Used on the category page.
+    commentAbove: An image to represent this category.
     type: mediafinder
     mode: image
     maxItems: 1
@@ -25,16 +25,6 @@ fields:
   description:
     tab: Edit
     label: Description
-    commentAbove: The description of this category. Used on the Category page.
+    commentAbove: The description of this category.
     type: textarea
     span: right
-  seo_fields:
-    tab: Manage
-    type: mixin
-    name: SEO Fields
-    source: Content\SEOFields
-  code_fields:
-    tab: Manage
-    type: mixin
-    name: SEO Fields
-    source: Content\CodeFields
