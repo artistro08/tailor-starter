@@ -10,6 +10,9 @@ primaryNavigation:
   icon: icon-newspaper-o
   order: 141
 
+structure:
+  maxDepth: 0
+
 navigation:
   icon: icon-pencil
   order: 100
