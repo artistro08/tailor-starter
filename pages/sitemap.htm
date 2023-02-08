@@ -10,8 +10,11 @@ handle = "Content\Event"
 [collection products]
 handle = "Content\Product"
 
-[collection product_categories]
-handle = "Content\Product\Category"
+[collection posts]
+handle = "Blog\Posts"
+
+[collection authors]
+handle = "Blog\Authors"
 
 [global settings]
 handle = "Content\Settings"
@@ -31,6 +34,22 @@ function onStart() {
 			{% else %}
 			<loc>{{ 'page'|page({fullslug: (page.fullslug|length ? page.fullslug : page.slug) }) }}</loc>
 			{% endif %}
+	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
+	    	<changefreq>daily</changefreq>
+	    	<priority>0.8</priority>
+	    </url>
+	{% endfor %}
+	{% for post in posts.where('exclude_in_sitemap', false).get() %}
+		<url>
+	    	<loc>{{ 'post'|page({slug: post.fullslug}) }}</loc>
+	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
+	    	<changefreq>daily</changefreq>
+	    	<priority>0.8</priority>
+	    </url>
+	{% endfor %}
+	{% for author in authors.where('exclude_in_sitemap', false).get() %}
+		<url>
+	    	<loc>{{ 'author'|page({slug: author.fullslug}) }}</loc>
 	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
 	    	<changefreq>daily</changefreq>
 	    	<priority>0.8</priority>
