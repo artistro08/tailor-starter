@@ -53,6 +53,16 @@ handle = "Content\Settings"
                                 <h3 class="text-decoration-none text-dark fs-5">
                                     <a href="{{ 'post'|page({ slug: post.slug }) }}" class="text-decoration-none text-reset">{{ post.title }}</a>
                                 </h3>
+                                {% if post.author|length %}
+                                    <a class="d-flex text-decoration-none text-dark mb-2" href="{{ 'author'|page({slug: post.author.slug}) }}">
+                                        {% if post.author.avatar|length %}
+                                            <img class="rounded-circle me-1" width="25px" src="{{ post.author.avatar|media|resize(25, 25, {mode: "crop"}) }}" alt="{{ post.author.title }}">
+                                        {% endif %}
+                                        <div>
+                                            <span class="fs-6">By <span class="fw-semibold">{{ post.author.title }}</span></span>
+                                        </div>
+                                    </a>
+                                {% endif %}
                                 <p>{{ post.excerpt }}</p>
                                 <a href="{{ 'post'|page({ slug: post.slug }) }}" class="btn btn-primary mt-auto">Read</a>
                             </div>
