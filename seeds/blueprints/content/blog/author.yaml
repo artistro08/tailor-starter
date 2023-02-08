@@ -18,9 +18,23 @@ fields:
     label: Avatar
     type: mediafinder
     mode: image
+    tab: Edit
+    maxItems: 1
   role:
     label: Role
     type: text
+    tab: Edit
   about:
     label: About
     type: richeditor
+    tab: Edit
+  seo_fields:
+    tab: Manage
+    type: mixin
+    name: SEO Fields
+    source: Content\SEOFields
+  code_fields:
+    tab: Manage
+    type: mixin
+    name: SEO Fields
+    source: Content\CodeFields
