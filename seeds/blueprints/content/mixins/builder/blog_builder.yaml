@@ -21,6 +21,17 @@ fields:
           section:
             type: mixin
             source: Content\Section
+      posts:
+        name: Posts
+        icon: icon-newspaper-o
+        description: Section with blog posts.
+        titleFrom: title
+        useTabs: true
+        fields:
+          posts:
+            type: mixin
+            source: Content\Posts
+            tab: General
       events:
         name: Events
         icon: icon-calendar

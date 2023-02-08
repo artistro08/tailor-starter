@@ -95,6 +95,20 @@ fields:
           column_options:
             type: mixin
             source: Content\ColumnOptions
+      posts:
+        name: Posts
+        icon: icon-newspaper-o
+        description: Column with blog posts.
+        titleFrom: title
+        fields:
+          posts:
+            type: mixin
+            source: Content\PostsColum
+          hr_1:
+            type: ruler
+          column_options:
+            type: mixin
+            source: Content\ColumnOptions
       events:
         name: Events
         icon: icon-calendar

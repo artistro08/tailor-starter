@@ -1,0 +1,17 @@
+uuid: 96d5b37c-a7c0-11ed-bcf3-d58139d0635e
+handle: Content\PostsColum
+type: mixin
+name: Blog Posts
+fields:
+  column_header:
+    type: mixin
+    label: Column Header
+    source: Content\ColumnHeader
+  common_fields:
+    type: mixin
+    source: Content\ProductsCommonFields
+  hr_1:
+    type: ruler
+  column_options:
+    type: mixin
+    source: Content\ColumnOptions
