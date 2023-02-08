@@ -1,7 +1,7 @@
 [global settings]
 handle = "Content\Settings"
 ==
-<header {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
+<header {{ section.html_anchor|length ? 'id=' ~  section.html_anchor  ~ '' }}
         class="hero
                {{ section.size == 'small' ? 'small-hero' }} 
                bg-dark 
