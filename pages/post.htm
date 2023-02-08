@@ -1,0 +1,52 @@
+url = "/blog/:slug"
+layout = "post"
+title = "Post"
+
+[section]
+handle = "Blog\Posts"
+entrySlug = "{{ :slug }}"
+entryDefault = 1
+fullSlug = 0
+
+[global settings]
+handle = "Content\Settings"
+==
+
+{% if settings.enable_blog == true %}
+    {% set post = section %}
+    
+    {% put header_code %}
+        {{ post.header_code|raw }}
+    {% endput %}
+    
+    {% put body_code %}
+        {{ post.body_code|raw }}
+    {% endput %}
+    
+    {% put footer_code %}
+        {{ post.footer_code|raw }}
+    {% endput %}
+
+    {% if post is empty %}
+        {% do abort('404') %}
+    {% else %}
+        {% if post.entry_type == 'simple' %}
+            {% partial 'blog/header' post = post %}
+            <section>
+                <div class="container">
+                    {{ post.content|raw }}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if post.entry_type == 'builder' %}
+            {% partial 'blog/header' post = post %}
+            {% for section in post.builder %}
+                {% partial 'builder/items' section=section %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+{% else %}
+    {% do abort('404') %}
+{% endif %}
