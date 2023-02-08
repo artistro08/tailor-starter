@@ -1,12 +1,12 @@
 uuid: 6947ff28-b660-47d7-9240-24ca6d58aeae
-handle: Blog\Author
+handle: Blog\Authors
 type: entry
 name: Post Authors
 drafts: false
 multisite: sync
 
 navigation:
-  parent: Blog\Post
+  parent: Blog\Posts
   icon: octo-icon-user
   order: 200
 

@@ -1,6 +1,6 @@
 uuid: b022a74b-15e6-4c6b-9eb9-17efc5103543
 type: structure
-handle: Blog\Category
+handle: Blog\Categories
 name: Post Categories
 drafts: false
 multisite: sync
@@ -12,7 +12,7 @@ customMessages:
   buttonCreate: New Post Category
 
 navigation:
-  parent: Blog\Post
+  parent: Blog\Posts
   icon: octo-icon-list-ul
   order: 150
 

@@ -1,5 +1,5 @@
 uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
-handle: Blog\Post
+handle: Blog\Posts
 type: stream
 name: Posts
 drafts: true
@@ -26,14 +26,10 @@ groups:
         tab: Edit
         type: richeditor
         span: adaptive
-      image:
-        tab: Manage
-        label: Image
-        commentAbove: An image to represent this post. Used on the top section of this post.
-        type: mediafinder
-        mode: image
-        maxItems: 1
-        span: full
+      post_attributes:
+        type: mixin
+        name: Post Content
+        source: Blog\PostAttributes
       seo_fields:
         tab: Manage
         type: mixin
@@ -52,14 +48,10 @@ groups:
         type: mixin
         name: Builder
         source: Content\BlogBuilder
-      image:
-        tab: Manage
-        label: Image
-        commentAbove: An image to represent this post. Used on the top section of this post.
-        type: mediafinder
-        mode: image
-        maxItems: 1
-        span: full
+      post_attributes:
+        type: mixin
+        name: Post Content
+        source: Blog\PostAttributes
       seo_fields:
         tab: Manage
         type: mixin
