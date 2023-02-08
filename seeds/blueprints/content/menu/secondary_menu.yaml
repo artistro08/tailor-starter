@@ -8,7 +8,7 @@ multisite: sync
 
 navigation:
   icon: icon-list
-  parent: Content\MainMenu
+  parent: Content\Page
   order: 6
 
 structure:

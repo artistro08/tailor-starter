@@ -6,13 +6,13 @@ drafts: true
 multisite: sync
 
 primaryNavigation:
-  label: Pages
+  label: Pages & Menus
   icon: icon-file
   order: 140
 
 navigation:
   icon: icon-file
-  parent: Content\Pages
+  parent: Content\Page
   order: 1
   
 customMessages:
