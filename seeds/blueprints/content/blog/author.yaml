@@ -1,0 +1,26 @@
+uuid: 6947ff28-b660-47d7-9240-24ca6d58aeae
+handle: Blog\Author
+type: entry
+name: Post Authors
+drafts: false
+multisite: sync
+
+navigation:
+  parent: Blog\Post
+  icon: octo-icon-user
+  order: 200
+
+customMessages:
+  buttonCreate: New Author
+
+fields:
+  avatar:
+    label: Avatar
+    type: mediafinder
+    mode: image
+  role:
+    label: Role
+    type: text
+  about:
+    label: About
+    type: richeditor

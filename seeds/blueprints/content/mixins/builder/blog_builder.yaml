@@ -1,0 +1,55 @@
+uuid: 32810b92-a7ad-11ed-924b-685ccfc43173
+handle: Content\BlogBuilder
+type: mixin
+name: Blog Builder
+
+fields:
+  builder:
+    type: repeater
+    label: Builder
+    displayMode: builder
+    span: adaptive
+    prompt: Add a Block
+    groups:
+      section:
+        name: Section
+        icon: icon-columns
+        description: Section with configurable columns.
+        titleFrom: title
+        useTabs: true
+        fields:
+          section:
+            type: mixin
+            source: Content\Section
+      events:
+        name: Events
+        icon: icon-calendar
+        description: Section with events.
+        titleFrom: title
+        useTabs: true
+        fields:
+          events:
+            type: mixin
+            source: Content\Events
+            tab: General
+      products:
+        name: Products
+        icon: icon-cube
+        description: Section with products.
+        titleFrom: title
+        useTabs: true
+        fields:
+          products:
+            type: mixin
+            source: Content\Products
+            tab: General
+      form:
+        name: Form
+        icon: icon-list-alt
+        description: Section with a form.
+        titleFrom: title
+        useTabs: true
+        fields:
+          form:
+            type: mixin
+            source: Content\Form
