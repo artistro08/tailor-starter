@@ -45,7 +45,7 @@ fields:
     maxItems: 1
     displayMode: recordfinder
     prompt: Click the %s to find a post category.
-    source: Blog\Category
+    source: Blog\Categories
     tab: General
     trigger:
       action: show

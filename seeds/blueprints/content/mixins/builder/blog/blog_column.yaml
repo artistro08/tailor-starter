@@ -9,7 +9,7 @@ fields:
     source: Content\ColumnHeader
   common_fields:
     type: mixin
-    source: Content\ProductsCommonFields
+    source: Content\PostsCommonFields
   hr_1:
     type: ruler
   column_options:
