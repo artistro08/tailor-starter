@@ -72,7 +72,7 @@ handle = "Content\Event"
                     {% if event.image|length %}
                         <img class="w-100 h-100 img-fluid opacity-50" style="object-position: center; object-fit: cover;" src="{{ event.image|media }}" alt="{{ event.title }}">
                     {% endif %}
-                    <a href="{{ 'event'|page({ event: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
+                    <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
                         {% if event.is_recurring %}
                             <span class="text-center fw-bold">
                                 {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts" : "Started" }}<br>
@@ -90,7 +90,7 @@ handle = "Content\Event"
                 </div>
                 <div class="col-12 col-lg-9 card-body">
                     <h3>
-                        <a href="{{ 'event'|page({ event: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
                     </h3>
                     <span class="mb-1 badge bg-primary rounded-pill">
                     {% if event.is_recurring %}
@@ -156,7 +156,7 @@ handle = "Content\Event"
                     {% if event.link|length %}
                         <a href="{{ event.link }}" target="_blank" class="btn btn-primary" role="button">Sign Up</a>
                     {% endif %}
-                    <a href="{{ 'event'|page({ event: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
+                    <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
                 </div>
             </div>
         </div>
@@ -197,7 +197,7 @@ handle = "Content\Event"
                         {% if event.image|length %}
                             <img class="w-100 h-100 img-fluid opacity-50" style="object-position: center; object-fit: cover;" src="{{ event.image|media }}" alt="{{ event.title }}">
                         {% endif %}
-                        <a href="{{ 'event'|page({ event: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
                             {% if event.is_recurring %}
                                 <span class="text-center fw-bold">
                                     {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts" : "Started" }}<br>
@@ -215,7 +215,7 @@ handle = "Content\Event"
                     </div>
                     <div class="col-12 col-lg-9 card-body">
                         <h3>
-                            <a href="{{ 'event'|page({ event: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
+                            <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
                         </h3>
                         <span class="mb-1 badge bg-primary rounded-pill">
                         {% if event.is_recurring %}
@@ -281,7 +281,7 @@ handle = "Content\Event"
                         {% if event.link|length %}
                             <a href="{{ event.link }}" target="_blank" class="btn btn-primary" role="button">Sign Up</a>
                         {% endif %}
-                        <a href="{{ 'event'|page({ event: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
                     </div>
                 </div>
             </div>

@@ -17,68 +17,11 @@ fields:
           label: Button Title
           span: left
           placeholder: Your button's text
-        item_type:
-          type: dropdown
-          label: Button Type
-          span: right
-          default: page
-          options:
-            page_entry: Page
-            product_entry: Product
-            product_list: Product List
-            product_category_entry: Product Category
-            event_entry: Event
-            url: URL
-        url:
-          type: text
-          validation: url
-          span: full
-          placeholder: Your button's url (e.g. https://example.com)
-          trigger:
-            action: show
-            field: item_type
-            condition: value[url]
         page:
-          type: entries
-          span: full
-          source: Content\Page
-          maxItems: 1
-          displayMode: recordfinder
-          prompt: Click the %s icon to find a page.
-          trigger:
-            action: show
-            field: item_type
-            condition: value[page_entry]
-        product:
-          type: entries
-          source: Content\Product
-          maxItems: 1
-          displayMode: recordfinder
-          prompt: Click the %s icon to find a product.
-          trigger:
-            action: show
-            field: item_type
-            condition: value[product_entry]
-        product_category:
-          type: entries
-          source: Content\Product\Category
-          maxItems: 1
-          displayMode: recordfinder
-          prompt: Click the %s icon to find a product category.
-          trigger:
-            action: show
-            field: item_type
-            condition: value[product_category_entry]
-        event:
-          type: entries
-          source: Content\Event
-          maxItems: 1
-          displayMode: recordfinder
-          prompt: Click the %s icon to find an event.
-          trigger:
-            action: show
-            field: item_type
-            condition: value[event_entry]
+          type: pagefinder
+          label: Page
+          singleMode: true
+          span: right
         hr_1:
           type: ruler
         style:

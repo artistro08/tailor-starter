@@ -1,10 +1,10 @@
-url = "/products/:product"
+url = "/products/:fullslug"
 layout = "product"
 title = "Product"
 
 [section]
 handle = "Content\Product"
-entrySlug = "{{ :product }}"
+entrySlug = "{{ :fullslug }}"
 entryDefault = 1
 fullSlug = 0
 
@@ -30,7 +30,7 @@ handle = "Content\Settings"
     {% if product is empty %}
         {% do abort('404') %}
     {% else %}
-        {% set preview_url = ''|page %}
+        {% set preview_url = this.request.requestUri %}
         {% set keys_set = true %}
         {% if settings.stripe_public_key is empty or settings.stripe_public_key is empty or settings.stripe_webhook_secret_key is empty %}
             {% set keys_set = false %}
@@ -202,7 +202,7 @@ handle = "Content\Settings"
                                 {% endif %}
         
                                 {% if keys_set %}
-                                    {% if 'default?' not in preview_url %}
+                                    {% if 'preview_token' not in preview_url %}
                                         <div class="d-flex">
                                             <div id="button">
                                                 {% partial 'shop/buy-button' product=product %}
@@ -216,7 +216,7 @@ handle = "Content\Settings"
                                         <div class="card bg-light">
                                             <div class="card-body">
                                                 <p>You can't purchase products in preview mode.</p>
-                                                <a href="{{ 'product'|page({product: product.slug}) }}" class="btn btn-primary">View Live Product</a>
+                                                <a href="{{ 'product'|page({fullslug: product.fullslug}) }}" class="btn btn-primary">View Live Product</a>
                                             </div>
                                         </div>
                                     {% endif %}
@@ -227,7 +227,7 @@ handle = "Content\Settings"
                             <p class="fs-5">This product is out of stock</p>
                         {% endif %}
         
-                        {% if 'default' not in preview_url %}
+                        {% if 'preview_token' not in preview_url %}
                             {% if product.content_group == "variant" %}
                                 {% if product.allow_purchases %}
                                     {% put scripts %}

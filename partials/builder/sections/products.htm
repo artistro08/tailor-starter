@@ -43,7 +43,7 @@ handle = "Content\Settings"
             <div class="row row-cols-lg-{{ section.enable_pagination ? section.per_page : section.limit }}">
                 {% for product in products %}
                     <div class="col{{ section.per_page > 4 ? "-12 col-lg-3" }}{{ section.limit > 4 ? "-12 col-lg-3" }} mb-4">
-                        <a href="{{ 'product'|page({ product: product.slug }) }}" class="d-block text-decoration-none">
+                        <a href="{{ 'product'|page({ fullslug: product.slug }) }}" class="d-block text-decoration-none">
                             <div class="card">
                                 <img
                                         src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"

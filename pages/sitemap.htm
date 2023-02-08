@@ -26,31 +26,27 @@ function onStart() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	{% for page in pages.where('exclude_in_sitemap', false).get() %}
 		<url>
-	    	<loc>{{ (settings.homepage.id == page.id) and (settings.homepage.slug == page.slug) ? '/'|app : 'page'|page({page: page.slug}) }}</loc>
+			{% if (settings.homepage.id == page.id) and (settings.homepage.slug == page.slug) %}
+	    	<loc>{{ '/'|app }}</loc>
+			{% else %}
+			<loc>{{ 'page'|page({fullslug: (page.fullslug|length ? page.fullslug : page.slug) }) }}</loc>
+			{% endif %}
 	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
 	    	<changefreq>daily</changefreq>
 	    	<priority>0.8</priority>
 	    </url>
 	{% endfor %}
-	{% for event in events %}
+	{% for event in events.where('exclude_in_sitemap', false).get() %}
 		<url>
-	    	<loc>{{ 'event'|page({event: event.slug}) }}</loc>
+	    	<loc>{{ 'event'|page({fullslug: event.fullslug}) }}</loc>
 	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
 	    	<changefreq>daily</changefreq>
 	    	<priority>0.8</priority>
 	    </url>
 	{% endfor %}
-	{% for product in products %}
+	{% for product in products.where('exclude_in_sitemap', false).get() %}
 		<url>
-	    	<loc>{{ 'product'|page({product: product.slug}) }}</loc>
-	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
-	    	<changefreq>daily</changefreq>
-	    	<priority>0.8</priority>
-	    </url>
-	{% endfor %}
-	{% for category in product_categories %}
-		<url>
-	    	<loc>{{ 'product_category'|page({product_category: category.slug}) }}</loc>
+	    	<loc>{{ 'product'|page({fullslug: product.fullslug}) }}</loc>
 	    	<lastmod>{{ 'now'|date('Y-m-d') }}</lastmod>
 	    	<changefreq>daily</changefreq>
 	    	<priority>0.8</priority>
