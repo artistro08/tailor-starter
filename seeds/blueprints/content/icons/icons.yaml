@@ -5,10 +5,10 @@ name: Icons
 drafts: false
 multisite: sync
 
-navigation:
+primaryNavigation:
+  label: Icons
   icon: icon-bookmark
-  parent: Content\Page
-  order: 13
+  order: 146
 
 fields:
   svg_code:

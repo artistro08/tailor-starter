@@ -5,9 +5,14 @@ name: Main Menu
 drafts: false
 multisite: sync
 
+primaryNavigation:
+  label: Menus
+  icon: icon-list
+  order: 141
+
 navigation:
   icon: icon-list
-  parent: Content\Page
+  parent: Content\MainMenu
   order: 5
 
 structure:

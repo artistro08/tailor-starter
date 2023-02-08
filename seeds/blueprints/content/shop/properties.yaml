@@ -6,8 +6,8 @@ multisite: sync
 
 navigation:
   icon: icon-tags
-  parent: Content\Page
-  order: 11
+  parent: Content\Product
+  order: 2
 
 structure:
   maxDepth: 1
