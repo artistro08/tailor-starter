@@ -40,20 +40,33 @@ fields:
     tab: Settings
     maxItems: 1
     span: right
+  hr_1:
+    type: ruler
+    tab: Settings
   enable_shop:
     type: switch
     comment: Enable the shop on the site.
     label: Enable Shop
     default: false
     tab: Settings
-    span: left
+    span: row
+    spanClass: col-12 col-lg-4
   enable_events:
     type: switch
     comment: Enable events on the site.
     label: Enable Events
     default: false
     tab: Settings
-    span: right
+    span: row
+    spanClass: col-12 col-lg-4
+  enable_blog:
+    type: switch
+    comment: Enable blog posts on the site.
+    label: Enable Blog
+    default: false
+    tab: Settings
+    span: row
+    spanClass: col-12 col-lg-4
   header_code:
     label: Header Code
     type: codeeditor

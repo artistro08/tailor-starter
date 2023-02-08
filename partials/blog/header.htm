@@ -1,0 +1,23 @@
+<header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
+    <div class="container position-relative" style="z-index: 1">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>{{ post.title }}</h1>
+                {% if post.author|length %}
+                    <a class="d-flex flex-column align-items-center text-center text-decoration-none text-white" href="{{ 'author'|page({slug: post.author.slug}) }}">
+                        {% if post.author.avatar|length %}
+                            <img class="rounded-circle" width="75px" src="{{ post.author.avatar|media|resize(75, 75, {mode: "crop"}) }}" alt="{{ post.author.title }}">
+                        {% endif %}
+                        <span class="fs-4">By {{ post.author.title }}</span>
+                        <span class="fs-5">{{ post.author.role }}</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if post.image|length %}
+        <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
+            <img src="{{ post.image|media|resize(1920) }}" alt="{{ post.title }}" class="w-100 h-100" style="object-fit: cover; ">
+        </div>
+    {% endif %}
+</header>

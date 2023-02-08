@@ -1,0 +1,17 @@
+uuid: 96601276-a7c0-11ed-b652-e07d090eb056
+handle: Content\Posts
+type: mixin
+name: Blog Posts
+fields:
+  section_header:
+    type: mixin
+    source: Content\SectionHeader
+    tab: General
+  common_fields:
+    type: mixin
+    source: Content\PostsCommonFields
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced

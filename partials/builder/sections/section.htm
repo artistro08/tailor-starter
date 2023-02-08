@@ -2,7 +2,7 @@
 handle = "Content\Settings"
 ==
 <section 
-        {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
+        {{ section.html_anchor|length ? 'id=' ~  section.html_anchor  ~ '' }}
         class="{% if section.css_classes|length %}
                     {% for class in section.css_classes|split(',') %}
                         {{ class ~ ' ' }}
@@ -31,6 +31,13 @@ handle = "Content\Settings"
                     {# Image Column Group #}
                     {% if column.content_group == "image" %}
                         {% partial 'builder/columns/image' column = column %}
+                    {% endif %}
+
+                    {# Posts Column Group #}
+                    {% if settings.enable_blog == true %}
+                        {% if column.content_group == "posts" %}
+                            {% partial 'builder/columns/posts' column = column %}
+                        {% endif %}
                     {% endif %}
                     
                     {# Event Column Group #}

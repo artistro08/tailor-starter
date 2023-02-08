@@ -1,7 +1,7 @@
-uuid: 78650dea-607e-4c63-bde8-2364cb786072
-handle: Content\Builder
+uuid: 32810b92-a7ad-11ed-924b-685ccfc43173
+handle: Content\BlogBuilder
 type: mixin
-name: Builder
+name: Blog Builder
 
 fields:
   builder:
@@ -11,16 +11,6 @@ fields:
     span: adaptive
     prompt: Add a Block
     groups:
-      hero:
-        name: Hero
-        icon: icon-laptop
-        description: A section with a background image.
-        titleFrom: title
-        useTabs: true
-        fields:
-          hero:
-            type: mixin
-            source: Content\Hero
       section:
         name: Section
         icon: icon-columns

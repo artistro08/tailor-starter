@@ -1,18 +1,21 @@
-uuid: c59d8718-0115-11ed-98c7-806b464850f0
-handle: Content\Product\Category
+uuid: b022a74b-15e6-4c6b-9eb9-17efc5103543
 type: structure
-name: Product Categories
+handle: Blog\Categories
+name: Post Categories
 drafts: false
 multisite: sync
 
-navigation:
-  icon: icon-th
-  parent: Content\Page
-  order: 8
+structure:
+  maxDepth: 1
 
 customMessages:
-  buttonCreate: New Category
-  
+  buttonCreate: New Post Category
+
+navigation:
+  parent: Blog\Posts
+  icon: octo-icon-list-ul
+  order: 150
+
 fields:
   image:
     tab: Edit

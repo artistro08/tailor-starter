@@ -1,0 +1,270 @@
+description = "Author Layout for Post Author Tailor Entries"
+title = "Author"
+
+[global settings]
+handle = "Content\Settings"
+==
+<?php
+use Stripe\Stripe as Stripe;
+use Stripe\Checkout as Checkout;
+use Tailor\Models\GlobalRecord as GlobalRecord;
+use Tailor\Models\EntryRecord as EntryRecord;
+
+function onRemoveFromCart() {
+    $cart_session = Session::get('cart_items');
+    unset($cart_session[input('index')]);
+    $cart_session = array_values($cart_session);
+    Session::put('cart_items', $cart_session, 4320);
+    $this['cart_items'] = Session::get('cart_items');
+}
+
+function onCheckout() {
+    // Grab Shop settings from Content -> Shop -> Settings
+    $shop_settings = GlobalRecord::findForGlobal('Content\Settings');
+    $currency      = $shop_settings->currency;
+    $success_url = 
+        Config::get('app.url') .
+        '/' . 
+        $shop_settings->stripe_checkout_success_page->slug;
+    $cancel_url = $this->currentPageUrl();
+
+    // Set Stripe Key from Settings
+    Stripe::setApiKey($shop_settings->stripe_secret_key);
+
+    // Get Cart Data from Session
+    $cart_data = Session::get('cart_items');
+
+    // Set Line Items
+    $line_items = [];
+
+    $all_metadata = [];
+    foreach($cart_data as $line_item) {
+        foreach($line_item['metadata'] as $pair) {
+            list($a, $b) = explode(':', $pair);
+            $all_metadata[$a] = $b;
+        }
+
+        $product_line_item = EntryRecord::inSection('Content\Product')->find($line_item['product_id']);
+
+        if($product_line_item->content_group == "simple") {
+            $items_in_question = [];
+            if($line_item['quantity'] > $product_line_item->quantity) {
+                $items_in_question[] = ['name' => $line_item['product_name']];
+                $this['items_in_question'] = $items_in_question;
+                throw new AjaxException(['#items-out-of-stock' => $this->renderPartial('shop/items-out-of-stock-message')]);
+            }
+        }
+
+        $all_metadata['tailor_id'] = $line_item['product_id'];
+        $line_items[] = [
+            'price_data' => [
+                'currency'     => $currency,
+                'product_data' => [
+                    'name'        => $line_item['product_name'],
+                    'description' => $line_item['product_description'] . ' - ' . implode(' - ', $line_item['metadata']),
+                    'images'      => [
+                        $line_item['image'],
+                    ],
+                    'metadata'    => $all_metadata,
+                ],
+                'unit_amount' => $line_item['unit_amount'],
+            ],
+            'quantity' => $line_item['quantity'],
+        ];
+    }
+
+
+    // Set Shipping Stuff
+    $available_countries = $shop_settings->available_countries;
+    $shipping_rate_data = [];
+
+    foreach ($shop_settings->shipping_methods as $shipping_method) {
+        $shipping_rate_data[] = [
+            'shipping_rate_data' => [
+                'type' => 'fixed_amount',
+                'fixed_amount' => [
+                    'amount' => $shipping_method->price * 100,
+                    'currency' => strtolower($currency),
+                ],
+                'display_name' => $shipping_method->title,
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_min,
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping_method->delivery_estimate_max,
+                    ],
+                ]
+            ]
+        ];
+    }
+
+    // Initiate Checkout Session
+    $checkout_session = Checkout\Session::create([
+        'shipping_address_collection' => [
+            'allowed_countries' => $available_countries,
+        ],
+        'shipping_options' => $shipping_rate_data,
+        'line_items' => $line_items,
+        'mode' => 'payment',
+        'success_url' =>  $success_url.'?session_id={CHECKOUT_SESSION_ID}',
+        'cancel_url'  => $cancel_url,
+    ]);
+
+    return redirect($checkout_session->url);
+}
+
+function onLoad() {
+    $this['cart_items'] = Session::get('cart_items');
+}
+
+function onStart() {
+    $this['cart_items'] = Session::get('cart_items');
+}
+
+function onFormSubmit() {
+
+    $form_input = input();
+    $form_id = $form_input["form_id"];
+    $form_success_message = $form_input["success_message"];
+    $form = EntryRecord::inSection('Content\Forms')->find($form_id);
+    $submission = EntryRecord::inSection('Content\Forms\Submissions');
+    $settings = GlobalRecord::findForGlobal('Content\Settings');
+    $form_validation_rules = [];
+    $form_validation_messages = [];
+    $form_input_formatted = '';
+    $form_name = '(no data)';
+    
+    // Parse form validation data
+    foreach ($form->fields as $field) {
+        
+        $field_validation_rules = [];
+        $field_validation_messages = [];
+
+        if($field->validation == true) {
+
+            foreach ($field->validation_rules as $validation_item) {
+                if($validation_item->attributes['type'] == "phone") {
+                    $field_validation_rules[] = "regex:/^([0-9\s\-\+\(\)]*)$/";
+                    $field_validation_rules[] = "min:9";
+                    $field_validation_messages[$field->slug . '.' . "regex"] = $validation_item->attributes['error_message'];
+                    $field_validation_messages[$field->slug . '.' . "min"] = $validation_item->attributes['error_message'];
+                } else {
+                    $field_validation_rules[] = $validation_item->attributes['type'];
+                    $field_validation_messages[$field->slug . '.' . $validation_item->attributes['type']] = $validation_item->attributes['error_message'];
+                }
+                
+            }
+            
+            $form_validation_rules[] = [$field->slug => $field_validation_rules];
+            $form_validation_messages[] = $field_validation_messages;
+            if($form->enable_recaptcha) {
+                $form_validation_rules[] = [
+                    'g-recaptcha-response' => 'required|recaptcha'
+                ];
+                $form_validation_messages[] = [
+                    'g-recaptcha-response.required' => 'Please ensure you are not a robot.'
+                ];
+            }
+        }
+
+    }
+
+    // Format Rules and messages
+    $form_validation_rules = array_merge(...$form_validation_rules);
+    $form_validation_messages = array_merge(...$form_validation_messages);
+
+    $form_unwanted_fields = [
+        "form_id",
+        "g-recaptcha-response",
+        "success_message",
+        "submitted",
+        "_preview_token"
+    ];
+
+    // Validate Fields
+    $validation = Validator::make(request()->all(), $form_validation_rules, $form_validation_messages);
+
+    if($validation->fails()) {
+        throw new ValidationException($validation);
+    }
+    
+    foreach ($form_input as $key => $value) {
+        
+        if(!in_array($key, $form_unwanted_fields)) {
+            if($key == array_key_first($form_input)){
+                $form_name = (!empty($value)) ? $value : $form_name;
+            }
+            $key = ucwords(str_replace("-", ' ', $key));
+            $form_input_formatted .= $key . ": " . $value  . "\n";
+        }
+
+    }
+
+    $submission->title = $form_name;
+    $submission->form  = $form_input['form_id'];
+    $submission->data  = $form_input_formatted;
+    
+    $submission->save();
+
+    // Send Email
+    $mail_data = [
+        'form_name' => $form->title,
+        'form_data' => $form_input_formatted,
+    ];
+
+    $mail_recipients = [];
+    
+
+    if(!$form->recipients->isEmpty()){
+        foreach ($form->recipients as $recipient) {
+            $mail_recipients[$recipient->email] = $recipient->name;
+        }
+    } else {
+        if((!empty($settings->notification_email) && (!empty($settings->notification_email_recipient_name)))) {
+            $mail_recipients = [
+                $settings->notification_email => $settings->notification_email_recipient_name
+            ];
+        }
+        
+    }
+
+    if(($form->enable_notifications) && (!empty($mail_recipients))) {
+
+        Mail::send('artistro08.tailorstarter::mail.form_submission', $mail_data, function($message) use ($mail_recipients, $form) {
+            foreach ($mail_recipients as $email => $name) {
+                $message->to($email, $name);
+                $message->subject('New Form Submission from ' . $form->title);
+            }
+        });
+
+    }
+
+    Flash::success($form_success_message);
+
+    $this['submitted'] = $form_input['submitted'];
+
+}
+?>
+==
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% partial 'head' %}
+    </head>
+    {% partial 'header' %}
+    <body>
+        {{ settings.body_code|raw }}
+        {% placeholder body_code %}
+        <main>
+            {% page %}
+        </main>
+    </body>
+    <div id="cart-data">
+        {% partial 'shop/cart-data' %}
+    </div>
+    {% partial 'footer' %}
+    {% partial 'foot' %}
+</html>

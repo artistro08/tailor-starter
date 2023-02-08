@@ -1,0 +1,67 @@
+uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
+handle: Blog\Posts
+type: stream
+name: Posts
+drafts: true
+multisite: sync
+
+primaryNavigation:
+  label: Blog
+  icon: icon-newspaper-o
+  order: 141
+
+structure:
+  maxDepth: 0
+
+navigation:
+  icon: icon-pencil
+  order: 100
+  
+customMessages:
+  buttonCreate: New Post
+
+groups:
+  simple:
+    name: Simple Post
+    fields:
+      content:
+        label: Content
+        tab: Edit
+        type: richeditor
+        span: adaptive
+      post_attributes:
+        type: mixin
+        name: Post Content
+        source: Blog\PostAttributes
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields
+  builder:
+    name: Dynamic Post
+    fields:
+      builder:
+        tab: Edit
+        type: mixin
+        name: Builder
+        source: Content\BlogBuilder
+      post_attributes:
+        type: mixin
+        name: Post Content
+        source: Blog\PostAttributes
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields

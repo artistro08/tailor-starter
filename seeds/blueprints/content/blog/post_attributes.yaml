@@ -1,0 +1,41 @@
+uuid: 4d7fd1e4-85f2-48f5-947e-92819fc8664b
+handle: Blog\PostAttributes
+type: mixin
+name: Blog Post Attributes
+multisite: sync
+
+fields:
+  image:
+    tab: Manage
+    label: Image
+    commentAbove: An image to represent this post. Used on the top section of this post's page.
+    type: mediafinder
+    mode: image
+    maxItems: 1
+    span: left
+  author:
+    tab: Manage
+    label: Author
+    commentAbove: Select the author for this blog post.
+    type: entries
+    maxItems: 1
+    source: Blog\Authors
+    span: right
+  excerpt:
+    tab: Manage
+    label: Blog Excerpt
+    commentAbove: A short description of your blog post.
+    type: textarea
+    size: small
+    span: left
+    cssClass: mb-3
+  categories:
+    tab: Manage
+    label: Categories
+    commentAbove: Select categories that this blog post belongs to
+    type: entries
+    source: Blog\Categories
+    span: right
+  hr_post_content:
+    type: ruler
+    tab: Manage
