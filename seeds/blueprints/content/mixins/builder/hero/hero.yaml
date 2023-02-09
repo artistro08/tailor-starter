@@ -12,6 +12,15 @@ fields:
     type: text
     span: full
     tab: General
+  image_type:
+    label: Image Type
+    commentAbove: Choose which type of image you would like to display. Add your own image or pick from a image category.
+    type: dropdown
+    tab: General
+    options:
+      media_library: Media Library Image
+      product_category_image: Product Category Image
+      blog_category_image: Blog Category Image
   image:
     label: Image
     type: mediafinder
@@ -20,12 +29,40 @@ fields:
     mode: image
     maxItems: 1
     tab: General
+    trigger:
+      action: show
+      field: image_type
+      condition: value[media_library]
   image_description:
     label: Image Description
     type: text
     commentAbove: The Description of the image. Use for SEO purposes.
     span: right
     tab: General
+    trigger:
+      action: show
+      field: image_type
+      condition: value[media_library]
+  blog_category:
+    type: entries
+    source: Blog\Categories
+    tab: General
+    maxItems: 1
+    label: Blog Category
+    trigger: 
+      action: show
+      field: image_type
+      condition: value[blog_category_image]
+  product_category:
+    type: entries
+    source: Content\Product\Category
+    tab: General
+    maxItems: 1
+    label: Product Category
+    trigger: 
+      action: show
+      field: image_type
+      condition: value[product_category_image]
   position:
     label: Position
     type: dropdown
