@@ -64,3 +64,4 @@ v5.1.0: Add multi-level page support
 v6.0.0: Added the pagefinder widget. Added a blog with post authors and categories. Removed Categories pages since they can be created in the builder (More flexible). 
 v6.1.0: Added ability to select specific records for the Posts, Products, and Events blocks in the builder. 
 v6.1.1: Added format_money filter from companion plugin
+v6.1.2: Added "Theme" to the code namespace for the marketplace
