@@ -36,7 +36,7 @@ php artisan theme:install Artistro08.TailorStarterTheme --from=git@github.com:ar
 Once installed, run the seeding function for the theme:
 
 ```bash
-php artisan theme:seed artistro08-tailorstartertheme-theme --root
+php artisan theme:seed artistro08-tailorstartertheme --root
 ```
 
 This will initialize the Tailor structure, so you can add content.
