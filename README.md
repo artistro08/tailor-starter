@@ -30,7 +30,7 @@ Install the theme and dependencies via `artisan`:
 
 ```bash
 php artisan plugin:install Artistro08.TailorStarter --from=git@github.com:artistro08/tailor-starter-plugin.git
-php artisan theme:install Artistro08.TailorStarter --from=git@github.com:artistro08/tailor-starter.git
+php artisan theme:install Artistro08.TailorStarterTheme --from=git@github.com:artistro08/tailor-starter.git
 ```
 
 Once installed, run the seeding function for the theme:
