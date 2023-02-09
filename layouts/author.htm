@@ -233,7 +233,7 @@ function onFormSubmit() {
 
     if(($form->enable_notifications) && (!empty($mail_recipients))) {
 
-        Mail::send('artistro08.tailorstarter::mail.form_submission', $mail_data, function($message) use ($mail_recipients, $form) {
+        Mail::send('artistro08.::mail.form_submission', $mail_data, function($message) use ($mail_recipients, $form) {
             foreach ($mail_recipients as $email => $name) {
                 $message->to($email, $name);
                 $message->subject('New Form Submission from ' . $form->title);
