@@ -6,4 +6,4 @@ authorCode: Artistro08
 code: TailorStarterTheme
 database: '0'
 require:
-  - "Artistro08.TailorStarter"
+  - "Artistro08.TailorStarterCompanion"

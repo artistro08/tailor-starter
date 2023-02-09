@@ -18,4 +18,4 @@ fields:
     attributes: disabled
     column:
       type: partial
-      path: "#/artistro08-tailorstarter/partials/columns/_icon"
+      path: "#/artistro08-tailorstartertheme/partials/columns/_icon"
