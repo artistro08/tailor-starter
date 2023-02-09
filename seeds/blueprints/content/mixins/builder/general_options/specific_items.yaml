@@ -1,0 +1,20 @@
+uuid: f20ade7d-a7fc-11ed-bd1e-79654f973810
+handle: Content\SpecificItems
+type: mixin
+name: Pagination
+
+fields:
+  hr_specific_items:
+    type: ruler
+    tab: General
+  show_specific_items:
+    type: switch
+    label: Show Specific Items
+    comment: Pick items you want to show for this block
+    span: left
+    tab: General
+    trigger:
+      action: disable|empty
+      field: show
+      condition: value[upcoming]
+  

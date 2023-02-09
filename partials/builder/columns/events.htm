@@ -15,6 +15,15 @@ handle = "Content\Event"
 {% set month_day_year_and_time = "M d, Y - g:i A" %}
 {% set sort_order = column.reverse_order ? 'desc' : 'asc' %}
 
+{% if column.show_specific_items %}
+    {% set events = collect() %}
+    {% for event in column.specific_items %}
+        {% if event.item is not empty %}
+            {% do events.push(event.item) %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 {% if column.show == 'upcoming' %}
     {% set events = events.whereDate('date', '>=', today) %}
 {% endif %}
@@ -24,21 +33,39 @@ handle = "Content\Event"
 {% endif %}
 
 {% if column.sort_by == 'title' %}
-    {% set events = events.orderBy('title', sort_order) %}
-    {% set older_events = older_events.orderBy('title', sort_order) %}
+    {% if column.show_specific_items %}
+        {% if sort_order == 'asc' %}
+            {% set events = events.sortBy('title') %}
+        {% else %}
+            {% set events = events.sortBy('title')|reverse %}
+        {% endif %}
+    {% else %}
+        {% set events = events.orderBy('title', sort_order) %}
+        {% set older_events = older_events.orderBy('title', sort_order) %}
+    {% endif %}
 {% endif %}
 
 {% if column.sort_by == 'date' %}
-    {% set events = events.orderBy('date', sort_order) %}
-    {% set older_events = older_events.orderBy('title', sort_order) %}
+    {% if column.show_specific_items %}
+        {% if sort_order == 'asc' %}
+            {% set events = events.sortBy('date') %}
+        {% else %}
+            {% set events = events.sortBy('date')|reverse %}
+        {% endif %}
+    {% else %}
+        {% set events = events.orderBy('date', sort_order) %}
+        {% set older_events = older_events.orderBy('date', sort_order) %}
+    {% endif %}
 {% endif %}
 
 {% if column.enable_pagination %}
     {% set events = events.paginateCustom(column.per_page, 'events_column') %}
     {% set older_events = older_events.paginateCustom(column.per_page, 'older_events_column') %}
 {% else %}
-    {% set events = events.limit(column.limit).get() %}
-    {% set older_events = older_events.limit(column.limit).get() %}
+    {% if not column.show_specific_items %}
+        {% set events = events.limit(column.limit).get() %}
+        {% set older_events = older_events.limit(column.limit).get() %}
+    {% endif %}
 {% endif %}
 
 {% if (column.show_older_events and column.show == 'upcoming') %}

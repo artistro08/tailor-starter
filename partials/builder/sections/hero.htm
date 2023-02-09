@@ -1,6 +1,28 @@
 [global settings]
 handle = "Content\Settings"
 ==
+{% set heroImage = '' %}
+{% set heroImageAlt = '' %}
+
+{% if section.image_type == "media_library" %}
+    {% set heroImage = section.image %}
+    {% set heroImageAlt = section.image_description %}
+{% endif %}
+
+{% if section.image_type == "product_category_image" %}
+    {% if section.product_category.image|length %}
+        {% set heroImage = section.product_category.image %}
+    {% endif %}
+    {% set heroImageAlt = section.product_category.title %}
+{% endif %}
+
+{% if section.image_type == "blog_category_image" %}
+    {% if section.blog_category.image|length %}
+        {% set heroImage = section.blog_category.image %}
+    {% endif %}
+    {% set heroImageAlt = section.blog_category.title %}
+{% endif %}
+
 <header {{ section.html_anchor|length ? 'id=' ~  section.html_anchor  ~ '' }}
         class="hero
                {{ section.size == 'small' ? 'small-hero' }} 
@@ -27,10 +49,9 @@ handle = "Content\Settings"
             </div>
         </div>
     </div>
-    {% if section.image|length %}
-        {% set heroImage = section.image|split('.')|last %}
+    {% if heroImage|length %}
         <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100" style="z-index: 0">
-            <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media|resize(1920) }}" alt="{{ section.image_description }}">
+            <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ heroImage|media|resize(1920) }}" alt="{{ heroImageAlt }}">
         </div>
     {% endif %}
 </header>
