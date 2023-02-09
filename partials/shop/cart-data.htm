@@ -7,8 +7,7 @@ handle = "Content\Settings"
             <div class="toast-body align-items-center justify-content-between w-100">
                 <span class="mb-2 d-block">Successfully added to Cart!</span>
                 <div class="d-flex">
-                    <a href="{{ 'products'|page }}" class="btn btn-sm btn-dark me-2">Shop More</a>
-                    <button href="{{ 'products'|page }}" class="btn btn-sm btn-dark d-flex align-items-center" data-request="onCheckout">
+                    <button class="btn btn-sm btn-dark d-flex align-items-center" data-request="onCheckout">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                         </svg>&nbsp;Checkout
@@ -53,7 +52,7 @@ handle = "Content\Settings"
                                     {% endfor %}
                                 </span>
                                     <span class="d-block">
-                                    Price: {{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ (item.unit_amount / 100)|number_format(2,'.',',') }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}
+                                    Price: {{ (item.unit_amount / 100)|format_money }}
                                 </span>
                             </div>
                             <div class="col-2 align-self-center mb-3 text-center">
@@ -74,13 +73,12 @@ handle = "Content\Settings"
                 {% else %}
                     <div class="d-flex flex-column text-center align-items-center justify-content-center py-5">
                         <h6>You've got nothing in your cart</h6>
-                        <a href="{{ 'products'|page }}" class="btn btn-primary">Shop Products</a>
                     </div>
                 {% endif %}
                 
             </div>
             <div class="pt-2 pe-2 d-flex align-items-center justify-content-between w-100">
-                <div><strong>Subtotal: </strong>{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ (subtotal / 100)|number_format(2,'.',',') }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</div>
+                <div><strong>Subtotal: </strong>{{ (subtotal / 100)|format_money }}</div>
                 <button class="btn-primary btn d-flex align-items-center" data-request="onCheckout">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
