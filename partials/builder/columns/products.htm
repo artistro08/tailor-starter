@@ -3,34 +3,63 @@ handle = "Content\Product"
 ==
 {% set sort_order = column.reverse_order ? 'desc' : 'asc' %}
 
+{% if column.show_specific_items %}
+    {% set products = collect() %}
+    {% for product in column.specific_items %}
+        {% if product.item is not empty %}
+            {% do products.push(product.item) %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 {% if column.filter_by_category %}
     {% set products = products.whereRelation('categories', 'id', column.product_category_filter.id) %}
 {% endif %}
 
 {% if column.sort_by == 'title' %}
-    {% set products = products.orderBy('title', sort_order) %}
+    {% if column.show_specific_items %}
+        {% if sort_order == 'asc' %}
+            {% set products = products.sortBy('title') %}
+        {% else %}
+            {% set products = products.sortBy('title')|reverse %}
+        {% endif %}
+    {% else %}
+        {% set products = products.orderBy('title', sort_order) %}
+    {% endif %}
 {% endif %}
 
 {% if column.sort_by == 'date' %}
-    {% set products = products.orderBy('published_at_date', sort_order) %}
+    {% if column.show_specific_items %}
+        {% if sort_order == 'asc' %}
+            {% set products = products.sortBy('published_at_date') %}
+        {% else %}
+            {% set products = products.sortBy('published_at_date')|reverse %}
+        {% endif %}
+    {% else %}
+        {% set products = products.orderBy('published_at_date', sort_order) %}
+    {% endif %}
 {% endif %}
 
 {% if column.enable_pagination %}
     {% set products = products.paginateCustom(column.per_page, "products_column") %}
 {% else %}
-    {% set products = products.limit(column.limit).get() %}
+    {% if not column.show_specific_items %}
+        {% set products = products.limit(column.limit).get() %}
+    {% endif %}
 {% endif %}
 
 {% partial 'builder/globals/shop_alerts' %}
-<div class="row row-cols-lg-{{ column.enable_pagination ? column.per_page : column.limit }}">
+<div class="row row-cols-lg-{{ column.enable_pagination ? column.limit }}">
     {% for product in products %}
-        <div class="col{{ column.per_page > 4 ? "-12 col-lg-3" }}{{ column.limit > 4 ? "-12 col-lg-3" }} mb-4">
+        <div class="col{{ column.show_specific_items ? '-12 col-lg-' ~ column.specific_items_columns : (column.limit > 4 ? "-12 col-lg-3")  }} mb-4">
             <a href="{{ 'product'|page({ fullslug: product.slug }) }}" class="d-block text-decoration-none">
                 <div class="card">
-                    <img
-                            src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
-                            alt="{{ product.title }}" class="card-img-top"
-                    >
+                    {% if product.images|length %}
+                        <img
+                                src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                alt="{{ product.title }}" class="card-img-top"
+                        >
+                    {% endif %}
                     <div class="card-body d-flex justify-content-between">
                         <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
                         <span class="text-decoration-none text-dark fw-bold">{{ settings.currency_symbol_placement == 'before' ? settings.currency_symbol }}{{ product.price }}{{ settings.currency_symbol_placement == 'after' ? settings.currency_symbol }}</span>

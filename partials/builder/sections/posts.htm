@@ -8,22 +8,49 @@ handle = "Content\Settings"
 
     {% set sort_order = section.reverse_order ? 'desc' : 'asc' %}
 
+    {% if section.show_specific_items %}
+        {% set posts = collect() %}
+        {% for post in section.specific_items %}
+            {% if post.item is not empty %}
+                {% do posts.push(post.item) %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
     {% if section.filter_by_category %}
         {% set posts = posts.whereRelation('categories', 'id', section.post_category_filter.id) %}
     {% endif %}
 
     {% if section.sort_by == 'title' %}
-        {% set posts = posts.orderBy('title', sort_order) %}
+        {% if section.show_specific_items %}
+            {% if sort_order == 'asc' %}
+                {% set posts = posts.sortBy('title') %}
+            {% else %}
+                {% set posts = posts.sortBy('title')|reverse %}
+            {% endif %}
+        {% else %}
+            {% set posts = posts.orderBy('title', sort_order) %}
+        {% endif %}
     {% endif %}
 
     {% if section.sort_by == 'date' %}
-        {% set posts = posts.orderBy('published_at_date', sort_order) %}
+        {% if section.show_specific_items %}
+            {% if sort_order == 'asc' %}
+                {% set posts = posts.sortBy('published_at_date') %}
+            {% else %}
+                {% set posts = posts.sortBy('published_at_date')|reverse %}
+            {% endif %}
+        {% else %}
+            {% set posts = posts.orderBy('published_at_date', sort_order) %}
+        {% endif %}
     {% endif %}
 
     {% if section.enable_pagination %}
-        {% set posts = posts.paginateCustom(section.per_page, "posts") %}
+        {% set posts = posts.paginateCustom(section.limit, "posts") %}
     {% else %}
-        {% set posts = posts.limit(section.limit).get() %}
+        {% if not section.show_specific_items %}
+            {% set posts = posts.limit(section.limit).get() %}
+        {% endif %}
     {% endif %}
 
     <section 
@@ -39,16 +66,18 @@ handle = "Content\Settings"
                    {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}"
     >
         <div class="{{ section.container_style }}">
-            <div class="row row-cols-lg-{{ section.enable_pagination ? section.per_page : section.limit }}">
+            <div class="row row-cols-lg-{{ section.enable_pagination ? section.limit }}">
                 {% for post in posts %}
-                    <div class="col{{ section.per_page > 4 ? "-12 col-lg-3" }}{{ section.limit > 4 ? "-12 col-lg-3" }} mb-4">
+                    <div class="col{{ section.show_specific_items ? '-12 col-lg-' ~ section.specific_items_columns : (section.limit > 4 ? "-12 col-lg-3")  }} mb-4">
                         <div class="card h-100">
-                            <a href="{{ 'post'|page({ slug: post.slug }) }}" class="card-img-top">
-                                <img
-                                        src="{{ post.image|media|resize(700, 400, {mode: 'crop'}) }}"
-                                        alt="{{ post.title }}" class="card-img-top"
-                                >
-                            </a>
+                            {% if post.image|length %}
+                                <a href="{{ 'post'|page({ slug: post.slug }) }}" class="card-img-top">
+                                    <img
+                                            src="{{ post.image|media|resize(700, 400, {mode: 'crop'}) }}"
+                                            alt="{{ post.title }}" class="card-img-top"
+                                    >
+                                </a>
+                            {% endif %}
                             <div class="card-body d-flex flex-column h-100 align-items-start">
                                 <h3 class="text-decoration-none text-dark fs-5">
                                     <a href="{{ 'post'|page({ slug: post.slug }) }}" class="text-decoration-none text-reset">{{ post.title }}</a>

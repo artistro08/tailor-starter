@@ -16,13 +16,13 @@ fields:
     type: number
     span: right
     label: Post Limit
-    commentAbove: How many posts would you like to show? Min of 3.
+    commentAbove: How many posts would you like to show? Also used for pagination. 
     default: 3
-    min: 3
+    min: 1
     tab: General
     trigger: 
-      action: disable
-      field: enable_pagination
+      action: disable|empty
+      field: show_specific_items
       condition: checked
   filter_by_category:
     type: switch
@@ -30,6 +30,10 @@ fields:
     cssClass: mt-3
     label: Filter By Category
     comment: Filter posts by a specific category
+    trigger: 
+      action: disable|empty
+      field: show_specific_items
+      condition: checked
   reverse_order:
     type: switch
     span: right
@@ -50,6 +54,45 @@ fields:
     trigger:
       action: show
       field: filter_by_category
+      condition: checked
+  specific_items_mixin:
+    type: mixin
+    tab: General
+    source: Content\SpecificItems
+  specific_items_columns:
+    type: dropdown
+    label: Number of Columns
+    default: value[3]
+    commentAbove: Choose the number of columns you would like for the specific items you chose. Min of 1, Max of 4.
+    span: right
+    options:
+      12: One Column 
+      6: Two Columns
+      4: Three Columns
+      3: Four Columns
+    trigger:
+      action: show
+      field: show_specific_items
+      condition: checked
+  specific_items:
+    type: repeater
+    label: Specific Items
+    commentAbove: Add items to show for this block. 
+    span: full
+    tab: General
+    showDuplicate: false
+    showReorder: false
+    prompt: Add a Post
+    form:
+      fields:
+        item: 
+          label: Post
+          type: entries
+          maxItems: 1
+          source: Blog\Posts
+    trigger: 
+      action: show
+      field: show_specific_items
       condition: checked
   pagination:
     type: mixin

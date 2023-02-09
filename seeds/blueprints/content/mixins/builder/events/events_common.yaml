@@ -12,6 +12,10 @@ fields:
     options:
       upcoming: Upcoming Events
       all: All Events
+    trigger:
+      action: fill[all]
+      field: show_specific_items
+      condition: checked
   sort_by:
     type: dropdown
     span: right
@@ -43,13 +47,13 @@ fields:
     type: number
     span: full
     label: Event Limit
-    commentAbove: How many events would you like to show? Min of 3. Applies to all events (old and new).
+    commentAbove: How many events would you like to show? Also used for pagination. 
     default: 3
-    min: 3
+    min: 1
     tab: General
     trigger: 
-      action: disable
-      field: enable_pagination
+      action: disable|empty
+      field: show_specific_items
       condition: checked
   older_events_title:
     type: text
@@ -72,6 +76,30 @@ fields:
     trigger:
       action: show
       field: show_older_events
+      condition: checked
+  specific_items_mixin:
+    type: mixin
+    tab: General
+    source: Content\SpecificItems
+  specific_items:
+    type: repeater
+    label: Specific Items
+    commentAbove: Add items to show for this block.
+    span: full
+    tab: General
+    showDuplicate: false
+    showReorder: false
+    prompt: Add an Event
+    form:
+      fields:
+        item: 
+          label: Event
+          type: entries
+          maxItems: 1
+          source: Content\Event
+    trigger: 
+      action: show
+      field: show_specific_items
       condition: checked
   pagination:
     type: mixin

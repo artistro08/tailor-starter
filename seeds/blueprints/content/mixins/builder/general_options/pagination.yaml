@@ -13,14 +13,7 @@ fields:
     comment: Enable Pagination for this block. Also disables the limit. Applies to all content (old and new).
     span: left
     tab: General
-  per_page:
-    type: number
-    label: Items Per Page
-    commentAbove: How many items should show per page
-    default: 4
-    span: right
-    min: 1
     trigger: 
-      action: show
-      field: enable_pagination
+      action: disable|empty
+      field: show_specific_items
       condition: checked

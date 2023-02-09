@@ -18,6 +18,15 @@ handle = "Content\Settings"
     {% set month_day_and_time = "M d - g:i A" %}
     {% set month_day_year_and_time = "M d, Y - g:i A" %}
     {% set sort_order = section.reverse_order ? 'desc' : 'asc' %}
+
+    {% if section.show_specific_items %}
+        {% set events = collect() %}
+        {% for event in section.specific_items %}
+            {% if event.item is not empty %}
+                {% do events.push(event.item) %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     
     {% if section.show == 'upcoming' %}
         {% set events = events.whereDate('date', '>=', today) %}
@@ -28,21 +37,39 @@ handle = "Content\Settings"
     {% endif %}
     
     {% if section.sort_by == 'title' %}
-        {% set events = events.orderBy('title', sort_order) %}
-        {% set older_events = older_events.orderBy('title', sort_order) %}
+        {% if section.show_specific_items %}
+            {% if sort_order == 'asc' %}
+                {% set events = events.sortBy('title') %}
+            {% else %}
+                {% set events = events.sortBy('title')|reverse %}
+            {% endif %}
+        {% else %}
+            {% set events = events.orderBy('title', sort_order) %}
+            {% set older_events = older_events.orderBy('title', sort_order) %}
+        {% endif %}
     {% endif %}
 
     {% if section.sort_by == 'date' %}
-        {% set events = events.orderBy('date', sort_order) %}
-        {% set older_events = older_events.orderBy('date', sort_order) %}
+        {% if section.show_specific_items %}
+            {% if sort_order == 'asc' %}
+                {% set events = events.sortBy('date') %}
+            {% else %}
+                {% set events = events.sortBy('date')|reverse %}
+            {% endif %}
+        {% else %}
+            {% set events = events.orderBy('date', sort_order) %}
+            {% set older_events = older_events.orderBy('date', sort_order) %}
+        {% endif %}
     {% endif %}
 
     {% if section.enable_pagination %}
-        {% set events = events.paginateCustom(section.per_page, 'events') %}
-        {% set older_events = older_events.paginateCustom(section.per_page, 'older_events') %}
+        {% set events = events.paginateCustom(section.limit, 'events') %}
+        {% set older_events = older_events.paginateCustom(section.limit, 'older_events') %}
     {% else %}
-        {% set events = events.limit(section.limit).get() %}
-        {% set older_events = older_events.limit(section.limit).get() %}
+        {% if not section.show_specific_items %}
+            {% set events = events.limit(section.limit).get() %}
+            {% set older_events = older_events.limit(section.limit).get() %}
+        {% endif %}
     {% endif %}
     <section 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
