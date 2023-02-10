@@ -23,7 +23,7 @@ handle = "Content\Settings"
     {% set heroImageAlt = section.blog_category.title %}
 {% endif %}
 
-<header {{ section.html_anchor|length ? 'id=' ~  section.html_anchor  ~ '' }}
+<{{ section.html_tag == "default" ? "header" : section.html_tag }} {{ section.html_anchor|length ? 'id=' ~  section.html_anchor  ~ '' }}
         class="hero
                {{ section.size == 'small' ? 'small-hero' }} 
                bg-dark 
@@ -54,4 +54,4 @@ handle = "Content\Settings"
             <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ heroImage|media|resize(1920) }}" alt="{{ heroImageAlt }}">
         </div>
     {% endif %}
-</header>
+</{{ section.html_tag == "default" ? "header" : section.html_tag }}>

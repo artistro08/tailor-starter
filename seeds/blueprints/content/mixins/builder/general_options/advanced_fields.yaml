@@ -27,3 +27,13 @@ fields:
     options: 
       container: Normal
       container-fluid: Fluid
+  html_tag:
+    type: dropdown
+    label: HTML Tag type
+    commentAbove: Override this block tag to one of the options below. Useful for SEO and Semantic HTML
+    span: right
+    options:
+      default: Default
+      section: Section
+      header: Header
+      article: Article
