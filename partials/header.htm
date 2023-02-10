@@ -71,8 +71,10 @@ handle = "Content\Settings"
                 {% endfor %}
             </ul>
         </div>
-        <div class="me-1 ms-auto order-3 order-lg-4" id="global-cart-button">
-            {% partial 'shop/global-cart-button' %}
-        </div>
+        {% if settings.enable_shop %}
+            <div class="me-1 ms-auto order-3 order-lg-4" id="global-cart-button">
+                {% partial 'shop/global-cart-button' %}
+            </div>
+        {% endif %}
     </div>
 </nav>

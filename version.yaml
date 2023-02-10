@@ -70,3 +70,4 @@ v6.1.4: Prep for marketplace release with the namespace change of the plugin.
 v6.1.5: Composer fixes
 v6.1.6: Added theme preview image
 v6.1.7: Updated Main Menu seeds
+v6.1.8: Disable cart related pages, partials and layouts if shop is disabled. Also updated Shop menu icon
