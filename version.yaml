@@ -72,3 +72,4 @@ v6.1.6: Added theme preview image
 v6.1.7: Updated Main Menu seeds
 v6.1.8: Disable cart related pages, partials and layouts if shop is disabled. Also updated Shop menu icon
 v6.1.9: Added background to navbar
+v6.1.10: Hide checkout button in cart-data.htm partial if no cart items
