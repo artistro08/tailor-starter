@@ -71,7 +71,7 @@ handle = "Content\Settings"
             {% set older_events = older_events.limit(section.limit).get() %}
         {% endif %}
     {% endif %}
-    <section 
+    <{{ section.html_tag == "default" ? "section" : section.html_tag }} 
             {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
             class="{% if section.css_classes|length %}
                         {% for class in section.css_classes|split(',') %}
@@ -358,5 +358,5 @@ handle = "Content\Settings"
                 </div>
             </div>
         </div>
-    </section>
+    </{{ section.html_tag == "default" ? "section" : section.html_tag }}>
 {% endif %}

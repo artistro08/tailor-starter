@@ -30,21 +30,23 @@ handle = "Content\Settings"
     {% if post is empty %}
         {% do abort('404') %}
     {% else %}
-        {% if post.entry_type == 'simple' %}
-            {% partial 'blog/header' post = post %}
-            <section>
-                <div class="container">
-                    {{ post.content|raw }}
-                </div>
-            </section>
-        {% endif %}
+        <article>
+            {% if post.entry_type == 'simple' %}
+                {% partial 'blog/header' post = post %}
+                <section>
+                    <div class="container">
+                        {{ post.content|raw }}
+                    </div>
+                </section>
+            {% endif %}
 
-        {% if post.entry_type == 'builder' %}
-            {% partial 'blog/header' post = post %}
-            {% for section in post.builder %}
-                {% partial 'builder/items' section=section %}
-            {% endfor %}
-        {% endif %}
+            {% if post.entry_type == 'builder' %}
+                {% partial 'blog/header' post = post %}
+                {% for section in post.builder %}
+                    {% partial 'builder/items' section=section %}
+                {% endfor %}
+            {% endif %}
+        </article>
     {% endif %}
 
 {% else %}
