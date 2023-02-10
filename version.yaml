@@ -68,3 +68,4 @@ v6.1.2: Added "Theme" to the code namespace for the marketplace
 v6.1.3: Fix issue in composer.json file.
 v6.1.4: Prep for marketplace release with the namespace change of the plugin.
 v6.1.5: Composer fixes
+v6.1.6: Added theme preview image
