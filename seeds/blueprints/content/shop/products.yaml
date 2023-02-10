@@ -10,7 +10,7 @@ structure:
 
 primaryNavigation:
   label: Shop
-  icon: icon-cube
+  icon: icon-shopping-cart
   order: 144
 
 navigation:

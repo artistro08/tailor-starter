@@ -141,9 +141,11 @@ function onStart() {
             {% page %}
         </main>
     </body>
-    <div id="cart-data">
-        {% partial 'shop/cart-data' %}
-    </div>
+    {% if settings.enable_shop %}
+        <div id="cart-data">
+            {% partial 'shop/cart-data' %}
+        </div>
+    {% endif %}
     {% partial 'footer' %}
     {% partial 'foot' %}
 </html>
