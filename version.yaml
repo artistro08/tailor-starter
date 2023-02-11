@@ -74,3 +74,4 @@ v6.1.8: Disable cart related pages, partials and layouts if shop is disabled. Al
 v6.1.9: Added background to navbar
 v6.1.10: Hide checkout button in cart-data.htm partial if no cart items
 v6.2.0: Add ability to pick HTML tags for builder blocks. 
+v6.2.1: Initialize docs
