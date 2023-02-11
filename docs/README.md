@@ -1,3 +1,2 @@
-# Developer Documentation
-
+# User Documentation
 TODO: Create Documentation
