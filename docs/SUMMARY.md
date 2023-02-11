@@ -2,7 +2,6 @@
 
 * [Developer Documentation](README.md)
   * [Pages](developer/pages/README.md)
-    * [Introduction](developer/pages/introduction.md)
     * [Blocks](developer/pages/blocks/README.md)
       * [Block Types](developer/pages/blocks/block-types/README.md)
         * [Hero](developer/pages/blocks/block-types/hero.md)
@@ -40,7 +39,6 @@
     * [Creating Form Field Types](developer/forms/creating-form-field-types.md)
 * [User Documentation](user/README.md)
   * [Pages](user/pages/README.md)
-    * [Introduction](user/pages/introduction.md)
     * [Blocks](user/pages/blocks/README.md)
       * [Block Types](user/pages/blocks/block-types/README.md)
         * [Hero](user/pages/blocks/block-types/hero.md)
