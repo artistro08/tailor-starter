@@ -75,3 +75,4 @@
   * [Forms](developer/forms/README.md)
     * [Submissions](developer/forms/submissions.md)
     * [Creating Form Field Types](developer/forms/creating-form-field-types.md)
+  * [Settings](developer/settings.md)

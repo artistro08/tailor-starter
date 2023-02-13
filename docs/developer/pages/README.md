@@ -33,5 +33,55 @@ These pages are more powerful. You can build pages exactly how you want. They su
   * [Products ](blocks/products-section.md)which are filterable
   * [Forms ](../forms/)which displays a chosen form&#x20;
 * SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
-* Header, Body, and Footer code areas provided by the [`code_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/code\_fields.yaml) file
+* Header, Body, and Footer code areas provided by the [`code_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/code\_fields.yaml) file.
+
+## Page Templates
+
+The pages and layouts below are used to display content throughout the site. Below is an explanation of what each file does and how things are rendered.&#x20;
+
+### Pages
+
+#### `page.htm`
+
+This file is used to display page content form the [`page.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/page/page.yaml) blueprint. It includes sections for the [Simple ](./#simple-pages)and [Dynamic Pages](./#dynamic-builder-pages).
+
+it uses the [`builder/items.htm`](./#builder-items.htm) partial for rendering the [Section Blocks](blocks/#section-blocks) builder content.&#x20;
+
+#### `index.htm`
+
+This file is used to display the homepage from the settings. It's almost a carbon copy of the site except there's some logic to get the current homepage from the [`settings.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/settings/settings.yaml) blueprint.
+
+### Partials
+
+#### `builder/items.htm`
+
+[This file](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/items.htm) renders the top level Section blocks in the Dynamic Page builder. It contains partial links to the following blocks:
+
+* [Hero Section](blocks/hero-section.md)
+* [Section](blocks/section/)
+* [Posts Section](blocks/posts-section.md)
+* [Events Section](blocks/events-section.md)
+* [Form Section](blocks/form-section.md)
+
+#### `builder/sections/*`
+
+[These files](https://github.com/artistro08/tailor-starter/tree/main/partials/builder/sections) are used to render the top level Section blocks in the Dynamic Page Builder
+
+#### `builder/columns/*`
+
+[These files](https://github.com/artistro08/tailor-starter/tree/main/partials/builder/columns) are used in the [Section](blocks/section/) Block to render partial content. They are very similar to the Section blocks but include a few more partials to render column block content:
+
+* [Buttons Column](blocks/section/buttons-column.md)
+* [Content Column](blocks/section/content-column.md)
+* [Images Column](blocks/section/columns.md)
+
+#### `builder/globals/*`
+
+[These files ](https://github.com/artistro08/tailor-starter/tree/main/partials/builder/globals)are used throughout the [Section ](blocks/section/)and [Column ](../../user/pages/blocks/block-types/section/columns.md)blocks to render the following content:
+
+* Buttons&#x20;
+  * Used in [Buttons Column](blocks/section/buttons-column.md) Block
+  * Used in [Hero Section](blocks/hero-section.md) Block
+* Shop Alerts&#x20;
+  * Used in all Products Blocks ([Section ](../shop/products.md)and [Column](blocks/section/products-column.md)). Used to display Shop alert content when the shop content isn't set.&#x20;
 
