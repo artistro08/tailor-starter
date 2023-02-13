@@ -1,8 +1,10 @@
 # Blocks
 
+## Introduction
+
 Blocks are a cluster of blueprint mixins that make up the builder part of the [Dynamic Pages](../#dynamic-builder-pages).&#x20;
 
-## Block Types
+## General Block Structure
 
 There are two general types of blocks. Section and Columns.&#x20;
 
@@ -52,6 +54,33 @@ Below is a file structure with annotations to explain what each block blueprint 
 ┣ <a data-footnote-ref href="#user-content-fn-21">blog_builder.yaml</a>
 ┗ <a data-footnote-ref href="#user-content-fn-22">builder.yaml</a>
 </code></pre>
+
+## Block Types
+
+### Section Blocks
+
+The Section block types are as follows:
+
+* [Hero](hero.md)
+* [Section](section/)
+* [Posts](../../blog/posts.md)
+* [Events](events.md)
+* [Products](products.md)
+* [Form](form.md)
+
+### Colum Blocks
+
+The Column block types are as follows:
+
+* [Content](section/content-column.md)
+* [Buttons](section/buttons-column.md)
+* [Image](section/image-column.md)
+* [Posts](section/posts-column.md)
+* [Events](section/events-column.md)
+* [Products](section/products-column.md)
+* [Forms](section/form-column.md)
+
+
 
 
 
