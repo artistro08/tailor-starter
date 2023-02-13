@@ -4,15 +4,15 @@ Blocks are a cluster of blueprint mixins that make up the builder part of the [D
 
 ## Block Types
 
-There are two general types of blocks. [Section](block-types/section/)  and [Columns](block-types/section/columns.md).&#x20;
+There are two general types of blocks. Section and Columns.&#x20;
 
 ### Section Blocks
 
-The section blocks are top level blocks that you can add to any Dynamic Page.
+The section blocks are top level blocks that you can add to any Dynamic Page. They display information in a `<section>` , `<header>`, or `<article>` depending on your [Advanced Tab](section/advanced-tab.md) settings.&#x20;
 
 ### Column Blocks
 
-The Column blocks are carbon copies of the Section blocks except they include a section for configurable columns. They work exactly like the Section blocks, but are wrapped in a Bootstrap Column. They only exist in the Section blocks.
+The Column blocks are carbon copies of the Section blocks except they include a section for configurable columns. They work exactly like the Section blocks, but are wrapped in a [Bootstrap Column](https://getbootstrap.com/docs/5.2/layout/columns/#how-they-work). The column width is configurable and based on a 12 column grid They only exist in Section blocks.
 
 ## File Structure (`mixins` Folder)
 
@@ -52,6 +52,8 @@ Below is a file structure with annotations to explain what each block blueprint 
 ┣ <a data-footnote-ref href="#user-content-fn-21">blog_builder.yaml</a>
 ┗ <a data-footnote-ref href="#user-content-fn-22">builder.yaml</a>
 </code></pre>
+
+
 
 
 
