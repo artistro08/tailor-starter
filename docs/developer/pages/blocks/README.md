@@ -61,12 +61,12 @@ Below is a file structure with annotations to explain what each block blueprint 
 
 The Section block types are as follows:
 
-* [Hero](hero.md)
+* [Hero](hero-section.md)
 * [Section](section/)
 * [Posts](../../blog/posts.md)
-* [Events](events.md)
-* [Products](products.md)
-* [Form](form.md)
+* [Events](events-section.md)
+* [Products](products-section.md)
+* [Form](form-section.md)
 
 ### Colum Blocks
 
@@ -74,7 +74,7 @@ The Column block types are as follows:
 
 * [Content](section/content-column.md)
 * [Buttons](section/buttons-column.md)
-* [Image](section/image-column.md)
+* [Image](section/columns.md)
 * [Posts](section/posts-column.md)
 * [Events](section/events-column.md)
 * [Products](section/products-column.md)
