@@ -35,7 +35,7 @@ These pages are more powerful. You can build pages exactly how you want. They su
 * SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
 * Header, Body, and Footer code areas provided by the [`code_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/code\_fields.yaml) file.
 
-## Page Templates
+## Template Files
 
 The pages and layouts below are used to display content throughout the site. Below is an explanation of what each file does and how things are rendered.&#x20;
 

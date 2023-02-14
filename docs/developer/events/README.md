@@ -44,7 +44,7 @@ Recurring events depend on the start and end date fields and automatically calcu
 
 These recurrences give you more flexibility to pick exact start and end dates for anything.
 
-## Page Templates
+## Template Files
 
 The pages and layouts below are used to display content throughout the site. Below is an explanation of what each file does and how things are rendered.&#x20;
 

@@ -1,3 +1,9 @@
+---
+cover: >-
+  https://images.unsplash.com/photo-1620121692029-d088224ddc74?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwxOTcwMjR8MHwxfHNlYXJjaHw0fHxibHVlJTIwM2QlMjByZW5kZXJ8ZW58MHx8fHwxNjc2MzUwNzc4&ixlib=rb-4.0.3&q=80
+coverY: 0
+---
+
 # Developer Documentation
 
 ## Introduction
