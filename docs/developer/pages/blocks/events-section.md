@@ -1,6 +1,6 @@
 # Events Section
 
-This block shows Events from the [Events ](../../events/)entry type. The section's display behavior is controlled by the following settings:
+This block shows Events from the [Events ](../../events.md)entry type. The section's display behavior is controlled by the following settings:
 
 * `settings.enable_events`: Defined in the [Settings](../../settings.md)
 * `section.reverse_order`: A boolean value indicating whether the events should be displayed in reverse order.
@@ -14,7 +14,7 @@ The section's tag name is either `section` or the `section.html_tag` in the [Adv
 
 You can also adjust the spacing before and after using the switches from `section.disable_top_spacing`, and `section.disable_bottom_spacing` respectfully.
 
-The code sets several time-related variables, such as the current date/time, various formats for displaying the date and time of events based on the section's settings, such as hiding the event date or hiding the event time based on the [Events ](../../events/)settings
+The code sets several time-related variables, such as the current date/time, various formats for displaying the date and time of events based on the section's settings, such as hiding the event date or hiding the event time based on the [Events ](../../events.md)settings
 
 If the section is set to show "upcoming" events, the code filters the `events` array to only include events with a date that is greater than or equal to the current date.
 

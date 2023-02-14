@@ -29,7 +29,7 @@ These pages are more powerful. You can build pages exactly how you want. They su
   * [Hero ](blocks/hero-section.md)(Section with Background Image, content, and buttons from the [buttons.yaml](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/buttons/buttons.yaml) file)
   * [Section ](blocks/section/)Block With configurable columns matching the top level of selectable blocks
   * [Posts ](blocks/posts-section.md)which are filterable
-  * [Events ](../events/)which are filterable
+  * [Events ](../events.md)which are filterable
   * [Products ](blocks/products-section.md)which are filterable
   * [Forms ](../forms/)which displays a chosen form&#x20;
 * SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
