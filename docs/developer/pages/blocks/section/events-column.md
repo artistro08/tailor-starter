@@ -1,6 +1,6 @@
 # Events Column
 
-Events Column block shows events from the [Events ](../../../events.md)entry type. This is a carbon copy of the [Events Section](../events-section.md) block except it has column attributes.
+Events Column block shows events from the [Events ](../../../events/)entry type. This is a carbon copy of the [Events Section](../events-section.md) block except it has column attributes.
 
 ### Files Used
 

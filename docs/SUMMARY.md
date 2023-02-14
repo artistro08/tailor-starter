@@ -19,7 +19,7 @@
       * [Form Section](developer/pages/blocks/form-section.md)
       * [Creating Blocks](developer/pages/blocks/creating-blocks.md)
       * [Editing Blocks](developer/pages/blocks/editing-blocks.md)
-  * [Events](developer/events.md)
+  * [Events](developer/events/README.md)
   * [Blog](developer/blog/README.md)
     * [Posts](developer/blog/posts.md)
     * [Authors](developer/blog/authors.md)

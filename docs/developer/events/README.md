@@ -11,7 +11,7 @@ The idea behind events are to show them as quickly as possible without having to
 Events have the following content fields:
 
 * A content field
-* A short description (used in the [Page Blocks](pages/blocks/))
+* A short description (used in the [Page Blocks](../pages/blocks/))
 * An Image field used to display behind the title (and date depending where the event is being displayed)
 * An event link
 * A location link
@@ -21,7 +21,7 @@ Events have the following content fields:
   * Ability to hide event times
   * Ability to add recurring events
 * Ability to set start and end times with events
-* [Recurring Events](events.md#recurring-events)
+* [Recurring Events](./#recurring-events)
 * SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
 * Header, Body, and Footer code areas provided by the [`code_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/code\_fields.yaml) file
 
@@ -36,7 +36,7 @@ Recurring events depend on the start and end date fields and automatically calcu
   * Monthly
   * Bi-Monthly
   * Yearly
-  * [Custom](events.md#custom-recurrences)
+  * [Custom](./#custom-recurrences)
 * Repeat Length
   * &#x20;Only used if "Custom" is not set
 
