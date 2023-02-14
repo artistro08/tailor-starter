@@ -18,7 +18,7 @@ You can view more about each column block by browsing each block below:
 
 * [Content Column ](content-column.md)Block
 * [Buttons Column ](buttons-column.md)Block
-* [Image Column ](columns.md)Block
+* [Image Column ](image-column.md)Block
 * [Posts Column ](posts-column.md)Block
 * [Events Column](events-column.md) Block
 * [Products Column](products-column.md) Block

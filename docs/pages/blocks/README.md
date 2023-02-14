@@ -74,7 +74,7 @@ The Column block types are as follows:
 
 * [Content](section/content-column.md)
 * [Buttons](section/buttons-column.md)
-* [Image](section/columns.md)
+* [Image](section/image-column.md)
 * [Posts](section/posts-column.md)
 * [Events](section/events-column.md)
 * [Products](section/products-column.md)

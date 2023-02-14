@@ -4,7 +4,7 @@ cover: >-
 coverY: 0
 ---
 
-# Developer Documentation
+# Getting Started
 
 ## Introduction
 
@@ -29,7 +29,7 @@ This theme depends on the following plugins:
 
 ### Get Started
 
-Install the theme and dependencies via `artisan`:
+Install the theme and dependencies via `artisan`(From the October CMS Marketplace):
 
 ```bash
 php artisan theme:install Artistro08.TailorStarterTheme
@@ -102,7 +102,7 @@ If you plan on including assets conditionally, it's a good idea to use the CMS p
 
 #### `footer.htm`
 
-This file is used to display the [Secondary Menu](broken-reference) & [Social Menu](developer/menus/social-menu.md) throughout the site. It also uses the [`settings.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/settings/settings.yaml)  file to display the site name. It includes a Copyright Line with the current year automatically generated.&#x20;
+This file is used to display the [Secondary Menu](broken-reference) & [Social Menu](menus/social-menu.md) throughout the site. It also uses the [`settings.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/settings/settings.yaml)  file to display the site name. It includes a Copyright Line with the current year automatically generated.&#x20;
 
 
 

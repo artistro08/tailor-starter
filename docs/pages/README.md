@@ -10,7 +10,7 @@ The idea behind the pages is that anyone can create anything based anything. The
 
 ### Simple Pages
 
-Simple page are just that. They support the following content:
+Simple pages are just that. They support the following content:
 
 * An adaptive content field
 * An Image field used to display behind the title
@@ -23,13 +23,13 @@ These pages are designed to dump data quickly, such as Terms & Conditions or Pri
 
 ### Dynamic (Builder) Pages
 
-These pages are more powerful. You can build pages exactly how you want. They support a lot of features but most of them are covered in the Block Types area of the documentation. To summarize, These pages have the following content and abilites:
+These pages are more powerful. You can build pages exactly how you want. They support a lot of features but most of them are covered in the Block Types area of the documentation. To summarize, These pages have the following content and abilities:
 
 * A "builder block" style area supported by [October CMS's repeater field widget](https://docs.octobercms.com/3.x/element/form/widget-repeater.html) with the following blocks:
   * [Hero ](blocks/hero-section.md)(Section with Background Image, content, and buttons from the [buttons.yaml](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/buttons/buttons.yaml) file)
   * [Section ](blocks/section/)Block With configurable columns matching the top level of selectable blocks
   * [Posts ](blocks/posts-section.md)which are filterable
-  * [Events ](../events/)which are filterable
+  * [Events ](../events.md)which are filterable
   * [Products ](blocks/products-section.md)which are filterable
   * [Forms ](../forms/)which displays a chosen form&#x20;
 * SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
@@ -37,7 +37,7 @@ These pages are more powerful. You can build pages exactly how you want. They su
 
 ## Template Files
 
-The pages and layouts below are used to display content throughout the site. Below is an explanation of what each file does and how things are rendered.&#x20;
+The files below are used to display content throughout the site. Below is an explanation of what each file does and how things are rendered.&#x20;
 
 ### Pages
 
@@ -63,6 +63,8 @@ This file is used to display the homepage from the settings. It's almost a carbo
 * [Events Section](blocks/events-section.md)
 * [Form Section](blocks/form-section.md)
 
+### Blueprints
+
 #### `builder/sections/*`
 
 [These files](https://github.com/artistro08/tailor-starter/tree/main/partials/builder/sections) are used to render the top level Section blocks in the Dynamic Page Builder
@@ -73,7 +75,7 @@ This file is used to display the homepage from the settings. It's almost a carbo
 
 * [Buttons Column](blocks/section/buttons-column.md)
 * [Content Column](blocks/section/content-column.md)
-* [Images Column](blocks/section/columns.md)
+* [Images Column](blocks/section/image-column.md)
 
 #### `builder/globals/*`
 

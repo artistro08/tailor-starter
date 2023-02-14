@@ -35,6 +35,12 @@ The files below are used to display content throughout the site. Below is an exp
 
 [This file](https://github.com/artistro08/tailor-starter/blob/main/partials/tailor\_modules/form.htm) is used in the [Form Section](../pages/blocks/form-section.md) block and the [Form Column](../pages/blocks/section/form-column.md) block.
 
+### Blueprints
+
+#### `builder/form/*`
+
+[These files](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/form) are used to render the top level Section blocks in the Dynamic Page Builder
+
 
 
 [^1]: Uses Bootstrap Columns to show the width.
