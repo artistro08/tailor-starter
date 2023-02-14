@@ -76,3 +76,4 @@ v6.1.10: Hide checkout button in cart-data.htm partial if no cart items
 v6.2.0: Add ability to pick HTML tags for builder blocks. 
 v6.2.1: Initialize docs
 v6.2.2: Add new documentation link, re-added license information
+v6.2.4: Added Documentation
