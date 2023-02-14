@@ -25,6 +25,7 @@ Install the theme and dependencies via `artisan`:
 ```bash
 php artisan theme:install Artistro08.TailorStarterTheme
 ```
+
 > All theme dependencies should be installed automatically
 
 Once installed, run the seeding function for the theme:
@@ -35,7 +36,7 @@ php artisan theme:seed artistro08-tailorstartertheme --root
 
 This will initialize the Tailor structure, so you can add content.
 
-> #### Note
+> **Note**
 >
 > This theme automatically creates a child theme. The directory name is `artistro08-tailorstarter-child`. Use that theme to make edits to the code. To learn more info about child themes, check [here](https://docs.octobercms.com/3.x/cms/themes/child-themes.html). Whenever you make changes to the theme in the editor, it copies the data and puts it in the child theme.
 
