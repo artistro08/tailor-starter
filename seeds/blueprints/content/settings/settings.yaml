@@ -84,6 +84,8 @@ fields:
     source: Content\Page
     commentAbove: The default search page. Used if no page is set in a search block.
     displayMode: recordfinder
+    validation: 
+      - required_if:enable_search,1
     conditions: content_group = 'search'
     trigger:
       action: show
@@ -101,7 +103,7 @@ fields:
       field: enable_search
       condition: checked
   entries_to_search:
-    label: Items to Search
+    label: Global Items to Search
     commentAbove: What content should be searchable?
     type: checkboxlist
     tab: Search
@@ -113,7 +115,7 @@ fields:
       products: Products
     trigger:
       action: show
-      field: enable_global_search
+      field: enable_search
       condition: checked
   search_field_placeholder:
     type: text
@@ -124,7 +126,7 @@ fields:
     default: Search this site...
     trigger:
       action: show
-      field: enable_global_search
+      field: enable_search
       condition: checked
   header_code:
     label: Header Code
