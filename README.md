@@ -44,8 +44,6 @@ Once you've seeded the theme, head over to the content settings in the backend a
 
 ## Documentation 
 Documentation can be found [here](https://artistro08.gitbook.io/tailor-starter-documentation/) 
-> #### NOTE: 
-> Docs are a work in progress
 
 #### Contributing
 
