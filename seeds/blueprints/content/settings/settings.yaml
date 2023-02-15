@@ -824,6 +824,7 @@ fields:
     commentAbove: Available shipping methods.
     type: repeater
     prompt: Add new method.
+    itemsExpanded: false
     trigger:
       action: show
       field: enable_shop
