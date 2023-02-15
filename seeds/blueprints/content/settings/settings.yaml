@@ -105,11 +105,23 @@ fields:
     commentAbove: What content should be searchable?
     type: checkboxlist
     tab: Search
+    quickselect: true
     options: 
       pages: Pages
       posts: Blog Posts
       events: Events
       products: Products
+    trigger:
+      action: show
+      field: enable_global_search
+      condition: checked
+  search_field_placeholder:
+    type: text
+    label: Search Field Placeholder
+    tab: Search
+    commentAbove: The text that is inside the field before the user starts typing
+    span: full
+    default: Search this site...
     trigger:
       action: show
       field: enable_global_search
