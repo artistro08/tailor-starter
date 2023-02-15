@@ -68,27 +68,32 @@ function onInit() {
                 {% partial 'builder/items' section=section %}
             {% endfor %}
         {% endif %}
+        
         {% if page.entry_type == 'search' %}
-            {% set searchTerms = get() %}
-            <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
-                <div class="container position-relative" style="z-index: 1">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <h1>Search Results for "{{ searchTerms.term }}"</h1>
+            {% if settings.enable_search == true %}
+                {% set searchTerms = get() %}
+                <header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
+                    <div class="container position-relative" style="z-index: 1">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1>Search Results for "{{ searchTerms.term }}"</h1>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% if page.image|length %}
-                    <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
-                        <img src="{{ page.image|media|resize(1920) }}" alt="{{ page.title }}" class="w-100 h-100" style="object-fit: cover; ">
+                    {% if page.image|length %}
+                        <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
+                            <img src="{{ page.image|media|resize(1920) }}" alt="{{ page.title }}" class="w-100 h-100" style="object-fit: cover; ">
+                        </div>
+                    {% endif %}
+                </header>
+                <section>
+                    <div class="container">
+                        {% partial 'search/search_results' section=section searchTerms=searchTerms %}
                     </div>
-                {% endif %}
-            </header>
-            <section>
-                <div class="container">
-                    {% partial 'search/search_results' section=section searchTerms=searchTerms %}
-                </div>
-            </section>
+                </section>
+            {% else %}
+                {% do abort('404') %}
+            {% endif %}
         {% endif %}
     {% endif %}
 {% endif %}
