@@ -22,8 +22,21 @@ This tab allows you to do the following
 * Enable the Blog
   * If disabled, the Blog navigation item will be hidden.
   * Will also disable the posts builder blocks
+* Enable Search
+  * If disabled the search blocks and backend navigation items will be hidden.&#x20;
 
 > Note: if any of the switches are turned off on this page, you'll need to refresh the backend to see the changes.&#x20;
+
+## Search Tab
+
+This tab is used to configure search settings. The following is configurable:
+
+* Default Search Page (Required)
+* Enable Global Search (in Navbar)
+* Global Items to Search For
+  * Lets you specify which items you want searchable throughout the site.&#x20;
+
+By default, search is disabled since you have to create a [Search Page](pages/#search-pages) for it.&#x20;
 
 ## Global Code Tab
 
