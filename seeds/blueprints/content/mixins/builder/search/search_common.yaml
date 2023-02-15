@@ -1,0 +1,31 @@
+uuid: 194f971d-ad35-11ed-9dd7-e78c9935af10
+handle: Content\SearchCommonFields
+type: mixin
+name: Common Event Fields
+fields:
+  entries_to_search:
+    label: Items to Search
+    commentAbove: What content should be searchable?
+    type: checkboxlist
+    quickselect: true
+    options: 
+      pages: Pages
+      posts: Blog Posts
+      events: Events
+      products: Products
+  search_page:
+    maxItems: 1
+    label: Search Page
+    type: entries
+    source: Content\Page
+    commentHtml: true
+    commentAbove: Where you would like to display the search results. Defaults to the <a href="../../globals/content_settings#primarytab-search">global search page</a>
+    displayMode: recordfinder
+    conditions: content_group = 'search'
+    span: left
+  search_field_placeholder:
+    type: text
+    label: Search Field Placeholder
+    commentAbove: The text that is inside the field before the user starts typing
+    span: right
+  

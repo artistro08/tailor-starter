@@ -1,6 +1,6 @@
 # Form Column
 
-The Form Column Block displays forms from the [Form ](../../../forms/)entry type according to specified settings. This is a carbon copy of the [Posts Section](../posts-section.md) block except it has column attributes.
+The Form Column Block displays forms from the [Form ](../../../forms/)entry type according to specified settings. This is a carbon copy of the [Form Section ](../form-section.md)block except it has column attributes.
 
 ### Files Used
 

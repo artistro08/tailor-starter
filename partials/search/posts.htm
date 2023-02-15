@@ -1,0 +1,45 @@
+<h3 class="text-center mb-4">Blog Post Results</h3>
+<div class="row">
+    {% for post in posts %}
+        <div class="col-12 col-lg-4 mb-4">
+            <div class="card h-100">
+                {% if post.image|length %}
+                    <a href="{{ 'post'|page({ slug: post.slug }) }}" class="card-img-top">
+                        <img
+                                src="{{ post.image|media|resize(700, 400, {mode: 'crop'}) }}"
+                                alt="{{ post.title }}" class="card-img-top"
+                        >
+                    </a>
+                {% endif %}
+                <div class="card-body d-flex flex-column h-100 align-items-start">
+                    <h3 class="text-decoration-none text-dark fs-5">
+                        <a href="{{ 'post'|page({ slug: post.slug }) }}" class="text-decoration-none text-reset">{{ post.title }}</a>
+                    </h3>
+                    {% if post.author|length %}
+                        <a class="d-flex text-decoration-none text-dark mb-2" href="{{ 'author'|page({slug: post.author.slug}) }}">
+                            {% if post.author.avatar|length %}
+                                <img class="rounded-circle me-1" width="25px" src="{{ post.author.avatar|media|resize(25, 25, {mode: "crop"}) }}" alt="{{ post.author.title }}">
+                            {% endif %}
+                            <div>
+                                <span class="fs-6">By <span class="fw-semibold">{{ post.author.title }}</span></span>
+                            </div>
+                        </a>
+                    {% endif %}
+                    <p>{{ post.excerpt }}</p>
+                    <a href="{{ 'post'|page({ slug: post.slug }) }}" class="btn btn-primary mt-auto">Read</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="col-12 d-flex justify-content-center">
+        {{ pager(posts, { withQuery: true }) }}
+    </div>
+</div>
+
+{% if posts is empty %}
+    <div class="card bg-light mb-4">
+        <div class="card-body text-center">
+            There are no posts for your search
+        </div>
+    </div>
+{% endif %}

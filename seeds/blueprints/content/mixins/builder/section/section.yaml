@@ -146,6 +146,15 @@ fields:
           column_options:
             type: mixin
             source: Content\ColumnOptions
+      search:
+        name: Search
+        icon: icon-search
+        description: Section with a search field.
+        titleFrom: title
+        fields:
+          search:
+            type: mixin
+            source: Content\SearchColumn
   advanced_content:
     type: mixin
     source: Content\AdvancedFields

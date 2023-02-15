@@ -63,3 +63,21 @@ groups:
         type: mixin
         name: SEO Fields
         source: Content\CodeFields
+  search:
+    name: Search Results Page
+    fields:
+      search:
+        tab: Edit
+        type: mixin
+        name: Search
+        source: Content\SearchFields
+      seo_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\SEOFields
+      code_fields:
+        tab: Manage
+        type: mixin
+        name: SEO Fields
+        source: Content\CodeFields

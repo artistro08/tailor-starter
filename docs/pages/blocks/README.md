@@ -49,10 +49,14 @@ Below is a file structure with annotations to explain what each block blueprint 
 ┃ ┣ <a data-footnote-ref href="#user-content-fn-17">products.yaml</a>
 ┃ ┣ <a data-footnote-ref href="#user-content-fn-18">products_column.yaml</a>
 ┃ ┗ <a data-footnote-ref href="#user-content-fn-19">products_common.yaml</a>
+┣ search/
+┃ ┣ <a data-footnote-ref href="#user-content-fn-20">search_column.yaml</a>
+┃ ┣ <a data-footnote-ref href="#user-content-fn-21">search_common.yaml</a>
+┃ ┗ <a data-footnote-ref href="#user-content-fn-22">search.yaml</a>
 ┣ section/
-┃ ┗ <a data-footnote-ref href="#user-content-fn-20">section.yaml</a>
-┣ <a data-footnote-ref href="#user-content-fn-21">blog_builder.yaml</a>
-┗ <a data-footnote-ref href="#user-content-fn-22">builder.yaml</a>
+┃ ┗ <a data-footnote-ref href="#user-content-fn-23">section.yaml</a>
+┣ <a data-footnote-ref href="#user-content-fn-24">blog_builder.yaml</a>
+┗ <a data-footnote-ref href="#user-content-fn-25">builder.yaml</a>
 </code></pre>
 
 ## Block Types
@@ -67,6 +71,7 @@ The Section block types are as follows:
 * [Events](events-section.md)
 * [Products](products-section.md)
 * [Form](form-section.md)
+* [Search](search-section.md)
 
 ### Colum Blocks
 
@@ -79,6 +84,7 @@ The Column block types are as follows:
 * [Events](section/events-column.md)
 * [Products](section/products-column.md)
 * [Forms](section/form-column.md)
+* [Search](search-section.md)
 
 
 
@@ -124,10 +130,16 @@ The Column block types are as follows:
 
 [^19]: Contains common fields in the product section and column blocks
 
-[^20]: Shows a section block with columns
+[^20]: Shows a Search block in a column
 
-[^21]: Used to build the page in the Blog Posts entry type
+[^21]: Contains common fields in the search section and column blocks
+
+[^22]: Shows a Search block in a Section
+
+[^23]: Shows a section block with columns
+
+[^24]: Used to build the page in the Blog Posts entry type
 
 
 
-[^22]: Used to build pages&#x20;
+[^25]: Used to build pages&#x20;

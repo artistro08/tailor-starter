@@ -1,0 +1,32 @@
+<h3 class="text-center mb-4">Product Results</h3>
+    {% partial 'builder/globals/shop_alerts' %}
+<div class="row">
+    {% for product in products %}
+        <div class="col-12 col-lg-4 mb-4">
+            <a href="{{ 'product'|page({ fullslug: product.slug }) }}" class="d-block text-decoration-none">
+                <div class="card">
+                    {% if product.images|length %}
+                        <img
+                                src="{% for image in product.images|slice(0,1) %}{{ image.path|resize(400, 400, {mode: 'crop'}) }}{% endfor %}"
+                                alt="{{ product.title }}" class="card-img-top"
+                        >
+                    {% endif %}
+                    <div class="card-body d-flex justify-content-between">
+                        <h3 class="text-decoration-none text-dark fs-5">{{ product.title }}</h3>
+                        <span class="text-decoration-none text-dark fw-bold">{{ product.price|format_money }}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+    <div class="col-12 d-flex justify-content-center">
+        {{ pager(products, { withQuery: true }) }}
+    </div>
+</div>
+{% if products is empty %}
+    <div class="card bg-light mb-4">
+        <div class="card-body text-center">
+            There are no products for your search
+        </div>
+    </div>
+{% endif %}
