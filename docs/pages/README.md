@@ -2,9 +2,7 @@
 
 ## Introduction
 
-Pages are Tailor Blueprint entries designed to display the content throughout the theme. The following files are used to display pages
-
-The idea behind the pages is that anyone can create anything based anything. There are two types of pages defined in the [`page.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/page/page.yaml) blueprint, listed below:
+Pages are Tailor Blueprint entries designed to display the content throughout the theme. The idea behind the pages is that anyone can create anything based anything. There are three types of pages defined in the [`page.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/page/page.yaml) blueprint, listed below:
 
 
 
@@ -35,6 +33,16 @@ These pages are more powerful. You can build pages exactly how you want. They su
 * SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
 * Header, Body, and Footer code areas provided by the [`code_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/code\_fields.yaml) file.
 
+### Search Pages
+
+Search Pages return search content from a [Search Section](blocks/search-section.md) block or from the Global Search. They support the following content:
+
+* An Image field used to display behind the title
+* SEO & OG Tag information provided by the [`seo_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/seo\_fields.yaml) file
+* Header, Body, and Footer code areas provided by the [`code_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/code\_fields.yaml) file
+
+These page types can keep data structure as well, so they can have any child (or be a child)
+
 ## Template Files
 
 The files below are used to display content throughout the site. Below is an explanation of what each file does and how things are rendered.&#x20;
@@ -62,6 +70,10 @@ This file is used to display the homepage from the settings. It's almost a carbo
 * [Posts Section](blocks/posts-section.md)
 * [Events Section](blocks/events-section.md)
 * [Form Section](blocks/form-section.md)
+
+#### `search/*`
+
+[These files](https://github.com/artistro08/tailor-starter/tree/main/partials/search) include the search results from a query. They return all front facing post types. They are used by the [Search Section](blocks/search-section.md) block.
 
 ### Blueprints
 
