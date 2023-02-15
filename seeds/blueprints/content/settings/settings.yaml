@@ -20,6 +20,7 @@ fields:
     span: left
     comment: The default homepage
     displayMode: recordfinder
+    conditions: content_group != 'search'
   website_name:
     label: Website Name
     tab: Settings
@@ -67,6 +68,27 @@ fields:
     tab: Settings
     span: row
     spanClass: col-12 col-lg-4
+  enable_search:
+    type: switch
+    comment: Enable Search throughout the site
+    label: Enable Search
+    default: false
+    tab: Settings
+    span: left
+    cssClass: mt-3
+  default_search_page:
+    maxItems: 1
+    label: Default Search Page
+    tab: Search
+    type: entries
+    source: Content\Page
+    commentAbove: The default search page. Used if no page is set in a search block.
+    displayMode: recordfinder
+    conditions: content_group = 'search'
+    trigger:
+      action: show
+      field: enable_search
+      condition: checked
   header_code:
     label: Header Code
     type: codeeditor

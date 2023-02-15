@@ -74,3 +74,13 @@ fields:
           form:
             type: mixin
             source: Content\Form
+      search:
+        name: Search
+        icon: icon-search
+        description: Section with a search field.
+        titleFrom: title
+        useTabs: true
+        fields:
+          search:
+            type: mixin
+            source: Content\Search
