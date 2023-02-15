@@ -58,6 +58,13 @@ handle = "Content\Settings"
                     {% if column.content_group == "form" %}
                         {% partial 'builder/columns/form' column = column %}
                     {% endif %}
+                    
+                    {# Search Column Group #}
+                    {% if settings.enable_search == true %}
+                        {% if column.content_group == "search" %}
+                            {% partial 'builder/columns/search' column = column %}
+                        {% endif %}
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

@@ -1,0 +1,36 @@
+[collection pages]
+handle = "Content\Page"
+
+[collection posts]
+handle = "Blog\Posts"
+
+[collection events]
+handle = "Content\Event"
+
+[collection products]
+handle = "Content\Product"
+==
+{% for searchTerm,searchValue in searchTerms %}
+    
+    {% if (searchTerm == "pages" and searchValue == "true") %}
+        {% set pages = pages.searchWhere(searchTerms.term, ['title']).where('content_group', '!=', 'search').paginateCustom(3, 'pages_page') %}
+        {% partial 'search/pages' pages=pages %}
+        
+    {% endif %}
+    
+    {% if (searchTerm == "posts" and searchValue == "true") %}
+        {% set posts = posts.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'posts_page') %}
+        {% partial 'search/posts' posts=posts %}
+    {% endif %}
+    
+    {% if (searchTerm == "events" and searchValue == "true") %}
+        {% set events = events.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'events_page') %}
+        {% partial 'search/events' events=events %}
+        
+    {% endif %}
+        
+    {% if (searchTerm == "products" and searchValue == "true") %}
+        {% set products = products.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'products_page') %}
+        {% partial 'search/products' products=products %}
+    {% endif %}
+{% endfor %}
