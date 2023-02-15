@@ -1,0 +1,145 @@
+{% set today = 'now'|date('Y-m-d h:i:s') %}
+    
+{% set time_only = "g:i A" %}
+{% set month_only = "M" %}
+{% set day_only = "d" %}
+{% set day_and_time = "D - g:i A" %}
+{% set day_month_and_time = "jS - g:i A" %}
+{% set month_day_and_time = "M d - g:i A" %}
+{% set month_day_year_and_time = "M d, Y - g:i A" %}
+{% set sort_order = section.reverse_order ? 'desc' : 'asc' %}
+
+<h3 class="text-center mb-4">Event Results</h3>
+<div class="row">
+    {% for event in events %}
+        {% if event.hide_date == true %}
+            {% set time_only = "g:i A" %}
+            {% set month_only = "" %}
+            {% set day_only = "" %}
+            {% set day_and_time = "g:i A" %}
+            {% set day_month_and_time = "g:i A" %}
+            {% set month_day_and_time = "g:i A" %}
+            {% set month_day_year_and_time = "g:i A" %}
+        {% endif %}
+
+        {% if event.hide_time == true %}
+            {% set time_only = "" %}
+            {% set month_only = "M" %}
+            {% set day_only = "d" %}
+            {% set day_and_time = "D" %}
+            {% set day_month_and_time = "jS" %}
+            {% set month_day_and_time = "M d" %}
+            {% set month_day_year_and_time = "M d, Y" %}
+        {% endif %}
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-12 col-lg-3 bg-dark position-relative">
+                        {% if event.image|length %}
+                            <img class="w-100 h-100 img-fluid {% if (event.hide_date == true and event.hide_time == true) %}opacity-100{% else %}opacity-50{% endif %}" style="object-position: center; object-fit: cover;" src="{{ event.image|media }}" alt="{{ event.title }}">
+                        {% endif %}
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="position-absolute top-0 bottom-0 w-100 text-decoration-none text-white d-flex flex-column justify-content-center" style="left: 0; right: 0">
+                            {% if not (event.hide_date == true and event.hide_time == true) %}
+                                {% if event.is_recurring %}
+                                    <span class="text-center fw-bold">
+                                        {{ event.date|date('U', this.site.timezone) > "now"|date('U', this.site.timezone) ? "Starts" : "Started" }}<br>
+                                    </span>
+                                {% endif %}
+                                <span class="display-4 mx-auto text-center">
+                                    <span class="text-center">{{ event.date|date(month_only, this.site.timezone) }}</span>
+                                    {{ event.date|date(day_only, this.site.timezone) }}
+                                </span>
+                                <span class="text-center fs-5 fw-bold">
+                                    {{ event.date|date(time_only, this.site.timezone) }}{{ event.end_date|date("Y-m-d", this.site.timezone) == event.date|date("Y-m-d", this.site.timezone) ? ' - ' ~ event.end_date|date(time_only, this.site.timezone) }}
+                                    {{ event.date|date('T', this.site.timezone) }}
+                                </span>
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-9 card-body">
+                        <h3>
+                            <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="text-decoration-none">{{ event.title }}</a>
+                        </h3>
+                        {% if not (event.hide_date == true and event.hide_time == true) %}
+                            <span class="mb-1 badge bg-primary rounded-pill">
+                                {% if event.is_recurring %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-arrow-repeat me-1" viewBox="0 0 16 16">
+                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-1" viewBox="0 0 16 16">
+                                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                                    </svg>
+                                {% endif %}
+                                {% if event.is_recurring %}
+                                    {# Display Date Logic #}
+                                    {% if event.recurrence == "daily" %}
+                                        Every Day {{ event.date|date(time_only, this.site.timezone) }}
+                                    {% elseif event.recurrence == "weekly" %}
+                                        Every Week {{ event.date|date(day_and_time, this.site.timezone) }}
+                                    {% elseif event.recurrence == "biWeekly" %}
+                                        Every Other Week {{ event.date|date(day_and_time, this.site.timezone) }}
+                                    {% elseif event.recurrence == "monthly" %}
+                                        Every Month {{ event.date|date(day_month_and_time, this.site.timezone) }}
+                                    {% elseif event.recurrence == "biMonthly" %}
+                                        Every Other Month {{ event.date|date(day_month_and_time, this.site.timezone) }}
+                                    {% elseif event.recurrence == "yearly" %}
+                                        Every Year {{ event.date|date(month_day_and_time, this.site.timezone) }}
+                                    {% elseif event.recurrence == "custom" %}
+                                        Recurring Event
+                                    {% endif %}
+                                {% else %}
+                                    {{ event.date|date(month_day_year_and_time, this.site.timezone) }}
+                                    {% if event.end_date|date("Y-m-d", this.site.timezone, this.site.timezone) == event.date|date("Y-m-d", this.site.timezone, this.site.timezone) %}
+                                        - {{ event.end_date|date(time_only, this.site.timezone) }}
+                                    {% endif %}
+                                {% endif %}
+                                {{ event.date|date('T', this.site.timezone) }}
+                            </span>
+                            {% if event.end_date|length %}
+                                {% if event.end_date|date("Y-m-d", this.site.timezone) != event.date|date("Y-m-d", this.site.timezone) %}
+                                    <span class="mb-1 badge bg-primary rounded-pill">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-calendar2 me-1" viewBox="0 0 16 16">
+                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                                        </svg>
+                                        Ends: {{ event.end_date|date(month_day_year_and_time, this.site.timezone) }}
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                        {% if event.location|length %}
+                            <span class="mb-1 badge bg-primary rounded-pill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-geo-alt-fill me-1" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                </svg>
+                                {% if event.location_url|length %}
+                                    <a class="text-white" target="_blank" href="{{ event.location_url }}">{{ event.location }}</a>
+                                {% else %}
+                                    {{ event.location }}
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                        <p class="mt-2">{{ event.short_description }}</p>
+                        {% if event.link|length %}
+                            <a href="{{ event.link }}" target="_blank" class="btn btn-primary" role="button">Sign Up</a>
+                        {% endif %}
+                        <a href="{{ 'event'|page({ fullslug: event.slug }) }}" class="btn btn-primary" role="button">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="col-12 d-flex justify-content-center">
+        {{ pager(events, { withQuery: true }) }}
+    </div>
+</div>
+{% if events is empty %}
+    <div class="card bg-light mb-4">
+        <div class="card-body text-center">
+            There are no events for your search
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,14 @@
+uuid: 422e95a6-ad22-11ed-a6d5-c65bdaf55e8e
+handle: Content\SearchFields
+type: mixin
+name: Search Fields
+
+fields:
+  image:
+    tab: Manage
+    label: Image
+    commentAbove: An image to represent this page. Used on the top section of this page.
+    type: mediafinder
+    mode: image
+    maxItems: 1
+    span: full

@@ -22,3 +22,7 @@
 {% if section.content_group == 'form' %}
     {% partial 'builder/sections/form' section=section %}
 {% endif %}
+{# Search #}
+{% if section.content_group == 'search' %}
+    {% partial 'builder/sections/search' section=section %}
+{% endif %}

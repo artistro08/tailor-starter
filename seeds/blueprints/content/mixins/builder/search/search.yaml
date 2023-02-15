@@ -1,0 +1,18 @@
+uuid: f0ec415b-ad32-11ed-9b81-88a1efb24968
+handle: Content\Search
+type: mixin
+name: Search
+fields:
+  section_header:
+    type: mixin
+    source: Content\SectionHeader
+    tab: General
+  common_fields:
+    type: mixin
+    source: Content\SearchCommonFields
+    tab: General
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced
