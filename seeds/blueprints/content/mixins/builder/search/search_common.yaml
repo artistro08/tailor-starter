@@ -5,7 +5,7 @@ name: Common Event Fields
 fields:
   entries_to_search:
     label: Items to Search
-    commentAbove: What you would like to search for.
+    commentAbove: What content should be searchable?
     type: checkboxlist
     options: 
       pages: Pages

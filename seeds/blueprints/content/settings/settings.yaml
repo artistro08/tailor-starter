@@ -89,6 +89,31 @@ fields:
       action: show
       field: enable_search
       condition: checked
+  enable_global_search:
+    type: switch
+    comment: Enable Global Search in the navbar
+    label: Enable Global Search
+    default: false
+    tab: Search
+    span: full
+    trigger:
+      action: show
+      field: enable_search
+      condition: checked
+  entries_to_search:
+    label: Items to Search
+    commentAbove: What content should be searchable?
+    type: checkboxlist
+    tab: Search
+    options: 
+      pages: Pages
+      posts: Blog Posts
+      events: Events
+      products: Products
+    trigger:
+      action: show
+      field: enable_global_search
+      condition: checked
   header_code:
     label: Header Code
     type: codeeditor
