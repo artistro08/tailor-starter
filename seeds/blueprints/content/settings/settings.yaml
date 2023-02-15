@@ -51,7 +51,7 @@ fields:
     default: false
     tab: Settings
     span: row
-    spanClass: col-12 col-lg-4
+    spanClass: col-12 col-lg-3
   enable_events:
     type: switch
     comment: Enable events on the site.
@@ -59,7 +59,7 @@ fields:
     default: false
     tab: Settings
     span: row
-    spanClass: col-12 col-lg-4
+    spanClass: col-12 col-lg-3
   enable_blog:
     type: switch
     comment: Enable blog posts on the site.
@@ -67,15 +67,15 @@ fields:
     default: false
     tab: Settings
     span: row
-    spanClass: col-12 col-lg-4
+    spanClass: col-12 col-lg-3
   enable_search:
     type: switch
     comment: Enable Search throughout the site
     label: Enable Search
     default: false
     tab: Settings
-    span: left
-    cssClass: mt-3
+    span: row
+    spanClass: col-12 col-lg-3
   default_search_page:
     maxItems: 1
     label: Default Search Page
