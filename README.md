@@ -1,6 +1,6 @@
 # Introduction
 
-This theme supplies the user some simple starter templates to get started with October's Tailor Feature. It uses Bootstrap 5 to generate menus, general HTML content, and more.
+A builder theme for October CMS v3.2 based on Bootstrap 5 to speed up website creation. It uses October CMS's Tailor Feature to create re-usable content throughout the site
 
 ### Prerequisites
 
