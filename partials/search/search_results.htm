@@ -13,7 +13,7 @@ handle = "Content\Product"
 {% for searchTerm,searchValue in searchTerms %}
     
     {% if (searchTerm == "pages" and searchValue == "true") %}
-        {% set pages = pages.searchWhere(searchTerms.term, ['title']).where('content_group', '!=', 'search').paginateCustom(3, 'pages_page') %}
+        {% set pages = pages.searchWhere(searchTerms.term, ['title']).where('content_group', '!=', 'search').paginateCustom(12, 'pages_page') %}
         {% partial 'search/pages' pages=pages %}
         
     {% endif %}
