@@ -11,92 +11,98 @@ handle = "Content\Settings"
 {% if availableSites|length > 1 %}
     {% set locale = this.locale %}
 {% endif %}
-<nav class="navbar navbar-light navbar-expand-lg sticky-top bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand order-1" href="{{ '/'|app ~ '/' ~ locale }}">
-            {% if settings.logo|length %}
-                <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">
-            {% else %}
-                {{ settings.website_name }}
-            {% endif %}
-        </a>
-        <button data-bs-toggle="collapse" class="navbar-toggler order-4 order-lg-2" data-bs-target="#navcol-1">
-            <span class="visually-hidden">Toggle navigation</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
-            </svg>
-        </button>
-        <div class="collapse navbar-collapse order-4 order-lg-4" id="navcol-1">
-            <ul class="navbar-nav">
-                {% for item in mainMenu %}
-                    {% if not item.parent_id %}
-                        <li class="nav-item {{ item.children ? 'dropdown' }}">
-                            <a
-                                    class="nav-link 
-                                        {{ item.children|length ? 'dropdown-toggle' : '' }} 
-                                        {{ link(item.page).isActive ? 'active' }}
-                                        {% if this.page.id == "index" %}
-                                            {{ settings.homepage.fullslug in item.page|link ? 'active' }}
-                                        {% endif %}"
-                                    href="{{ settings.homepage.fullslug in item.page|link ? '/' : item.page|link }}"
-                                    {{ item.external ? 'target="_blank" '}}
-                                    {% if item.children|length %}
-                                        data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                                    {% endif %}
-                            >
-                                {{ item.title }}
-                            </a>
-                            {% if item.children %}
-                                <ul class="dropdown-menu">
-                                    {% for item in item.children %}
-                                        <li>
-                                            <a
-                                                    class="dropdown-item 
-                                                    {{ link(item.page).isActive ? 'active' }}
-                                                    {% if this.page.id == "index" %}
-                                                        {{ settings.homepage.fullslug in item.page|link ? 'active' }}
-                                                    {% endif %}
-                                                    "
-                                                    href="{{ item.page|link }}"
-                                                    {{ item.external ? 'target="_blank" '}}
-                                            >
-                                                {{ item.title }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            {% if settings.enable_search %}
-                {% if settings.enable_global_search %}
-                    <div class="ms-auto me-2">
-                        {% set searchPage = 'page'|page({fullslug: settings.default_search_page.fullslug })  %}
-                        {% set globalSearchTerms = get() %}
-                        <form action="{{ searchPage }}" method="get">
-                            <div class="input-group">
-                                <input type="text" name="term" class="form-control" placeholder="{{ settings.search_field_placeholder }}" aria-label="{{ settings.search_field_placeholder }}" value="{{ globalSearchTerms.global == "true" ? globalSearchTerms.term }}">
-                                {% for entry in settings.entries_to_search %}
-                                    <input type="hidden" name="{{ entry }}" value="true">
-                                {% endfor %}
-                                <input type="hidden" name="global" value="true">
-                                <button class="btn btn-primary" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+<header class="site-header">
+    <nav class="navbar navbar-light navbar-expand-lg
+        {{ settings.navbar_position }}
+        {{ settings.navbar_position == 'position-absolute' ? 'start-0 end-0 top-0': '' }}
+        {{ settings.navbar_background }}"
+         {{ settings.navbar_position == 'position-absolute' ? 'style="z-index: 1020;"': '' }}>
+        <div class="{{ settings.container_style }}">
+            <a class="navbar-brand order-1" href="{{ '/'|app ~ '/' ~ locale }}">
+                {% if settings.logo|length %}
+                    <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">
+                {% else %}
+                    {{ settings.website_name }}
                 {% endif %}
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler order-4 order-lg-2" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-list">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse order-4 order-lg-4" id="navcol-1">
+                <ul class="navbar-nav">
+                    {% for item in mainMenu %}
+                        {% if not item.parent_id %}
+                            <li class="nav-item {{ item.children ? 'dropdown' }}">
+                                <a
+                                        class="nav-link 
+                                            {{ item.children|length ? 'dropdown-toggle' : '' }} 
+                                            {{ link(item.page).isActive ? 'active' }}
+                                            {% if this.page.id == "index" %}
+                                                {{ settings.homepage.fullslug in item.page|link ? 'active' }}
+                                            {% endif %}"
+                                        href="{{ settings.homepage.fullslug in item.page|link ? '/' : item.page|link }}"
+                                        {{ item.external ? 'target="_blank" '}}
+                                        {% if item.children|length %}
+                                            data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                                        {% endif %}
+                                >
+                                    {{ item.title }}
+                                </a>
+                                {% if item.children %}
+                                    <ul class="dropdown-menu">
+                                        {% for item in item.children %}
+                                            <li>
+                                                <a
+                                                        class="dropdown-item 
+                                                        {{ link(item.page).isActive ? 'active' }}
+                                                        {% if this.page.id == "index" %}
+                                                            {{ settings.homepage.fullslug in item.page|link ? 'active' }}
+                                                        {% endif %}
+                                                        "
+                                                        href="{{ item.page|link }}"
+                                                        {{ item.external ? 'target="_blank" '}}
+                                                >
+                                                    {{ item.title }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% if settings.enable_search %}
+                    {% if settings.enable_global_search %}
+                        <div class="ms-auto me-2">
+                            {% set searchPage = 'page'|page({fullslug: settings.default_search_page.fullslug })  %}
+                            {% set globalSearchTerms = get() %}
+                            <form action="{{ searchPage }}" method="get">
+                                <div class="input-group">
+                                    <input type="text" name="term" class="form-control" placeholder="{{ settings.search_field_placeholder }}" aria-label="{{ settings.search_field_placeholder }}" value="{{ globalSearchTerms.global == "true" ? globalSearchTerms.term }}">
+                                    {% for entry in settings.entries_to_search %}
+                                        <input type="hidden" name="{{ entry }}" value="true">
+                                    {% endfor %}
+                                    <input type="hidden" name="global" value="true">
+                                    <button class="btn btn-primary" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+            {% if settings.enable_shop %}
+                <div class="me-1 ms-auto order-3 order-lg-4" id="global-cart-button">
+                    {% partial 'shop/global-cart-button' %}
+                </div>
             {% endif %}
         </div>
-        {% if settings.enable_shop %}
-            <div class="me-1 ms-auto order-3 order-lg-4" id="global-cart-button">
-                {% partial 'shop/global-cart-button' %}
-            </div>
-        {% endif %}
-    </div>
-</nav>
+    </nav>
+</header>
