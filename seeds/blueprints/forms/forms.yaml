@@ -58,6 +58,7 @@ fields:
             textarea: Multi-line Text
             checkbox: Checkbox
             select: Dropdown
+            files: Files
         placeholder:
           type: text
           label: Placeholder
@@ -68,10 +69,22 @@ fields:
             action: show
             field: field_type
             condition: value[select][text][dropdown][textarea]
+        multiple_files:
+          type: switch
+          label: Allow Multiple Files
+          comment: Accept multiple files in this field
+          tab: Field
+          span: right
+          cssClass: mt-5
+          trigger:
+            action: show
+            field: field_type
+            condition: value[files]
         options:
           type: repeater
           label: Field Options
           commentAbove: Add items to the dropdown
+          tab: Field
           form:
             fields:
               label:
