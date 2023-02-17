@@ -22,8 +22,13 @@ Forms fields have the following options:
   * Required&#x20;
   * Email (Checks if the value in the field is an email)
   * Numeric (Checks if the value in the field is numeric)
-  * Phone (Checks if the value in the field is a phone nubmer)
+  * Phone (Checks if the value in the field is a phone number)
+  * Regular Expression (Advanced). See [Regex Validation](./#regex-validation)
 * Field Width [(Half Width or Full Width)](#user-content-fn-1)[^1]
+
+#### Regex Validation
+
+This validation allows you to use regular expression to validate the field. If you know regex, you can use it to validate the text. This gives you more power to validate fields.&#x20;
 
 ## Template Files
 
