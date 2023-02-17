@@ -109,12 +109,32 @@ fields:
                   email: Email
                   numeric: Numeric
                   phone: Phone
+                  regex: Regular Expression (Advanced)
               error_message:
                 span: right
                 label: Validation Error Message
                 type: text
                 placeholder: Please enter valid data
                 default: Please enter valid data
+              regex:
+                type: text
+                label: Regex
+                commentAbove: Regular expression to use. 
+                span: left
+                trigger: 
+                  action: show
+                  field: type
+                  condition: value[regex]
+              regex_explainer:
+                type: hint
+                mode: info
+                label: Advanced Setting
+                comment: This specifies a rule for advanced validation. If this is set, it's best to leave it alone. Edit only if you know what you are doing.
+                span: right
+                trigger: 
+                  action: show
+                  field: type
+                  condition: value[regex]
           trigger:
             action: show
             field: validation
