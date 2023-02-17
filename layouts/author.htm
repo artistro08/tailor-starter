@@ -151,6 +151,9 @@ function onFormSubmit() {
                     $field_validation_rules[] = "min:9";
                     $field_validation_messages[$field->slug . '.' . "regex"] = $validation_item->attributes['error_message'];
                     $field_validation_messages[$field->slug . '.' . "min"] = $validation_item->attributes['error_message'];
+                } elseif ($validation_item->attributes['type'] == "regex") {
+                    $field_validation_rules[] = "regex:" . $validation_item->attributes['regex'];
+                    $field_validation_messages[$field->slug . '.' . "regex"] = $validation_item->attributes['error_message'];
                 } else {
                     $field_validation_rules[] = $validation_item->attributes['type'];
                     $field_validation_messages[$field->slug . '.' . $validation_item->attributes['type']] = $validation_item->attributes['error_message'];
