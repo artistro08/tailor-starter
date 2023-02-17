@@ -7,8 +7,14 @@ handle = "Content\SocialMenu"
 [global settings]
 handle = "Content\Settings"
 ==
-<footer>
-    <div class="container">
+<footer class="
+{% if settings.footer_css_classes|length %}
+    {% for class in settings.footer_css_classes|split(',') %}
+        {{ class ~ ' ' }}
+    {% endfor %}
+{% endif %}
+" {{ settings.footer_html_anchor|length ? 'id=' ~  settings.footer_html_anchor  ~ '' }}>
+    <div class="{{ settings.footer_container_style }}">
         <div class="row">
             <div class="col-12 col-lg-8 mx-auto">
                 <hr>
