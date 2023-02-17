@@ -11,8 +11,17 @@ handle = "Content\Settings"
 {% if availableSites|length > 1 %}
     {% set locale = this.locale %}
 {% endif %}
-<nav class="navbar navbar-light navbar-expand-lg sticky-top bg-light">
-    <div class="container-fluid">
+<nav 
+    class="navbar navbar-light navbar-expand-lg {{ settings.navbar_position }} bg-light
+    {% if settings.navbar_css_classes|length %}
+        {% for class in settings.navbar_css_classes|split(',') %}
+            {{ class ~ ' ' }}
+        {% endfor %}
+    {% endif %}
+    "
+    {{ settings.navbar_html_anchor|length ? 'id=' ~  settings.navbar_html_anchor  ~ '' }}
+>
+    <div class="{{ settings.navbar_container_style }}">
         <a class="navbar-brand order-1" href="{{ '/'|app ~ '/' ~ locale }}">
             {% if settings.logo|length %}
                 <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">

@@ -102,7 +102,7 @@ fields:
   navbar_html_anchor:
     type: text
     label: ID/Anchor
-    commentAbove: Specify a unique ID for the navbar. Also used for the collapse element on mobile. Defaults to <code>navcol-1</code>
+    commentAbove: Specify a unique ID for the navbar.
     commentHtml: true
     validation: alpha_dash
     span: full
