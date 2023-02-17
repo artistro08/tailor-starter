@@ -28,6 +28,11 @@ handle = "Content\Product"
                         {% do matchingPageIds.push(page.id) %}
                     {% endif %}
                 {% endif %}
+                {% for column in section.columns %}
+                    {% if searchTerms.term|lower in column.content|lower %}
+                        {% do matchingPageIds.push(page.id) %}
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         {% endfor %}
         {% set pages = pages.whereIn('id', matchingPageIds.toArray()).where('content_group', '!=', 'search').paginateCustom(12, 'pages_page') %}
@@ -52,9 +57,14 @@ handle = "Content\Product"
                         {% do matchingPostIds.push(post.id) %}
                     {% endif %}
                 {% endif %}
+                {% for column in section.columns %}
+                    {% if searchTerms.term|lower in column.content|lower %}
+                        {% do matchingPostIds.push(post.id) %}
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         {% endfor %}
-        {% set posts = posts.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'posts_page') %}
+        {% set posts = posts.whereIn('id', matchingPostIds.toArray()).where('content_group', '!=', 'search').paginateCustom(12, 'posts_page') %}
         
         {% partial 'search/posts' posts=posts %}
     {% endif %}
