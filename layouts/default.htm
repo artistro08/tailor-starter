@@ -165,21 +165,21 @@ function onFormSubmit() {
         if($field->validation == true) {
 
             foreach ($field->validation_rules as $validation_item) {
-                if($validation_item->attributes['type'] == "phone") {
+                if($validation_item->attributes['validation_type'] == "phone") {
                     $field_validation_rules[] = "regex:/^([0-9\s\-\+\(\)]*)$/";
                     $field_validation_rules[] = "min:9";
                     $field_validation_messages[$field->slug . '.' . "regex"] = $validation_item->attributes['error_message'];
                     $field_validation_messages[$field->slug . '.' . "min"] = $validation_item->attributes['error_message'];
-                } elseif ($validation_item->attributes['type'] == "regex") {
+                } elseif ($validation_item->attributes['validation_type'] == "regex") {
                     $field_validation_rules[] = "regex:" . $validation_item->attributes['regex'];
                     $field_validation_messages[$field->slug . '.' . "regex"] = $validation_item->attributes['error_message'];
-                } elseif ($validation_item->attributes['type'] == "custom") {
+                } elseif ($validation_item->attributes['validation_type'] == "custom") {
                     $rule_name = strtok($validation_item->attributes['custom'], ':');
                     $field_validation_rules[] = $validation_item->attributes['custom'];
                     $field_validation_messages[$field->slug . '.' . $rule_name] = $validation_item->attributes['error_message'];
                 } else {
-                    $field_validation_rules[] = $validation_item->attributes['type'];
-                    $field_validation_messages[$field->slug . '.' . $validation_item->attributes['type']] = $validation_item->attributes['error_message'];
+                    $field_validation_rules[] = $validation_item->attributes['validation_type'];
+                    $field_validation_messages[$field->slug . '.' . $validation_item->attributes['validation_type']] = $validation_item->attributes['error_message'];
                 }
                 
             }
