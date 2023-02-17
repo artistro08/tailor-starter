@@ -13,20 +13,55 @@ handle = "Content\Product"
 {% for searchTerm,searchValue in searchTerms %}
     
     {% if (searchTerm == "pages" and searchValue == "true") %}
-        {% set pages = pages.searchWhere(searchTerms.term, ['title']).where('content_group', '!=', 'search').paginateCustom(12, 'pages_page') %}
+        {# Query the content in the pages for the search term #}
+        {% set matchingPageIds = collect() %}
+        {% set matchingPages = pages.searchWhere(searchTerms.term, ['title', 'content']) %}
+        {% for page in matchingPages.get() %}
+            {% if page.id not in matchingPageIds %}
+                {% do matchingPageIds.push(page.id) %}
+            {% endif %}
+        {% endfor %}
+        {% for page in pages.get() %}
+            {% for section in page.builder %}
+                {% if searchTerms.term|lower in section.content|lower %}
+                    {% if page.id not in matchingPageIds %}
+                        {% do matchingPageIds.push(page.id) %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        {% set pages = pages.whereIn('id', matchingPageIds.toArray()).where('content_group', '!=', 'search').paginateCustom(12, 'pages_page') %}
+        
         {% partial 'search/pages' pages=pages %}
         
     {% endif %}
     
     {% if (searchTerm == "posts" and searchValue == "true") %}
+        {# Query the content in the posts for the search term #}
+        {% set matchingPostIds = collect() %}
+        {% set matchingPosts = posts.searchWhere(searchTerms.term, ['title', 'content']) %}
+        {% for post in matchingPosts.get() %}
+            {% if post.id not in matchingPostIds %}
+                {% do matchingPostIds.push(post.id) %}
+            {% endif %}
+        {% endfor %}
+        {% for post in posts.get() %}
+            {% for section in post.builder %}
+                {% if searchTerms.term|lower in section.content|lower %}
+                    {% if post.id not in matchingPostIds %}
+                        {% do matchingPostIds.push(post.id) %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
         {% set posts = posts.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'posts_page') %}
+        
         {% partial 'search/posts' posts=posts %}
     {% endif %}
     
     {% if (searchTerm == "events" and searchValue == "true") %}
         {% set events = events.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'events_page') %}
         {% partial 'search/events' events=events %}
-        
     {% endif %}
         
     {% if (searchTerm == "products" and searchValue == "true") %}
