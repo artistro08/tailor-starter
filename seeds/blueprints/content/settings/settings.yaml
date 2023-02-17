@@ -76,54 +76,6 @@ fields:
     tab: Settings
     span: row
     spanClass: col-12 col-lg-3
-  navbar_position:
-    type: dropdown
-    commentAbove: Choose how the navbar is placed throughout the site
-    label: Navbar Position
-    tab: Navbar
-    options:
-      position-relative: Scroll With Content
-      sticky-top: Stick to Top of Screen
-  navbar_advanced_options:
-    type: switch
-    label: Show Advanced Settings
-    comment: Configure advanced settings for the navbar
-    tab: Navbar
-  navbar_css_classes:
-    type: taglist
-    label: CSS Classes
-    commentAbove: Specify CSS classes for the navbar. Separate them with a comma.
-    span: full
-    tab: Navbar
-    trigger: 
-      action: empty|hide
-      field: navbar_advanced_options
-      condition: unchecked
-  navbar_html_anchor:
-    type: text
-    label: ID/Anchor
-    commentAbove: Specify a unique ID for the navbar.
-    commentHtml: true
-    validation: alpha_dash
-    span: full
-    tab: Navbar
-    trigger: 
-      action: empty|hide
-      field: navbar_advanced_options
-      condition: unchecked
-  navbar_container_style:
-    type: dropdown
-    label: Container Style
-    commentAbove: Choose the navbar container style. Pick "Fluid" for full width.
-    tab: Navbar
-    span: full
-    options: 
-      container: Normal
-      container-fluid: Fluid
-    trigger: 
-      action: empty|hide|fill[container]
-      field: navbar_advanced_options
-      condition: unchecked
   default_search_page:
     maxItems: 1
     label: Default Search Page
@@ -176,6 +128,54 @@ fields:
       action: show
       field: enable_search
       condition: checked
+  navbar_position:
+    type: dropdown
+    commentAbove: Choose how the navbar is placed throughout the site
+    label: Navbar Position
+    tab: Global Elements
+    options:
+      position-relative: Scroll With Content
+      sticky-top: Stick to Top of Screen
+  navbar_advanced_options:
+    type: switch
+    label: Show Advanced Settings
+    comment: Configure advanced settings for the navbar
+    tab: Global Elements
+  navbar_css_classes:
+    type: taglist
+    label: CSS Classes
+    commentAbove: Specify CSS classes for the navbar. Separate them with a comma.
+    span: full
+    tab: Navbar
+    trigger: 
+      action: empty|hide
+      field: navbar_advanced_options
+      condition: unchecked
+  navbar_html_anchor:
+    type: text
+    label: ID/Anchor
+    commentAbove: Specify a unique ID for the navbar.
+    commentHtml: true
+    validation: alpha_dash
+    span: full
+    tab: Global Elements
+    trigger: 
+      action: empty|hide
+      field: navbar_advanced_options
+      condition: unchecked
+  navbar_container_style:
+    type: dropdown
+    label: Container Style
+    commentAbove: Choose the navbar container style. Pick "Fluid" for full width.
+    tab: Global Elements
+    span: full
+    options: 
+      container: Normal
+      container-fluid: Fluid
+    trigger: 
+      action: empty|hide|fill[container]
+      field: navbar_advanced_options
+      condition: unchecked
   header_code:
     label: Header Code
     type: codeeditor
