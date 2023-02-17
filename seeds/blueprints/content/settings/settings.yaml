@@ -76,6 +76,40 @@ fields:
     tab: Settings
     span: row
     spanClass: col-12 col-lg-3
+  hr_2:
+    type: ruler
+    tab: Settings
+  container_style:
+    type: dropdown
+    label: Container Style for the Main Navbar
+    commentAbove: Choose the container style. Pick "Fluid" for full width.
+    tab: Settings
+    span: left
+    options:
+      container: Normal
+      container-fluid: Fluid
+  navbar_position:
+    type: dropdown
+    label: Navbar Style for the Main Navbar
+    commentAbove: Choose the Navbar position.
+    tab: Settings
+    span: right
+    default:  sticky-top
+    options:
+      sticky-top : Sticky
+      position-relative: Relative
+      position-absolute: Absolute
+  navbar_background:
+    type: dropdown
+    label: Navbar Background Color
+    commentAbove: Choose the Navbar Background Color.
+    tab: Settings
+    span: left
+    default: bg-light
+    options:
+      bg-light: Light
+      bg-dark: Dark
+      bg-transparent: Transparent
   default_search_page:
     maxItems: 1
     label: Default Search Page
