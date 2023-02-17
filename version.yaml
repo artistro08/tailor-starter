@@ -83,3 +83,4 @@ v6.2.6: Fixes an issue where shipping items were always expanded.
 v6.3.0: Adds search to the site 
 v6.3.1: Update search results pagination for page
 v6.3.2: Added global element configuration support.
+v6.3.3: Adds custom validation and regex validation to form fields. Also fixes reading form field validation from the backend.
