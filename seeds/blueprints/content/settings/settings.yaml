@@ -96,9 +96,9 @@ fields:
     span: full
     tab: Navbar
     trigger: 
-      action: show
+      action: empty|hide
       field: navbar_advanced_options
-      condition: checked
+      condition: unchecked
   navbar_html_anchor:
     type: text
     label: ID/Anchor
@@ -108,9 +108,9 @@ fields:
     span: full
     tab: Navbar
     trigger: 
-      action: show
+      action: empty|hide
       field: navbar_advanced_options
-      condition: checked
+      condition: unchecked
   navbar_container_style:
     type: dropdown
     label: Container Style
@@ -121,9 +121,9 @@ fields:
       container: Normal
       container-fluid: Fluid
     trigger: 
-      action: show
+      action: empty|hide|fill[container]
       field: navbar_advanced_options
-      condition: checked
+      condition: unchecked
   default_search_page:
     maxItems: 1
     label: Default Search Page
