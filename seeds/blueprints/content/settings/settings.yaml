@@ -82,8 +82,8 @@ fields:
     label: Navbar Position
     tab: Navbar
     options:
-      sticky-top: Stick to Top of Screen
       position-relative: Scroll With Content
+      sticky-top: Stick to Top of Screen
   navbar_advanced_options:
     type: switch
     label: Show Advanced Settings
