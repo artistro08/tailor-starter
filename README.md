@@ -2,6 +2,9 @@
 
 A builder theme for October CMS v3.2 based on Bootstrap 5 to speed up website creation. It uses October CMS's Tailor Feature to create re-usable content throughout the site
 
+## Theme Philosophy
+This theme is meant to be themed. It provides a lot of options out of the box for building content, but also leaves part of the elements simple to theme at your discretion. The general idea behind it is that you can quickly build out a structure and import styles from a bootstrap theme without doing too much work. 
+
 ### Prerequisites
 
 To get started with this theme, you'll need the following
