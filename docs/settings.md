@@ -38,6 +38,33 @@ This tab is used to configure search settings. The following is configurable:
 
 By default, search is disabled since you have to create a [Search Page](pages/#search-pages) for it.&#x20;
 
+
+
+## Global Elements Tab
+
+This tab configures the global elements `<nav>` and `<footer>`. The following options are available
+
+### Navbar
+
+* Navbar Position: Adjust make the navbar stick to the top or scroll with content
+* Show Advanced Options
+  * CSS Classes: Add CSS Classes to the navbar
+  * ID/Anchor: Add an unique ID to the navbar
+  * Container Style: Choose between Fluid and Normal bootstrap containers
+
+### Footer
+
+* Show Advanced Options
+  * CSS Classes: Add CSS Classes to the footer
+  * ID/Anchor: Add an unique ID to the footer
+  * Container Style: Choose between Fluid and Normal bootstrap containers
+
+### Why the "Advanced Options" switch?
+
+The philosophy behind the theme is to give the client options to change content throughout the site. Since this is something that isn't relevant to the client but relevant to the developer, The options would be needed to be hidden from the client by default.&#x20;
+
+This prevents changing the settings by the client accidentally.&#x20;
+
 ## Global Code Tab
 
 This tab is used to place code snippets in their respective areas of the site.
