@@ -110,6 +110,7 @@ fields:
                   numeric: Numeric
                   phone: Phone
                   regex: Regular Expression (Advanced)
+                  custom: Custom Rule (Advanced)
               error_message:
                 span: right
                 label: Validation Error Message
@@ -125,6 +126,15 @@ fields:
                   action: show
                   field: type
                   condition: value[regex]
+              custom:
+                type: text
+                label: Custom Rule
+                commentAbove: Custom rule string to use
+                span: left
+                trigger: 
+                  action: show
+                  field: type
+                  condition: value[custom]
               regex_explainer:
                 type: hint
                 mode: info
@@ -135,6 +145,17 @@ fields:
                   action: show
                   field: type
                   condition: value[regex]
+              custom_explainer:
+                type: hint
+                mode: info
+                label: Custom Rule Setting
+                comment: This specifies a rule for advanced validation. If this is set, it's best to leave it alone. Edit only if you know what you are doing. Find available validation rules <a href="https://docs.octobercms.com/3.x/extend/services/validation.html">here</a>
+                commentHtml: true
+                span: right
+                trigger: 
+                  action: show
+                  field: type
+                  condition: value[custom]
           trigger:
             action: show
             field: validation
