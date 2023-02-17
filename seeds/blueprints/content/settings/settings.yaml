@@ -146,7 +146,7 @@ fields:
     label: CSS Classes
     commentAbove: Specify CSS classes for the navbar. Separate them with a comma.
     span: full
-    tab: Navbar
+    tab: Global Elements
     trigger: 
       action: empty|hide
       field: navbar_advanced_options
