@@ -26,6 +26,7 @@ fields:
     displayMode: builder
     titleFrom: Label
     tab: Form Fields
+    useTabs: true
     form:
       fields:
         label:
@@ -33,7 +34,7 @@ fields:
           type: text
           commentAbove: The name of the field
           validation: required
-          tab: Form Fields
+          tab: Field
           span: left
         slug:
           type: text
@@ -41,6 +42,7 @@ fields:
           commentAbove: Used to identify the field in the form. If Unsure, match it to the label with letters, numbers, and dashes only.
           span: right
           validation: alpha_dash|required
+          tab: Field
           preset:
             field: label
             type: slug
@@ -48,8 +50,8 @@ fields:
           label: Field Type
           validation: required
           type: dropdown
-          tab: Form Fields
-          span: full
+          tab: Field
+          span: left
           commentAbove: Choose the type of this field.
           options:
             text: Text
@@ -60,6 +62,8 @@ fields:
           type: text
           label: Placeholder
           commentAbove: The text that appears inside the field.
+          tab: Field
+          span: right
           trigger:
             action: show
             field: field_type
@@ -93,14 +97,14 @@ fields:
           label: Enable Field Validation
           comment: Enable this field to be required with rules you specify
           type: switch
-          tab: Form Fields
+          tab: Validation
         validation_rules:
           label: Validation Rules
           type: repeater
-          tab: Form Fields
+          tab: Validation
           form:
             fields:
-              type:
+              validation_type:
                 type: dropdown
                 label: Validation Type
                 span: left
@@ -110,6 +114,7 @@ fields:
                   numeric: Numeric
                   phone: Phone
                   regex: Regular Expression (Advanced)
+                  custom: Custom Rule (Advanced)
               error_message:
                 span: right
                 label: Validation Error Message
@@ -123,8 +128,17 @@ fields:
                 span: left
                 trigger: 
                   action: show
-                  field: type
+                  field: validation_type
                   condition: value[regex]
+              custom:
+                type: text
+                label: Custom Rule
+                commentAbove: Custom rule string to use
+                span: left
+                trigger: 
+                  action: show
+                  field: validation_type
+                  condition: value[custom]
               regex_explainer:
                 type: hint
                 mode: info
@@ -133,20 +147,28 @@ fields:
                 span: right
                 trigger: 
                   action: show
-                  field: type
+                  field: validation_type
                   condition: value[regex]
+              custom_explainer:
+                type: hint
+                mode: info
+                label: Custom Rule Setting
+                comment: This specifies a rule for advanced validation. If this is set, it's best to leave it alone. Edit only if you know what you are doing. Find available validation rules <a target="_blank" href="https://docs.octobercms.com/3.x/extend/services/validation.html">here</a>
+                commentHtml: true
+                span: right
+                trigger: 
+                  action: show
+                  field: validation_type
+                  condition: value[custom]
           trigger:
             action: show
             field: validation
             condition: checked
-        hr_1:
-          type: ruler
-          tab: Form Fields
         width:
           label: Field Width
           type: dropdown
           commentAbove: Choose how wide this field should be
-          tab: Form Fields
+          tab: Field
           options:
             full_width: Full Width
             half_width: Half Width
