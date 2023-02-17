@@ -24,11 +24,26 @@ Forms fields have the following options:
   * Numeric (Checks if the value in the field is numeric)
   * Phone (Checks if the value in the field is a phone number)
   * Regular Expression (Advanced). See [Regex Validation](./#regex-validation)
+  * Custom Rule (Advanced). See [Custom Rules](./#custom-rules)
 * Field Width [(Half Width or Full Width)](#user-content-fn-1)[^1]
 
 #### Regex Validation
 
-This validation allows you to use regular expression to validate the field. If you know regex, you can use it to validate the text. This gives you more power to validate fields.&#x20;
+This validation type allows you to use regular expression to validate the field. If you know regex, you can use it to validate the text. This gives you more power to validate fields.&#x20;
+
+There's also a note to anyone (particularly clients) to let them know that this is advanced behavior.
+
+#### Custom Rules
+
+This validation type allows you to specify custom rules to validate the fields. If you're familiar with Laravel Validation, you can use this to give you more power to validate form fields.
+
+There's also a note to anyone (particularly clients) to let them know that this is advanced behavior.
+
+It works by taking the string from the custom rule field and splitting it at the `:` if there is one.&#x20;
+
+To see a list of available validation rules, See the [October CMS Validation Documentation](https://docs.octobercms.com/3.x/extend/services/validation.html)
+
+
 
 ## Template Files
 
