@@ -12,7 +12,7 @@ handle = "Content\Settings"
     {% set locale = this.locale %}
 {% endif %}
 <nav 
-    class="navbar navbar-light navbar-expand-lg {{ settings.navbar_position }} bg-light
+    class="navbar navbar-light navbar-expand-lg {{ settings.navbar_position }}
     {% if settings.navbar_css_classes|length %}
         {% for class in settings.navbar_css_classes|split(',') %}
             {{ class ~ ' ' }}
