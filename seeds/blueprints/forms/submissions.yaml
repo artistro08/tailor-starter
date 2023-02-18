@@ -29,5 +29,11 @@ fields:
     column:
       type: summary
       label: Submission Data
-    
+  files:
+    type: fileupload
+    label: Files
+    disabled: true
+    column:
+      type: image
+      label: Files
     
