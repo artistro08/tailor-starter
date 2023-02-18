@@ -223,10 +223,20 @@ function onFormSubmit() {
             if($key == array_key_first($form_input)){
                 $form_name = (!empty($value)) ? $value : $form_name;
             }
+            
             $key = ucwords(str_replace("-", ' ', $key));
-            $form_input_formatted .= $key . ": " . $value  . "\n";
+            
+            if(is_object($value)) {
+                $form_input_formatted .= $key . ": " . $value->getClientOriginalName()  . "\n";
+            } else {
+                $form_input_formatted .= $key . ": " . $value  . "\n";
+            }
         }
-
+        
+        if(is_object($value)) {
+            $submission->files = $value;
+        }
+        
     }
 
     $submission->title = $form_name;

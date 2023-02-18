@@ -20,6 +20,7 @@ handle = "Content\Settings"
         {% if form.enable_recaptcha %}
             data-request-error="recaptcha_{{ form_id }}_error()"
         {% endif %}
+        data-request-files
 >
     {% if submitted %}
         {% flash %}
@@ -124,7 +125,7 @@ handle = "Content\Settings"
                         {% endfor %}
                     </select>
                 {% endif %}
-                {% if field.attributes.field_type == 'files' %}
+                {% if field.attributes.field_type == 'file' %}
                     <label class="form-label" for="{{ field.slug }}">
                         {{ field.label }}
                         {% set index_required = 0 %}
@@ -149,9 +150,6 @@ handle = "Content\Settings"
                             name="{{ field.slug }}"
                             class="form-control"
                             placeholder="{{ field.placeholder }}"
-                            {% if field.attributes.multiple_files %}
-                                multiple
-                            {% endif %}
                     >
                 {% endif %}
             </div>
