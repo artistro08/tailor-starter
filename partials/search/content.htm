@@ -1,0 +1,39 @@
+<header class="hero bg-dark overflow-hidden d-flex align-items-center text-light position-relative py-4 mb-4">
+    <div class="container position-relative" style="z-index: 1">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="mb-4">Search Results for "{{ searchTerms.term }}"</h1>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-6 mx-auto">
+                    <form action="{{ searchPage }}" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" name="term" class="form-control" placeholder="{{ section.search_field_placeholder }}" aria-label="{{ section.search_field_placeholder }}" value="{{ searchTerms.term }}">
+                            {% for searchTerm,searchValue in searchTerms %}
+                                {% if searchTerm != "term" %}
+                                    <input type="hidden" name="{{ searchTerm }}" value="true">
+                                {% endif %}
+                            {% endfor %}
+                            <input type="hidden" name="global" value="{{ searchTerms.global == "true" ? "true" : "false" }}">
+                            <button class="btn btn-primary d-flex align-items-center justify-content-center" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if page.image|length %}
+        <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100 opacity-50" style="z-index: 0">
+            <img src="{{ page.image|media|resize(1920) }}" alt="{{ page.title }}" class="w-100 h-100" style="object-fit: cover; ">
+        </div>
+    {% endif %}
+</header>
+<section>
+    <div class="container">
+        {% partial 'search/search_results' section=section searchTerms=searchTerms %}
+    </div>
+</section>

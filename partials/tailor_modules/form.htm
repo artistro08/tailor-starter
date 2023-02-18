@@ -38,7 +38,7 @@ handle = "Content\Settings"
                         {{ field.label }}
                         {% set index_required = 0 %}
                         {% for validation in field.validation_rules %}
-                            {% if (validation.attributes.type == "required" and index_required == 0)  %}
+                            {% if (validation.validation_type == "required" and index_required == 0)  %}
                                 <span class="text-danger">*</span>
                                 {% set index_required = index_required+1 %}
                             {% endif %}
@@ -48,7 +48,7 @@ handle = "Content\Settings"
                             {% set index_number = 0 %}
                             {% set field_type = "text" %}
                             {% for validation in field.validation_rules %}
-                                {% if (validation.attributes.type == "numeric" and index_number == 0)  %}
+                                {% if (validation.validation_type == "numeric" and index_number == 0)  %}
                                     {% set field_type = "number" %}
                                     {% set index_number = index_number+1 %}
                                 {% endif %}
@@ -65,7 +65,7 @@ handle = "Content\Settings"
                         {{ field.label }}
                         {% set index = 0 %}
                         {% for validation in field.validation_rules %}
-                            {% if (validation.attributes.type == "required" and index == 0)  %}
+                            {% if (validation.validation_type == "required" and index == 0)  %}
                                 <span class="text-danger">*</span>
                                 {% set index = index+1 %}
                             {% endif %}
@@ -93,7 +93,7 @@ handle = "Content\Settings"
                             {{ field.label }}
                             {% set index = 0 %}
                             {% for validation in field.validation_rules %}
-                                {% if (validation.attributes.type == "required" and index == 0)  %}
+                                {% if (validation.validation_type == "required" and index == 0)  %}
                                     <span class="text-danger">*</span>
                                     {% set index = index+1 %}
                                 {% endif %}
@@ -106,7 +106,7 @@ handle = "Content\Settings"
                         {{ field.label }}
                         {% set index = 0 %}
                         {% for validation in field.validation_rules %}
-                            {% if (validation.attributes.type == "required" and index == 0)  %}
+                            {% if (validation.validation_type == "required" and index == 0)  %}
                                 <span class="text-danger">*</span>
                                 {% set index = index+1 %}
                             {% endif %}
@@ -130,7 +130,7 @@ handle = "Content\Settings"
                         {{ field.label }}
                         {% set index_required = 0 %}
                         {% for validation in field.validation_rules %}
-                            {% if (validation.attributes.type == "required" and index_required == 0)  %}
+                            {% if (validation.validation_type == "required" and index_required == 0)  %}
                                 <span class="text-danger">*</span>
                                 {% set index_required = index_required+1 %}
                             {% endif %}
@@ -140,7 +140,7 @@ handle = "Content\Settings"
                             {% set index_number = 0 %}
                             {% set field_type = "file" %}
                             {% for validation in field.validation_rules %}
-                                {% if (validation.attributes.type == "numeric" and index_number == 0)  %}
+                                {% if (validation.validation_type == "numeric" and index_number == 0)  %}
                                     {% set field_type = "number" %}
                                     {% set index_number = index_number+1 %}
                                 {% endif %}
