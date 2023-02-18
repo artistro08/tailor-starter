@@ -85,3 +85,4 @@ v6.3.1: Update search results pagination for page
 v6.3.2: Added global element configuration support.
 v6.3.3: Adds custom validation and regex validation to form fields. Also fixes reading form field validation from the backend.
 v6.3.4: Extend search to builder blocks with rich editor content
+v6.3.5: Added support for file uploads in forms.
