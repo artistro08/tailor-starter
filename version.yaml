@@ -87,3 +87,4 @@ v6.3.3: Adds custom validation and regex validation to form fields. Also fixes r
 v6.3.4: Extend search to builder blocks with rich editor content
 v6.3.5: Added support for file uploads in forms.
 v6.3.6: Fix asterisk not appearing for fields that are required
+v6.3.7: Move search content to own partial for easier editing of the content
