@@ -20,6 +20,7 @@ handle = "Content\Settings"
         {% if form.enable_recaptcha %}
             data-request-error="recaptcha_{{ form_id }}_error()"
         {% endif %}
+        data-request-files
 >
     {% if submitted %}
         {% flash %}
@@ -123,6 +124,33 @@ handle = "Content\Settings"
                             <option value="{{ option.label }}">{{ option.label }}</option>
                         {% endfor %}
                     </select>
+                {% endif %}
+                {% if field.attributes.field_type == 'file' %}
+                    <label class="form-label" for="{{ field.slug }}">
+                        {{ field.label }}
+                        {% set index_required = 0 %}
+                        {% for validation in field.validation_rules %}
+                            {% if (validation.attributes.type == "required" and index_required == 0)  %}
+                                <span class="text-danger">*</span>
+                                {% set index_required = index_required+1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </label>
+                    <input
+                            {% set index_number = 0 %}
+                            {% set field_type = "file" %}
+                            {% for validation in field.validation_rules %}
+                                {% if (validation.attributes.type == "numeric" and index_number == 0)  %}
+                                    {% set field_type = "number" %}
+                                    {% set index_number = index_number+1 %}
+                                {% endif %}
+                            {% endfor %}
+                            type="{{ field_type }}"
+                            id="{{ field.slug }}"
+                            name="{{ field.slug }}"
+                            class="form-control"
+                            placeholder="{{ field.placeholder }}"
+                    >
                 {% endif %}
             </div>
         {% endfor %}
