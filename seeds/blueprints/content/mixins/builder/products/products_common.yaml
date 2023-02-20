@@ -30,6 +30,7 @@ fields:
     cssClass: mt-3
     label: Filter By Category
     comment: Filter products by a specific category
+    tab: General
     trigger: 
       action: disable|empty
       field: show_specific_items
@@ -65,6 +66,7 @@ fields:
     default: value[3]
     commentAbove: Choose the number of columns you would like for the specific items you chose. Min of 1, Max of 4.
     span: right
+    tab: General
     options:
       12: One Column 
       6: Two Columns

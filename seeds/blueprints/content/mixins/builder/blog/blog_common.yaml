@@ -30,6 +30,7 @@ fields:
     cssClass: mt-3
     label: Filter By Category
     comment: Filter posts by a specific category
+    tab: General
     trigger: 
       action: disable|empty
       field: show_specific_items

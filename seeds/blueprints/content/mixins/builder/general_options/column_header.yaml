@@ -8,8 +8,10 @@ fields:
     label: Title
     commentAbove: Title of this column. Used for organizational purposes.
     type: text
+    tab: General
   disable_bottom_spacing:
     type: switch
     label: Disable Bottom Spacing
     comment: Remove bottom spacing from this column
     span: left
+    tab: Style

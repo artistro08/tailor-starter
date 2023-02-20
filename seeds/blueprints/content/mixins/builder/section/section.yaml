@@ -24,6 +24,7 @@ fields:
         icon: icon-align-left
         description: Add content to your section. Has buttons as well.
         titleFrom: title
+        useTabs: true
         fields:
           column_header:
             type: mixin
@@ -32,14 +33,15 @@ fields:
           content:
             label: Content
             type: richeditor
+            tab: General
           hr_1:
             type: ruler
+            tab: General
           buttons:
             type: mixin
             source: Content\Buttons
             commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
-          hr_2:
-            type: ruler
+            tab: General
           column_options:
             type: mixin
             source: Content\ColumnOptions
@@ -48,6 +50,7 @@ fields:
         icon: icon-link
         titleFrom: title
         description: Add buttons to your section.
+        useTabs: true
         fields:
           column_header:
             type: mixin
@@ -57,8 +60,7 @@ fields:
             type: mixin
             source: Content\Buttons
             commentAbove: Display links in your content as buttons. Use a Page or specify a link. Max of 3 per content block.
-          hr_2:
-            type: ruler
+            tab: General
           column_options:
             type: mixin
             source: Content\ColumnOptions
@@ -67,13 +69,12 @@ fields:
         icon: icon-image
         description: Add an image to your section.
         titleFrom: title
+        useTabs: true
         fields:
           column_header:
             type: mixin
             label: Column Header
             source: Content\ColumnHeader
-          hr_1:
-            type: ruler
           image:
             label: Image
             type: mediafinder
@@ -81,13 +82,13 @@ fields:
             span: left
             mode: image
             maxItems: 1
+            tab: General
           image_description:
             label: Image Description
             type: text
             commentAbove: The Description of the image. Use for SEO purposes.
             span: right
-          hr_2:
-            type: ruler
+            tab: General
           column_options:
             type: mixin
             source: Content\ColumnOptions
@@ -96,20 +97,17 @@ fields:
         icon: icon-newspaper-o
         description: Column with blog posts.
         titleFrom: title
+        useTabs: true
         fields:
           posts:
             type: mixin
             source: Content\PostsColum
-          hr_1:
-            type: ruler
-          column_options:
-            type: mixin
-            source: Content\ColumnOptions
       events:
         name: Events
         icon: icon-calendar
         description: Column with events.
         titleFrom: title
+        useTabs: true
         fields:
           events:
             type: mixin
@@ -119,34 +117,28 @@ fields:
         icon: icon-cube
         description: Column with products.
         titleFrom: title
+        useTabs: true
         fields:
           products:
             type: mixin
             source: Content\ProductsColumn
-          hr_1:
-            type: ruler
-          column_options:
-            type: mixin
-            source: Content\ColumnOptions
       form:
         name: Form
         icon: icon-list-alt
         description: Section with a form.
         titleFrom: title
+        useTabs: true
         fields:
           form:
             type: mixin
             source: Content\FormColumn
-          hr_1:
-            type: ruler
-          column_options:
-            type: mixin
-            source: Content\ColumnOptions
+            tab: General
       search:
         name: Search
         icon: icon-search
         description: Section with a search field.
         titleFrom: title
+        useTabs: true
         fields:
           search:
             type: mixin
