@@ -3,9 +3,6 @@ handle: Content\Hero
 type: mixin
 name: Hero
 fields:
-  hr_tab:
-    tab: General
-    type: ruler
   title:
     label: Title
     commentAbove: Title of this section. Used for organizational purposes.
@@ -16,7 +13,7 @@ fields:
     label: Image Type
     commentAbove: Choose which type of image you would like to display. Add your own image or pick from a image category.
     type: dropdown
-    tab: General
+    tab: Background Image
     options:
       media_library: Media Library Image
       product_category_image: Product Category Image
@@ -28,7 +25,7 @@ fields:
     span: left
     mode: image
     maxItems: 1
-    tab: General
+    tab: Background Image
     trigger:
       action: show
       field: image_type
@@ -38,7 +35,7 @@ fields:
     type: text
     commentAbove: The Description of the image. Use for SEO purposes.
     span: right
-    tab: General
+    tab: Background Image
     trigger:
       action: show
       field: image_type
@@ -46,7 +43,7 @@ fields:
   blog_category:
     type: entries
     source: Blog\Categories
-    tab: General
+    tab: Background Image
     maxItems: 1
     label: Blog Category
     trigger: 
@@ -56,7 +53,7 @@ fields:
   product_category:
     type: entries
     source: Content\Product\Category
-    tab: General
+    tab: Background Image
     maxItems: 1
     label: Product Category
     trigger: 
@@ -69,7 +66,7 @@ fields:
     commentAbove: The position of the content.
     span: left
     default: value[left]
-    tab: General
+    tab: Style
     options:
       left: Left
       center: Center
@@ -79,7 +76,7 @@ fields:
     commentAbove: The size of the content.
     span: right
     default: value[normal]
-    tab: General
+    tab: Style
     options:
       normal: Normal
       small: Small

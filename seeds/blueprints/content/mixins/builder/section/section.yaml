@@ -6,15 +6,11 @@ fields:
   section_header:
     type: mixin
     source: Content\SectionHeader
-    tab: General
   reverse_columns_on_mobile:
     label: Reverse Columns on Mobile
     comment: Useful if you have content that needs to be stacked a different way on a phone.
     type: switch
-    tab: General
-  hr_1:
-    type: ruler
-    tab: General
+    tab: Style
   columns:
     label: Content
     type: repeater
