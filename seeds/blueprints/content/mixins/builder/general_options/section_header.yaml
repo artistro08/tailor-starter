@@ -4,19 +4,18 @@ type: mixin
 name: Section Header
 
 fields:
-  hr_tab:
-    tab: General
-    type: ruler
   title:
     label: Title
     type: text
-    span: left
+    span: full
     commentAbove: Title of this section. Title of the section. Used for organizational purposes.
+    tab: General
   style:
     label: Style
     type: dropdown
-    span: right
+    span: full
     commentAbove: Style of the background
+    tab: Style
     options:
       none: None
       light: Light
@@ -26,10 +25,10 @@ fields:
     label: Disable Top Spacing
     comment: Remove top spacing from this section
     span: left
+    tab: Style
   disable_bottom_spacing:
     type: switch
     label: Disable Bottom Spacing
     comment: Remove bottom spacing from this section
     span: right
-  hr_1:
-    type: ruler
+    tab: Style

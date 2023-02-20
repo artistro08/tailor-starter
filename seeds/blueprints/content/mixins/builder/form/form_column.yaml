@@ -14,8 +14,6 @@ fields:
     source: Content\Forms
     displayMode: recordfinder
     maxItems: 1
-  hr_1:
-    type: ruler
   column_options:
     type: mixin
     source: Content\ColumnOptions

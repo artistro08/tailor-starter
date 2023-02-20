@@ -10,8 +10,6 @@ fields:
   common_fields:
     type: mixin
     source: Content\ProductsCommonFields
-  hr_1:
-    type: ruler
   column_options:
     type: mixin
     source: Content\ColumnOptions
