@@ -89,6 +89,13 @@ fields:
             commentAbove: The Description of the image. Use for SEO purposes.
             span: right
             tab: General
+          image_link:
+            label: Image Link
+            type: pagefinder
+            commentAbove: Add a link for this image. Leave empty for no link.
+            span: full
+            tab: General
+            singleMode: true
           column_options:
             type: mixin
             source: Content\ColumnOptions
