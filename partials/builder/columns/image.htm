@@ -1,5 +1,5 @@
 {% if column.image_link|length %}
-<a href="{{ column.image_link|link }}">
+<a href="{{ column.image_link|link }}" {{ column.external_link ? 'target="_blank"' }}>
 {% endif %}
     <img src="{{ column.image|media }}" alt="{{ column.image_description }}" class="img-fluid">
 {% if column.image_link|length %}

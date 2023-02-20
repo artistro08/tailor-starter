@@ -96,6 +96,13 @@ fields:
             span: full
             tab: General
             singleMode: true
+          external_link:
+            label: External link
+            comment: Open in new tab
+            type: switch
+            default: unchecked
+            tab: General
+            span: full
           column_options:
             type: mixin
             source: Content\ColumnOptions
