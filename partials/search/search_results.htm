@@ -16,8 +16,10 @@ handle = "Content\Product"
         {# Query the content in the pages for the search term #}
         {% set pages = pages
             .searchWhere(searchTerms.term, ['title', 'content'])
-            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value', 'content'])
-            .paginateCustom(12, 'matchingPages_page') 
+            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value'])
+            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value'])
+            .where('content_group', '!=', 'search')
+            .paginateCustom(12, 'pages_page') 
         %}
         
         {% partial 'search/pages' pages=pages %}
@@ -26,28 +28,15 @@ handle = "Content\Product"
     
     {% if (searchTerm == "posts" and searchValue == "true") %}
         {# Query the content in the posts for the search term #}
-        {% set matchingPostIds = collect() %}
-        {% set matchingPosts = posts.searchWhere(searchTerms.term, ['title', 'content']) %}
-        {% for post in matchingPosts.get() %}
-            {% if post.id not in matchingPostIds %}
-                {% do matchingPostIds.push(post.id) %}
-            {% endif %}
-        {% endfor %}
-        {% for post in posts.get() %}
-            {% for section in post.builder %}
-                {% if searchTerms.term|lower in section.content|lower %}
-                    {% if post.id not in matchingPostIds %}
-                        {% do matchingPostIds.push(post.id) %}
-                    {% endif %}
-                {% endif %}
-                {% for column in section.columns %}
-                    {% if searchTerms.term|lower in column.content|lower %}
-                        {% do matchingPostIds.push(post.id) %}
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-        {% set posts = posts.whereIn('id', matchingPostIds.toArray()).where('content_group', '!=', 'search').paginateCustom(12, 'posts_page') %}
+        {% set posts = posts
+            .searchWhere(searchTerms.term, ['title', 'content'])
+            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value'])
+            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value'])
+            .orSearchWhereRelation(searchTerms.term, 'author', 'title')
+            .orSearchWhereRelation(searchTerms.term, 'author', 'about')
+            .where('content_group', '!=', 'search')
+            .paginateCustom(12, 'posts_page') 
+        %}
         
         {% partial 'search/posts' posts=posts %}
     {% endif %}
