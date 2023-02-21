@@ -14,28 +14,11 @@ handle = "Content\Product"
     
     {% if (searchTerm == "pages" and searchValue == "true") %}
         {# Query the content in the pages for the search term #}
-        {% set matchingPageIds = collect() %}
-        {% set matchingPages = pages.searchWhere(searchTerms.term, ['title', 'content']) %}
-        {% for page in matchingPages.get() %}
-            {% if page.id not in matchingPageIds %}
-                {% do matchingPageIds.push(page.id) %}
-            {% endif %}
-        {% endfor %}
-        {% for page in pages.get() %}
-            {% for section in page.builder %}
-                {% if searchTerms.term|lower in section.content|lower %}
-                    {% if page.id not in matchingPageIds %}
-                        {% do matchingPageIds.push(page.id) %}
-                    {% endif %}
-                {% endif %}
-                {% for column in section.columns %}
-                    {% if searchTerms.term|lower in column.content|lower %}
-                        {% do matchingPageIds.push(page.id) %}
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-        {% set pages = pages.whereIn('id', matchingPageIds.toArray()).where('content_group', '!=', 'search').paginateCustom(12, 'pages_page') %}
+        {% set pages = pages
+            .searchWhere(searchTerms.term, ['title', 'content'])
+            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value', 'content'])
+            .paginateCustom(12, 'matchingPages_page') 
+        %}
         
         {% partial 'search/pages' pages=pages %}
         
