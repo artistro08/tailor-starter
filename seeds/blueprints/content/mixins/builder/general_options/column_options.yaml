@@ -12,11 +12,13 @@ fields:
     min: 0
     max: 12
     default: 0
+    tab: Column Options
   position:
     label: Position
     type: dropdown
     commentAbove: The position of the column.
     span: right
+    tab: Column Options
     options:
       me-auto: Left
       mx-auto: Center
