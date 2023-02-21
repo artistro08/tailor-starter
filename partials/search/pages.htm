@@ -4,7 +4,7 @@
         <div class="col-12 col-lg-4 mb-4">
             <div class="card h-100">
                 {% if page.image|length %}
-                    <a href="{{ 'page'|page({ slug: page.slug }) }}" class="card-img-top">
+                    <a href="{{ 'page'|page({ fullslug: page.fullslug }) }}" class="card-img-top">
                         <img
                                 src="{{ page.image|media|resize(700, 400, {mode: 'crop'}) }}"
                                 alt="{{ page.title }}" class="card-img-top"
@@ -12,7 +12,7 @@
                     </a>
                 {% endif %}
                 {% if page.sharing_image|length %}
-                    <a href="{{ 'page'|page({ slug: page.slug }) }}" class="card-img-top">
+                    <a href="{{ 'page'|page({ fullslug: page.fullslug }) }}" class="card-img-top">
                         <img
                                 src="{{ page.sharing_image|media|resize(700, 400, {mode: 'crop'}) }}"
                                 alt="{{ page.title }}" class="card-img-top"
@@ -21,10 +21,10 @@
                 {% endif %}
                 <div class="card-body d-flex flex-column h-100 align-items-start">
                     <h3 class="text-decoration-none text-dark fs-5">
-                        <a href="{{ 'page'|page({ slug: page.slug }) }}" class="text-decoration-none text-reset">{{ page.title }}</a>
+                        <a href="{{ 'page'|page({ fullslug: page.fullslug }) }}" class="text-decoration-none text-reset">{{ page.title }}</a>
                     </h3>
                     <p>{{ page.meta_description }}</p>
-                    <a href="{{ 'page'|page({ slug: page.slug }) }}" class="btn btn-primary mt-auto">Open</a>
+                    <a href="{{ 'page'|page({ fullslug: page.fullslug }) }}" class="btn btn-primary mt-auto">Open</a>
                 </div>
             </div>
         </div>
