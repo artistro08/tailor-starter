@@ -8,7 +8,7 @@ In order to use the search, you'll need create a [Search Page](pages/#search-pag
 
 ## How Search Works
 
-The search query from either a [Search Section](pages/blocks/search-section.md) block or Global Search is used to search all titles, rich text content (from top level rich editor adaptive fields), and rich text content fields from blocks. You can specify what entry types to search by configuring the block or settings to do so.&#x20;
+The search query from either a [Search Section](pages/blocks/search-section.md) block or Global Search is used to search all titles, rich text content (from top level rich editor adaptive fields), meta content (SEO `meta_title` and `meta_description`), and rich text content fields from blocks. You can specify what entry types to search by configuring the block or settings to do so.&#x20;
 
 You can also refine the search to other stuff by updating the queries in the `search_results.htm` file. Use that file as an example to extend the search to other blocks and content.&#x20;
 
