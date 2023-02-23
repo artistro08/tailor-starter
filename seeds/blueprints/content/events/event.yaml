@@ -13,11 +13,6 @@ primaryNavigation:
   icon: icon-calendar
   order: 143
 
-navigation:
-  icon: icon-calendar
-  parent: Content\Events
-  order: 12
-
 customMessages:
   buttonCreate: New Event
 
