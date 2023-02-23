@@ -16,9 +16,9 @@ handle = "Content\Product"
         {# Query the content in the pages for the search term #}
         {% set pages = pages
             .searchWhere(searchTerms.term, ['title', 'content'])
-            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value'])
-            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value'])
             .where('content_group', '!=', 'search')
+            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value->"$.content"'])
+            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value->"$.content"'])
             .paginateCustom(12, 'pages_page') 
         %}
         
@@ -30,11 +30,10 @@ handle = "Content\Product"
         {# Query the content in the posts for the search term #}
         {% set posts = posts
             .searchWhere(searchTerms.term, ['title', 'content'])
-            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value'])
-            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value'])
+            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value->"$.content"'])
+            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value->"$.content"'])
             .orSearchWhereRelation(searchTerms.term, 'author', 'title')
             .orSearchWhereRelation(searchTerms.term, 'author', 'about')
-            .where('content_group', '!=', 'search')
             .paginateCustom(12, 'posts_page') 
         %}
         
