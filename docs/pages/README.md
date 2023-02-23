@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Pages are Tailor Blueprint entries designed to display the content throughout the theme. The idea behind the pages is that anyone can create anything based anything. There are three types of pages defined in the [`page.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/page/page.yaml) blueprint, listed below:
+Pages are Tailor Blueprint entries designed to display the content throughout the theme. The idea behind the pages is that anyone can create anything. There are three types of pages defined in the [`page.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/page/page.yaml) blueprint, listed below:
 
 
 
