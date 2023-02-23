@@ -91,3 +91,4 @@ v6.3.7: Move search content to own partial for easier editing of the content
 v6.3.8: Organize builder blocks with tabs for easier content management. Added external link to image
 v6.3.9: Refined search to all builder blocks content. Requires October v3.2.16 to work
 v6.3.10: Refined search to only content and content blocks
+v6.3.11: Fix search syntax. Requires v3.2.17 to work
