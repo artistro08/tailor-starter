@@ -9,6 +9,9 @@ handle = "Content\Event"
 
 [collection products]
 handle = "Content\Product"
+
+[global settings]
+handle = "Content\Settings"
 ==
 {% for searchTerm,searchValue in searchTerms %}
     
@@ -26,27 +29,33 @@ handle = "Content\Product"
         
     {% endif %}
     
-    {% if (searchTerm == "posts" and searchValue == "true") %}
-        {# Query the content in the posts for the search term #}
-        {% set posts = posts
-            .searchWhere(searchTerms.term, ['title', 'content'])
-            .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value->content'])
-            .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value->content'])
-            .orSearchWhereRelation(searchTerms.term, 'author', 'title')
-            .orSearchWhereRelation(searchTerms.term, 'author', 'about')
-            .paginateCustom(12, 'posts_page') 
-        %}
-        
-        {% partial 'search/posts' posts=posts %}
+    {% if settings.enable_blog %}
+        {% if (searchTerm == "posts" and searchValue == "true") %}
+            {# Query the content in the posts for the search term #}
+            {% set posts = posts
+                .searchWhere(searchTerms.term, ['title', 'content'])
+                .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value->content'])
+                .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value->content'])
+                .orSearchWhereRelation(searchTerms.term, 'author', 'title')
+                .orSearchWhereRelation(searchTerms.term, 'author', 'about')
+                .paginateCustom(12, 'posts_page') 
+            %}
+            
+            {% partial 'search/posts' posts=posts %}
+        {% endif %}
     {% endif %}
     
-    {% if (searchTerm == "events" and searchValue == "true") %}
-        {% set events = events.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'events_page') %}
-        {% partial 'search/events' events=events %}
+    {% if settings.enable_events %}
+        {% if (searchTerm == "events" and searchValue == "true") %}
+            {% set events = events.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'events_page') %}
+            {% partial 'search/events' events=events %}
+        {% endif %}
     {% endif %}
         
-    {% if (searchTerm == "products" and searchValue == "true") %}
-        {% set products = products.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'products_page') %}
-        {% partial 'search/products' products=products %}
+    {% if settings.enable_shop %}
+        {% if (searchTerm == "products" and searchValue == "true") %}
+            {% set products = products.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'products_page') %}
+            {% partial 'search/products' products=products %}
+        {% endif %}
     {% endif %}
 {% endfor %}
