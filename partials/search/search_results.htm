@@ -18,7 +18,7 @@ handle = "Content\Settings"
     {% if (searchTerm == "pages" and searchValue == "true") %}
         {# Query the content in the pages for the search term #}
         {% set pages = pages
-            .searchWhere(searchTerms.term, ['title', 'content'])
+            .searchWhere(searchTerms.term, ['title', 'content', 'meta_title', 'meta_description'])
             .where('content_group', '!=', 'search')
             .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value->content'])
             .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value->content'])
@@ -33,7 +33,7 @@ handle = "Content\Settings"
         {% if (searchTerm == "posts" and searchValue == "true") %}
             {# Query the content in the posts for the search term #}
             {% set posts = posts
-                .searchWhere(searchTerms.term, ['title', 'content'])
+                .searchWhere(searchTerms.term, ['title', 'content', 'meta_title', 'meta_description'])
                 .orSearchWhereRelation(searchTerms.term, 'builder', ['content_value->content'])
                 .orSearchWhereRelation(searchTerms.term, 'builder.columns', ['content_value->content'])
                 .orSearchWhereRelation(searchTerms.term, 'author', 'title')
@@ -47,14 +47,20 @@ handle = "Content\Settings"
     
     {% if settings.enable_events %}
         {% if (searchTerm == "events" and searchValue == "true") %}
-            {% set events = events.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'events_page') %}
+            {% set events = events
+                .searchWhere(searchTerms.term, ['title', 'content', 'meta_title', 'meta_description'])
+                .paginateCustom(12, 'events_page') 
+            %}
             {% partial 'search/events' events=events %}
         {% endif %}
     {% endif %}
         
     {% if settings.enable_shop %}
         {% if (searchTerm == "products" and searchValue == "true") %}
-            {% set products = products.searchWhere(searchTerms.term, ['title']).paginateCustom(12, 'products_page') %}
+            {% set products = products
+                .searchWhere(searchTerms.term, ['title', 'description', 'short_description', 'meta_title', 'meta_description'])
+                .paginateCustom(12, 'products_page') 
+            %}
             {% partial 'search/products' products=products %}
         {% endif %}
     {% endif %}
