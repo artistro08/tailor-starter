@@ -2,7 +2,7 @@
 
 ## Best Practices
 
-If you need more content in the current blocks, you can add on to the blueprints. The recommended way to edit the blocks is to copy the files from the `seeds` folder into your child theme and edit what you need there.&#x20;
+If you need more content in the current blocks, you can add on to the blueprints. The recommended way to edit the blocks is to copy the files form the `seeds` folder into your child theme and edit what you need there.&#x20;
 
 Once you're done, just seed your theme with the following command:
 

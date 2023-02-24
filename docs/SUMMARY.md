@@ -41,4 +41,5 @@
 * [Search](search.md)
 * [Icons](icons.md)
 * [Settings](settings.md)
+* [Editing Blueprint Files](editing-blueprint-files.md)
 * [Seed Data](seed-data.md)
