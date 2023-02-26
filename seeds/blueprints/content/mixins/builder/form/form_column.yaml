@@ -17,3 +17,8 @@ fields:
   column_options:
     type: mixin
     source: Content\ColumnOptions
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFieldsColumn
+    label: Advanced Settings
+    tab: Advanced

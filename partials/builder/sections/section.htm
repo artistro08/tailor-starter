@@ -17,7 +17,18 @@ handle = "Content\Settings"
     <div class="{{ section.container_style }}">
         <div class="row row-cols-lg-{{ section.columns|length }} row-cols-1 mx-auto {{ section.reverse_columns_on_mobile ? 'flex-lg-row flex-column-reverse' }}">
             {% for column in section.columns %}
-                <div class="col {{ column.disable_bottom_spacing == true ? 'mb-0' : 'mb-5' }} {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}">
+                <div 
+                    {{ column.html_anchor|length ? 'id=' ~  column.html_anchor  ~ '' }}
+                    class="col 
+                    {% if column.css_classes|length %}
+                        {% for class in column.css_classes|split(',') %}
+                            {{ class ~ ' ' }}
+                        {% endfor %}
+                    {% endif %}
+                    {{ column.disable_bottom_spacing == true ? 'mb-0' : 'mb-5' }} 
+                    {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}
+                    "
+                >
                     
                     {# Content Column Group #}
                     {% if column.content_group == "content" %}
