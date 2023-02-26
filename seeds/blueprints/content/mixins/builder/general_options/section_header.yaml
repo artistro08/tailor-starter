@@ -10,6 +10,20 @@ fields:
     span: full
     commentAbove: Title of this section. Title of the section. Used for organizational purposes.
     tab: General
+  image:
+    label: Image
+    type: mediafinder
+    commentAbove: Background image to the section.
+    span: left
+    mode: image
+    maxItems: 1
+    tab: Background Image
+  image_description:
+    label: Image Description
+    type: text
+    commentAbove: The Description of the image. Use for SEO purposes.
+    span: right
+    tab: Background Image
   style:
     label: Style
     type: dropdown
