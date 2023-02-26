@@ -45,6 +45,11 @@ fields:
           column_options:
             type: mixin
             source: Content\ColumnOptions
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFieldsColumn
+            label: Advanced Settings
+            tab: Advanced
       buttons:
         name: Buttons
         icon: icon-link
@@ -64,6 +69,11 @@ fields:
           column_options:
             type: mixin
             source: Content\ColumnOptions
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFieldsColumn
+            label: Advanced Settings
+            tab: Advanced
       image:
         name: Image
         icon: icon-image
@@ -106,6 +116,11 @@ fields:
           column_options:
             type: mixin
             source: Content\ColumnOptions
+          advanced_content:
+            type: mixin
+            source: Content\AdvancedFieldsColumn
+            label: Advanced Settings
+            tab: Advanced
       posts:
         name: Posts
         icon: icon-newspaper-o

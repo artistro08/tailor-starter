@@ -1,0 +1,20 @@
+uuid: fe489c01-b604-11ed-81dc-12df1226eb33
+handle: Content\AdvancedFieldsColumn
+type: mixin
+name: Advanced Fields
+
+fields:
+  css_classes:
+    type: taglist
+    label: CSS Classes
+    commentAbove: Specify CSS classes for this section. Separate them with a comma.
+    span: left
+    tab: Advanced
+  html_anchor:
+    type: text
+    label: ID/Anchor
+    commentAbove: Specify a unique ID for this section. 
+    commentHtml: true
+    validation: alpha_dash
+    span: right
+    tab: Advanced
