@@ -95,3 +95,4 @@ v6.3.11: Fix search syntax. Requires v3.2.17 to work
 v6.3.12: Fix an issue where search items still showed in search results if the global settings switch was off
 v6.3.13: Fixed link in global shop_alerts.htm partial
 v6.3.14: Backend typo fixes
+v6.3.16: Added backgrounds to sections. Added advanced content to columns
