@@ -29,6 +29,10 @@ handle = "Content\Settings"
                     {{ column.position }} {{ column.width|length ? "col-lg-" ~ column.width : '12' }}
                     "
                 >
+                
+                    {% if column.card_styling %}
+                        <div class="card"><div class="card-body">
+                    {% endif %}
                     
                     {# Content Column Group #}
                     {% if column.content_group == "content" %}
@@ -77,6 +81,11 @@ handle = "Content\Settings"
                             {% partial 'builder/columns/search' column = column %}
                         {% endif %}
                     {% endif %}
+                    
+                    {% if column.card_styling %}
+                        </div> </div>
+                    {% endif %}
+                    
                 </div>
             {% endfor %}
         </div>
