@@ -15,3 +15,9 @@ fields:
     comment: Remove bottom spacing from this column
     span: left
     tab: Style
+  card_styling:
+    type: switch
+    label: Card Styling
+    comment: Add card styling to column
+    span: right
+    tab: Style
