@@ -6,6 +6,8 @@ The general idea behind Section blocks is that you can add any content in here, 
 
 The section's tag name is either `section` or the `section.html_tag` in the [Advanced Tab](advanced-tab.md) fields if you have it set. The Advanced Tab fields also add an ID attribute and CSS Classes that you specify. You can also adjust the Bootstrap container type as well in this tab.&#x20;
 
+You can set a background to a section by going under the Background Image Tab.
+
 You can also adjust the spacing before and after using the switches from `section.disable_top_spacing`, and `section.disable_bottom_spacing` respectfully.&#x20;
 
 The section element contains a `row` element with a `class` attribute set to `row-cols-lg-` followed by the length of `section.columns`  and is dynamically set by the number of column blocks, as well as additional classes to set the row's direction on mobile devices based on the value of `section.reverse_columns_on_mobile`.&#x20;

@@ -14,7 +14,7 @@ The section blocks are top level blocks that you can add to any Dynamic Page. Th
 
 ### Column Blocks
 
-The Column blocks are carbon copies of the Section blocks except they include a section for configurable columns. They work exactly like the Section blocks, but are wrapped in a [Bootstrap Column](https://getbootstrap.com/docs/5.2/layout/columns/#how-they-work). The column width is configurable and based on a 12 column grid They only exist in Section blocks.
+The Column blocks are carbon copies of the Section blocks except they include a section for configurable columns. They work exactly like the Section blocks, but are wrapped in a [Bootstrap Column](https://getbootstrap.com/docs/5.2/layout/columns/#how-they-work). The column width is configurable and based on a 12 column grid They only exist in Section blocks. They also have [Advanced Settings](section/advanced-tab.md) as well
 
 ## File Structure (`mixins` Folder)
 
