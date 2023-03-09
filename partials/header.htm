@@ -6,11 +6,6 @@ handle = "Content\Settings"
 
 [sitePicker]
 ==
-{% set availableSites = sitePicker.sites %}
-{% set locale = '' %}
-{% if availableSites|length > 1 %}
-    {% set locale = this.locale %}
-{% endif %}
 <nav 
     class="navbar navbar-light navbar-expand-lg {{ settings.navbar_position }}
     {% if settings.navbar_css_classes|length %}
@@ -22,7 +17,7 @@ handle = "Content\Settings"
     {{ settings.navbar_html_anchor|length ? 'id=' ~  settings.navbar_html_anchor  ~ '' }}
 >
     <div class="{{ settings.navbar_container_style }}">
-        <a class="navbar-brand order-1" href="{{ '/'|app ~ '/' ~ locale }}">
+        <a class="navbar-brand order-1" href="{{ '/'|app ~ this.site.route_prefix }}">
             {% if settings.logo|length %}
                 <img class="img-fluid" style="max-width: 250px" src="{{ settings.logo|media }}" alt="{{ settings.website_name }}">
             {% else %}
@@ -47,7 +42,7 @@ handle = "Content\Settings"
                                         {% if this.page.id == "index" %}
                                             {{ settings.homepage.fullslug in item.page|link ? 'active' }}
                                         {% endif %}"
-                                    href="{{ settings.homepage.fullslug in item.page|link ? '/' : item.page|link }}"
+                                    href="{{ settings.homepage.fullslug in item.page|link ? '/'|app ~ this.site.route_prefix : item.page|link }}"
                                     {{ item.external ? 'target="_blank" '}}
                                     {% if item.children|length %}
                                         data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
@@ -66,7 +61,7 @@ handle = "Content\Settings"
                                                         {{ settings.homepage.fullslug in item.page|link ? 'active' }}
                                                     {% endif %}
                                                     "
-                                                    href="{{ item.page|link }}"
+                                                    href="{{ settings.homepage.fullslug in item.page|link ? '/'|app ~ this.site.route_prefix : item.page|link }}"
                                                     {{ item.external ? 'target="_blank" '}}
                                             >
                                                 {{ item.title }}
