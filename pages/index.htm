@@ -20,7 +20,7 @@ handle = "Content\Settings"
 {% endput %}
 
 {% if settings.homepage is empty %}
-    {% do abort('404') %}
+    {% do abort('404') %} 
 {% else %}
 
     {% if page.entry_type == 'simple' %}
