@@ -98,4 +98,5 @@ v6.3.14: Backend typo fixes
 v6.3.16: Added backgrounds to sections. Added advanced content to columns
 v6.3.17: Added card styling to columns
 v6.3.19: Fix locale being stuck in url if there is more than one site.
-v6.3.20: fix issue where navbar container style isn't set.  
+v6.3.20: fix issue where navbar container style isn't set. 
+v6.3.21: Added extra sitemap options for tailor entries. 
