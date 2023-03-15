@@ -14,29 +14,74 @@ fields:
     preset:
       field: title
       type: exact
-    span: left
+    span: row
+    spanClass: col-12 col-lg-3
     column: false
   meta_keywords:
     label: Meta Keywords
     type: taglist
     tab: Manage
     commentAbove: Keywords used for SEO. Use a comma to separate the keywords
-    span: right
+    span: row
+    spanClass: col-12 col-lg-3
     column: false
+  change_frequency:
+    commentAbove: How frequently the page is likely to change. Used for the Sitemap definition
+    label: Sitemap Change Frequency
+    type: dropdown
+    span: row
+    spanClass: col-12 col-lg-3
+    default: value[daily]
+    options:
+      always: Always
+      hourly: Hourly
+      daily: Daily
+      weekly: Weekly
+      monthly: Monthly
+      yearly: Yearly
+      never: Never
+    trigger:
+      action: disable
+      field: exclude_in_sitemap
+      condition: checked
+  priority:
+    label: URL Priority
+    commentAbove: The priority of this URL relative to other URLs on your site. Used for the Sitemap definition
+    type: dropdown
+    span: row
+    spanClass: col-12 col-lg-3
+    default: value[0.8]
+    options:
+      '0.1': '0.1'
+      '0.2': '0.2'
+      '0.3': '0.3'
+      '0.4': '0.4'
+      '0.5': '0.5'
+      '0.6': '0.6'
+      '0.7': '0.7'
+      '0.8': '0.8'
+      '0.9': '0.9'
+      '1.0': '1.0'
+    trigger:
+      action: disable
+      field: exclude_in_sitemap
+      condition: checked
   sharing_image:
     label: Sharing Image
     tab: Manage
     type: mediafinder
     commentAbove: Image used for social media sites (Facebook, Twitter, Etc.)
     mode: image
-    span: left
+    span: row
+    spanClass: col-12 col-lg-6
     maxItems: 1
     column: false
   exclude_in_sitemap:
     label: Remove from Sitemap
     type: switch
     tab: Manage
-    span: right
+    span: row
+    spanClass: col-12 col-lg-6
     cssClass: mt-4
     comment: Remove this item from the <a target="_blank" href="/sitemap.xml">sitemap.xml</a> file. Useful if you don't want search engines to index this page.
     commentHtml: true
@@ -47,7 +92,8 @@ fields:
     label: Meta Description
     tab: Manage
     type: textarea
-    span: left
+    span: row
+    spanClass: col-12 col-lg-6
     commentAbove: Meta Description. Used for SEO. Limited to 300 characters.
     attributes:
       maxlength: 300
@@ -56,7 +102,8 @@ fields:
     commentAbove: Use this section to determine what search engine robots should do when they reach your page.
     tab: Manage
     type: checkboxlist
-    span: right
+    span: row
+    spanClass: col-12 col-lg-6
     quickselect: true
     column: false
     scope: false
