@@ -4,6 +4,7 @@ type: structure
 name: Product Categories
 drafts: false
 multisite: sync
+pagefinder: false
 
 navigation:
   icon: icon-th

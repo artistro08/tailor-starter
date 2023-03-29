@@ -4,6 +4,7 @@ type: stream
 name: Submissions
 drafts: false
 multisite: false
+pagefinder: false
 
 navigation:
   icon: icon-inbox

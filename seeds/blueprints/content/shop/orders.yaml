@@ -3,6 +3,7 @@ handle: Content\Orders
 type: stream
 name: Orders
 drafts: false
+pagefinder: false
 
 navigation:
   icon: icon-shopping-bag

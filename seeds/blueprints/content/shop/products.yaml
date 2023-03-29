@@ -4,6 +4,7 @@ type: structure
 name: Products
 drafts: true
 multisite: sync
+pagefinder: item
 
 structure:
   maxDepth: 0

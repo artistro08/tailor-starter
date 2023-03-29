@@ -4,6 +4,7 @@ type: structure
 name: Main Menu
 drafts: false
 multisite: sync
+pagefinder: false
 
 navigation:
   icon: icon-list

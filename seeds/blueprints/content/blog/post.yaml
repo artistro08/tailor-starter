@@ -4,6 +4,7 @@ type: stream
 name: Posts
 drafts: true
 multisite: sync
+pagefinder: item
 
 primaryNavigation:
   label: Blog
