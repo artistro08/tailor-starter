@@ -4,6 +4,7 @@ type: structure
 name: Pages
 drafts: true
 multisite: sync
+pagefinder: item
 
 primaryNavigation:
   label: Pages & Menus

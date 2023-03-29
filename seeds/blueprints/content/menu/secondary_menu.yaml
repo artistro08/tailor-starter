@@ -4,6 +4,7 @@ type: structure
 name: Secondary Menu
 drafts: false
 multisite: sync
+pagefinder: false
 
 
 navigation:

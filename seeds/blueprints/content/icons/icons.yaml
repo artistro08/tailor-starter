@@ -4,6 +4,7 @@ type: stream
 name: Icons
 drafts: false
 multisite: sync
+pagefinder: false
 
 primaryNavigation:
   label: Icons

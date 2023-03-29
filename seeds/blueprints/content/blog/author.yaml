@@ -4,6 +4,7 @@ type: entry
 name: Post Authors
 drafts: false
 multisite: sync
+pagefinder: item
 
 navigation:
   parent: Blog\Posts

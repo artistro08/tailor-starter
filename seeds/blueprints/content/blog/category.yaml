@@ -4,6 +4,7 @@ handle: Blog\Categories
 name: Post Categories
 drafts: false
 multisite: sync
+pagefinder: false
 
 structure:
   maxDepth: 1

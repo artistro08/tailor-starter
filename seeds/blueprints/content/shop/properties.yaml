@@ -3,6 +3,7 @@ handle: Content\Product\Properties
 type: structure
 name: Product Properties
 multisite: sync
+pagefinder: false
 
 navigation:
   icon: icon-tags
