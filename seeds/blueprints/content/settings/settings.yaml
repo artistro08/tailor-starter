@@ -18,29 +18,34 @@ fields:
     type: entries
     source: Content\Page
     span: left
-    comment: The default homepage
+    commentAbove: The default homepage
     displayMode: recordfinder
     conditions: content_group != 'search'
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
   website_name:
     label: Website Name
     tab: Settings
     span: right
+    commentAbove: The name of the website. Used in the footer and in the header if no logo is set
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
   favicon:
     type: mediafinder
     mode: image
     label: Favicon
-    comment: The icon that appears in the browser tab or window
+    commentAbove: The icon that appears in the browser tab or window
     tab: Settings
     maxItems: 1
     span: left
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
   logo:
     type: mediafinder
     mode: image
     label: Logo
-    comment: The Logo. Appears in the navigation
+    commentAbove: The Logo. Appears in the navigation
     tab: Settings
     maxItems: 1
     span: right
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
   hr_1:
     type: ruler
     tab: Settings
@@ -50,32 +55,32 @@ fields:
     label: Enable Shop
     default: false
     tab: Settings
-    span: row
-    spanClass: col-12 col-lg-3
+    span: left
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
   enable_events:
     type: switch
     comment: Enable events on the site.
     label: Enable Events
     default: false
     tab: Settings
-    span: row
-    spanClass: col-12 col-lg-3
+    span: right
+    permissions: tailor.entry.817ac186fc5d11ec86016e37945c2034
   enable_blog:
     type: switch
     comment: Enable blog posts on the site.
     label: Enable Blog
     default: false
     tab: Settings
-    span: row
-    spanClass: col-12 col-lg-3
+    span: left
+    permissions: tailor.entry.a113a242ac3711ed82e2cdd679785a5c
   enable_search:
     type: switch
     comment: Enable Search throughout the site
     label: Enable Search
     default: false
     tab: Settings
-    span: row
-    spanClass: col-12 col-lg-3
+    span: right
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
   default_search_page:
     maxItems: 1
     label: Default Search Page
@@ -84,6 +89,7 @@ fields:
     source: Content\Page
     commentAbove: The default search page. Used if no page is set in a search block.
     displayMode: recordfinder
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
     validation: 
       - required_if:enable_search,1
     conditions: content_group = 'search'
@@ -98,6 +104,7 @@ fields:
     default: false
     tab: Search
     span: full
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
     trigger:
       action: show
       field: enable_search
@@ -108,6 +115,7 @@ fields:
     type: checkboxlist
     tab: Search
     quickselect: true
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
     options: 
       pages: Pages
       posts: Blog Posts
@@ -124,6 +132,7 @@ fields:
     commentAbove: The text that is inside the field before the user starts typing
     span: full
     default: Search this site...
+    permissions: tailor.entry.698afed670f147dd9dcfdc2a0f903ff2
     trigger:
       action: show
       field: enable_search
@@ -263,6 +272,7 @@ fields:
     commentAbove: Pick your currency code. Used in Stripe Checkout
     default: USD
     tab: Currency
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     options:
       AFN: AFN
       EUR: EUR
@@ -578,6 +588,7 @@ fields:
     tab: Currency
     required: true
     span: left
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     trigger:
       action: show
       field: enable_shop
@@ -589,6 +600,7 @@ fields:
     default: value[before]
     tab: Currency
     span: right
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     trigger:
       action: show
       field: enable_shop
@@ -600,6 +612,7 @@ fields:
     type: section
     label: Stripe Keys
     tab: Stripe
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     trigger:
       action: show
       field: enable_shop
@@ -609,6 +622,7 @@ fields:
     tab: Stripe
     type: sensitive
     span: left
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     validation:
       - required_with:stripe_secret_key
       - required_with:stripe_webhook_secret_key
@@ -621,6 +635,7 @@ fields:
     tab: Stripe
     span: right
     type: sensitive
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     validation:
       - required_with:stripe_public_key
       - required_with:stripe_webhook_secret_key
@@ -635,6 +650,7 @@ fields:
     type: sensitive
     comment: The webhook secret to sign requests. The shop will not work without it. For step-by-step instructions on how to get it, <a href='https://scribehow.com/shared/Obtain_a_Stripe_Webhook_Secret__5lTS37MMRnu_hhGzWJe07w' target='_blank'>click here</a>.
     commentHtml: true
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     validation:
       - required_with:stripe_public_key
       - required_with:stripe_secret_key
@@ -650,6 +666,7 @@ fields:
     type: entries
     source: Content\Page
     displayMode: recordfinder
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     maxItems: 1
     validation:
       - required_with:stripe_public_key
@@ -666,6 +683,7 @@ fields:
     mode: array
     separator: comma
     tab: Shipping
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     commentHtml: true
     customTags: false
     trigger:
@@ -927,6 +945,7 @@ fields:
     type: repeater
     prompt: Add new method.
     itemsExpanded: false
+    permissions: tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     trigger:
       action: show
       field: enable_shop
@@ -969,6 +988,9 @@ fields:
     commentAbove: Specify an email to send email notifications to. Form Submissions & Shop Orders default to this email
     tab: Mail Notifications
     span: left
+    permissions: 
+      - tailor.entry.f04b58ea6d8011edaa98d348ccf890ef
+      - tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     validation:
       - email
       - required_with:stripe_public_key
@@ -980,6 +1002,9 @@ fields:
     tab: Mail Notifications
     commentAbove: The name of the person receiving the notification email. Form Submissions & Shop Orders default to this name
     span: right
+    permissions: 
+      - tailor.entry.f04b58ea6d8011edaa98d348ccf890ef
+      - tailor.entry.2a9a76d0010c11ed90b6fc95f7401555
     validation:
       - required_with:notification_email
   recaptcha_section:
@@ -988,11 +1013,14 @@ fields:
     comment: Recaptcha helps limit spam from forms in the backend. Only v2 is supported. You can get your keys <a href="https://www.google.com/recaptcha/admin#list">here</a>
     commentHtml: true
     tab: Forms
+    permissions: tailor.entry.f04b58ea6d8011edaa98d348ccf890ef
   recaptcha_site_key:
     type: text
     label: Recaptcha Site Key
     tab: Forms
+    permissions: tailor.entry.f04b58ea6d8011edaa98d348ccf890ef
   recaptcha_secret_key:
     type: text
     label: Recaptcha Secret Key
     tab: Forms
+    permissions: tailor.entry.f04b58ea6d8011edaa98d348ccf890ef
