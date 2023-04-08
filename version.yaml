@@ -101,3 +101,4 @@ v6.3.19: Fix locale being stuck in url if there is more than one site.
 v6.3.20: fix issue where navbar container style isn't set. 
 v6.3.21: Added extra sitemap options for tailor entries. 
 v6.3.22: Setup pagefinder to only use front facing page types. Requires October CMS v3.3.3
+v6.3.23: Added permissions to settings switches
