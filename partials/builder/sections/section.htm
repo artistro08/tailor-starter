@@ -63,6 +63,11 @@ handle = "Content\Settings"
                         {% endif %}
                     {% endif %}
                     
+                    {# Form Column Group #}
+                    {% if column.content_group == "faqs" %}
+                        {% partial 'builder/columns/faqs' column = column %}
+                    {% endif %}
+                    
                     {# Shop Column Group #}
                     {% if settings.enable_shop == true %}
                         {% if column.content_group == "products" %}

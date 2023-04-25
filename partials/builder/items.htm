@@ -14,6 +14,10 @@
 {% if section.content_group == 'posts' %}
     {% partial 'builder/sections/posts' section=section %}
 {% endif %}
+{# FAQs #}
+{% if section.content_group == 'faqs' %}
+    {% partial 'builder/sections/faqs' section=section %}
+{% endif %}
 {# Products #}
 {% if section.content_group == 'products' %}
     {% partial 'builder/sections/products' section=section %}
