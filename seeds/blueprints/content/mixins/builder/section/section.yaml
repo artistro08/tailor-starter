@@ -151,6 +151,16 @@ fields:
           products:
             type: mixin
             source: Content\ProductsColumn
+      faqs:
+        name: FAQs
+        icon: icon-question-circle-o
+        description: Column with Frequently Asked Questions
+        titleFrom: title
+        useTabs: true
+        fields:
+          search:
+            type: mixin
+            source: Content\FAQsColumn
       form:
         name: Form
         icon: icon-list-alt

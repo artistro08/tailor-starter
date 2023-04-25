@@ -1,0 +1,17 @@
+uuid: a0162173-d4c9-11ed-b361-b220a3e8a205
+handle: Content\FAQsCommonFields
+type: mixin
+name: Frequently Asked Questions Fields
+fields:
+  per_row:
+    type: dropdown
+    tab: Style
+    label: FAQs per Row
+    commentAbove: The number of FAQs that appear in a Row
+    span: full
+    options:
+      '1': '1 Per Row'
+      '2': '2 Per Row'
+      '3': '3 Per Row'
+      '4': '4 Per Row'
+      '5': '5 Per Row'

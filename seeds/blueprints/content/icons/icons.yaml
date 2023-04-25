@@ -9,7 +9,7 @@ pagefinder: false
 primaryNavigation:
   label: Icons
   icon: icon-bookmark
-  order: 146
+  order: 147
 
 fields:
   svg_code:

@@ -1,0 +1,51 @@
+[collection faqs]
+handle = "Content\FAQ"
+
+[collection icons]
+handle = "Content\Icon"
+==
+<{{ section.html_tag == "default" ? "section" : section.html_tag }} 
+        {{ section.html_anchor|length ? 'id="' ~  section.html_anchor  ~ '"' }}
+        class="{% if section.css_classes|length %}
+                    {% for class in section.css_classes|split(',') %}
+                        {{ class ~ ' ' }}
+                    {% endfor %}
+               {% endif %}
+               {{ section.style == 'light' ? 'bg-light' }} 
+               {{ section.style == 'dark' ? 'bg-dark text-white' }} 
+               {{ section.disable_top_spacing == true ? 'pt-0' : "pt-4" }} 
+               {{ section.disable_bottom_spacing == true ? 'pb-0' : "pb-4" }}
+               position-relative"
+>
+    <div class="{{ section.container_style }}">
+        {% if faqs|length %}
+            <div class="row row-cols-1 row-cols-lg-{{ section.per_row }} mb-4">
+                {% set default_icon = icons.find(1485).svg_code|raw %}
+                {% for faq in faqs %}
+                    <div class="col">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-lg-2 text-left text-lg-center">
+                                        <div class="fs-1">
+                                            {{ faq.icon.svg_code|default(default_icon)|raw }}
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-9">
+                                        <h6 class="card-title fs-4"><strong>{{ faq.question }}</strong></h6>
+                                        <p class="card-text">{{ faq.answer|nl2br }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    {% if section.image|length %}
+        <div class="hero-media position-absolute bg-dark position-absolute top-0 start-0 bottom-0 end-0 w-100" style="z-index: -1">
+            <img class="w-100 h-100 opacity-25" style="object-fit: cover; object-position: center" src="{{ section.image|media|resize(1920) }}" alt="{{ section.image_description }}">
+        </div>
+    {% endif %}
+</{{ section.html_tag == "default" ? "section" : section.html_tag }}>
