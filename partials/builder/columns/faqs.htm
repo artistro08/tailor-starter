@@ -1,0 +1,30 @@
+[collection faqs]
+handle = "Content\FAQ"
+
+[collection icons]
+handle = "Content\Icon"
+==
+{% if faqs|length %}
+    <div class="row row-cols-1 row-cols-lg-{{ column.per_row }} mb-4">
+        {% set default_icon = icons.find(1485).svg_code|raw %}
+        {% for faq in faqs %}
+            <div class="col">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-2 text-left text-lg-center">
+                                <div class="fs-1">
+                                    {{ faq.icon.svg_code|default(default_icon)|raw }}
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-9">
+                                <h6 class="card-title fs-4"><strong>{{ faq.question }}</strong></h6>
+                                <p class="card-text">{{ faq.answer|nl2br }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
