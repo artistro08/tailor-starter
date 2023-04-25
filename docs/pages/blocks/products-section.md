@@ -18,5 +18,5 @@ A partial template named [`builder/globals/shop_alerts.htm`](https://github.com/
 
 The following files are used to display this content
 
-* ``[`builder/products/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/products) (Minus the [`product_attributes.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/products/product\_attributes.yaml) file) included in the [builder.yaml ](https://github.com/artistro08/tailor-starter/blob/542d106a4c08bf56811491d8aa5cacbdfbd62159/seeds/blueprints/content/mixins/builder/builder.yaml#L14)file
+* [`builder/products/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/products) (Minus the [`product_attributes.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/products/product\_attributes.yaml) file) included in the [builder.yaml ](https://github.com/artistro08/tailor-starter/blob/542d106a4c08bf56811491d8aa5cacbdfbd62159/seeds/blueprints/content/mixins/builder/builder.yaml#L14)file
 * [`builder/section/product.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/products.htm) partial file

@@ -6,6 +6,6 @@ The Posts Column Block displays posts according to specified settings. This is a
 
 The following files are used to display this content
 
-* ``[`builder/blog/*` ](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/blog)included in the [`section.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/section/section.yaml) file
-* ``[`builder/column/posts.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/posts.htm) partial used to display Blog Posts
+* [`builder/blog/*` ](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/blog)included in the [`section.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/section/section.yaml) file
+* [`builder/column/posts.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/posts.htm) partial used to display Blog Posts
 

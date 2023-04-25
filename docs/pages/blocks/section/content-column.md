@@ -6,5 +6,5 @@ The Content Column block is a simple block that is used to display Rich Editor c
 
 The following files are used to display this content
 
-* ``[`builder/buttons/buttons.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/buttons/buttons.yaml) included in the [`section.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/section/section.yaml) file
-* ``[`builder/column/content.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/content.htm) partial used to display the content and buttons.&#x20;
+* [`builder/buttons/buttons.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/buttons/buttons.yaml) included in the [`section.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/section/section.yaml) file
+* [`builder/column/content.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/content.htm) partial used to display the content and buttons.&#x20;

@@ -31,6 +31,6 @@ Note: This code requires additional context and information about the Twig funct
 
 The following files are used to display this content
 
-* ``[`builder/blog/*` ](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/blog)included in the [`builder.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/builder.yaml) file
+* [`builder/blog/*` ](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/blog)included in the [`builder.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/builder.yaml) file
 * [`builder/section/posts.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/sections/posts.htm) partial used to display Blog Posts
 

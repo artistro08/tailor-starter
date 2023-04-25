@@ -24,16 +24,16 @@ You can view more about each column block by browsing each block below:
 * [Posts Column ](posts-column.md)Block
 * [Events Column](events-column.md) Block
 * [Products Column](products-column.md) Block
-* [Form Column ](form-column.md)Block
+* [Form Column ](form-column-1.md)Block
 
 ### Files Used
 
 The following files are used to display this content
 
-* ``[`section.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/section/section.yaml) which is used in the [`builder.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/builder.yaml) blueprint file
-* ``[`general_options/advanced_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/advanced\_fields.yaml) file
-* ``[`general_options/section_header.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/section\_header.yaml) file
-* ``[`builder/sections/section.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/sections/section.htm) partial file
+* [`section.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/section/section.yaml) which is used in the [`builder.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/builder.yaml) blueprint file
+* [`general_options/advanced_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/advanced\_fields.yaml) file
+* [`general_options/section_header.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/section\_header.yaml) file
+* [`builder/sections/section.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/sections/section.htm) partial file
 
 
 

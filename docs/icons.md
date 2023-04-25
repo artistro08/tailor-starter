@@ -30,4 +30,3 @@ By default, the `icon_svg` field is disabled. You'll need to enable this field t
 * set the `width` and `height` attributes of the SVG root element to `16`
 * add a `fill` attribute to the SVG root element with the value `currentColor`
 
-``

@@ -83,7 +83,7 @@ The Column block types are as follows:
 * [Posts](section/posts-column.md)
 * [Events](section/events-column.md)
 * [Products](section/products-column.md)
-* [Forms](section/form-column.md)
+* [Forms](section/form-column-1.md)
 * [Search](search-section.md)
 
 

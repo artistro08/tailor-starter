@@ -12,5 +12,5 @@ You can also adjust the spacing before and after using the switches from `sectio
 
 The following files are used to display this content
 
-* ``[`builder/search/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/search) blueprint files used in the `builder.yaml` file
-* ``[`search/*`](https://github.com/artistro08/tailor-starter/tree/main/partials/search) partial files used to render search&#x20;
+* [`builder/search/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/search) blueprint files used in the `builder.yaml` file
+* [`search/*`](https://github.com/artistro08/tailor-starter/tree/main/partials/search) partial files used to render search&#x20;
