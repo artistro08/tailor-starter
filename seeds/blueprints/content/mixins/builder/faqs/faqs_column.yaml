@@ -1,0 +1,20 @@
+uuid: a000701a-d4c9-11ed-9ab0-83463553e4b9
+handle: Content\FAQsColumn
+type: mixin
+name: Frequently Asked Questions Column
+fields:
+  column_header:
+    type: mixin
+    label: Column Header
+    source: Content\ColumnHeader
+  common_fields:
+    type: mixin
+    source: Content\FAQsCommonFields
+  column_options:
+    type: mixin
+    source: Content\ColumnOptions
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFieldsColumn
+    label: Advanced Settings
+    tab: Advanced

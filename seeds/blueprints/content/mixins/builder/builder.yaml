@@ -64,6 +64,16 @@ fields:
             type: mixin
             source: Content\Products
             tab: General
+      faqs:
+        name: FAQs
+        icon: icon-question-circle-o
+        description: Section with Frequently Asked Questions.
+        titleFrom: title
+        useTabs: true
+        fields:
+          search:
+            type: mixin
+            source: Content\FAQs
       form:
         name: Form
         icon: icon-list-alt

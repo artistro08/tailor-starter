@@ -1,0 +1,16 @@
+uuid: a0a0b68c-d4c9-11ed-8cf6-94b3c242168d
+handle: Content\FAQs
+type: mixin
+name: Frequently Asked Questions
+fields:
+  section_header:
+    type: mixin
+    source: Content\SectionHeader
+  common_fields:
+    type: mixin
+    source: Content\FAQsCommonFields
+  advanced_content:
+    type: mixin
+    source: Content\AdvancedFields
+    label: Advanced Settings
+    tab: Advanced

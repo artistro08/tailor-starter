@@ -1,0 +1,42 @@
+uuid: 84e05424-d4a1-11ed-a494-ddf0a211cbca
+handle: Content\FAQ
+type: structure
+name: FAQs
+drafts: false
+multisite: sync
+pagefinder: false
+
+primaryNavigation:
+  label: FAQs
+  icon: icon-question-circle-o
+  order: 145
+
+structure:
+  maxDepth: 2
+
+customMessages:
+  buttonCreate: New Question
+  
+fields:
+  icon:
+    label: Icon
+    type: entries
+    maxItems: 1
+    displayMode: recordfinder
+    span: full
+    source: Content\Icon
+    commentAbove: The icon related to the question/answer pair
+    scope: false
+    column:
+      type: partial
+      path: "#/artistro08-tailorstartertheme/partials/columns/_list_icon"
+  question:
+    label: Question
+    commentAbove: The question that's frequently asked
+    type: textarea
+    span: left
+  answer:
+    label: Answer
+    commentAbove: The answer of the question
+    type: textarea
+    span: right
