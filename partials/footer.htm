@@ -21,11 +21,33 @@ handle = "Content\Settings"
             </div>
             <div class="col-12 mx-auto">
                 <ul class="nav justify-content-center flex-column flex-lg-row align-items-center">
-                    {% for item in secondaryMenu %}
-                        <li class="nav-item">
+                    <li class="nav-item me-5">
+                        {% if item.page|length %}
                             <a class="nav-link" {{ item.external ? 'target="_blank" '}} href="{{ item.page|link }}">{{ item.title }}</a>
-                        </li>
-                    {% endfor %}
+                        {% else %}
+                            <h5 class="">{{ item.title }}</h5>
+                        {% endif %}
+                        {% if item.children %}
+                            <ul class="_footer-menu nav flex-column">
+                                {% for item in item.children %}
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-link p-0
+                                            {{ link(item.page).isActive ? 'active' }}
+                                            {% if this.page.id == "index" %}
+                                                {{ settings.homepage.fullslug in item.page|link ? 'active' }}
+                                            {% endif %}
+                                            "
+                                            href="{{ item.page|link }}"
+                                            {{ item.external ? 'target="_blank" '}}
+                                        >
+                                            {{ item.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
                 </ul>
                 <ul class="nav justify-content-center flex-lg-row align-items-center">
                     {% for item in socialMenu %}
