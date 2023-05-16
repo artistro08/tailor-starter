@@ -103,8 +103,40 @@ handle = "Content\Settings"
 {# Favicons #}
 {% if settings.favicon %}
     <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon|media|resize(180) }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon|media|resize(32) }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon|media|resize(16) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon|media|resize(32) }}" id="light-scheme-icon-32">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon|media|resize(16) }}" id="light-scheme-icon-16">
+
+    {% if settings.favicon_dark|length %}
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon_dark|media|resize(32) }}" id="dark-scheme-icon-32">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon_dark|media|resize(16) }}" id="dark-scheme-icon-16">
+        {% put scripts %}
+            <script>
+                
+                let light_scheme_icon_32 = document.querySelector('link#light-scheme-icon-32');
+                let light_scheme_icon_16 = document.querySelector('link#light-scheme-icon-16');
+                let dark_scheme_icon_32  = document.querySelector('link#dark-scheme-icon-32');
+                let dark_scheme_icon_16  = document.querySelector('link#dark-scheme-icon-16');
+                
+                function onUpdate() {
+                    if (matcher.matches) {
+                        light_scheme_icon_32.remove();
+                        light_scheme_icon_16.remove();
+                        document.head.append(dark_scheme_icon_32);
+                        document.head.append(dark_scheme_icon_16);
+                    } else {
+                        document.head.append(light_scheme_icon_32);
+                        document.head.append(light_scheme_icon_16);
+                        dark_scheme_icon_32.remove();
+                        dark_scheme_icon_16.remove();
+                    }
+                }
+                
+                let matcher = window.matchMedia('(prefers-color-scheme: dark)');
+                matcher.addListener(onUpdate);
+                onUpdate();
+            </script>
+        {% endput %}
+    {% endif %}
 {% endif %}
 
 {# Header Code Placeholders #}
