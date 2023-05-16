@@ -1,4 +1,4 @@
-{{ column.content|raw }}
+{{ column.content|content }}
 {% if column.buttons|length %}
     {% partial 'builder/globals/buttons' section = column %}
 {% endif %}
