@@ -13,7 +13,7 @@ navigation:
   order: 6
 
 structure:
-  maxDepth: 1
+  maxDepth: 2
   
 customMessages:
   buttonCreate: New Menu Item
