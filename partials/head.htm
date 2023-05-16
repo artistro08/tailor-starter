@@ -112,22 +112,22 @@ handle = "Content\Settings"
         {% put scripts %}
             <script>
                 
-                let lightSchemeIcon32 = document.querySelector('link#light-scheme-icon-32');
-                let lightSchemeIcon16 = document.querySelector('link#light-scheme-icon-16');
-                let darkSchemeIcon32  = document.querySelector('link#dark-scheme-icon-32');
-                let darkSchemeIcon16  = document.querySelector('link#dark-scheme-icon-16');
+                let light_scheme_icon_32 = document.querySelector('link#light-scheme-icon-32');
+                let light_scheme_icon_16 = document.querySelector('link#light-scheme-icon-16');
+                let dark_scheme_icon_32  = document.querySelector('link#dark-scheme-icon-32');
+                let dark_scheme_icon_16  = document.querySelector('link#dark-scheme-icon-16');
                 
                 function onUpdate() {
                     if (matcher.matches) {
-                        lightSchemeIcon32.remove();
-                        lightSchemeIcon16.remove();
-                        document.head.append(darkSchemeIcon32);
-                        document.head.append(darkSchemeIcon16);
+                        light_scheme_icon_32.remove();
+                        light_scheme_icon_16.remove();
+                        document.head.append(dark_scheme_icon_32);
+                        document.head.append(dark_scheme_icon_16);
                     } else {
-                        document.head.append(lightSchemeIcon32);
-                        document.head.append(lightSchemeIcon16);
-                        darkSchemeIcon32.remove();
-                        darkSchemeIcon16.remove();
+                        document.head.append(light_scheme_icon_32);
+                        document.head.append(light_scheme_icon_16);
+                        dark_scheme_icon_32.remove();
+                        dark_scheme_icon_16.remove();
                     }
                 }
                 
