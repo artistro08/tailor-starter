@@ -12,5 +12,5 @@ Since the form content is interchangeable, the form content for the block is pla
 
 The following files are used to display this content
 
-* ``[`builder/form/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/form) blueprint files used in the `builder.yaml` file
-* ``[`tailor_modules/form.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/tailor\_modules/form.htm) partial file
+* [`builder/form/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/form) blueprint files used in the `builder.yaml` file
+* [`tailor_modules/form.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/tailor\_modules/form.htm) partial file

@@ -24,6 +24,6 @@ The code then sorts the `events` and `older_events` arrays based on either the e
 
 The following files are used to display this content
 
-* ``[`builder/events/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/events) used in the [`builder.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/builder.yaml) file
-* ``[`builder/sections/events.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/sections/events.htm) partial file
+* [`builder/events/*`](https://github.com/artistro08/tailor-starter/tree/main/seeds/blueprints/content/mixins/builder/events) used in the [`builder.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/builder.yaml) file
+* [`builder/sections/events.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/sections/events.htm) partial file
 

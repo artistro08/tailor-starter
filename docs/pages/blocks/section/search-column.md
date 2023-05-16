@@ -7,5 +7,5 @@ The Search Column Block displays a search field according to specified settings.
 The following files are used to display this content
 
 * `builder/search/*` included in the `section.yaml` file
-* ``[`builder/column/search.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/search.htm) partial used to display the search block.
+* [`builder/column/search.htm`](https://github.com/artistro08/tailor-starter/blob/main/partials/builder/columns/search.htm) partial used to display the search block.
 

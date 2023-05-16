@@ -14,4 +14,4 @@ The following files are used to display this content
 
 [`general_options/advanced_fields.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/advanced\_fields.yaml) file
 
-``[`general_options/advanced_fields_column.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/advanced\_fields\_column.yaml) file
+[`general_options/advanced_fields_column.yaml`](https://github.com/artistro08/tailor-starter/blob/main/seeds/blueprints/content/mixins/builder/general\_options/advanced\_fields\_column.yaml) file
