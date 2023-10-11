@@ -76,27 +76,16 @@ fields:
     spanClass: col-12 col-lg-6
     maxItems: 1
     column: false
-  exclude_in_sitemap:
-    label: Remove from Sitemap
-    type: switch
+  canonical_url:
+    label: Canonical URL
     tab: Manage
+    type: text
+    commentAbove: The canonical URL of this page. Used for SEO
     span: row
     spanClass: col-12 col-lg-6
-    cssClass: mt-4
-    comment: Remove this item from the <a target="_blank" href="/sitemap.xml">sitemap.xml</a> file. Useful if you don't want search engines to index this page.
-    commentHtml: true
-    default: unchecked
     column: false
     scope: false
-  meta_description:
-    label: Meta Description
-    tab: Manage
-    type: textarea
-    span: row
-    spanClass: col-12 col-lg-6
-    commentAbove: Meta Description. Used for SEO. Limited to 300 characters.
-    attributes:
-      maxlength: 300
+    validation: url
   robots:
     label: Robots Info
     commentAbove: Use this section to determine what search engine robots should do when they reach your page.
@@ -110,3 +99,24 @@ fields:
     options:
       noindex: [No Index, Disallow search engine robots to index this page.]
       nofollow: [No Follow, Disallow disallow search engines from crawling the links on this page.]
+  meta_description:
+    label: Meta Description
+    tab: Manage
+    type: textarea
+    span: row
+    spanClass: col-12 col-lg-6
+    commentAbove: Meta Description. Used for SEO. Limited to 300 characters.
+    attributes:
+      maxlength: 300
+  exclude_in_sitemap:
+    label: Remove from Sitemap
+    type: switch
+    tab: Manage
+    span: row
+    spanClass: col-12 col-lg-6
+    cssClass: mt-4
+    comment: Remove this item from the <a target="_blank" href="/sitemap.xml">sitemap.xml</a> file. Useful if you don't want search engines to index this page.
+    commentHtml: true
+    default: unchecked
+    column: false
+    scope: false

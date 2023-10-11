@@ -1,6 +1,9 @@
 [global settings]
 handle = "Content\Settings"
+
+[sitePicker]
 ==
+{% set sites = sitePicker.sites %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <meta name="turbo-visit-control" content="disable" />
@@ -19,6 +22,14 @@ handle = "Content\Settings"
         {% if section.meta_keywords|length %}
             <meta name="keywords" content="{{ section.meta_keywords }}">
         {% endif %}
+        {% if section.canonical_url|length %}
+            <link rel="canonical" href="{{ section.canonical_url }}">
+        {% endif %}
+        {% for site in sites %}
+            {% if this.site.id != site.id %}
+                <link rel="alternate" href="{{ site.url }}" hreflang="{{ site.route_prefix|replace({'/' : ''}) }}">
+            {% endif %}
+        {% endfor %}
         
         {# Robot Info #}
         {% if section.robots|length %}
@@ -48,6 +59,13 @@ handle = "Content\Settings"
         <title>{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}</title>
         <meta name="title" content="{{ this.page.meta_title ~ ' - ' ~ settings.website_name }}">
         <meta name="description" content="{{ this.page.meta_description }}">
+        {% if section.canonical_url|length %}
+            <link rel="canonical" href="{{ section.canonical_url }}">
+        {% endif %}
+        
+        {% for site in sites %}
+            <link rel="alternate" href="{{ site }}" hreflang="{{ site.code }}">
+        {% endfor %}
         
         
         {# Open Graph / Facebook #}
