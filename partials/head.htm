@@ -64,7 +64,9 @@ handle = "Content\Settings"
         {% endif %}
         
         {% for site in sites %}
-            <link rel="alternate" href="{{ site }}" hreflang="{{ site.code }}">
+            {% if this.site.id != site.id %}
+                <link rel="alternate" href="{{ site.url }}" hreflang="{{ site.route_prefix|replace({'/' : ''}) }}">
+            {% endif %}
         {% endfor %}
         
         
