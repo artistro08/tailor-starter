@@ -272,7 +272,7 @@ function onFormSubmit() {
         {% partial 'head' %}
     </head>
     {% partial 'header' %}
-    <body>
+    <body class="layout-{{ this.page.layout }} page-{{ this.page.id }}">
         {{ settings.body_code|raw }}
         {% placeholder body_code %}
         <main>
