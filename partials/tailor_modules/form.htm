@@ -121,7 +121,7 @@ handle = "Content\Settings"
                     >
                         <option selected disabled>{{ field.placeholder }}</option>
                         {% for option in field.options %}
-                            <option value="{{ option.label }}">{{ option.label }}</option>
+                            <option value="{{ option.slug }}">{{ option.label }}</option>
                         {% endfor %}
                     </select>
                 {% endif %}
