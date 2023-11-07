@@ -33,44 +33,46 @@ handle = "Content\Settings"
         <div class="collapse navbar-collapse order-4 order-lg-4" id="navcol-1">
             <ul class="navbar-nav">
                 {% for item in mainMenu %}
-                    {% if not item.parent_id %}
-                        <li class="nav-item {{ item.children ? 'dropdown' }}">
-                            <a
-                                    class="nav-link 
-                                        {{ item.children|length ? 'dropdown-toggle' : '' }} 
-                                        {{ link(item.page).isActive ? 'active' }}
-                                        {% if this.page.id == "index" %}
-                                            {{ settings.homepage.fullslug in item.page|link ? 'active' }}
-                                        {% endif %}"
-                                    href="{{ settings.homepage.fullslug in item.page|link ? '/'|app ~ this.site.route_prefix : item.page|link }}"
-                                    {{ item.external ? 'target="_blank" '}}
-                                    {% if item.children|length %}
-                                        data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                                    {% endif %}
-                            >
-                                {{ item.title }}
-                            </a>
-                            {% if item.children %}
-                                <ul class="dropdown-menu">
-                                    {% for item in item.children %}
-                                        <li>
-                                            <a
-                                                    class="dropdown-item 
-                                                    {{ link(item.page).isActive ? 'active' }}
-                                                    {% if this.page.id == "index" %}
-                                                        {{ settings.homepage.fullslug in item.page|link ? 'active' }}
-                                                    {% endif %}
-                                                    "
-                                                    href="{{ settings.homepage.fullslug in item.page|link ? '/'|app ~ this.site.route_prefix : item.page|link }}"
-                                                    {{ item.external ? 'target="_blank" '}}
-                                            >
-                                                {{ item.title }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-                        </li>
+                    {% if not(item.hidden) %}
+                        {% if not item.parent_id %}
+                            <li class="nav-item {{ item.children ? 'dropdown' }}">
+                                <a
+                                        class="nav-link 
+                                            {{ item.children|length ? 'dropdown-toggle' : '' }} 
+                                            {{ link(item.page).isActive ? 'active' }}
+                                            {% if this.page.id == "index" %}
+                                                {{ settings.homepage.fullslug in item.page|link ? 'active' }}
+                                            {% endif %}"
+                                        href="{{ settings.homepage.fullslug in item.page|link ? '/'|app ~ this.site.route_prefix : item.page|link }}"
+                                        {{ item.external ? 'target="_blank" '}}
+                                        {% if item.children|length %}
+                                            data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                                        {% endif %}
+                                >
+                                    {{ item.title }}
+                                </a>
+                                {% if item.children %}
+                                    <ul class="dropdown-menu">
+                                        {% for item in item.children %}
+                                            <li>
+                                                <a
+                                                        class="dropdown-item 
+                                                        {{ link(item.page).isActive ? 'active' }}
+                                                        {% if this.page.id == "index" %}
+                                                            {{ settings.homepage.fullslug in item.page|link ? 'active' }}
+                                                        {% endif %}
+                                                        "
+                                                        href="{{ settings.homepage.fullslug in item.page|link ? '/'|app ~ this.site.route_prefix : item.page|link }}"
+                                                        {{ item.external ? 'target="_blank" '}}
+                                                >
+                                                    {{ item.title }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </ul>
