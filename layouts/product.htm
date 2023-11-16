@@ -525,7 +525,7 @@ function onCheckout() {
 }
 ?>
 ==
-<html lang="en">
+<html lang="{{ this.site ? this.site.locale : 'en' }}">
     <head>
         {% partial 'head' %}
     </head>
