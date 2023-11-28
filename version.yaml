@@ -104,3 +104,4 @@ v6.3.22: Setup pagefinder to only use front facing page types. Requires October 
 v6.3.23: Added permissions to settings switches
 v6.3.24: Added Frequently Asked Questions
 v6.3.30: Multiple bugfixes and improvements
+v6.3.32: Multisite Language code support (thanks! @chrisvidal), Multiple bugfixes and improvements
