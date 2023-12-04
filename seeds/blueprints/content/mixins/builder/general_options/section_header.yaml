@@ -10,6 +10,13 @@ fields:
     span: full
     commentAbove: Title of this section. Title of the section. Used for organizational purposes.
     tab: General
+  disabled:
+    label: Disabled?
+    comment: Used to disabled the block. If switched on the block will not be display on the page.
+    type: switch
+    default: false
+    span: full
+    tab: General
   image:
     label: Image
     type: mediafinder
